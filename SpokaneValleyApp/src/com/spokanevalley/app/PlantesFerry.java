@@ -4,9 +4,9 @@
  */
 package com.spokanevalley.app;
 
-import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 
-public class PlantesFerry implements ApplicationListener{
+public class PlantesFerry extends Game{
 
 	@Override
 	public void create() {

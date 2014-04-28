@@ -1,5 +1,52 @@
+/*
+ * Main Class for loading the splash screen, loading database, and main map.
+ */
 package com.spokanevalley.app;
 
+import com.badlogic.gdx.Game;
+import com.spokanevalley.app.screens.Splash;
+
+public class SpokaneValleyApp extends Game {
+
+	@Override
+	public void create() {
+		setScreen(new Splash());
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		super.resize(width, height);
+	}
+
+	@Override
+	public void render() {
+		super.render();
+	}
+
+	@Override
+	public void pause() {
+		super.pause();
+	}
+
+	@Override
+	public void resume() {
+		super.resume();
+	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+	}
+	
+}// End class
+
+
+
+
+/*
+ * Stock class that came with Libgdx setup. Won't be using but leaving here for reference.
+ */
+/*
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -11,6 +58,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class SpokaneValleyApp implements ApplicationListener {
+	
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture texture;
@@ -64,3 +112,4 @@ public class SpokaneValleyApp implements ApplicationListener {
 	public void resume() {
 	}
 }
+*/

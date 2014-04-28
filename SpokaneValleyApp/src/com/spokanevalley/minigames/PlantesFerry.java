@@ -1,8 +1,9 @@
+package com.spokanevalley.minigames;
 /*
  * @author Kevin Borling
  * Plante's Ferry mini game
  */
-package com.spokanevalley.app;
+
 
 import com.badlogic.gdx.Game;
 

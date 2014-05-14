@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Location>
+        <Title>Terace View Park</Title>
+        <Artist>...</Artist>
+        <Latitude>47.636221</Latitude>
+        <Longitude>-117.222319</Longitude>
+        <Info>
+			...
+        </Info>
+        <BadgeImage>@drawable/rainbowbadge</BadgeImage>
+    </Location>
+    <Location>
+        <Title>Plantes Ferry Park</Title>
+        <Artist></Artist>
+        <Latitude>47.697924</Latitude>
+        <Longitude>-117.241588</Longitude>
+        <Info></Info>
+        <BadgeImage></BadgeImage>
+    </Location>
+</PreferenceScreen>

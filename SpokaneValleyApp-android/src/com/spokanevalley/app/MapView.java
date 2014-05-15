@@ -1,13 +1,16 @@
 package com.spokanevalley.app;
 
 
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.widget.DrawerLayout;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.location.Criteria;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
-import android.view.*;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,21 +26,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
-
-import android.location.Criteria;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.widget.SlidingDrawer;
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Configuration;
 
 
 @SuppressWarnings("deprecation")
@@ -202,6 +190,14 @@ public class MapView extends Activity implements OnMarkerClickListener,  Locatio
         
         //MARKER IMAGES AND CENTERING*****************************************************************************************
         
+        //INITIALIZE GAME
+        
+        Intent intent = new Intent(MapView.this, GameLauncher.class);
+        startActivity(intent);
+        finish();
+        
+        //Apple apple = new Apple();
+       // apple.create();
         
         //return true so that the stock things don't happen when a marker is pressed.
         //This removes the automatic centering and the info and title boxes

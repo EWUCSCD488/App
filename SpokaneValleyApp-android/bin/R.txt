@@ -60,7 +60,8 @@ int drawable marker128 0x7f02001d
 int drawable marker256 0x7f02001e
 int drawable marker512 0x7f02001f
 int drawable rainbowbadge 0x7f020020
-int drawable thunderbadge 0x7f020021
+int drawable test 0x7f020021
+int drawable thunderbadge 0x7f020022
 int id hybrid 0x7f060004
 int id map 0x7f060005
 int id none 0x7f060000

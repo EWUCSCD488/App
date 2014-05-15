@@ -10,13 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -64,8 +65,10 @@ public class MapView extends Activity implements OnMarkerClickListener,  Locatio
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_view);
-        
+                
         mOverscrollHandler.sendEmptyMessageDelayed(0,100);
+        
+        
         
         //Initialize Location List
         try{
@@ -126,6 +129,16 @@ public class MapView extends Activity implements OnMarkerClickListener,  Locatio
         
         //marker info window listener
         map.setOnMarkerClickListener(this);
+        
+        //This adds an image over the google map
+        GroundOverlay groundOverlay = map.addGroundOverlay(new GroundOverlayOptions()
+        .image(BitmapDescriptorFactory.fromResource(R.drawable.test))
+        .position(new LatLng(47.670568, -117.239437), 9000)
+        .transparency(0.3f));
+        
+        //Removes all street names
+        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        
         
     }//end initilizeMap
     

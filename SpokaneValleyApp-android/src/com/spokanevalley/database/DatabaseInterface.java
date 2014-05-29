@@ -21,6 +21,8 @@ public class DatabaseInterface {
 
 	private static ArrayList<Location> LIST = null;
 	private SpokaneValleyDatabaseHelper helper;
+	
+	// the tableName need to match with name of table in actual database
 	private static final String LocationtableName = "LocationTable";
 
 	private static final int ID_LOCATION_COLUMN = 0 ;

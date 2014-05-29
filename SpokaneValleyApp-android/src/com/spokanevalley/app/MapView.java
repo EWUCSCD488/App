@@ -39,23 +39,18 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	private final LatLngBounds BOUNDS = new LatLngBounds(new LatLng(47.575693,
 			-117.364063), new LatLng(47.749113, -117.115154));
 	private overscrollHandler mOverscrollHandler = new overscrollHandler();
-
 	final Context context = this;
-
-	GoogleMap map;
-
-	Marker lastMarkerSelected = null;
-
+	private GoogleMap map;
+	private Marker lastMarkerSelected = null;
 	private LatLng LastLegitLocation = null;
-
 	private LatLng locationMain = null;
 	private float globalZoom = 0;
-
-	private Button tempButton;
-	private int tempCount = 0;
+	
+	//temp values
 	private Location location1;
 	private Location location2;
 	private Location location3;
+	
 	public static final int REQUEST_CODE = 1;
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

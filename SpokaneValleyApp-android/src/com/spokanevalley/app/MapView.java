@@ -192,20 +192,29 @@ public class MapView extends Activity implements OnMarkerClickListener,
 					.fromResource(R.drawable.marker256));
 
 		lastMarkerSelected = arg0;
-
+		
+		/*
 		// move camera
 		CameraPosition position = map.getCameraPosition();
 		CameraPosition newPosition = new CameraPosition(arg0.getPosition(),
 				position.zoom, position.tilt, position.bearing);
 		map.animateCamera(CameraUpdateFactory.newCameraPosition(newPosition),
 				400, null);
+		*/
+		
+		// Zooms camera towards the marker, focusing in on it.
+	    map.moveCamera(CameraUpdateFactory.newLatLngZoom(arg0.getPosition(),15));
+	    // Zoom in, animating the camera.
+	    map.animateCamera(CameraUpdateFactory.zoomIn());
+	    // Zoom out to zoom level 15, animating with a duration of 5 seconds.
+	    map.animateCamera(CameraUpdateFactory.zoomTo(15), 5000, null);
 
 		// MARKER IMAGES AND
 		// CENTERING*****************************************************************************************
 
 		// INITIALIZE GAME
-		Intent intent = new Intent(MapView.this, GameLauncher.class);
-		startActivityForResult(intent, REQUEST_CODE);
+		//Intent intent = new Intent(MapView.this, GameLauncher.class);
+		//startActivityForResult(intent, REQUEST_CODE);
 
 		// return true so that the stock things don't happen when a marker is
 		// pressed.

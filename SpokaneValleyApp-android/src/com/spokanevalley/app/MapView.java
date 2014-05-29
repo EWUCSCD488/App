@@ -213,8 +213,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		// CENTERING*****************************************************************************************
 
 		// INITIALIZE GAME
-		//Intent intent = new Intent(MapView.this, GameLauncher.class);
-		//startActivityForResult(intent, REQUEST_CODE);
+		Intent intent = new Intent(MapView.this, GameLauncher.class);
+		startActivityForResult(intent, REQUEST_CODE);
 
 		// return true so that the stock things don't happen when a marker is
 		// pressed.

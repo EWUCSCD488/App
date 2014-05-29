@@ -214,9 +214,10 @@ containing a value of this type.
         public static final int marker128=0x7f02001f;
         public static final int marker256=0x7f020020;
         public static final int marker512=0x7f020021;
-        public static final int rainbowbadge=0x7f020022;
-        public static final int test=0x7f020023;
-        public static final int thunderbadge=0x7f020024;
+        public static final int newmap=0x7f020022;
+        public static final int rainbowbadge=0x7f020023;
+        public static final int test=0x7f020024;
+        public static final int thunderbadge=0x7f020025;
     }
     public static final class id {
         public static final int hybrid=0x7f060004;

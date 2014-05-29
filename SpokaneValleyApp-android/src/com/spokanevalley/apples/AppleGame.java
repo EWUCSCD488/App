@@ -232,8 +232,8 @@ public class AppleGame implements Screen {
 		Rectangle Apple = new Rectangle();
 		Apple.x = MathUtils.random(0, 480 - 64);
 		Apple.y = 720;
-		Apple.width = 64;
-		Apple.height = 64;
+		Apple.width = 48;
+		Apple.height = 48;
 		ob.rec = Apple;
 		int rand = MathUtils.random(0, 300);
 		if (rand < 225) {

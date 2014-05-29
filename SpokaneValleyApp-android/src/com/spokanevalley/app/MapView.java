@@ -16,8 +16,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.GroundOverlay;
@@ -31,7 +33,7 @@ import com.spokanevalley.database.DatabaseInterface;
 
 @SuppressWarnings("deprecation")
 public class MapView extends Activity implements OnMarkerClickListener,
-		LocationListener {
+		LocationListener, OnInfoWindowClickListener {
 
 	public static final String TAG = MapView.class.getName();
 
@@ -47,9 +49,9 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	private float globalZoom = 0;
 	
 	//temp values
-	private Location location1;
+	/*private Location location1;
 	private Location location2;
-	private Location location3;
+	private Location location3;*/
 	
 	public static final int REQUEST_CODE = 1;
 
@@ -66,8 +68,20 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		mOverscrollHandler.sendEmptyMessageDelayed(0, 100);
 		DatabaseInterface.Create(context);
 		// Initialize Location List
+		try {
+			LocationList
+					.Create(LocationInflator.inflate(this, R.xml.locations));
+		} catch (Exception e) {
+			Log.e("Inflator Error", e.getMessage());
+		}
+
+		// location checking...
+		LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+		String provider = lm.getBestProvider(new Criteria(), true);
+		lm.requestLocationUpdates(provider, 1000, 0, this); // change these
+		
 		// for testing only
-				location1 = new Location("ID1", "Terace View Park",
+				/*location1 = new Location("ID1", "Terace View Park",
 						"Awesome place 1", 47.636221, -117.222319);
 				location2 = new Location("ID2", "Plantes Ferry Park",
 						"Awesome place 2", 47.697924, -117.241588);
@@ -77,12 +91,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 				
 				(DatabaseInterface.Create(context)).addNewLocation(location1);
 				(DatabaseInterface.Create(context)).addNewLocation(location2);
-				(DatabaseInterface.Create(context)).addNewLocation(location3);
-
-		// location checking...
-		LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-		String provider = lm.getBestProvider(new Criteria(), true);
-		lm.requestLocationUpdates(provider, 1000, 0, this); // change these
+				(DatabaseInterface.Create(context)).addNewLocation(location3);*/
   
 	}// end onCreate
 
@@ -98,21 +107,19 @@ public class MapView extends Activity implements OnMarkerClickListener,
 
 		map.setMapType(GoogleMap.MAP_TYPE_NONE); // WHY DO WE NEED TO SET
 													// TYPE OF MAP TWICE
-
 		map.getUiSettings().setZoomControlsEnabled(false);
 		// Add different markers when reading through the location list
-		if( (DatabaseInterface.Create(context)).getLocationList() != null){
-			for (Location location : (DatabaseInterface.Create(context)).getLocationList()) {
-				
-				LatLng coor = new LatLng(location.getLatitude(), location.getLongitude());
-				map.addMarker(new MarkerOptions()
-						.title(location.getTitle()
-								)
-						.icon(BitmapDescriptorFactory
-								.fromResource(R.drawable.marker128))
-						.position( coor ));
-			}
+		for (Location location : LocationList.LIST) {
+			location.setGpsCoord(new LatLng(location.getLatitude(), location
+					.getLongitude()));
+			map.addMarker(new MarkerOptions()
+					.title(location.getTitle())
+					.snippet(location.getInfo() + "Click to Play!")
+					.icon(location.getMarkerImage())
+					.position(location.getGpsCoord()));
+					map.setOnInfoWindowClickListener(this);
 		}
+
 		map.setPadding(0, 0, 30, 0);
 
 		// set location and camera of where map looks
@@ -180,6 +187,12 @@ public class MapView extends Activity implements OnMarkerClickListener,
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+    public void onInfoWindowClick(Marker marker) 
+    {
+		// INITIALIZE GAME
+		Intent intent = new Intent(MapView.this, GameLauncher.class);
+		startActivityForResult(intent, REQUEST_CODE);
+    }
 	/**
 	 * Responds to marker click
 	 * 
@@ -189,12 +202,12 @@ public class MapView extends Activity implements OnMarkerClickListener,
 
 		// Change title text depending on pin
 
-		arg0.hideInfoWindow();
+		//arg0.hideInfoWindow();
 
 		// MARKER IMAGES AND
 		// CENTERING*****************************************************************************************
 		// put last pressed marker back to normal
-		if (lastMarkerSelected != null && !arg0.equals(lastMarkerSelected))
+		/*if (lastMarkerSelected != null && !arg0.equals(lastMarkerSelected))
 			lastMarkerSelected.setIcon(BitmapDescriptorFactory
 					.fromResource(R.drawable.marker128));
 
@@ -202,7 +215,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			arg0.setIcon(BitmapDescriptorFactory
 					.fromResource(R.drawable.marker256));
 
-		lastMarkerSelected = arg0;
+		lastMarkerSelected = arg0;*/
 
 		// move camera
 		CameraPosition position = map.getCameraPosition();
@@ -215,8 +228,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		// CENTERING*****************************************************************************************
 
 		// INITIALIZE GAME
-		Intent intent = new Intent(MapView.this, GameLauncher.class);
-		startActivityForResult(intent, REQUEST_CODE);
+		//Intent intent = new Intent(MapView.this, GameLauncher.class);
+		//startActivityForResult(intent, REQUEST_CODE);
 
 		// return true so that the stock things don't happen when a marker is
 		// pressed.

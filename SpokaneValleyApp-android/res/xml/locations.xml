@@ -6,14 +6,17 @@
         <Latitude>47.636221</Latitude>
         <Longitude>-117.222319</Longitude>
         <Info>
-			...
+			Helllooooooooo World!!!
         </Info>
-        <BadgeImage>@drawable/rainbowbadge</BadgeImage>
+        <MarkerImage>appletrees.png</MarkerImage>
     </Location>
     <Location>
         <Title>Plantes Ferry Park</Title>
         <Latitude>47.697924</Latitude>
         <Longitude>-117.241588</Longitude>
-        <Info></Info>
+        <Info>
+            This is a chill Park...
+        </Info>
+        <MarkerImage>marker128.png</MarkerImage>
     </Location>
 </PreferenceScreen>

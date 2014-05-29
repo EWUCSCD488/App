@@ -155,8 +155,6 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		map.getUiSettings().setCompassEnabled(false);
 		map.getUiSettings().setRotateGesturesEnabled(false);
 		map.getUiSettings().setTiltGesturesEnabled(false);
-		map.setMapType(GoogleMap.MAP_TYPE_NONE);
-
 	
 	}// end initilizeMap
 

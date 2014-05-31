@@ -121,14 +121,14 @@ public class AppleGame implements Screen {
 		scoreFont = new BitmapFont();
 		
 		// save max score to database
-		Cursor checking_avalability = helper.getData(tableName, AppleID);
+		Cursor checking_avalability = helper.getScoreData(tableName, AppleID);
 		if( checking_avalability == null  ){
-				long RowIds = helper.insertData(tableName, AppleID, String.valueOf(score));
+				long RowIds = helper.insertScoreData(tableName, AppleID, String.valueOf(score));
 				if (RowIds == -1)
 					Log.d(TAG, "Error on inserting columns");
 		}
 		else if (checking_avalability.getCount() == 0){
-			long RowIds = helper.insertData(tableName, AppleID, String.valueOf(score));
+			long RowIds = helper.insertScoreData(tableName, AppleID, String.valueOf(score));
 			if (RowIds == -1)
 				Log.d(TAG, "Error on inserting columns");
 		}
@@ -204,7 +204,7 @@ public class AppleGame implements Screen {
 	}
 
 	private int saveMaxScore(int CurrentScore) {
-		Cursor cursor= helper.getData(tableName,AppleID);
+		Cursor cursor= helper.getScoreData(tableName,AppleID);
 		
 		int MaxScore = 0;
 		while(cursor.moveToNext()){
@@ -217,7 +217,7 @@ public class AppleGame implements Screen {
 		} // travel to database result
 		
 		if(MaxScore < CurrentScore){
-			long RowIds = helper.updateTable(tableName, AppleID, String.valueOf(CurrentScore));
+			long RowIds = helper.updateScoreTable(tableName, AppleID, String.valueOf(CurrentScore));
 			if (RowIds == -1)
 				Log.d(TAG, "Error on inserting columns");
 			return CurrentScore;

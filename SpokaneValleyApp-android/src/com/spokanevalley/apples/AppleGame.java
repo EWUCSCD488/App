@@ -29,6 +29,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.spokanevalley.app.GameLauncher;
+import com.spokanevalley.database.DatabaseInterface;
 import com.spokanevalley.database.SpokaneValleyDatabaseHelper;
 
 public class AppleGame implements Screen {
@@ -51,7 +52,7 @@ public class AppleGame implements Screen {
 	
 	private int score;
 	private Context context;
-	private SpokaneValleyDatabaseHelper helper;
+	
 	private static final String AppleID = "123abcf";
 	private static final String tableName = "GameScoreTable";
 	private static final int IDColumns = 0;
@@ -67,7 +68,7 @@ public class AppleGame implements Screen {
 
 		this.Game = gam;
 		this.context = context;
-		helper = new SpokaneValleyDatabaseHelper(context);
+		
 		
 		// load the images for apple and bucket, 64x64 pixels each
 		appleImage = new Texture(Gdx.files.internal(Constants.IMAGE_APPLE)); // internal
@@ -121,14 +122,14 @@ public class AppleGame implements Screen {
 		scoreFont = new BitmapFont();
 		
 		// save max score to database
-		Cursor checking_avalability = helper.getScoreData(tableName, AppleID);
+		Cursor checking_avalability = (DatabaseInterface.Create(context)).getDatabase().getScoreData(tableName, AppleID);
 		if( checking_avalability == null  ){
-				long RowIds = helper.insertScoreData(tableName, AppleID, String.valueOf(score));
+				long RowIds = (DatabaseInterface.Create(context)).getDatabase().insertScoreData(tableName, AppleID, String.valueOf(score));
 				if (RowIds == -1)
 					Log.d(TAG, "Error on inserting columns");
 		}
 		else if (checking_avalability.getCount() == 0){
-			long RowIds = helper.insertScoreData(tableName, AppleID, String.valueOf(score));
+			long RowIds = (DatabaseInterface.Create(context)).getDatabase().insertScoreData(tableName, AppleID, String.valueOf(score));
 			if (RowIds == -1)
 				Log.d(TAG, "Error on inserting columns");
 		}
@@ -204,7 +205,7 @@ public class AppleGame implements Screen {
 	}
 
 	private int saveMaxScore(int CurrentScore) {
-		Cursor cursor= helper.getScoreData(tableName,AppleID);
+		Cursor cursor= (DatabaseInterface.Create(context)).getDatabase().getScoreData(tableName,AppleID);
 		
 		int MaxScore = 0;
 		while(cursor.moveToNext()){
@@ -217,7 +218,7 @@ public class AppleGame implements Screen {
 		} // travel to database result
 		
 		if(MaxScore < CurrentScore){
-			long RowIds = helper.updateScoreTable(tableName, AppleID, String.valueOf(CurrentScore));
+			long RowIds = (DatabaseInterface.Create(context)).getDatabase().updateScoreTable(tableName, AppleID, String.valueOf(CurrentScore));
 			if (RowIds == -1)
 				Log.d(TAG, "Error on inserting columns");
 			return CurrentScore;
@@ -232,8 +233,8 @@ public class AppleGame implements Screen {
 		Rectangle Apple = new Rectangle();
 		Apple.x = MathUtils.random(0, 480 - 64);
 		Apple.y = 720;
-		Apple.width = 48;
-		Apple.height = 48;
+		Apple.width = 64;
+		Apple.height = 64;
 		ob.rec = Apple;
 		int rand = MathUtils.random(0, 300);
 		if (rand < 225) {

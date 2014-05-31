@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +27,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
+import com.spokanevalley.database.DatabaseInterface;
 
 @SuppressWarnings("deprecation")
 public class MapView extends Activity implements OnMarkerClickListener,
@@ -48,6 +51,11 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	private LatLng locationMain = null;
 	private float globalZoom = 0;
 
+	private Button tempButton;
+	private int tempCount = 0;
+	private Location location1;
+	private Location location2;
+	private Location location3;
 	public static final int REQUEST_CODE = 1;
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,20 +69,26 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		setContentView(R.layout.activity_map_view);
 
 		mOverscrollHandler.sendEmptyMessageDelayed(0, 100);
-
+		DatabaseInterface.Create(context);
 		// Initialize Location List
-		try {
-			LocationList
-					.Create(LocationInflator.inflate(this, R.xml.locations));
-		} catch (Exception e) {
-			Log.e("Inflator Error", e.getMessage());
-		}
+		// for testing only
+				location1 = new Location("ID1", "Terace View Park",
+						"Awesome place 1", 47.636221, -117.222319);
+				location2 = new Location("ID2", "Plantes Ferry Park",
+						"Awesome place 2", 47.697924, -117.241588);
+				
+				location3 = new Location("ID3", "Discovery Park",
+						"Awesome place 3", 47.678063, -117.224036);
+				
+				(DatabaseInterface.Create(context)).addNewLocation(location1);
+				(DatabaseInterface.Create(context)).addNewLocation(location2);
+				(DatabaseInterface.Create(context)).addNewLocation(location3);
 
 		// location checking...
 		LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 		String provider = lm.getBestProvider(new Criteria(), true);
 		lm.requestLocationUpdates(provider, 1000, 0, this); // change these
-
+  
 	}// end onCreate
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,16 +106,18 @@ public class MapView extends Activity implements OnMarkerClickListener,
 
 		map.getUiSettings().setZoomControlsEnabled(false);
 		// Add different markers when reading through the location list
-		for (Location location : LocationList.LIST) {
-			location.setGpsCoord(new LatLng(location.getLatitude(), location
-					.getLongitude()));
-			map.addMarker(new MarkerOptions()
-					.title(location.getTitle())
-					.icon(BitmapDescriptorFactory
-							.fromResource(R.drawable.marker128))
-					.position(location.getGpsCoord()));
+		if( (DatabaseInterface.Create(context)).getLocationList() != null){
+			for (Location location : (DatabaseInterface.Create(context)).getLocationList()) {
+				
+				LatLng coor = new LatLng(location.getLatitude(), location.getLongitude());
+				map.addMarker(new MarkerOptions()
+						.title(location.getTitle()
+								)
+						.icon(BitmapDescriptorFactory
+								.fromResource(R.drawable.marker128))
+						.position( coor ));
+			}
 		}
-
 		map.setPadding(0, 0, 30, 0);
 
 		// set location and camera of where map looks
@@ -129,7 +145,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		GroundOverlay groundOverlay = map
 				.addGroundOverlay(new GroundOverlayOptions()
 						.image(BitmapDescriptorFactory
-								.fromResource(R.drawable.newmap))
+								.fromResource(R.drawable.mapbg))
 						.position(new LatLng(47.670568, -117.239437), 39000)
 						.transparency(0.0f));
 
@@ -192,21 +208,14 @@ public class MapView extends Activity implements OnMarkerClickListener,
 					.fromResource(R.drawable.marker256));
 
 		lastMarkerSelected = arg0;
-		
 
 		// move camera
 		CameraPosition position = map.getCameraPosition();
 		CameraPosition newPosition = new CameraPosition(arg0.getPosition(),
 				position.zoom, position.tilt, position.bearing);
-		map.animateCamera(CameraUpdateFactory.newCameraPosition(newPosition),400, null);
-		/*
-		// Zooms camera towards the marker, focusing in on it.
-	    map.moveCamera(CameraUpdateFactory.newLatLngZoom(arg0.getPosition() ,15));
-	    // Zoom in, animating the camera.
-	    map.animateCamera(CameraUpdateFactory.zoomIn());
-	    // Zoom out to zoom level 15, animating with a duration of 2 seconds.
-	    map.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
-		*/
+		map.animateCamera(CameraUpdateFactory.newCameraPosition(newPosition),
+				400, null);
+
 		// MARKER IMAGES AND
 		// CENTERING*****************************************************************************************
 

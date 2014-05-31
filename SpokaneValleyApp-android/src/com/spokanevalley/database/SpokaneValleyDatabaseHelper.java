@@ -58,8 +58,8 @@ public class SpokaneValleyDatabaseHelper {
 			return 0;
 		}
 
-	}
-
+	}  
+ 
 	/*
 	 * THIS METHOD UPDATE ROWS IN TABLE MAXSCORE AT GIVEN ID WITH NEW MAX SCORE
 	 * 
@@ -180,7 +180,7 @@ public class SpokaneValleyDatabaseHelper {
 	 * null VALUES WILL NOT BE CREATED UNLESS USING
 	 * numColumnHack in insert method
 	 */
-	public long insertLocationData(String tableName, String ID ,String Latitude, String longitude) {
+	public long insertLocationData(String tableName, String ID ,String Latitude, String longitude,String title,String info) {
 
 		// CHECK IF WE HAVE INSERTING IN RIGHT TABLE
 		if (!tableName.equals(privateDatabaseContent.LOCATION_TABLE_NAME))
@@ -192,6 +192,8 @@ public class SpokaneValleyDatabaseHelper {
 			contentvalue.put(privateDatabaseContent.LOCATION_LATITUDE, Latitude);
 			contentvalue.put(privateDatabaseContent.LOCATION_LONGITUDE, longitude);
 			contentvalue.put(privateDatabaseContent.LOCATION_ATTITUDE, "0");
+			contentvalue.put(privateDatabaseContent.LOCATION_TITLE, title);
+			contentvalue.put(privateDatabaseContent.LOCATION_INFO, info);
 
 			// PERFORM INSERTING
 			SQLiteDatabase db = databaseContent.getWritableDatabase();
@@ -208,7 +210,7 @@ public class SpokaneValleyDatabaseHelper {
 	 * null VALUES WILL NOT BE CREATED UNLESS USING
 	 * numColumnHack in insert method
 	 */
-	public long insertLocationData(String tableName, String ID ,String Latitude, String longitude,String Attitude) {
+	public long insertLocationData(String tableName, String ID ,String Latitude, String longitude,String Attitude,String title,String info) {
 
 		// CHECK IF WE HAVE INSERTING IN RIGHT TABLE
 		if (!tableName.equals(privateDatabaseContent.LOCATION_TABLE_NAME))
@@ -220,6 +222,8 @@ public class SpokaneValleyDatabaseHelper {
 			contentvalue.put(privateDatabaseContent.LOCATION_LATITUDE, Latitude);
 			contentvalue.put(privateDatabaseContent.LOCATION_LONGITUDE, longitude);
 			contentvalue.put(privateDatabaseContent.LOCATION_ATTITUDE, Latitude);
+			contentvalue.put(privateDatabaseContent.LOCATION_TITLE, title);
+			contentvalue.put(privateDatabaseContent.LOCATION_INFO, info);
 
 			// PERFORM INSERTING
 			SQLiteDatabase db = databaseContent.getWritableDatabase();
@@ -254,7 +258,9 @@ public class SpokaneValleyDatabaseHelper {
 			String[] columns = { privateDatabaseContent.LOCATION_ID,
 					privateDatabaseContent.LOCATION_LATITUDE,
 					privateDatabaseContent.LOCATION_LONGITUDE,
-					privateDatabaseContent.LOCATION_ATTITUDE };
+					privateDatabaseContent.LOCATION_ATTITUDE,
+					privateDatabaseContent.LOCATION_TITLE,
+					privateDatabaseContent.LOCATION_INFO};
 
 			Cursor cursor = db.query(table, columns, null, null, null, null,
 					null);
@@ -305,11 +311,13 @@ public class SpokaneValleyDatabaseHelper {
 			String[] columns = { privateDatabaseContent.LOCATION_ID,
 					privateDatabaseContent.LOCATION_LATITUDE,
 					privateDatabaseContent.LOCATION_LONGITUDE,
-					privateDatabaseContent.LOCATION_ATTITUDE };
+					privateDatabaseContent.LOCATION_ATTITUDE,
+					privateDatabaseContent.LOCATION_TITLE,
+					privateDatabaseContent.LOCATION_INFO};
 			String[] selectionArgs = { ID };
 
 			Cursor cursor = db.query(table, columns,
-					privateDatabaseContent.MAXSCORE_ID + " = ?", selectionArgs,
+					privateDatabaseContent.LOCATION_ID + " = ?", selectionArgs,
 					null, null, null);
 
 			return cursor;
@@ -372,14 +380,20 @@ public class SpokaneValleyDatabaseHelper {
 		private static final String LOCATION_LATITUDE = "Latitude";
 		private static final String LOCATION_LONGITUDE = "Longitude";
 		private static final String LOCATION_ATTITUDE = "Attitude";
+		private static final String LOCATION_TITLE = "Title";
+		private static final String LOCATION_INFO = "Information";
+		
 
 		// Query to create table , we can have multiple queries to create
 		// multiple tables
 		private static final String CREATE_QUERY_LOCATION = "CREATE TABLE "
-				+ LOCATION_TABLE_NAME + " (" + LOCATION_ID
-				+ " VARCHAR(255) PRIMARY KEY ," + LOCATION_LATITUDE
-				+ " VARCHAR(255)" + LOCATION_LONGITUDE + " VARCHAR(255)"
-				+ LOCATION_ATTITUDE + " VARCHAR(255));";
+				+ LOCATION_TABLE_NAME 	+ " (" 
+				+ LOCATION_ID 			+ " VARCHAR(255) PRIMARY KEY ," 
+				+ LOCATION_LATITUDE 	+ " VARCHAR(255) ," 
+				+ LOCATION_LONGITUDE 	+ " VARCHAR(255) ,"
+				+ LOCATION_ATTITUDE 	+ " VARCHAR(255) ,"
+				+ LOCATION_TITLE 		+ " VARCHAR(255) ,"
+				+ LOCATION_INFO 		+ " VARCHAR(255));";
 
 		private static final String DROP_TABLE_LOCATION = "DROP TABLE IF EXISTS "
 				+ LOCATION_TABLE_NAME;

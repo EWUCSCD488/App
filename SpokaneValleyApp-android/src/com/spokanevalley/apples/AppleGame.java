@@ -72,12 +72,7 @@ public class AppleGame implements Screen {
 		
 		// load the images for apple and bucket, 64x64 pixels each
 		appleImage = new Texture(Gdx.files.internal(Constants.IMAGE_APPLE)); // internal
-																				// files
-																				// is
-																				// located
-																				// in
-																				// assets
-																				// folder
+																				// files																		// folder
 		bucketImage = new Texture(Gdx.files.internal(Constants.IMAGE_BUCKET));
 		goldAppleImage = new Texture(Gdx.files.internal(Constants.IMAGE_GAPPLE));
 		rotAppleImage = new Texture(Gdx.files.internal(Constants.IMAGE_RAPPLE));
@@ -118,8 +113,8 @@ public class AppleGame implements Screen {
 
 		// initialize score
 		score = 0;
-		applesCaught = "score: 0";
-		scoreFont = new BitmapFont();
+		applesCaught = "SCORE: 0";
+		scoreFont = new BitmapFont(Gdx.files.internal(Constants.GAME_FONT), false);
 		
 		// save max score to database
 		Cursor checking_avalability = (DatabaseInterface.Create(context)).getDatabase().getScoreData(tableName, AppleID);
@@ -180,7 +175,9 @@ public class AppleGame implements Screen {
 			batch.draw(Apple.image, Apple.rec.x, Apple.rec.y);
 			if (Apple.rec.overlaps(bucket)) {
 				score = score + Apple.points;
-				applesCaught = "score: " + score;
+				if(score < 0)// Ensure score can't go negative
+					score = 0;
+				applesCaught = "SCORE: " + score;
 				appleSound.play();
 				if (Apple.isBad) {
 					badApples++;
@@ -198,7 +195,7 @@ public class AppleGame implements Screen {
 
 		// score color and size
 		scoreFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-		scoreFont.setScale((float) 2);
+		//scoreFont.setScale((float) 2);
 		scoreFont.draw(batch, applesCaught, 190, 750);
 		batch.end(); // end batch, write all drawings to screen
 

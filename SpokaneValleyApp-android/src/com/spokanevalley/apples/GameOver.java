@@ -46,10 +46,10 @@ public class GameOver implements Screen
 
 		game.batch.begin();
 		back.draw(game.batch);
-		game.font.setScale((float) 2);
+		//game.font.setScale((float) 2);
 		game.font.draw(game.batch, "Game Over", 170, 425);
 		game.font.draw(game.batch, "Current score : " + this.CurrentScore, 170, 525);
-		game.font.draw(game.batch, "Max Score :" + this.MaxScore, 170, 625);
+		game.font.draw(game.batch, "High Score :" + this.MaxScore, 170, 625);
 		game.batch.end();
 
 		if (Gdx.input.isTouched()) {

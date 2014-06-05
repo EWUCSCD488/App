@@ -7,6 +7,9 @@ public class Constants {
 	public static final String IMAGE_RAPPLE = "gfx/rotapplenew.png";
 	public static final String BACKGROUND = "gfx/appletreenew.png";
 	
+	public static final String GAME_FONT = "fonts/gamefont.fnt";
+	public static final String MENU_FONT = "fonts/myriad.fnt";
+	
 	public static final String SOUND_MUSIC = "sfx/BadApple.mp3";
 	public static final String SOUND_APPLE = "sfx/basket.wav";
 	

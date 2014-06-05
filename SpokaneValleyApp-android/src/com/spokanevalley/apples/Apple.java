@@ -3,6 +3,7 @@ package com.spokanevalley.apples;
 import android.content.Context;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -16,8 +17,8 @@ public class Apple extends Game {
 	
 	public void create() {
 		batch = new SpriteBatch();
-		// Use LibGDX's default Arial font.
-		font = new BitmapFont();
+		// Set font to custom font.
+		font = new BitmapFont(Gdx.files.internal(Constants.GAME_FONT), false);
 		this.setScreen(new MainMenuScreen(this,context));
 	}
 

@@ -40,7 +40,7 @@ public class MainMenuScreen implements Screen {
 
 		game.batch.begin();
 		back.draw(game.batch);
-		game.font.setScale((float) 2);
+		//game.font.setScale((float) 2);
 		game.font.draw(game.batch, "Welcome to Apple Catch! ", 90, 445);
 		game.font.draw(game.batch, "Tap anywhere to begin", 102, 395);
 		game.batch.end();

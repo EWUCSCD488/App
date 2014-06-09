@@ -110,8 +110,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		map.getUiSettings().setZoomControlsEnabled(false);
 		// Add different markers when reading through the location list
 		for (Location location : LocationList.LIST) {
-			location.setGpsCoord(new LatLng(location.getLatitude(), location
-					.getLongitude()));
+			location.setGpsCoord(new LatLng(location.getLatitude(), location.getLongitude()));
 			map.addMarker(new MarkerOptions()
 					.title(location.getTitle())
 					.snippet(location.getInfo() + "Click to Play!")

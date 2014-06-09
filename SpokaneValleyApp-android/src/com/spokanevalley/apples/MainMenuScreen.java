@@ -41,6 +41,7 @@ public class MainMenuScreen implements Screen {
 		game.batch.begin();
 		back.draw(game.batch);
 		//game.font.setScale((float) 2);
+		game.font.setColor(0.0f, 0.0f, 204.0f, 1.0f);// set font color to red
 		game.font.draw(game.batch, "Welcome to Apple Catch! ", 90, 445);
 		game.font.draw(game.batch, "Tap anywhere to begin", 102, 395);
 		game.batch.end();

@@ -2,11 +2,14 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <Location>
-        <Title>Terace View Park</Title>
+        <Title>Terrace View Park And Pool</Title>
         <Latitude>47.636221</Latitude>
         <Longitude>-117.222319</Longitude>
         <Info>
-			Helllooooooooo World!!!
+			Play equipment and horseshoe pit.
+			Swimming pool and lazy river feature.
+			Pool shade structure and furniture.
+			Ball field and basketball court.
         </Info>
         <MarkerImage>appletrees.png</MarkerImage>
     </Location>

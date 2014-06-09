@@ -12,10 +12,12 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
@@ -113,10 +115,53 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			location.setGpsCoord(new LatLng(location.getLatitude(), location.getLongitude()));
 			map.addMarker(new MarkerOptions()
 					.title(location.getTitle())
-					.snippet(location.getInfo() + "Click to Play!")
+					.snippet(location.getInfo())
 					.icon(location.getMarkerImage())
 					.position(location.getGpsCoord()));
 					map.setOnInfoWindowClickListener(this);
+					// Setting a custom info window adapter for the google map
+					map.setInfoWindowAdapter(new InfoWindowAdapter() {
+						 
+			            // Use default InfoWindow frame
+				        @Override
+				        public View getInfoContents(Marker marker) {
+				            if (marker != null && marker.isInfoWindowShown()) {
+				                marker.hideInfoWindow();
+				                marker.showInfoWindow();
+				            }
+				            return null;
+				        }
+			 
+			            // Defines the contents of the InfoWindow (Have to use this one to use custom info-bubble)
+			            @Override
+			            public View getInfoWindow(Marker arg0) {
+			 
+			                // Getting view from the layout file info_window_layout
+			                View view = getLayoutInflater().inflate(R.layout.info_window_layout, null);
+			               
+			                //setting title
+		                	TextView titleUi = (TextView) view.findViewById(R.id.custom_title);
+			                if (arg0.getTitle() != null && arg0 != null)
+			                	titleUi.setText(arg0.getTitle());
+			                else
+			                	titleUi.setText("");
+			                
+			                //setting info
+			                TextView snippetUi = ((TextView) view.findViewById(R.id.custom_snippet));
+			                if (arg0.getSnippet() != null && arg0 != null)
+			                	snippetUi.setText(arg0.getSnippet());
+			                else
+			                	snippetUi.setText("");
+			 
+			                //Setting click to play option
+			                TextView clickUi = ((TextView) view.findViewById(R.id.custom_click));
+			                clickUi.setText("Click to Play!");
+			       
+			                // Returning the view containing InfoWindow contents
+			                return view;
+			 
+			            }
+			        });
 		}
 
 		map.setPadding(0, 0, 30, 0);

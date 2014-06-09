@@ -205,18 +205,22 @@ containing a value of this type.
         public static final int common_signin_btn_text_normal_light=0x7f020016;
         public static final int common_signin_btn_text_pressed_dark=0x7f020017;
         public static final int common_signin_btn_text_pressed_light=0x7f020018;
-        public static final int ic_launcher=0x7f020019;
-        public static final int ic_plusone_medium_off_client=0x7f02001a;
-        public static final int ic_plusone_small_off_client=0x7f02001b;
-        public static final int ic_plusone_standard_off_client=0x7f02001c;
-        public static final int ic_plusone_tall_off_client=0x7f02001d;
-        public static final int mapbg=0x7f02001e;
-        public static final int marker128=0x7f02001f;
-        public static final int marker256=0x7f020020;
-        public static final int marker512=0x7f020021;
-        public static final int newmapbg=0x7f020022;
+        public static final int custom_info_bubble=0x7f020019;
+        public static final int ic_launcher=0x7f02001a;
+        public static final int ic_plusone_medium_off_client=0x7f02001b;
+        public static final int ic_plusone_small_off_client=0x7f02001c;
+        public static final int ic_plusone_standard_off_client=0x7f02001d;
+        public static final int ic_plusone_tall_off_client=0x7f02001e;
+        public static final int mapbg=0x7f02001f;
+        public static final int marker128=0x7f020020;
+        public static final int marker256=0x7f020021;
+        public static final int marker512=0x7f020022;
+        public static final int newmapbg=0x7f020023;
     }
     public static final class id {
+        public static final int custom_click=0x7f060008;
+        public static final int custom_snippet=0x7f060007;
+        public static final int custom_title=0x7f060006;
         public static final int hybrid=0x7f060004;
         public static final int map=0x7f060005;
         public static final int none=0x7f060000;
@@ -229,8 +233,9 @@ containing a value of this type.
     }
     public static final class layout {
         public static final int activity_map_view=0x7f030000;
-        public static final int locations=0x7f030001;
-        public static final int main=0x7f030002;
+        public static final int info_window_layout=0x7f030001;
+        public static final int locations=0x7f030002;
+        public static final int main=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f07001b;

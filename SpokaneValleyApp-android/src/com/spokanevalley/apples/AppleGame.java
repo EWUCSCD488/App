@@ -48,6 +48,8 @@ public class AppleGame implements Screen {
 	Rectangle bucket;
 	Array<Appleob> Apples;
 	long lastAppleTime;
+	long speed;
+	int lastpoint = 55;
 	
 	
 	private int score;
@@ -154,7 +156,7 @@ public class AppleGame implements Screen {
 			camera.unproject(touchPos);
 			bucket.x = touchPos.x - 64 / 2;
 		}
-
+		
 		// constantly update drops
 		if (TimeUtils.nanoTime() - lastAppleTime > 200000000)
 			spawnApple();
@@ -168,7 +170,41 @@ public class AppleGame implements Screen {
 		Iterator<Appleob> iter = Apples.iterator();
 		while (iter.hasNext()) {
 			Appleob Apple = iter.next();
-			Apple.rec.y -= 600 * Gdx.graphics.getDeltaTime();
+			
+			if(score < 15)
+			{
+				speed = 200;
+			}
+			
+			
+			else if(score >= 15 && score < 25)
+			{
+				speed = 300;
+			}
+			
+			else if(score >= 25 && score < 35)
+			{
+				speed = 400;
+			}
+			
+			else if(score >= 35 && score < 45)
+			{
+				speed = 500;
+			}
+			else if(score >= 45 && score < 55)
+			{
+				speed = 600;
+			}
+			
+			else
+			{
+				if(score > lastpoint + 10)
+				{
+					speed += 50;
+				}
+			}
+			
+			Apple.rec.y -= speed * Gdx.graphics.getDeltaTime();
 			if (Apple.rec.y + 64 < 0)
 				iter.remove();
 

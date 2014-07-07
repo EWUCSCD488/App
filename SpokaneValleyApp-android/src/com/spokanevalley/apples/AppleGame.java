@@ -1,5 +1,5 @@
-package com.spokanevalley.apples;
 
+package com.spokanevalley.apples;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,6 +50,7 @@ public class AppleGame implements Screen {
 	long lastAppleTime;
 	long speed;
 	int lastpoint = 55;
+	int spawn = 600000000;
 	
 	
 	private int score;
@@ -72,7 +73,7 @@ public class AppleGame implements Screen {
 		this.context = context;
 		
 		
-		// load the images for apple and bucket, 64x64 pixels each
+		// load the images for apple and bucket, 48x48 pixels each
 		appleImage = new Texture(Gdx.files.internal(Constants.IMAGE_APPLE)); // internal
 																				// files																		// folder
 		bucketImage = new Texture(Gdx.files.internal(Constants.IMAGE_BUCKET));
@@ -136,6 +137,8 @@ public class AppleGame implements Screen {
 	public void resize(int width, int height) {
 
 	}
+	
+	
 
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1); // set color to blue
@@ -157,8 +160,46 @@ public class AppleGame implements Screen {
 			bucket.x = touchPos.x - 64 / 2;
 		}
 		
+		
+		
+		if(score < 25)
+		{
+			spawn = 600000000;
+		}
+		
+		
+		else if(score >= 25 && score < 45)
+		{
+			spawn = 500000000;
+		}
+		
+		else if(score >= 45 && score < 65)
+		{
+			spawn = 400000000;
+		}
+		
+		else if(score >= 65 && score < 85)
+		{
+			spawn = 300000000;
+		}
+		else if(score >= 85 && score < 105)
+		{
+			spawn = 200000000;
+		}
+		
+		else
+		{
+			if(score > lastpoint + 20 && spawn > 50000000)
+			{
+				spawn -= 25000000;
+				lastpoint=score;
+			}
+		}
+		
+		
+		
 		// constantly update drops
-		if (TimeUtils.nanoTime() - lastAppleTime > 200000000)
+		if (TimeUtils.nanoTime() - lastAppleTime > spawn)
 			spawnApple();
 
 		// render Apple
@@ -171,41 +212,42 @@ public class AppleGame implements Screen {
 		while (iter.hasNext()) {
 			Appleob Apple = iter.next();
 			
-			if(score < 15)
+			if(score < 25)
 			{
 				speed = 200;
 			}
 			
 			
-			else if(score >= 15 && score < 25)
+			else if(score >= 25 && score < 45)
 			{
 				speed = 300;
 			}
 			
-			else if(score >= 25 && score < 35)
+			else if(score >= 45 && score < 65)
 			{
 				speed = 400;
 			}
 			
-			else if(score >= 35 && score < 45)
+			else if(score >= 65 && score < 85)
 			{
 				speed = 500;
 			}
-			else if(score >= 45 && score < 55)
+			else if(score >= 85 && score < 105)
 			{
 				speed = 600;
 			}
 			
 			else
 			{
-				if(score > lastpoint + 10)
+				if(score > lastpoint + 20 && speed <1000)
 				{
-					speed += 50;
+					speed += 25;
+					lastpoint=score;
 				}
 			}
 			
 			Apple.rec.y -= speed * Gdx.graphics.getDeltaTime();
-			if (Apple.rec.y + 64 < 0)
+			if (Apple.rec.y + 48 < 0)
 				iter.remove();
 
 			batch.draw(Apple.image, Apple.rec.x, Apple.rec.y);
@@ -222,7 +264,7 @@ public class AppleGame implements Screen {
 					
 					int MaxScore = saveMaxScore(score);
 
-					Game.setScreen(new GameOver(Game,score,MaxScore));
+					Game.setScreen(new GameOver(Game,score,maxScore));
 					dispose();
 				}
 				iter.remove();
@@ -264,10 +306,10 @@ public class AppleGame implements Screen {
 	private void spawnApple() {
 		Appleob ob = new Appleob();
 		Rectangle Apple = new Rectangle();
-		Apple.x = MathUtils.random(0, 480 - 64);
+		Apple.x = MathUtils.random(0, 480 - 48);
 		Apple.y = 720;
-		Apple.width = 64;
-		Apple.height = 64;
+		Apple.width = 48;
+		Apple.height = 48;
 		ob.rec = Apple;
 		int rand = MathUtils.random(0, 300);
 		if (rand < 225) {

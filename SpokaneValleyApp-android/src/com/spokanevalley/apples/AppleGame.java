@@ -264,7 +264,7 @@ public class AppleGame implements Screen {
 					
 					int MaxScore = saveMaxScore(score);
 
-					Game.setScreen(new GameOver(Game,score,maxScore));
+					Game.setScreen(new GameOver(Game,score,MaxScore)); //maxScore*****
 					dispose();
 				}
 				iter.remove();

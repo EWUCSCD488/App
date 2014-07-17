@@ -39,9 +39,10 @@ public class MapView extends Activity implements OnMarkerClickListener,
 
 	public static final String TAG = MapView.class.getName();
 
+	//NEED TO CONFIGURE BOUNDS AFTER WE PUT IN ALL OUR LOCATIONS!*****
 	// bounds for limiting scolling and zooming.
-	private final LatLngBounds BOUNDS = new LatLngBounds(new LatLng(47.575693,
-			-117.364063), new LatLng(47.749113, -117.115154));
+	private final LatLngBounds BOUNDS = new LatLngBounds(new LatLng(47.571128,
+			-117.489905), new LatLng(47.770645, -116.990714));
 	private overscrollHandler mOverscrollHandler = new overscrollHandler();
 	final Context context = this;
 	private GoogleMap map;
@@ -104,12 +105,19 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	 */
 	public void initilizeMap() {
 
+		//Setting fragment to map
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
 				.getMap();
 
-		map.setMapType(GoogleMap.MAP_TYPE_NONE); // WHY DO WE NEED TO SET
-													// TYPE OF MAP TWICE
+		//Makes a clear map
+		map.setMapType(GoogleMap.MAP_TYPE_NONE); 
+		
+		//Removes zoom buttons
 		map.getUiSettings().setZoomControlsEnabled(false);
+		
+		//Removes zoom gestures (pinch, double tap, etc.)
+		map.getUiSettings().setZoomGesturesEnabled(false);
+		
 		// Add different markers when reading through the location list
 		for (Location location : LocationList.LIST) {
 			location.setGpsCoord(new LatLng(location.getLatitude(), location.getLongitude()));
@@ -179,7 +187,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			locationMain = center; // place where it loads
 		}
 		if (globalZoom == 0) {
-			globalZoom = 11.8f; // Scaling when it loads
+			globalZoom = 11.4f; // Scaling when it loads *****
 		}
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(locationMain,
 				globalZoom)); // second number is zoom unit
@@ -261,8 +269,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 
 		// move camera
 		CameraPosition position = map.getCameraPosition();
-		CameraPosition newPosition = new CameraPosition(arg0.getPosition(),
-				position.zoom, position.tilt, position.bearing);
+		CameraPosition newPosition = new CameraPosition((arg0.getPosition()),
+				position.zoom, position.tilt, position.bearing); 
 		map.animateCamera(CameraUpdateFactory.newCameraPosition(newPosition),
 				400, null);
 

@@ -19,7 +19,7 @@ public class Apple extends Game {
 		batch = new SpriteBatch();
 		// Set font to custom font.
 		font = new BitmapFont(Gdx.files.internal(Constants.GAME_FONT), false);
-		this.setScreen(new MainMenuScreen(this,context));
+		this.setScreen(new MainMenuScreen(this));
 	}
 
 	public void render() {

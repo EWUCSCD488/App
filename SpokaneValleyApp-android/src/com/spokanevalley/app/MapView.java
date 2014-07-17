@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
@@ -42,7 +43,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	//NEED TO CONFIGURE BOUNDS AFTER WE PUT IN ALL OUR LOCATIONS!*****
 	// bounds for limiting scolling and zooming.
 	private final LatLngBounds BOUNDS = new LatLngBounds(new LatLng(47.571128,
-			-117.489905), new LatLng(47.770645, -116.990714));
+			-117.489905), new LatLng(47.90645, -116.990714));
 	private overscrollHandler mOverscrollHandler = new overscrollHandler();
 	final Context context = this;
 	private GoogleMap map;
@@ -249,42 +250,41 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	 */
 	@Override
 	public boolean onMarkerClick(Marker arg0) {
+		
+		// Check if there is an open info window
+        if (lastMarkerSelected != null) {
+            // Close the info window
+            lastMarkerSelected.hideInfoWindow();
 
-		// Change title text depending on pin
+            // Is the marker the same marker that was already open
+            if (lastMarkerSelected.equals(arg0)) {
+                // Nullify the lastOpened object
+                lastMarkerSelected = null;
+                // Return so that the info window isn't opened again
+                return true;
+            } 
+        }
 
-		//arg0.hideInfoWindow();
+        // Open the info window for the marker
+        arg0.showInfoWindow();
+        // Re-assign the last opened such that we can close it later
+        lastMarkerSelected = arg0;
 
-		// MARKER IMAGES AND
-		// CENTERING*****************************************************************************************
-		// put last pressed marker back to normal
-		/*if (lastMarkerSelected != null && !arg0.equals(lastMarkerSelected))
-			lastMarkerSelected.setIcon(BitmapDescriptorFactory
-					.fromResource(R.drawable.marker128));
+        // Get the markers current position
+        LatLng curMarkerPos = arg0.getPosition();
 
-		if (!arg0.equals(lastMarkerSelected))
-			arg0.setIcon(BitmapDescriptorFactory
-					.fromResource(R.drawable.marker256));
+        // Use the markers position to get a new latlng to move the camera to such that it adjusts appropriately to your infowindows height (might be more or less then 0.3 and might need to subtract vs add this is just an example)
+        LatLng camMove = new LatLng(curMarkerPos.latitude + 0.025, curMarkerPos.longitude);
 
-		lastMarkerSelected = arg0;*/
-
-		// move camera
-		CameraPosition position = map.getCameraPosition();
-		CameraPosition newPosition = new CameraPosition((arg0.getPosition()),
-				position.zoom, position.tilt, position.bearing); 
-		map.animateCamera(CameraUpdateFactory.newCameraPosition(newPosition),
-				400, null);
-
-		// MARKER IMAGES AND
-		// CENTERING*****************************************************************************************
-
-		// INITIALIZE GAME
-		//Intent intent = new Intent(MapView.this, GameLauncher.class);
-		//startActivityForResult(intent, REQUEST_CODE);
+        // Create a camera update with the new latlng to move to            
+        CameraUpdate camUpdate = CameraUpdateFactory.newLatLng(camMove);
+        // Move the map to this position
+        map.animateCamera(camUpdate);
 
 		// return true so that the stock things don't happen when a marker is
 		// pressed.
 		// This removes the automatic centering and the info and title boxes
-		return false;
+		return true;
 	}
 
 	@Override

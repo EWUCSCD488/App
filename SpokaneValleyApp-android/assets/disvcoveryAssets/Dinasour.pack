@@ -1,0 +1,12 @@
+
+Dinasour.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+dinoright
+  rotate: false
+  xy: 1, 1
+  size: 628, 689
+  orig: 628, 689
+  offset: 0, 0
+  index: -1

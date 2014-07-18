@@ -1,0 +1,75 @@
+
+atlasofimages.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+cloud1
+  rotate: false
+  xy: 1, 573
+  size: 808, 386
+  orig: 808, 386
+  offset: 0, 0
+  index: -1
+rightmoutain
+  rotate: false
+  xy: 1, 132
+  size: 668, 439
+  orig: 668, 439
+  offset: 0, 0
+  index: -1
+cutedinasour
+  rotate: false
+  xy: 811, 447
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+leftmountain
+  rotate: false
+  xy: 1325, 683
+  size: 601, 276
+  orig: 601, 276
+  offset: 0, 0
+  index: -1
+groundedge
+  rotate: false
+  xy: 1, 1
+  size: 128, 129
+  orig: 128, 129
+  offset: 0, 0
+  index: -1
+groundmiddle
+  rotate: false
+  xy: 1, 1
+  size: 128, 129
+  orig: 128, 129
+  offset: 0, 0
+  index: -1
+cloud2
+  rotate: false
+  xy: 671, 449
+  size: 128, 122
+  orig: 128, 122
+  offset: 0, 0
+  index: -1
+cloud3
+  rotate: false
+  xy: 1325, 559
+  size: 128, 122
+  orig: 128, 122
+  offset: 0, 0
+  index: -1
+sky
+  rotate: false
+  xy: 131, 8
+  size: 128, 122
+  orig: 128, 122
+  offset: 0, 0
+  index: -1
+coin
+  rotate: false
+  xy: 1928, 927
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1

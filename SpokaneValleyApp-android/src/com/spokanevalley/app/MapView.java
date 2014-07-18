@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
+import com.spokanevalley.bankStore.BankActivity;
 import com.spokanevalley.database.DatabaseInterface;
 
 @SuppressWarnings("deprecation")
@@ -238,9 +239,18 @@ public class MapView extends Activity implements OnMarkerClickListener,
 
     public void onInfoWindowClick(Marker marker) 
     {
-		// INITIALIZE GAME
-		Intent intent = new Intent(MapView.this, GameLauncher.class);
-		startActivityForResult(intent, REQUEST_CODE);
+    	Log.d(TAG, marker.getTitle());
+		// Check for Plantes Ferry Park
+
+					if(marker.getTitle().equals("Plantes Ferry Park")){
+						Intent intent = new Intent(MapView.this, BankActivity.class);
+						startActivityForResult(intent, REQUEST_CODE);
+					}else if(marker.getTitle().equals("Terrace View Park And Pool")){
+						// INITIALIZE GAME
+						Intent intent = new Intent(MapView.this, GameLauncher.class);
+						startActivityForResult(intent, REQUEST_CODE);
+
+					}
     }
 	/**
 	 * Responds to marker click

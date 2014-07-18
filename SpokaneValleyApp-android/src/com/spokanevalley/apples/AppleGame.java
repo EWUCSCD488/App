@@ -56,7 +56,7 @@ public class AppleGame implements Screen {
 	private int score;
 	private Context context;
 	
-	private static final String AppleID = "123abcf";
+	private static final String AppleID = "Apple Game";
 	private static final String tableName = "GameScoreTable";
 	private static final int IDColumns = 0;
 	private static final int ScoreColumns = 1;

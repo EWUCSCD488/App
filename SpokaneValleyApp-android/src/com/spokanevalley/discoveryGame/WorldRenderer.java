@@ -25,12 +25,14 @@ public class WorldRenderer implements Disposable {
 				Constants.VIEWPORT_HEIGHT);
 		camera.position.set(0, 0, 0);
 		camera.update();
+		camera.zoom -= 4;
 
 		cameraGUI = new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH,
 				Constants.VIEWPORT_GUI_HEIGHT);
 		cameraGUI.position.set(0, 0, 0);
 		cameraGUI.setToOrtho(true); // filp y axis
 		cameraGUI.update();
+		//cameraGUI.zoom -= 0.5;
 	}
 
 	private void renderWorld(SpriteBatch batch) {

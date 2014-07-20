@@ -31,7 +31,7 @@ public class Constants {
 		// Location of image file for level 01
 		 public static final String LEVEL_01 = "disvcoveryAssets/levels/level-01test1.png";
 		 
-		 public static final int LIVES_START = 3;
+		 public static final int LIVES_START = 1;
 		public static final String GAMEFONTS = "disvcoveryAssets/fonts/myriad.fnt";
 		public static final float ITEM_FEATHER_POWERUP_DURATION = 9;
 		public static final float TIME_DELAY_GAME_OVER = 3;

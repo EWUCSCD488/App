@@ -14,14 +14,14 @@ import com.spokanevalley.discoveryGame.drawingHandlers.SpecialCoin;
 
 public class LevelLoader {
 	public static final String TAG = LevelLoader.class.getName();
-
+	private float delay = 0;
 	public enum BLOCK_TYPE {
 		EMPTY(0, 0, 0), // black
 		ROCK(0, 255, 0), // green
 		PLAYER_SPAWMPOINT(255, 255, 255), // white
 		ITEM_GOLD_COIN(255, 255, 0), // yellow
 		ITEM_SPECIAL_COIN(255, 0, 255); // purple
-
+		
 		private int color;
 
 		private BLOCK_TYPE(int r, int g, int b) {
@@ -47,7 +47,8 @@ public class LevelLoader {
 
 	public LevelLoader(String filename) {
 		init(filename);
-		init1("levels/level-01test2.png");
+		init1("disvcoveryAssets/levels/level-01test2.png");
+		dinasour.setJumping(false);
 	}
 
 	private void init1(String filename) {
@@ -93,12 +94,14 @@ public class LevelLoader {
 					obj.position.set(pixelX+ pixmap.getWidth(),baseHeight * obj.dimension.y
 					+ offsetHeight);
 					coins.add((Coins)obj);
-				/*}	else if (BLOCK_TYPE.PLAYER_SPAWMPOINT.sameColor(currentPixel)){				// dinasour
-							obj = new Dinasour();
-							offsetHeight = -3.0f;
-							obj.position.set(pixelX	+ pixmap.getWidth(), baseHeight * obj.dimension.y + offsetHeight);
-							dinasour = (Dinasour) obj;
-					*/
+				}	else if (BLOCK_TYPE.PLAYER_SPAWMPOINT.sameColor(currentPixel)){				// dinasour
+					obj = new Dinasour();
+					offsetHeight =-2.0f;
+					float offsetWidth =2.0f;
+					obj.position.set(pixelX	+ offsetWidth, baseHeight * obj.dimension.y + offsetHeight);
+					dinasour = (Dinasour) obj;
+					dinasour.setJumping(false);
+					
 				}else if (BLOCK_TYPE.ITEM_SPECIAL_COIN.sameColor(currentPixel))	{		// special coin
 					obj = new SpecialCoin();
 					offsetHeight = -1.5f;
@@ -181,9 +184,11 @@ public class LevelLoader {
 					coins.add((Coins)obj);
 				}	else if (BLOCK_TYPE.PLAYER_SPAWMPOINT.sameColor(currentPixel)){				// dinasour
 							obj = new Dinasour();
-							offsetHeight = -3.0f;
-							obj.position.set(pixelX	, baseHeight * obj.dimension.y + offsetHeight);
+							offsetHeight =-3.0f;
+							float offsetWidth =2.0f;
+							obj.position.set(pixelX	+ offsetWidth, baseHeight * obj.dimension.y + offsetHeight);
 							dinasour = (Dinasour) obj;
+							dinasour.setJumping(false);
 					
 				}else if (BLOCK_TYPE.ITEM_SPECIAL_COIN.sameColor(currentPixel))	{		// special coin
 					obj = new SpecialCoin();
@@ -213,7 +218,7 @@ public class LevelLoader {
 		clouds = new Clouds(pixmap.getWidth());
 		clouds.position.set(0, 2);
 		mountains = new Mountains(pixmap.getWidth()*2);
-		mountains.position.set(-1, -1);
+		mountains.position.set(-3, -3);
 				
 		// free memory
 		pixmap.dispose();
@@ -236,11 +241,13 @@ public class LevelLoader {
 		for (SpecialCoin coin : specialCoin)
 			coin.render(batch);
 		
-		// Draw Player character
-		dinasour.render(batch);
+
 		
 		// Draw Clouds
 		clouds.render(batch);
+		
+		// Draw Player character
+		dinasour.render(batch);
 	}
 	
 	public void update (float deltaTime) {
@@ -252,6 +259,9 @@ public class LevelLoader {
 		for(SpecialCoin feather : specialCoin)
 		feather.update(deltaTime);
 		clouds.update(deltaTime);
+		
+		delay +=deltaTime;
+		if(delay > 1.0f)
 		dinasour.update(deltaTime);
 		}
 	

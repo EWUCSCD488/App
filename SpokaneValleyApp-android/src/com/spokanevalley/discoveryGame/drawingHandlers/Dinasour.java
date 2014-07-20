@@ -1,6 +1,5 @@
 package com.spokanevalley.discoveryGame.drawingHandlers;
 
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.spokanevalley.discoveryGame.Constants;

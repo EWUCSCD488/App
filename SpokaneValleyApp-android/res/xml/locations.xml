@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+     <Location>
+        <Title>Discovery Park</Title>
+        <Artist></Artist>
+        <Latitude>47.677359</Latitude>
+        <Longitude>-117.224588</Longitude>
+        <Info>Testing for Discovery Park. Update soon</Info>
+         <MarkerImage>marker128.png</MarkerImage>
+    </Location>
     <Location>
         <Title>Terrace View Park And Pool</Title>
         <Latitude>47.636221</Latitude>

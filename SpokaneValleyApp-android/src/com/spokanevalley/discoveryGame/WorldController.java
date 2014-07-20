@@ -22,7 +22,7 @@ public class WorldController implements GestureListener {
 	public CameraHelper cameraHelper;
 	public int lives;
 	public int score;
-
+	private float timeSinceCollision;
 	private Rectangle r1 = new Rectangle();
 	private Rectangle r2 = new Rectangle();
 	private float timeLeftGameOverDelay; 
@@ -32,7 +32,7 @@ public class WorldController implements GestureListener {
 	}
 
 	public boolean isGameOver(){
-		return lives <0;
+		return lives <=0;
 	}
 	
 	public boolean isPlayerInWater(){
@@ -84,12 +84,7 @@ public class WorldController implements GestureListener {
 		Gdx.app.log(TAG, "Gold coin collected");
 	}
 
-	private void onCollisionWithSpecialCoin(SpecialCoin specialcoin) {
-		specialcoin.collected = true;
-		score += specialcoin.getScore();
-		level.dinasour.setSpecialCoinPowerUp(true);
-		Gdx.app.log(TAG, "Feather collected");
-	}
+
 
 	private void testCollisions() {
 		r1.set(level.dinasour.position.x, level.dinasour.position.y,
@@ -140,6 +135,7 @@ public class WorldController implements GestureListener {
 	}
 
 	private void initLevel() {
+		level = null;
 		level = new LevelLoader(Constants.LEVEL_01);
 		score = 0;
 		cameraHelper.setTarget(level.dinasour);
@@ -180,8 +176,11 @@ public class WorldController implements GestureListener {
 			lives--;
 			if(isGameOver())
 				timeLeftGameOverDelay = Constants.TIME_DELAY_GAME_OVER;
-			else 
+			else {
 				initLevel();
+				//level.dinasour.update(deltaTime);
+				//level.dinasour.velocity.x = 0;
+			}
 		}
 		
 	}
@@ -197,9 +196,17 @@ public class WorldController implements GestureListener {
 		level.bunnyHead.terminalVelocity.x;
 		} else {*/
 		// Execute auto-forward movement on non-desktop platform
-			if (Gdx.app.getType() != ApplicationType.Desktop) {
-				level.dinasour.velocity.x = level.dinasour.terminalVelocity.x;
+			
+			timeSinceCollision += deltaTime;
+			if(timeSinceCollision > 2.0f) {
+				if (Gdx.app.getType() != ApplicationType.Desktop) {
+					level.dinasour.velocity.x = level.dinasour.terminalVelocity.x;
+				}
+			} else {
+			    // ignore the collision
 			}
+			
+			
 		}
 		// Bunny Jump
 		/*if (Gdx.input.isTouched() ||

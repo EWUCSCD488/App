@@ -17,7 +17,7 @@ public class Mountains extends AbstractGameObject {
 	}
 
 	private void init() {
-		dimension.set(10, 2);
+		dimension.set(10, 5);
 
 		regMountainLeft = Assets.instance.mountain.moutainLeft;
 		regMountainRight = Assets.instance.mountain.moutainRight;

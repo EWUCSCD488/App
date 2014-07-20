@@ -32,6 +32,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
 import com.spokanevalley.bankStore.BankActivity;
 import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.discoveryGame.DiscoveryActivity;
 
 @SuppressWarnings("deprecation")
 public class MapView extends Activity implements OnMarkerClickListener,
@@ -120,6 +121,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		
 		// Add different markers when reading through the location list
 		for (Location location : LocationList.LIST) {
+			Log.d(TAG, "location "+ location.getTitle());
 			location.setGpsCoord(new LatLng(location.getLatitude(), location.getLongitude()));
 			map.addMarker(new MarkerOptions()
 					.title(location.getTitle())
@@ -249,7 +251,10 @@ public class MapView extends Activity implements OnMarkerClickListener,
 						// INITIALIZE GAME
 						Intent intent = new Intent(MapView.this, GameLauncher.class);
 						startActivityForResult(intent, REQUEST_CODE);
-
+					}else if(marker.getTitle().equals("Discovery Park")){
+						// INITIALIZE GAME
+						Intent intent = new Intent(MapView.this, DiscoveryActivity.class);
+						startActivityForResult(intent, REQUEST_CODE);
 					}
     }
 	/**

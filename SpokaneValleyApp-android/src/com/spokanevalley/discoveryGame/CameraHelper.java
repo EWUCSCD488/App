@@ -29,7 +29,7 @@ public class CameraHelper {
 		position.y = target.position.y + target.origin.y;
 		
 		// Prevent camera from moving down too far
-		position.y = Math.max(-1f, position.y);
+		position.y = Math.max(-0.5f, position.y);
 	}
 	
 	public void setPosition(float x, float y){

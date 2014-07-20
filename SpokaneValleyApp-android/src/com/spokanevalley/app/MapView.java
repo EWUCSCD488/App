@@ -42,8 +42,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 
 	//NEED TO CONFIGURE BOUNDS AFTER WE PUT IN ALL OUR LOCATIONS!*****
 	// bounds for limiting scolling and zooming.
-	private final LatLngBounds BOUNDS = new LatLngBounds(new LatLng(47.571128,
-			-117.489905), new LatLng(47.90645, -116.990714));
+	private final LatLngBounds BOUNDS = new LatLngBounds(new LatLng(47.594413,
+			-117.399280), new LatLng(47.756088, -117.035187));
 	private overscrollHandler mOverscrollHandler = new overscrollHandler();
 	final Context context = this;
 	private GoogleMap map;
@@ -180,7 +180,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		map.setMyLocationEnabled(false);
 
 		// coordinates of center of Spokane Valley
-		LatLng center = new LatLng(47.670568, -117.239437);
+		LatLng center = new LatLng(47.717924, -117.221588);
 
 		if (LastLegitLocation == null)
 			LastLegitLocation = center;
@@ -189,7 +189,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			locationMain = center; // place where it loads
 		}
 		if (globalZoom == 0) {
-			globalZoom = 11.4f; // Scaling when it loads *****
+			globalZoom = 12.4f; // Scaling when it loads *****
 		}
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(locationMain,
 				globalZoom)); // second number is zoom unit

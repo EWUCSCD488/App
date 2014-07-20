@@ -81,7 +81,7 @@ public class LevelLoader {
 						obj = new Rocks();
 						float heightIncreaseFactor = 0.25f;
 						offsetHeight = -2.5f;
-						obj.position.set(pixelX + pixmap.getWidth() -10, baseHeight*obj.dimension.y
+						obj.position.set(pixelX + pixmap.getWidth() - 5, baseHeight*obj.dimension.y
 														* heightIncreaseFactor
 														+offsetHeight);
 						rocks.add((Rocks)obj);
@@ -90,21 +90,14 @@ public class LevelLoader {
 					}
 				} else if(BLOCK_TYPE.ITEM_GOLD_COIN.sameColor(currentPixel)){			// gold coin
 					obj = new Coins();
-					offsetHeight = -1.5f;
+					offsetHeight = -0.75f;
 					obj.position.set(pixelX+ pixmap.getWidth(),baseHeight * obj.dimension.y
 					+ offsetHeight);
 					coins.add((Coins)obj);
-				}	else if (BLOCK_TYPE.PLAYER_SPAWMPOINT.sameColor(currentPixel)){				// dinasour
-					obj = new Dinasour();
-					offsetHeight =-2.0f;
-					float offsetWidth =2.0f;
-					obj.position.set(pixelX	+ offsetWidth, baseHeight * obj.dimension.y + offsetHeight);
-					dinasour = (Dinasour) obj;
-					dinasour.setJumping(false);
-					
+				//}	else if (BLOCK_TYPE.PLAYER_SPAWMPOINT.sameColor(currentPixel)){				// dinasour				
 				}else if (BLOCK_TYPE.ITEM_SPECIAL_COIN.sameColor(currentPixel))	{		// special coin
 					obj = new SpecialCoin();
-					offsetHeight = -1.5f;
+					offsetHeight = -0.75f;
 					obj.position.set(pixelX  + pixmap.getWidth(),baseHeight * obj.dimension.y
 					+ offsetHeight);
 					specialCoin.add((SpecialCoin)obj);

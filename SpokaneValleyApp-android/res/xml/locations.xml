@@ -7,7 +7,7 @@
         <Latitude>47.677359</Latitude>
         <Longitude>-117.224588</Longitude>
         <Info>Testing for Discovery Park. Update soon</Info>
-         <MarkerImage>marker128.png</MarkerImage>
+         <MarkerImage>bucket_and_shovel.png</MarkerImage>
     </Location>
     <Location>
         <Title>Terrace View Park And Pool</Title>
@@ -28,6 +28,15 @@
         <Info>
             -  This is a chill Park...
         </Info>
-        <MarkerImage>marker128.png</MarkerImage>
+        <MarkerImage>boat.png</MarkerImage>
+    </Location>
+    <Location>
+        <Title>Bank</Title>
+        <Latitude>47.657974</Latitude>
+        <Longitude>-117.266581</Longitude>
+        <Info>
+            -  Redeem your apples for cool prizes here!
+        </Info>
+        <MarkerImage>piggy_bank.png</MarkerImage>
     </Location>
 </PreferenceScreen>

@@ -43,7 +43,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	//NEED TO CONFIGURE BOUNDS AFTER WE PUT IN ALL OUR LOCATIONS!*****
 	// bounds for limiting scolling and zooming.
 	private final LatLngBounds BOUNDS = new LatLngBounds(new LatLng(47.594413,
-			-117.399280), new LatLng(47.756088, -117.035187));
+			-117.399280), new LatLng(47.750088, -117.035187));
 	private overscrollHandler mOverscrollHandler = new overscrollHandler();
 	final Context context = this;
 	private GoogleMap map;
@@ -244,7 +244,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
     	Log.d(TAG, marker.getTitle());
 		// Check for Plantes Ferry Park
 
-					if(marker.getTitle().equals("Plantes Ferry Park")){
+					if(marker.getTitle().equals("Bank")){
 						Intent intent = new Intent(MapView.this, BankActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);
 					}else if(marker.getTitle().equals("Terrace View Park And Pool")){
@@ -255,6 +255,9 @@ public class MapView extends Activity implements OnMarkerClickListener,
 						// INITIALIZE GAME
 						Intent intent = new Intent(MapView.this, DiscoveryActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);
+					}else if(marker.getTitle().equals("Plantes Ferry Park")){
+						// INITIALIZE GAME
+						//Plantes Ferry Initialize code here
 					}
     }
 	/**
@@ -287,7 +290,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
         LatLng curMarkerPos = arg0.getPosition();
 
         // Use the markers position to get a new latlng to move the camera to such that it adjusts appropriately to your infowindows height (might be more or less then 0.3 and might need to subtract vs add this is just an example)
-        LatLng camMove = new LatLng(curMarkerPos.latitude + 0.025, curMarkerPos.longitude);
+        LatLng camMove = new LatLng(curMarkerPos.latitude + 0.02, curMarkerPos.longitude);
 
         // Create a camera update with the new latlng to move to            
         CameraUpdate camUpdate = CameraUpdateFactory.newLatLng(camMove);

@@ -11,7 +11,7 @@ public class Location {
     private double latitude;
     private double longitude;
     private LatLng gpsCoord;
-    private double attitude;
+    private double altitude;
     private BitmapDescriptor markerImage;
 
         public Location(String ID,String title,String info,double latitude,double longitude){
@@ -20,7 +20,7 @@ public class Location {
         	this.info = info;
         	this.latitude = latitude;
         	this.longitude = longitude;
-        	this.attitude = 0;
+        	this.setAltitude(0);
         }
         
         public Location(String ID,String title,String info,double latitude,double longitude,double attitude){
@@ -29,7 +29,7 @@ public class Location {
         	this.info = info;
         	this.latitude = latitude;
         	this.longitude = longitude;
-        	this.attitude = attitude;
+        	this.setAltitude(attitude);
         }
 
         public Location() {
@@ -91,5 +91,13 @@ public class Location {
     
 	public String getID() {
 		return ID;
+	}
+
+	public double getAltitude() {
+		return altitude;
+	}
+
+	public void setAltitude(double altitude) {
+		this.altitude = altitude;
 	}
 }

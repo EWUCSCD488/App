@@ -1,10 +1,11 @@
 package com.spokanevalley.app;
 
+import java.util.ArrayList;
+
+import org.xmlpull.v1.XmlPullParser;
+
 import android.content.Context;
 import android.content.res.XmlResourceParser;
-import android.util.Xml;
-import org.xmlpull.v1.XmlPullParser;
-import java.util.ArrayList;
 
 
 public class LocationInflator {

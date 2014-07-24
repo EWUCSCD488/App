@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.VisibleRegion;
 import com.spokanevalley.bankStore.BankActivity;
 import com.spokanevalley.database.DatabaseInterface;
 import com.spokanevalley.discoveryGame.DiscoveryActivity;
+import com.spokanevalley.minigames.plantesferry.GameSetup;
 
 @SuppressWarnings("deprecation")
 public class MapView extends Activity implements OnMarkerClickListener,
@@ -256,7 +257,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 						Intent intent = new Intent(MapView.this, DiscoveryActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);
 					}else if(marker.getTitle().equals("Plantes Ferry Park")){
-						// INITIALIZE GAME
+						Intent intent = new Intent(MapView.this, PlantesFerryActivity.class);
+						startActivityForResult(intent, REQUEST_CODE);
 						//Plantes Ferry Initialize code here
 					}
     }

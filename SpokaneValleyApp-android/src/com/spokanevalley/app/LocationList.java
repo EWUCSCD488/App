@@ -1,7 +1,6 @@
 package com.spokanevalley.app;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LocationList {
     public static ArrayList<Location> LIST = null;

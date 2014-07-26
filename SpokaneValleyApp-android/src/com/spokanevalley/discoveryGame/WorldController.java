@@ -1,6 +1,7 @@
 package com.spokanevalley.discoveryGame;
 
 import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.spokanevalley.Screen.EndSreen;
 import com.spokanevalley.discoveryGame.drawingHandlers.Coins;
 import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour;
 import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour.JUMP_STATE;
@@ -25,23 +27,31 @@ public class WorldController implements GestureListener {
 	private float timeSinceCollision;
 	private Rectangle r1 = new Rectangle();
 	private Rectangle r2 = new Rectangle();
-	private float timeLeftGameOverDelay; 
+	private float timeLeftGameOverDelay;
 
-	public WorldController() {
+	private Game game;
+
+	public WorldController(Game game) {
+		this.game = game;
 		init();
 	}
 
-	public boolean isGameOver(){
-		return lives <=0;
+	public boolean isGameOver() {
+		return lives <= 0;
 	}
-	
-	public boolean isPlayerInWater(){
+
+	public boolean isPlayerInWater() {
 		return level.dinasour.position.y < -5;
 	}
-	
+
+	private void callMenu() {
+		// switch to menu screen
+		game.setScreen(new EndSreen(game));
+	}
+
 	public void init() {
 		// initTestObjects();
-		
+
 		cameraHelper = new CameraHelper();
 		Gdx.input.setInputProcessor(new GestureDetector(this));
 		lives = Constants.LIVES_START;
@@ -83,8 +93,6 @@ public class WorldController implements GestureListener {
 		score += coin.getScore();
 		Gdx.app.log(TAG, "Gold coin collected");
 	}
-
-
 
 	private void testCollisions() {
 		r1.set(level.dinasour.position.x, level.dinasour.position.y,
@@ -158,73 +166,73 @@ public class WorldController implements GestureListener {
 	}
 
 	public void update(float deltaTime) {
-		
-		//handleInputGame(deltaTime);
-		
-		if(isGameOver()){
+
+		// handleInputGame(deltaTime);
+
+		if (isGameOver()) {
 			timeLeftGameOverDelay -= deltaTime;
-			if(timeLeftGameOverDelay <0 ) init();
-		}else {
+			if (timeLeftGameOverDelay < 0)
+				callMenu();
+		} else {
 			handleInputGame(deltaTime);
 		}
-		
-		level.update(deltaTime);
-		testCollisions();
-		cameraHelper.update(deltaTime);
-		
-		if(!isGameOver() && isPlayerInWater()){
-			lives--;
-			if(isGameOver())
-				timeLeftGameOverDelay = Constants.TIME_DELAY_GAME_OVER;
-			else {
-				initLevel();
-				//level.dinasour.update(deltaTime);
-				//level.dinasour.velocity.x = 0;
+
+		if (timeLeftGameOverDelay >= 0) {
+			level.update(deltaTime);
+			testCollisions();
+			cameraHelper.update(deltaTime);
+
+			if (!isGameOver() && isPlayerInWater()) {
+				lives--;
+				if (isGameOver())
+					timeLeftGameOverDelay = Constants.TIME_DELAY_GAME_OVER;
+				else {
+					initLevel();
+					// level.dinasour.update(deltaTime);
+					// level.dinasour.velocity.x = 0;
+				}
 			}
 		}
-		
+
 	}
 
-	private void handleInputGame (float deltaTime) {
+	private void handleInputGame(float deltaTime) {
 		if (cameraHelper.hasTarget(level.dinasour)) {
-		// Player Movement
-		/*if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-		level.dinasour.velocity.x =
-		-level.dinasour.terminalVelocity.x;
-		} else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-		level.bunnyHead.velocity.x =
-		level.bunnyHead.terminalVelocity.x;
-		} else {*/
-		// Execute auto-forward movement on non-desktop platform
-			
+			// Player Movement
+			/*
+			 * if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+			 * level.dinasour.velocity.x = -level.dinasour.terminalVelocity.x; }
+			 * else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+			 * level.bunnyHead.velocity.x = level.bunnyHead.terminalVelocity.x;
+			 * } else {
+			 */
+			// Execute auto-forward movement on non-desktop platform
+
 			timeSinceCollision += deltaTime;
-			if(timeSinceCollision > 2.0f) {
+			if (timeSinceCollision > 2.0f) {
 				if (Gdx.app.getType() != ApplicationType.Desktop) {
 					level.dinasour.velocity.x = level.dinasour.terminalVelocity.x;
 				}
 			} else {
-			    // ignore the collision
+				// ignore the collision
 			}
-			
-			
+
 		}
 		// Bunny Jump
-		/*if (Gdx.input.isTouched() ||
-		Gdx.input.isKeyPressed(Keys.SPACE))
-		level.bunnyHead.setJumping(true);
-		} else {
-		level.bunnyHead.setJumping(false);
-		}
-		}*/
-		}
-	
+		/*
+		 * if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Keys.SPACE))
+		 * level.bunnyHead.setJumping(true); } else {
+		 * level.bunnyHead.setJumping(false); } }
+		 */
+	}
+
 	@Override
 	public boolean touchDown(float x, float y, int pointer, int button) {
 		// TODO Auto-generated method stub
-		
+
 		level.dinasour.setJumping(true);
 		level.dinasour.setJumping(false);
-		
+
 		return false;
 	}
 
@@ -242,19 +250,19 @@ public class WorldController implements GestureListener {
 		 * cameraHelper.setTarget(cameraHelper.hasTarget() ? null :
 		 * testSprites[selectedSprite]);
 		 */
-		
+
 		level.dinasour.setJumping(true);
 		level.dinasour.setJumping(false);
-		
+
 		return false;
 	}
 
 	@Override
 	public boolean longPress(float x, float y) {
-		
+
 		level.dinasour.setJumping(true);
 		level.dinasour.setJumping(false);
-		
+
 		return false;
 	}
 

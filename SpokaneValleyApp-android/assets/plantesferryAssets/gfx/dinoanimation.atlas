@@ -1,0 +1,54 @@
+
+dinoanimation.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+waterdino
+  rotate: false
+  xy: 1, 60
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+waterdino2
+  rotate: false
+  xy: 67, 60
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+waterdino3
+  rotate: false
+  xy: 133, 60
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+waterdino7
+  rotate: false
+  xy: 199, 60
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+waterdino4
+  rotate: false
+  xy: 1, 1
+  size: 64, 57
+  orig: 64, 57
+  offset: 0, 0
+  index: -1
+waterdino5
+  rotate: false
+  xy: 265, 67
+  size: 64, 57
+  orig: 64, 57
+  offset: 0, 0
+  index: -1
+waterdino6
+  rotate: false
+  xy: 67, 1
+  size: 64, 57
+  orig: 64, 57
+  offset: 0, 0
+  index: -1

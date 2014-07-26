@@ -37,19 +37,19 @@ public class Assets {
   } // End dispose
   
   /*
-   * Load the image atlas, audio, score, and sprite images.
+   * Load the image atlas, audio, score, and sprite images. Located in assets > plantesferryAssets
    */
   public static void load()
   {
 	/* Load Image Atlas */
-    atlas = new TextureAtlas(Gdx.files.internal("gfx/texture.atlas"));
+    atlas = new TextureAtlas(Gdx.files.internal("plantesferryAssets/gfx/texture.atlas"));
     
     /* Load Sound Effects */
-    backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sfx/rainbowbunchie.mp3"));
-    appleSound = Gdx.audio.newSound(Gdx.files.internal("sfx/bite.wav"));
-    invinsibleSound = Gdx.audio.newSound(Gdx.files.internal("sfx/hurt.wav"));
-    invinsibleBubbleleSound = Gdx.audio.newSound(Gdx.files.internal("sfx/FX051.mp3"));
-    monsterSound = Gdx.audio.newSound(Gdx.files.internal("sfx/youch.wav"));
+    backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("plantesferryAssets/sfx/rainbowbunchie.mp3"));
+    appleSound = Gdx.audio.newSound(Gdx.files.internal("plantesferryAssets/sfx/bite.wav"));
+    invinsibleSound = Gdx.audio.newSound(Gdx.files.internal("plantesferryAssets/sfx/hurt.wav"));
+    invinsibleBubbleleSound = Gdx.audio.newSound(Gdx.files.internal("plantesferryAssets/sfx/FX051.mp3"));
+    monsterSound = Gdx.audio.newSound(Gdx.files.internal("plantesferryAssets/sfx/youch.wav"));
     
     /* Load Character / Background Sprites */
     underwaterbg = atlas.findRegion("underwater");

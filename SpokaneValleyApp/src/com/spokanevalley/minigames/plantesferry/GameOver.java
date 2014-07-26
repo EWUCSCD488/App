@@ -1,139 +1,104 @@
 package com.spokanevalley.minigames.plantesferry;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.input.GestureDetector.GestureListener;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
-public class GameOver implements Screen, GestureListener {
+public class GameOver implements ApplicationListener {
+    private OrthographicCamera camera;
+    private SpriteBatch batch;
+    private Stage stage; //** stage holds the Button **//
+    private BitmapFont font; //** same as that used in Tut 7 **//
+    private TextureAtlas buttonsAtlas; //** image of buttons **//
+    private Skin buttonSkin; //** images are used as skins of the button **//
+    private TextButton button; //** the button - the only actor in program **//
+    GameScreen screen;
+    
+    public GameOver() {
+    	camera = new OrthographicCamera();
+    	buttonsAtlas = new TextureAtlas("buttons.pack"); //** button atlas image **// 
+        font = new BitmapFont(Gdx.files.internal("fonts/gamefont.fnt"),
+					Gdx.files.internal("fonts/gamefont_0.png"), false); //** font **//
+        buttonSkin = new Skin();
+        //stage = new Stage(800, 480, true);        //** window is stage **//
+    }
+    @Override
+    public void create() {        
+        
+        camera.setToOrtho(false, 800, 480); //** w/h ratio = 1.66 **//
+        
+        batch = new SpriteBatch();
+        
+       
+        
+        buttonSkin.addRegions(buttonsAtlas); //** skins for on and off **//
+        //screen.getStage().clear();
+        Gdx.input.setInputProcessor(stage); //** stage is responsive **//
+        
+        TextButtonStyle style = new TextButtonStyle(); //** Button properties **//
+        style.up = buttonSkin.getDrawable("simplebutton");
+        style.down = buttonSkin.getDrawable("simplebutton2");
+        style.font = font;
+        
+        button = new TextButton("PRESS ME", style); //** Button text and style **//
+        button.setPosition(100, 100); //** Button location **//
+        button.setHeight(64); //** Button Height **//
+        button.setWidth(128); //** Button Width **//
+        button.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                    Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
+                    return true;
+            }
+            
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                    Gdx.app.log("my app", "Released");
+            }
+        });
+        
+       // screen.getStage().addActor(button);
+    }
 
-	  //private PlantesFerry plantesferry = new PlantesFerry();
-	  private Stage stage = new Stage();
-	  BitmapFont scoreFont;
-	  SpriteBatch paramSpriteBatch;
-	  
-	public GameOver() {
-	    //this.stage.addActor(this.plantesferry);
-	    
-		this.scoreFont = new BitmapFont(Gdx.files.internal("fonts/gamefont.fnt"),
-	  									Gdx.files.internal("fonts/gamefont_0.png"), false);
-		this.paramSpriteBatch = new SpriteBatch();
-	}
-	  
-	@Override
-	public void render(float delta) {
-	    Gdx.gl.glClearColor(0.0F, 0.0F, 0.0F, 1.0F);
-	    Gdx.gl.glClear(16384);
-	    this.stage.act(delta);
-	    this.stage.draw();
-	    displayStats();
-	  } // End render
-	  
-	  /*
-	   * Displays Game Over and Score
-	   */
-	  private void displayStats() {
-			this.paramSpriteBatch.begin();
-			this.scoreFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-			this.scoreFont.setScale(2.5f);
-			this.scoreFont.draw(paramSpriteBatch, "Game Over", Gdx.graphics.getWidth() / 2, Gdx.graphics.getWidth() / 2);
-			this.scoreFont.draw(paramSpriteBatch, "Score: " + Assets.score, Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getWidth() / 2);
-			this.paramSpriteBatch.end();
-	  }
+    @Override
+    public void dispose() {
+        batch.dispose();
+        buttonSkin.dispose();
+        buttonsAtlas.dispose();
+        font.dispose();
+        //screen.getStage().dispose();
+}
 
-	/*
-	 * Sets the Viewport to the size of the game: 800 x 480 = current size.
-	 */
-	public void resize(int paramInt1, int paramInt2)
-	{
-		this.stage.setViewport(800.0F, 480.0F, true);
-		this.stage.getCamera().translate(-this.stage.getGutterWidth(), -this.stage.getGutterHeight(), 0.0F);
-	} // End resize
+    @Override
+    public void render() {        
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+        
+       // screen.getStage().act();
+        
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        stage.draw();
+        batch.end();
+    }
 
-	/*
-	 * Sets the Input Processor to handle touch events.
-	 * Sets the Game music to repeat.
-	 */
-	public void show()
-	{
-	    Gdx.input.setInputProcessor(new GestureDetector(this));
-	    // Set background music and loop it forever
-	    Assets.backgroundMusic.play();
-	    Assets.backgroundMusic.setLooping(true);
-	} // End show()
+    @Override
+    public void resize(int width, int height) {
+    }
 
-	/*
-	 * Disable the Input Processor when the game is minimized.
-	 */
-	public void hide()
-	{
-	    Gdx.input.setInputProcessor(null);
-	} // End hide
+    @Override
+    public void pause() {
+    }
 
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/*
-	 * Dispose of any sprite batch used in game.
-	 */
-	public void dispose() {
-		this.paramSpriteBatch.dispose();
-	} // End dispose
-
-	@Override
-	public boolean touchDown(float x, float y, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean tap(float x, float y, int count, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean longPress(float x, float y) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean fling(float velocityX, float velocityY, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean pan(float x, float y, float deltaX, float deltaY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean zoom(float initialDistance, float distance) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2,
-			Vector2 pointer1, Vector2 pointer2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+    @Override
+    public void resume() {
+    }
 }

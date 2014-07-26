@@ -7,9 +7,13 @@ public class GameSetup extends Game {
   public static final int WIDTH = 800;
   private GameScreen gameScreen;
   
+  //private MenuScreen menuScreen;
+  
   public void create()
   {
     Assets.load();
+    //this.menuScreen = new MenuScreen();
+    //setScreen(this.menuScreen);
     this.gameScreen = new GameScreen();
     setScreen(this.gameScreen);
   } // End create
@@ -17,6 +21,7 @@ public class GameSetup extends Game {
   public void dispose()
   {
     Assets.dispose();
+    //this.menuScreen.dispose();
     this.gameScreen.dispose();
   } // End dispose
   

@@ -2,10 +2,18 @@ package com.spokanevalley.minigames.plantesferry;
 
 import java.util.Iterator;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -20,6 +28,12 @@ public class PlantesFerry extends Table {
   public final float row1 = 90.0F;
   public final float row2 = 240.0F;
   public final float row3 = 390.0F;
+  
+  private TextButton buttonPause;
+  private TextureAtlas atlas;
+  private Skin skin;
+  private Table table;
+  BitmapFont scoreFont;
 
   /*
    * Constructor for PlantesFerry Game
@@ -40,6 +54,44 @@ public class PlantesFerry extends Table {
     this.monsters = new Array<Monster>();
     this.apples = new Array<Apples>();
     
+	/* Pause Button Setup */
+    /*
+	this.atlas = new TextureAtlas(Gdx.files.internal("gfx/buttons.pack"));
+	this.skin = new Skin(this.atlas);
+	this.table = new Table(this.skin);
+	this.table.setFillParent(true);
+	this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+	this.table.setOrigin(125, 1000);
+	
+	TextButtonStyle textButtonStyle = new TextButtonStyle();
+	textButtonStyle.up = skin.getDrawable("simplebutton");
+	textButtonStyle.down = skin.getDrawable("simplebutton2");
+	textButtonStyle.pressedOffsetX = 1;
+	textButtonStyle.pressedOffsetY = -1;
+	this.scoreFont = new BitmapFont(Gdx.files.internal("fonts/gamefont.fnt"),
+				Gdx.files.internal("fonts/gamefont_0.png"), false);
+	textButtonStyle.font = this.scoreFont;
+	this.buttonPause = new TextButton("PAUSE", textButtonStyle);
+	this.buttonPause.pad(20);
+    this.buttonPause.setHeight(64);
+    this.buttonPause.setWidth(128);
+    this.buttonPause.setPosition(125, 1000);
+    
+    buttonPause.addListener(new InputListener() {
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log("my app", "Pressed");
+                System.out.println("Pressed");
+                return true;
+        }
+        
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log("my app", "Released");
+                System.out.println("Released");
+        }
+    });
+    add(this.buttonPause);
+    
+    */
   } // End PlantesFerry Constructor
 
   /*

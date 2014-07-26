@@ -4,18 +4,30 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameScreen implements Screen, GestureDetector.GestureListener {
   private PlantesFerry plantesferry;
-  private Stage stage;
+  protected Stage stage;
   BitmapFont scoreFont;
   SpriteBatch paramSpriteBatch;
   GameState state = GameState.PLAY;
+  private TextButton buttonPause;
+  protected TextureAtlas atlas;
+  protected Skin skin;
+  private Table table;
+  private Table rootTable;
 	
   /*
    * Set the game stage and initialized the score font.
@@ -24,20 +36,68 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
   {
 	this.plantesferry = new PlantesFerry();
 	this.stage = new Stage();
-    this.stage.addActor(this.plantesferry);
+	//this.stage.addActor(this.plantesferry);
+	
+	Gdx.input.setInputProcessor(stage);
     
 	this.scoreFont = new BitmapFont(Gdx.files.internal("fonts/gamefont.fnt"),
   									Gdx.files.internal("fonts/gamefont_0.png"), false);
 	this.paramSpriteBatch = new SpriteBatch();
+	
+	/* Pause Button Setup */
+	/*
+	this.rootTable = new Table();
+	this.rootTable.setFillParent(true);
+	this.atlas = new TextureAtlas(Gdx.files.internal("gfx/buttons.pack"));
+	this.skin = new Skin(this.atlas);
+	this.table = new Table(this.skin);
+	this.table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+	//this.table.setOrigin(125, 1000);
+	
+	TextButtonStyle textButtonStyle = new TextButtonStyle();
+	textButtonStyle.up = skin.getDrawable("simplebutton");
+	textButtonStyle.down = skin.getDrawable("simplebutton2");
+	textButtonStyle.pressedOffsetX = 1;
+	textButtonStyle.pressedOffsetY = -1;
+	textButtonStyle.font = this.scoreFont;
+	this.buttonPause = new TextButton("PAUSE", textButtonStyle);
+	this.buttonPause.pad(20);
+    this.buttonPause.setHeight(64);
+    this.buttonPause.setWidth(128);
+    this.buttonPause.setPosition(125, 1000);
+    
+    buttonPause.addListener(new InputListener() {
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log("my app", "Pressed");
+                System.out.println("Pressed");
+                return true;
+        }
+        
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.log("my app", "Released");
+                System.out.println("Released");
+        }
+    });
+    
+	//this.table.add(this.plantesferry);
+	this.table.add(this.buttonPause);
+	
+	table.debug();//REMOVE !
+	
+	this.rootTable.addActor(this.plantesferry);
+	this.rootTable.add(table);
+	*/
+	this.stage.addActor(this.plantesferry);
   } // End Constructor
  
   /*
    * Dispose of any sprite batch or font used in game.
    */
   public void dispose() {
-	  this.stage.addAction(Actions.removeActor(this.plantesferry));
+	  //this.stage.addAction(Actions.removeActor(this.plantesferry));
 	  this.scoreFont.dispose();
 	  this.paramSpriteBatch.dispose();
+	  //this.stage.dispose();
   } // End dispose
   
   /*
@@ -70,11 +130,14 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
 	  	case PLAY:
 	  		Gdx.gl.glClearColor(0.0F, 0.0F, 0.0F, 1.0F);
 	  		Gdx.gl.glClear(16384);
+	  		
+	  		Table.drawDebug(stage);
+	  		
 	  		this.stage.act(delta);
 	  		this.stage.draw();
 	  		displayStats();
-	  		//if(Assets.lives < 1)
-	  			//this.state = GameState.STOP;
+	  		if(Assets.lives < 1)
+	  			this.state = GameState.STOP;
 	  		break;
 	  	case PAUSE:
 	  		pause();
@@ -174,6 +237,7 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
 	  this.scoreFont.setScale(1.5f);
 	  this.scoreFont.draw(this.paramSpriteBatch, "Tap Once to restart", (Gdx.graphics.getWidth() / 2.0F) - 50.0F, (Gdx.graphics.getHeight() / 2.0F) - 100.0F);
 	  this.paramSpriteBatch.end();
+	  //dispose();
 	  this.state = GameState.RESTART;
   } // End gameOver
   
@@ -181,8 +245,7 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
    * Sets the Input Processor to handle touch events.
    * Sets the Game music to repeat.
    */
-  public void show()
-  {
+  public void show() {
     Gdx.input.setInputProcessor(new GestureDetector(this));
   } // End show()
   

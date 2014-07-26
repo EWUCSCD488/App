@@ -9,7 +9,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.spokanevalley.Screen.EndSreen;
+import com.spokanevalley.discoveryGame.Screen.EndSreen;
 import com.spokanevalley.discoveryGame.drawingHandlers.Coins;
 import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour;
 import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour.JUMP_STATE;

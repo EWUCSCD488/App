@@ -4,8 +4,8 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.spokanevalley.Screen.MenuSreen;
 import com.spokanevalley.discoveryGame.Atlas_handlers.Assets;
+import com.spokanevalley.discoveryGame.Screen.MenuSreen;
 
 public class DiscoveryDinasourMain extends Game{
 	@Override

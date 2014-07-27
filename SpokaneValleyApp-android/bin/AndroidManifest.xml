@@ -64,6 +64,11 @@
         </activity>
         <activity
             android:screenOrientation="landscape"
+            android:name="com.spokanevalley.farm.FarmGameLauncher"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:screenOrientation="landscape"
             android:name="com.spokanevalley.app.MapView"
             android:label="@string/app_name">
             

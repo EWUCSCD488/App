@@ -39,4 +39,13 @@
         </Info>
         <MarkerImage>piggy_bank.png</MarkerImage>
     </Location>
+    <Location>
+        <Title>Greenacres Park</Title>
+        <Latitude>47.668969</Latitude>
+        <Longitude>-117.165825</Longitude>
+        <Info>
+            -  A fun farm themed park!
+        </Info>
+        <MarkerImage>farm.png</MarkerImage>
+    </Location>
 </PreferenceScreen>

@@ -28,12 +28,13 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
   protected Skin skin;
   private Table table;
   private Table rootTable;
-	
+  GameSetup game;
   /*
    * Set the game stage and initialized the score font.
    */
-  public GameScreen()
+  public GameScreen(GameSetup game)
   {
+	this.game = game;
 	this.plantesferry = new PlantesFerry();
 	this.stage = new Stage();
 	//this.stage.addActor(this.plantesferry);

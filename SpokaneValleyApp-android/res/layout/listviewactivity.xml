@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/tileable_wood_texture"
+    android:tileMode="repeat"
     android:orientation="vertical" >
     
     <LinearLayout
@@ -33,7 +35,6 @@
         android:id="@+id/mainListView"
         android:layout_width="fill_parent"
         android:layout_height="442dp"
-        android:background="@drawable/tileable_wood_texture"
         android:dividerHeight="2dp"
         android:paddingTop="10dp" >
     </ListView>

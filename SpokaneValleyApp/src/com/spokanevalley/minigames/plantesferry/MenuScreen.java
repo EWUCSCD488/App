@@ -45,9 +45,9 @@ public MenuScreen(GameSetup game)
 	this.atlas = new TextureAtlas(Gdx.files.internal("plantesferryAssets/gfx/buttons.pack"));
 	this.skin = new Skin(this.atlas);
 	
-	LabelStyle labelStyle = new LabelStyle();
+	labelStyle = new LabelStyle();
 	labelStyle.font = this.scoreFont;
-	Label welcomeLabel = new Label("Welcome to Plante's Ferry", labelStyle);
+	welcomeLabel = new Label("Welcome to Plante's Ferry", labelStyle);
     
 	textButtonStyle = new TextButtonStyle();
 	textButtonStyle.up = skin.getDrawable("simplebutton");
@@ -98,9 +98,6 @@ public void render(float delta) {
 		Gdx.gl.glClear(16384);
 		this.stage.act(delta);
 		this.paramSpriteBatch.begin();
-		this.scoreFont.draw(this.paramSpriteBatch, "Welcome to Plante's Ferry!", Gdx.graphics.getWidth() / 2.0F, Gdx.graphics.getHeight() / 2.0F);
-		this.paramSpriteBatch.end();
-		this.paramSpriteBatch.begin();
 		paramSpriteBatch.draw(Assets.menubg, 0.0F, 0.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		this.paramSpriteBatch.end();
 		this.stage.draw();
@@ -136,8 +133,8 @@ public void resume() {}
 
 @Override
 public void dispose() {
-	  this.scoreFont.dispose();
-	  this.paramSpriteBatch.dispose();
+	  //this.scoreFont.dispose();
+	  //this.paramSpriteBatch.dispose();
 	  this.stage.dispose();
 }
 } // End MenuScreen

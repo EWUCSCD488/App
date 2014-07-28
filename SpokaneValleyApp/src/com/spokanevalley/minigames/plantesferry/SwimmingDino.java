@@ -116,9 +116,8 @@ public class SwimmingDino extends Actor {
 	{
     Assets.lives--;
     if(Assets.lives < 1)
-    {
     	Assets.lives = 0;
-    }
+
 	} // End not invinsible check
     //TODO: ADD message requesting to play again
   } // End collision

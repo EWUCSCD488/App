@@ -95,10 +95,10 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
    * Dispose of any sprite batch or font used in game.
    */
   public void dispose() {
-	  //this.stage.addAction(Actions.removeActor(this.plantesferry));
+	  this.stage.addAction(Actions.removeActor(this.plantesferry));
 	  this.scoreFont.dispose();
 	  this.paramSpriteBatch.dispose();
-	  //this.stage.dispose();
+	  this.stage.dispose();
   } // End dispose
   
   /*
@@ -137,14 +137,15 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
 	  		this.stage.act(delta);
 	  		this.stage.draw();
 	  		displayStats();
+	  		//TODO: Edit this so it's truely restarts. Right now it just continues with score and life reset.
 	  		if(Assets.lives < 1)
-	  			this.state = GameState.STOP;
+	  			game.setScreen(game.gameoverScreen);
 	  		break;
 	  	case PAUSE:
 	  		pause();
 	  		break;
 	  	case STOP:
-	  		gameOver();
+	  		
 	  		break;
 	  	case RESTART:
 	  		Assets.lives = 3;
@@ -225,23 +226,7 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
 	  this.scoreFont.draw(this.paramSpriteBatch, "Tap Once to resume", (Gdx.graphics.getWidth() / 2.0F) - 50.0F, (Gdx.graphics.getHeight() / 2.0F) - 100.0F);
 	  this.paramSpriteBatch.end();
   } // End pause
-  
-  public void gameOver() {
-	  Assets.backgroundMusic.pause();
-	  this.paramSpriteBatch.begin();
-	  paramSpriteBatch.draw(Assets.menubg, 0.0F, 0.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-	  this.scoreFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-	  this.scoreFont.setScale(2.5f);
-	  this.scoreFont.draw(this.paramSpriteBatch, "Game Over", Gdx.graphics.getWidth() / 2.0F, Gdx.graphics.getHeight() / 2.0F);
-	  this.paramSpriteBatch.end();
-	  this.paramSpriteBatch.begin();
-	  this.scoreFont.setScale(1.5f);
-	  this.scoreFont.draw(this.paramSpriteBatch, "Tap Once to restart", (Gdx.graphics.getWidth() / 2.0F) - 50.0F, (Gdx.graphics.getHeight() / 2.0F) - 100.0F);
-	  this.paramSpriteBatch.end();
-	  //dispose();
-	  this.state = GameState.RESTART;
-  } // End gameOver
-  
+ 
   /*
    * Sets the Input Processor to handle touch events.
    * Sets the Game music to repeat.

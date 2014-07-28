@@ -14,5 +14,5 @@
     <item name="android:shadowDy">1</item>
     <item name="android:shadowRadius">2</item>
 </style>
-    <string name="total_score_preview">This is where the score goes!</string>
+    <string name="total_score_preview">The Score!</string>
 </resources>

@@ -67,7 +67,7 @@ public class MainMenuScreen implements Screen {
 			if (pointInRectangle(button, touchPos.x, touchPos.y))
 			{
 				
-			game.setScreen(new AppleGame(game,context));
+			game.setScreen(new AppleGame(game,context)); //changed to game,context *****
 			dispose();
 			}
 		}

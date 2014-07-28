@@ -35,6 +35,7 @@
         android:inputType="date"
         android:paddingLeft="@dimen/activity_horizontal_margin_after_apple"
         android:paddingTop="@dimen/activity_vertical_margin_after_apple"
-        android:text="@string/total_score_preview" />
+        android:text="@string/total_score_preview" 
+        android:textSize="33sp"/>
 
 </FrameLayout>

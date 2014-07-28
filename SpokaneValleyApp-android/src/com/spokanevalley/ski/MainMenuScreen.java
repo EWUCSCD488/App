@@ -110,7 +110,7 @@ public class MainMenuScreen implements Screen {
 				if (pointInRectangle(button, touchPos.x, touchPos.y))
 				{
 
-					game.setScreen(new SkiGame(game/*,context*/));
+					game.setScreen(new SkiGame(game,context));
 					dispose();
 				}
 

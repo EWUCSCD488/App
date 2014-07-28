@@ -3,6 +3,7 @@ package com.spokanevalley.app;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.location.Criteria;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -85,6 +86,11 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		String provider = lm.getBestProvider(new Criteria(), true);
 		lm.requestLocationUpdates(provider, 1000, 0, this); // change these
 		
+		//Changing font of score in the corner to our apps font
+		TextView tv = (TextView) findViewById(R.id.scoreOnTopOfMap);
+		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/PhatRave.ttf");
+		tv.setTypeface(face);
+		
 		// for testing only
 				/*location1 = new Location("ID1", "Terace View Park",
 						"Awesome place 1", 47.636221, -117.222319);
@@ -157,6 +163,10 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			                else
 			                	titleUi.setText("");
 			                
+			                //Change title font
+			        		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/PhatRave.ttf");
+			        		titleUi.setTypeface(face);
+			                
 			                //setting info
 			                TextView snippetUi = ((TextView) view.findViewById(R.id.custom_snippet));
 			                if (arg0.getSnippet() != null && arg0 != null)
@@ -167,7 +177,10 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			                //Setting click to play option
 			                TextView clickUi = ((TextView) view.findViewById(R.id.custom_click));
 			                clickUi.setText("Click to Play!");
-			       
+			                
+			                //Change click to play font
+			                clickUi.setTypeface(face);
+			                
 			                // Returning the view containing InfoWindow contents
 			                return view;
 			 

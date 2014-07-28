@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Ski extends Game {
 	public  SpriteBatch batch;
 	public BitmapFont font;
+	private Context context; //Added *****
 //	private Context context;
 	public Ski(Context context){
 		this.context = context;

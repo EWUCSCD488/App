@@ -21,7 +21,7 @@ public class BankActivity extends Activity {
 	private Context context;
 	private List<gameModel> gameList;
 	public static final String TAG = BankActivity.class.getName();
-
+	private long score;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,7 +41,8 @@ public class BankActivity extends Activity {
 		// you can add image here or in XML
 		
 		listTextView = (TextView ) findViewById(R.id.ListTextView);
-		listTextView.setText("Testing for title for bank store");
+		listTextView.setText(score + " Apples");
+		
 		
 	}
 
@@ -49,6 +50,7 @@ public class BankActivity extends Activity {
 		gameList = DatabaseInterface.Create(context).getScoreList();
 		for(gameModel game : gameList){
 			Log.d(TAG, ""+ game.getTitle() + " with " + game.getMaxScore());
+			score+= game.getMaxScore(); // Sums up cumulative score
 		}
 		
 	}

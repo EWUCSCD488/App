@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Spokane Valley</string>
+    <string name="app_name">DinoValley</string>
     <style name="ButtonText">
     <item name="android:layout_width">fill_parent</item>
     <item name="android:layout_height">wrap_content</item>

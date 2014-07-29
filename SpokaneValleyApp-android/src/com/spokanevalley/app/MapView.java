@@ -313,7 +313,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
         LatLng curMarkerPos = arg0.getPosition();
 
         // Use the markers position to get a new latlng to move the camera to such that it adjusts appropriately to your infowindows height (might be more or less then 0.3 and might need to subtract vs add this is just an example)
-        LatLng camMove = new LatLng(curMarkerPos.latitude + 0.02, curMarkerPos.longitude);
+        LatLng camMove = new LatLng(curMarkerPos.latitude + 0.0175, curMarkerPos.longitude);
 
         // Create a camera update with the new latlng to move to            
         CameraUpdate camUpdate = CameraUpdateFactory.newLatLng(camMove);

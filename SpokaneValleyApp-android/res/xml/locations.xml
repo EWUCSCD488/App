@@ -57,4 +57,13 @@
         </Info>
         <MarkerImage>office_building.png</MarkerImage>
     </Location>
+    <Location>
+        <Title>Ski!</Title>
+        <Latitude>47.700621</Latitude>
+        <Longitude>-117.249931</Longitude>
+        <Info>
+            -  The person who made the ramps for going up and down the mountain lived here!
+        </Info>
+        <MarkerImage>marker128.png</MarkerImage>
+    </Location>
 </PreferenceScreen>

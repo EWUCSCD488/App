@@ -35,7 +35,7 @@
         <Latitude>47.657974</Latitude>
         <Longitude>-117.266581</Longitude>
         <Info>
-            -  Redeem your apples for cool prizes here!
+            -  Check for your trophies here...
         </Info>
         <MarkerImage>piggy_bank.png</MarkerImage>
     </Location>
@@ -47,5 +47,14 @@
             -  A fun farm themed park!
         </Info>
         <MarkerImage>farm.png</MarkerImage>
+    </Location>
+    <Location>
+        <Title>The Mall</Title>
+        <Latitude>47.674313</Latitude>
+        <Longitude>-117.207503</Longitude>
+        <Info>
+            -  Come here to redeem your apples for cool prizes here!
+        </Info>
+        <MarkerImage>office_building.png</MarkerImage>
     </Location>
 </PreferenceScreen>

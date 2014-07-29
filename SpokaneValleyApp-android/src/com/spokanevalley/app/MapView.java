@@ -275,7 +275,10 @@ public class MapView extends Activity implements OnMarkerClickListener,
 					}else if(marker.getTitle().equals("Greenacres Park")){
 					Intent intent = new Intent(MapView.this, FarmGameLauncher.class);
 					startActivityForResult(intent, REQUEST_CODE);
-				}
+					}else if(marker.getTitle().equals("The Mall")){
+						Intent intent = new Intent(MapView.this, BankActivity.class);
+						startActivityForResult(intent, REQUEST_CODE);
+					}
 		//TODO: Quyen, this is how you update the score in the corner of the map. Just call the database to get the score, convert it to a string and stick that string into where it says "Display this text"
 		//EditText text = (EditText) findViewById(R.id.scoreOnTopOfMap);
 		//text.setText("Display this text");

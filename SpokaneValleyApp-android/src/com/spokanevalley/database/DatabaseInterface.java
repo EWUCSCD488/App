@@ -231,4 +231,21 @@ public class DatabaseInterface {
 		
 	}
 	
+	public int AddDatabaseScores() {
+
+		Cursor cursor = helper.getDataAll(ScoretableName);
+		int totalScore =0;
+		while (cursor.moveToNext()) {
+			// loading each element from database
+			String ID  = cursor.getString(ID_LOCATION_COLUMN);
+			String Score = cursor.getString(LATITUDE_LOCATION_COLUMN);
+			int score_temp = Integer.parseInt(Score);
+			totalScore = totalScore + score_temp;
+			
+
+		} // travel to database result
+		return totalScore;
+	}
+	
+	
 }

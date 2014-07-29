@@ -28,6 +28,10 @@ public class DatabaseInterface {
 	private static final String LocationtableName = "LocationTable";
 	private static final String ScoretableName = "GameScoreTable";
 	private static final String AppleID = "Apple Game";
+	private static final String DiscoveryID = "Discovery Game";
+	private static final String PlantesFerryID = "Plantes Ferry Game";
+	private static final String GreenacresID = "Greenacres Game";
+	private static final String SkiID = "Ski Game";
 	
 	private static final int ID_LOCATION_COLUMN = 0 ;
 	private static final int LATITUDE_LOCATION_COLUMN = 1 ;
@@ -145,5 +149,86 @@ public class DatabaseInterface {
 		} // travel to database result
 
 	}
+	
+	public void saveInitialScoretoDatabase_AppleGame(int score){
+		saveInitialScoretoDatabase(score,AppleID);
+	}
+	
+	public void saveInitialScoretoDatabase_DiscoveryGame(int score){
+		saveInitialScoretoDatabase(score,DiscoveryID);
+	}
+	
+	public void saveInitialScoretoDatabase_PlantesFerryGame(int score){
+		saveInitialScoretoDatabase(score,PlantesFerryID);
+	}
+	
+	public void saveInitialScoretoDatabase_GreenacresGame(int score){
+		saveInitialScoretoDatabase(score,GreenacresID);
+	}
+	
+	public void saveInitialScoretoDatabase_SkiGame(int score){
+		saveInitialScoretoDatabase(score,SkiID);
+	}
+	
+	
+	
+	public int saveMaxScore_AppleGame(int score){
+		return saveMaxScore(score,AppleID);
+	}
+	
+	public int saveMaxScore_DiscoveryGame(int score){
+		return saveMaxScore(score,DiscoveryID);
+	}
+	
+	public int saveMaxScore_PlantesFerryGame(int score){
+		return saveMaxScore(score,PlantesFerryID);
+	}
+	
+	public int saveMaxScore_GreenacresGame(int score){
+		return saveMaxScore(score,GreenacresID);
+	}
+	
+	public int saveMaxScore_SkiGame(int score){
+		return saveMaxScore(score,SkiID);
+	}
+	
+	private void saveInitialScoretoDatabase(int score,String id){
+			// save max score to database
+				Cursor checking_avalability = getDatabase().getScoreData(ScoretableName, id);
+				if( checking_avalability == null  ){
+						long RowIds = getDatabase().insertScoreData(ScoretableName, id, String.valueOf(score));
+						if (RowIds == -1)
+							Log.d(TAG, "Error on inserting columns");
+				}
+				else if (checking_avalability.getCount() == 0){
+					long RowIds = getDatabase().insertScoreData(ScoretableName, id, String.valueOf(score));
+					if (RowIds == -1)
+						Log.d(TAG, "Error on inserting columns");
+				}
+	}
 
+	private int saveMaxScore(int CurrentScore,String id) {
+		Cursor cursor= getDatabase().getScoreData(ScoretableName,id);
+		
+		int MaxScore = 0;
+		while(cursor.moveToNext()){
+			//loading each element from database
+			String ID = cursor.getString(ID_MAXSCORE_COLUMN);
+			int MaxScore_temp =  Integer.parseInt(cursor.getString(SCORE_MAXSCORE_COLUMN));
+				if(MaxScore_temp > MaxScore)
+					MaxScore = MaxScore_temp ;
+				Log.d(TAG,"MaxScore is"+ MaxScore_temp+ " with ID : " + ID);
+		} // travel to database result
+		
+		if(MaxScore < CurrentScore){
+			long RowIds = getDatabase().updateScoreTable(ScoretableName, id, String.valueOf(CurrentScore));
+			if (RowIds == -1)
+				Log.d(TAG, "Error on inserting columns");
+			return CurrentScore;
+		}
+
+		return MaxScore;
+		
+	}
+	
 }

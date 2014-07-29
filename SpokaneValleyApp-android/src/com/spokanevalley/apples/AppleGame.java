@@ -47,10 +47,8 @@ public class AppleGame implements Screen {
 	private int score;
 	private Context context;
 	
-	private static final String AppleID = "Apple Game";
-	private static final String tableName = "GameScoreTable";
-	private static final int IDColumns = 0;
-	private static final int ScoreColumns = 1;
+
+
 	private static final String TAG = AppleGame.class.getName();
 	
 	
@@ -110,18 +108,9 @@ public class AppleGame implements Screen {
 		applesCaught = "SCORE: 0";
 		scoreFont = new BitmapFont(Gdx.files.internal(Constants.GAME_FONT), false);
 		
-		// save max score to database
-		Cursor checking_avalability = (DatabaseInterface.Create(context)).getDatabase().getScoreData(tableName, AppleID);
-		if( checking_avalability == null  ){
-				long RowIds = (DatabaseInterface.Create(context)).getDatabase().insertScoreData(tableName, AppleID, String.valueOf(score));
-				if (RowIds == -1)
-					Log.d(TAG, "Error on inserting columns");
-		}
-		else if (checking_avalability.getCount() == 0){
-			long RowIds = (DatabaseInterface.Create(context)).getDatabase().insertScoreData(tableName, AppleID, String.valueOf(score));
-			if (RowIds == -1)
-				Log.d(TAG, "Error on inserting columns");
-		}
+		DatabaseInterface.Create(context).saveInitialScoretoDatabase_AppleGame(score);
+		
+		
 	}
 
 	@Override
@@ -253,7 +242,7 @@ public class AppleGame implements Screen {
 				}
 				if (badApples > 2) {
 					
-					int MaxScore = saveMaxScore(score);
+					int MaxScore =  DatabaseInterface.Create(context).saveMaxScore_AppleGame(score);
 
 					Game.setScreen(new GameOver(Game,score,MaxScore)); //maxScore*****
 					dispose();
@@ -270,29 +259,7 @@ public class AppleGame implements Screen {
 
 	}
 
-	private int saveMaxScore(int CurrentScore) {
-		Cursor cursor= (DatabaseInterface.Create(context)).getDatabase().getScoreData(tableName,AppleID);
-		
-		int MaxScore = 0;
-		while(cursor.moveToNext()){
-			//loading each element from database
-			String ID = cursor.getString(IDColumns);
-			int MaxScore_temp =  Integer.parseInt(cursor.getString(ScoreColumns));
-				if(MaxScore_temp > MaxScore)
-					MaxScore = MaxScore_temp ;
-				Log.d(TAG,"MaxScore is"+ MaxScore_temp+ " with ID : " + ID);
-		} // travel to database result
-		
-		if(MaxScore < CurrentScore){
-			long RowIds = (DatabaseInterface.Create(context)).getDatabase().updateScoreTable(tableName, AppleID, String.valueOf(CurrentScore));
-			if (RowIds == -1)
-				Log.d(TAG, "Error on inserting columns");
-			return CurrentScore;
-		}
 
-		return MaxScore;
-		
-	}
 
 	private void spawnApple() {
 		Appleob ob = new Appleob();

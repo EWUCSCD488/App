@@ -92,6 +92,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/PhatRave.ttf");
 		tv.setTypeface(face);
 		
+		updateCornerScoreDisplay();
+
 		// for testing only
 				/*location1 = new Location("ID1", "Terace View Park",
 						"Awesome place 1", 47.636221, -117.222319);
@@ -280,13 +282,18 @@ public class MapView extends Activity implements OnMarkerClickListener,
 						Intent intent = new Intent(MapView.this, BankActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);
 					}
-		//TODO: Quyen, this is how you update the score in the corner of the map. Just call the database to get the score, convert it to a string and stick that string into where it says "Display this text"
-		EditText text = (EditText) findViewById(R.id.scoreOnTopOfMap);
+		updateCornerScoreDisplay();
+    }
+
+	/**
+	 * 
+	 */
+	private void updateCornerScoreDisplay() {
+		EditText text = (EditText) findViewById(R.id.scoreOnTopOfMap);	
 		String totalScore  = String.valueOf( DatabaseInterface.Create(context).AddDatabaseScores());
-		
 		text.setText( totalScore);
 		Log.d(TAG, "total score  : " + totalScore );
-    }
+	}
 	/**
 	 * Responds to marker click
 	 * 

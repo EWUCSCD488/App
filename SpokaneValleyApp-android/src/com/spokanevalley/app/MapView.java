@@ -38,6 +38,7 @@ import com.spokanevalley.database.DatabaseInterface;
 import com.spokanevalley.discoveryGame.DiscoveryActivity;
 import com.spokanevalley.farm.FarmGameLauncher;
 import com.spokanevalley.minigames.plantesferry.PlantesFerryActivity;
+import com.spokanevalley.ski.SkiActivity;
 
 @SuppressWarnings("deprecation")
 public class MapView extends Activity implements OnMarkerClickListener,
@@ -281,10 +282,9 @@ public class MapView extends Activity implements OnMarkerClickListener,
 					}else if(marker.getTitle().equals("The Mall")){
 						Intent intent = new Intent(MapView.this, BankActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);
-					}
-					else if(marker.getTitle().equals("Ski!")){
-						//Intent intent = new Intent(MapView.this, SkiActivity.class);
-						//startActivityForResult(intent, REQUEST_CODE);
+					}else if(marker.getTitle().equals("Ski!")){
+						Intent intent = new Intent(MapView.this, SkiActivity.class);
+						startActivityForResult(intent, REQUEST_CODE);
 					}
 		updateCornerScoreDisplay();
     }

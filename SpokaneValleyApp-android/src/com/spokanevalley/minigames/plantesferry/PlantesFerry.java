@@ -58,8 +58,8 @@ public class PlantesFerry extends Table {
     // Initialize score and lives
     this.setScore(0);
     this.setLives(3);
-    // Sets the Initial Database Score
-    DatabaseInterface.Create(this.context).saveInitialScoretoDatabase_PlantesFerryGame(this.getScore());
+
+    DatabaseInterface.Create(this.context).saveInitialScoretoDatabase_PlantesFerryGame(0);
   } // End PlantesFerry Constructor
 
   /*

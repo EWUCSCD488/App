@@ -35,16 +35,16 @@ public GameOverScreen(GameSetup setup, PlantesFerry game) {
 	this.game = game;
 	this.stage = new Stage();
 	this.paramSpriteBatch = new SpriteBatch();
-	//TODO: FIX DATABASE SCORE ISSUE
+
 	int score = game.getScore();
-	DatabaseInterface.Create(setup.getContext()).saveMaxScore_PlantesFerryGame(score);
+	int maxScore = DatabaseInterface.Create(setup.getContext()).saveMaxScore_PlantesFerryGame(score);
 	
 	this.menuTable = new MenuTable();
 
     /* Create Labels and Buttons */
 	this.gameoverLabel = new GameLabel("Game Over");
 	this.scoreLabel = new GameLabel("Score: " + score);
-	this.highscoreLabel = new GameLabel("High Score: " + score);
+	this.highscoreLabel = new GameLabel("High Score: " + maxScore);
 	this.restartGameButton = new GameTextButton("Try Again");
 	this.endGameButton = new EndGameButton("Return to Map");
 

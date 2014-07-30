@@ -1,5 +1,7 @@
 package com.spokanevalley.discoveryGame;
 
+import android.content.Context;
+
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.spokanevalley.database.DatabaseInterface;
 import com.spokanevalley.discoveryGame.Screen.EndSreen;
 import com.spokanevalley.discoveryGame.drawingHandlers.Coins;
 import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour;
@@ -19,7 +22,8 @@ import com.spokanevalley.discoveryGame.level.LevelLoader;
 
 public class WorldController implements GestureListener {
 	private static final String TAG = WorldController.class.getName();
-
+	
+	Context context = null;
 	public LevelLoader level;
 	public CameraHelper cameraHelper;
 	public int lives;
@@ -56,6 +60,7 @@ public class WorldController implements GestureListener {
 		Gdx.input.setInputProcessor(new GestureDetector(this));
 		lives = Constants.LIVES_START;
 		initLevel();
+		DatabaseInterface.Create(context).saveInitialScoretoDatabase_DiscoveryGame(score);
 
 	}
 
@@ -171,8 +176,11 @@ public class WorldController implements GestureListener {
 
 		if (isGameOver()) {
 			timeLeftGameOverDelay -= deltaTime;
-			if (timeLeftGameOverDelay < 0)
+			if (timeLeftGameOverDelay < 0){
 				callMenu();
+				DatabaseInterface.Create(context).saveMaxScore_DiscoveryGame(score);
+			}
+				
 		} else {
 			handleInputGame(deltaTime);
 		}

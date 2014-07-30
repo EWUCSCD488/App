@@ -13,9 +13,11 @@ import android.widget.Toast;
 
 import com.spokanevalley.app.Location;
 import com.spokanevalley.app.LocationList;
+import com.spokanevalley.bankStore.NameHolder;
+import com.spokanevalley.bankStore.ThumbNailFactory;
 import com.spokanevalley.bankStore.gameModel;
 
-public class DatabaseInterface {
+public class DatabaseInterface extends NameHolder{
 
 	public static final String TAG = DatabaseInterface.class.getName();
 	private static DatabaseInterface databaseInterface;
@@ -23,25 +25,6 @@ public class DatabaseInterface {
 	private static ArrayList<Location> LIST = null;
 	private static ArrayList<gameModel> SCORE_LIST = null;
 	private SpokaneValleyDatabaseHelper helper;
-	
-	// the tableName need to match with name of table in actual database
-	private static final String LocationtableName = "LocationTable";
-	private static final String ScoretableName = "GameScoreTable";
-	private static final String AppleID = "Apple Game";
-	private static final String DiscoveryID = "Discovery Game";
-	private static final String PlantesFerryID = "Plantes Ferry Game";
-	private static final String GreenacresID = "Greenacres Game";
-	private static final String SkiID = "Ski Game";
-	
-	private static final int ID_LOCATION_COLUMN = 0 ;
-	private static final int LATITUDE_LOCATION_COLUMN = 1 ;
-	private static final int LONGITUDE_LOCATION_COLUMN = 2 ;
-	private static final int TITLE_LOCATION_COLUMN = 4 ;
-	private static final int INFO_LOCATION_COLUMN = 5 ;
-	
-	private static final int ID_MAXSCORE_COLUMN = 0;
-	private static final int SCORE_MAXSCORE_COLUMN = 1;
-	
 	
 	public static DatabaseInterface Create(Context context) {
 		if (databaseInterface == null) {
@@ -144,7 +127,7 @@ public class DatabaseInterface {
 			String ID  = cursor.getString(ID_LOCATION_COLUMN);
 			String Score = cursor.getString(LATITUDE_LOCATION_COLUMN);
 			
-			SCORE_LIST.add(new gameModel(ID, Integer.parseInt(Score),"pharrell"));
+			SCORE_LIST.add(new gameModel(ID, Integer.parseInt(Score),ThumbNailFactory.create().getThumbNail(ID)));
 
 		} // travel to database result
 

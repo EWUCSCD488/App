@@ -32,13 +32,12 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
+import com.spokanevalley.apples.AppleActivity;
 import com.spokanevalley.bankStore.BankActivity;
 import com.spokanevalley.database.DatabaseInterface;
 import com.spokanevalley.discoveryGame.DiscoveryActivity;
 import com.spokanevalley.farm.FarmGameLauncher;
 import com.spokanevalley.minigames.plantesferry.PlantesFerryActivity;
-import com.spokanevalley.ski.SkiActivity;
-import com.spokanevalley.apples.AppleActivity;
 
 @SuppressWarnings("deprecation")
 public class MapView extends Activity implements OnMarkerClickListener,
@@ -284,8 +283,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 						startActivityForResult(intent, REQUEST_CODE);
 					}
 					else if(marker.getTitle().equals("Ski!")){
-						Intent intent = new Intent(MapView.this, SkiActivity.class);
-						startActivityForResult(intent, REQUEST_CODE);
+						//Intent intent = new Intent(MapView.this, SkiActivity.class);
+						//startActivityForResult(intent, REQUEST_CODE);
 					}
 		updateCornerScoreDisplay();
     }

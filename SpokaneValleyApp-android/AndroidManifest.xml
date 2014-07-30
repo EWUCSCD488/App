@@ -45,7 +45,7 @@
         
         
         <activity
-            android:name="com.spokanevalley.app.GameLauncher"
+            android:name="com.spokanevalley.apples.AppleActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
@@ -60,12 +60,17 @@
             android:label="@string/app_name">
         </activity>
         <activity
-            android:name="com.spokanevalley.app.PlantesFerryActivity"
+            android:name="com.spokanevalley.minigames.plantesferry.PlantesFerryActivity"
             android:screenOrientation="landscape"
             android:label="@string/app_name">
         </activity>
         <activity
             android:name="com.spokanevalley.farm.FarmGameLauncher"
+            android:screenOrientation="landscape"
+            android:label="@string/app_name">
+        </activity>
+                 <activity
+            android:name="com.spokanevalley.ski.SkiActivity"
             android:screenOrientation="landscape"
             android:label="@string/app_name">
         </activity>

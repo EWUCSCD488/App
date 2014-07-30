@@ -20,9 +20,9 @@ public class Constants {
 	public static final String MENU_FONT = "fonts/myriad.fnt";
 	
 	public static final String SOUND_MUSIC = "sfx/BadApple.mp3";
-	public static final String SOUND_TREE = "sfx/treesound.mp3";
+	public static final String SOUND_TREE = "sfx/treeSound.mp3";
 	public static final String SOUND_FLAG = "sfx/ding.mp3";
-	public static final String SOUND_BFLAG = "sfx/bding.mp3";
+	public static final String SOUND_BFLAG = "sfx/bDing.mp3";
 	
 	public static final int HEIGHT_GAME = 480;
 	public static final int WIDTH_GAME = 800;

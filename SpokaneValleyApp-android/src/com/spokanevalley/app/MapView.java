@@ -36,6 +36,9 @@ import com.spokanevalley.bankStore.BankActivity;
 import com.spokanevalley.database.DatabaseInterface;
 import com.spokanevalley.discoveryGame.DiscoveryActivity;
 import com.spokanevalley.farm.FarmGameLauncher;
+import com.spokanevalley.minigames.plantesferry.PlantesFerryActivity;
+import com.spokanevalley.ski.SkiActivity;
+import com.spokanevalley.apples.AppleActivity;
 
 @SuppressWarnings("deprecation")
 public class MapView extends Activity implements OnMarkerClickListener,
@@ -259,14 +262,12 @@ public class MapView extends Activity implements OnMarkerClickListener,
     public void onInfoWindowClick(Marker marker) 
     {
     	Log.d(TAG, marker.getTitle());
-		// Check for Plantes Ferry Park
-
 					if(marker.getTitle().equals("Bank")){
 						Intent intent = new Intent(MapView.this, BankActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);
 					}else if(marker.getTitle().equals("Terrace View Park And Pool")){
 						// INITIALIZE GAME
-						Intent intent = new Intent(MapView.this, GameLauncher.class);
+						Intent intent = new Intent(MapView.this, AppleActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);
 					}else if(marker.getTitle().equals("Discovery Park")){
 						// INITIALIZE GAME
@@ -280,6 +281,10 @@ public class MapView extends Activity implements OnMarkerClickListener,
 					startActivityForResult(intent, REQUEST_CODE);
 					}else if(marker.getTitle().equals("The Mall")){
 						Intent intent = new Intent(MapView.this, BankActivity.class);
+						startActivityForResult(intent, REQUEST_CODE);
+					}
+					else if(marker.getTitle().equals("Ski!")){
+						Intent intent = new Intent(MapView.this, SkiActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);
 					}
 		updateCornerScoreDisplay();

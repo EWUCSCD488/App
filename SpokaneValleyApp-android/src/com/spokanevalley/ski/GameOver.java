@@ -61,8 +61,8 @@ public class GameOver implements Screen
 		//game.font.setScale((float) 2);
 		game.font.setColor(0.0f, 0.0f, 204.0f, 1.0f);// set font color to red
 		game.font.draw(game.batch, "Game Over", 280, 425);
-		game.font.draw(game.batch, "Current score : " + this.CurrentScore, 200, 525);
-		game.font.draw(game.batch, "High Score :" + this.MaxScore, 200, 625);
+		game.font.draw(game.batch, "Current score : " + this.CurrentScore, 200, 375);
+		game.font.draw(game.batch, "High Score :" + this.MaxScore, 200, 325);
 		game.batch.draw(button3Image, button3.x, button3.y);
 		game.batch.end();
 

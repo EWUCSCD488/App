@@ -29,7 +29,7 @@ public class MainMenuScreen implements Screen {
 	
 	private Context context;
 
-	public MainMenuScreen(final Ski gam, Context context) {
+	public MainMenuScreen(final Ski gam) {
 		game = gam;
 
 		camera = new OrthographicCamera();
@@ -67,7 +67,6 @@ public class MainMenuScreen implements Screen {
 		howTo.width = 800;
 		howTo.height = 480;
 		
-		this.context = context;
 
 	}
 

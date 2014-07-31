@@ -71,10 +71,6 @@ public class SkiGame implements Screen {
 	private int score;
 	private Context context;
 	
-	private static final String SkiID = "ski42";
-	private static final String tableName = "GameScoreTable";
-	private static final int IDColumns = 0;
-	private static final int ScoreColumns = 1;
 	private static final String TAG = SkiGame.class.getName();
 	
 	
@@ -157,17 +153,7 @@ public class SkiGame implements Screen {
 		scoreFont = new BitmapFont(Gdx.files.internal(Constants.GAME_FONT), false);
 		
 		// save max score to database
-		Cursor checking_avalability = (DatabaseInterface.Create(context)).getDatabase().getScoreData(tableName, SkiID);
-		if( checking_avalability == null  ){
-				long RowIds = (DatabaseInterface.Create(context)).getDatabase().insertScoreData(tableName, SkiID, String.valueOf(score));
-				if (RowIds == -1)
-					Log.d(TAG, "Error on inserting columns");
-		}
-		else if (checking_avalability.getCount() == 0){
-			long RowIds = (DatabaseInterface.Create(context)).getDatabase().insertScoreData(tableName, SkiID, String.valueOf(score));
-			if (RowIds == -1)
-				Log.d(TAG, "Error on inserting columns");
-		}
+		DatabaseInterface.Create(context).saveInitialScoretoDatabase_AppleGame(score);
 	}
 
 	@Override
@@ -308,8 +294,8 @@ public class SkiGame implements Screen {
 					
 				}
 				if (crash > 2) {
-					
-					//int MaxScore = saveMaxScore(score);
+
+					 DatabaseInterface.Create(context).saveMaxScore_AppleGame(score);
 
 					Game.setScreen(new GameOver(Game,score,score));//maxscore
 					dispose();
@@ -334,30 +320,7 @@ public class SkiGame implements Screen {
 
 	}
 
-	private int saveMaxScore(int CurrentScore) {
-		Cursor cursor= (DatabaseInterface.Create(context)).getDatabase().getScoreData(tableName,SkiID);
-		
-		int MaxScore = 0;
-		while(cursor.moveToNext()){
-			//loading each element from database
-			String ID = cursor.getString(IDColumns);
-			int MaxScore_temp =  Integer.parseInt(cursor.getString(ScoreColumns));
-				if(MaxScore_temp > MaxScore)
-					MaxScore = MaxScore_temp ;
-				Log.d(TAG,"MaxScore is"+ MaxScore_temp+ " with ID : " + ID);
-		} // travel to database result
-		
-		if(MaxScore < CurrentScore){
-			long RowIds = (DatabaseInterface.Create(context)).getDatabase().updateScoreTable(tableName, SkiID, String.valueOf(CurrentScore));
-			if (RowIds == -1)
-				Log.d(TAG, "Error on inserting columns");
-			return CurrentScore;
-		}
-
-		return MaxScore;
-		
-	}
-
+	
 	private void spawnOb() {
 		Skiob ob = new Skiob();
 		Rectangle rect = new Rectangle();

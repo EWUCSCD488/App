@@ -153,7 +153,7 @@ public class SkiGame implements Screen {
 		scoreFont = new BitmapFont(Gdx.files.internal(Constants.GAME_FONT), false);
 		
 		// save max score to database
-		DatabaseInterface.Create(context).saveInitialScoretoDatabase_AppleGame(score);
+		DatabaseInterface.Create(context).saveInitialScoretoDatabase_SkiGame(score);
 	}
 
 	@Override
@@ -295,7 +295,7 @@ public class SkiGame implements Screen {
 				}
 				if (crash > 2) {
 
-					 DatabaseInterface.Create(context).saveMaxScore_AppleGame(score);
+					 DatabaseInterface.Create(context).saveMaxScore_SkiGame(score);
 
 					Game.setScreen(new GameOver(Game,score,score));//maxscore
 					dispose();
@@ -312,7 +312,6 @@ public class SkiGame implements Screen {
 
 		// score color and size
 		scoreFont.setColor(0.0f, 0.0f, 204.0f, 1.0f);
-		//scoreFont.setScale((float) 2);
 		scoreFont.draw(batch, points, 190, 460);
 		batch.draw(buttonLImage, buttonL.x, buttonL.y);
 		batch.draw(buttonRImage, buttonR.x, buttonR.y);

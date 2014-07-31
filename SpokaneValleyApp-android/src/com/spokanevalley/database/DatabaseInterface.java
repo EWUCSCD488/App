@@ -1,21 +1,17 @@
 package com.spokanevalley.database;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.spokanevalley.app.Location;
-import com.spokanevalley.app.LocationList;
 import com.spokanevalley.bankStore.NameHolder;
 import com.spokanevalley.bankStore.ThumbNailFactory;
 import com.spokanevalley.bankStore.gameModel;
+import com.spokanevalley.bankStore.poolLocation;
+import com.spokanevalley.bankStore.poolLocationFactory;
 
 public class DatabaseInterface extends NameHolder{
 
@@ -24,6 +20,7 @@ public class DatabaseInterface extends NameHolder{
 
 	private static ArrayList<Location> LIST = null;
 	private static ArrayList<gameModel> SCORE_LIST = null;
+	private static ArrayList<poolLocation> POOL_LIST = null;
 	private SpokaneValleyDatabaseHelper helper;
 	
 	public static DatabaseInterface Create(Context context) {
@@ -41,6 +38,7 @@ public class DatabaseInterface extends NameHolder{
 		LoadingDatabaseLocations();
 		LoadingDatabaseScores();
 		LoadingAllGamesInitial();
+		//LoadingDatabasePoolLocation();
 
 	}
 
@@ -53,9 +51,29 @@ public class DatabaseInterface extends NameHolder{
 		return helper;
 	}
 
-	public ArrayList<Location> getLocationList() {
-		LoadingDatabaseLocations();
-		return LIST;
+	public ArrayList<poolLocation> getPoolList() {
+		POOL_LIST = new ArrayList<poolLocation>();
+		saveInitialPoolLocation();
+		LoadingDatabasePoolLocation();
+		return POOL_LIST;
+	}
+	
+	private void saveInitialPoolLocation(){
+		for(int i = 0 ; i < NumPool ; i++){
+			addNewPool(getPoolLocation(i));
+		}
+	}
+	
+	private poolLocation getPoolLocation(int ID){
+		poolLocation pool = null;
+		if(ID == 0){
+			pool = new poolLocation(pool1ID, pool1Address, false, ThumbNailFactory.create().getThumbNail(pool1ID)); 
+		}else if(ID == 1){
+			pool = new poolLocation(pool2ID, pool2Address, false, ThumbNailFactory.create().getThumbNail(pool2ID)); 
+		}else if(ID == 2){
+			pool = new poolLocation(pool3ID, pool3Address, false, ThumbNailFactory.create().getThumbNail(pool3ID)); 
+		}
+		return pool;
 	}
 	
 	public ArrayList<gameModel> getScoreList() {
@@ -63,35 +81,39 @@ public class DatabaseInterface extends NameHolder{
 		return SCORE_LIST;
 	}
 
-	public void addNewLocation(Location location) {
+	public void addNewPool(poolLocation pool) {
 		
 		// add to database here
-		Cursor checking_avalability = helper.getLocationData(LocationtableName,
-				location.getID());
+		Cursor checking_avalability = helper.getPoolLocationData(PooltableName,
+				pool.getTitle());
 		if (checking_avalability == null) {
 			
-			LIST.add(location);
+			POOL_LIST.add(pool);
 			
-			long RowIds = helper.insertLocationData(LocationtableName,
-					location.getID(), String.valueOf(location.getLatitude()),
-					String.valueOf(location.getLongitude()),
-					location.getTitle(), location.getInfo());
+			long RowIds = helper.insertPoolLocation(PooltableName,
+					pool.getTitle(), pool.getDescription(),
+					convertToString(pool.getIsCouponUsed()) );
 			if (RowIds == -1)
 				Log.d(TAG, "Error on inserting columns");
 		} else if (checking_avalability.getCount() == 0) {
 			
-			LIST.add(location);
+			POOL_LIST.add(pool);
 			
-			long RowIds = helper.insertLocationData(LocationtableName,
-					location.getID(), String.valueOf(location.getLatitude()),
-					String.valueOf(location.getLongitude()),
-					location.getTitle(), location.getInfo());
+			long RowIds = helper.insertPoolLocation(PooltableName,
+					pool.getTitle(), pool.getDescription(),
+					convertToString(pool.getIsCouponUsed()) );
 			if (RowIds == -1)
 				Log.d(TAG, "Error on inserting columns");
 		}
 
 	}
 
+	private String convertToString(boolean isUsed){
+		if(isUsed)
+			return "1";
+		return "0";
+	}
+	
 	public Location getLocation(String title) {
 		return null;
 	}
@@ -131,6 +153,29 @@ public class DatabaseInterface extends NameHolder{
 
 		} // travel to database result
 
+	}
+	
+	private void LoadingDatabasePoolLocation() {
+
+		Cursor cursor = helper.getDataAll(PooltableName);
+		
+		//id_counter = cursor.getCount();
+		
+		while (cursor.moveToNext()) {
+			// loading each element from database
+			String ID  = cursor.getString(ID_POOL_LCOATION_COLUMN);
+			String Description = cursor.getString(DESCRIPTION_POOL_LCOATION_COLUMN);
+			String isCouponUsed = cursor.getString(COUPON_IS_USED_COLUMN);
+			
+			POOL_LIST.add(new poolLocation(ID, Description, isUsed(isCouponUsed) ,ThumbNailFactory.create().getThumbNail(ID)));
+			Log.d(TAG, " pool : " + ID);
+
+		} // travel to database result
+
+	}
+	
+	private boolean isUsed(String couponType){		// 0 = not used , 1 = used
+		return 0 == Integer.parseInt(couponType);
 	}
 	
 	public void saveInitialScoretoDatabase_AppleGame(int score){
@@ -229,6 +274,8 @@ public class DatabaseInterface extends NameHolder{
 		} // travel to database result
 		return totalScore;
 	}
+	
+	
 	
 	
 }

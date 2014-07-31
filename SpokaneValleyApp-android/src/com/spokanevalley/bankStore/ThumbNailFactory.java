@@ -28,6 +28,14 @@ public class ThumbNailFactory extends NameHolder{
 			return "skithumbnail";
 		}
 		
+		else if(ID.equals(pool1ID)){
+			return "parkroadpool";
+		}else if(ID.equals(pool2ID)){
+			return "terracepool";
+		}else if(ID.equals(pool3ID)){
+			return "valleymissionpool";
+		}
+		
 		return null;
 	}
 

@@ -34,6 +34,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
 import com.spokanevalley.apples.AppleActivity;
 import com.spokanevalley.bankStore.BankActivity;
+import com.spokanevalley.bankStore.MallActivity;
 import com.spokanevalley.database.DatabaseInterface;
 import com.spokanevalley.discoveryGame.DiscoveryActivity;
 import com.spokanevalley.farm.FarmGameLauncher;
@@ -280,7 +281,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 					Intent intent = new Intent(MapView.this, FarmGameLauncher.class);
 					startActivityForResult(intent, REQUEST_CODE);
 					}else if(marker.getTitle().equals("The Mall")){
-						Intent intent = new Intent(MapView.this, BankActivity.class);
+						Intent intent = new Intent(MapView.this, MallActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);
 					}else if(marker.getTitle().equals("Ski!")){
 						Intent intent = new Intent(MapView.this, SkiActivity.class);

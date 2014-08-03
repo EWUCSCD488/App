@@ -50,6 +50,9 @@ public class FarmGame implements Screen {
 		goodGuy = 2;
 		badGuy = 1;
 		
+		//Set initial databse score to zero
+	    DatabaseInterface.Create(this.context).saveInitialScoretoDatabase_GreenacresGame(0);
+		
 		//Setting up Timer Tick
 		timerT = 0.2D;
 		setTimerTick(timerT);
@@ -84,9 +87,9 @@ public class FarmGame implements Screen {
 		//If end of game, end game
 		if (holes[holes.length-2] == 0)
 		{
-			int maxScore = saveMaxScore(holes[holes.length-1]);
-			System.out.println("THIS IS THE SCORE: " + maxScore);
-			DatabaseInterface.Create(this.context).saveInitialScoretoDatabase_GreenacresGame(maxScore);
+			int score = saveMaxScore(holes[holes.length-1]);
+			System.out.println("THIS IS THE SCORE FOR THIS GAME: " + score);
+			DatabaseInterface.Create(context).saveMaxScore_GreenacresGame(holes[holes.length-1]);
 			Gdx.app.exit();
 		}
 		

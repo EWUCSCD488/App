@@ -128,17 +128,4 @@ public class Player{
 		hole7 = new Vector2((position.x)*2, position.y);
 		hole8 = new Vector2((position.x)*3, position.y);
 	}
-	
-	/*
-	 * 	public void setHoles6(){
-		hole0 = new Vector2(position.x, position.y);
-		hole1 = new Vector2((position.x)*2, position.y);
-		hole2 = new Vector2((position.x)*3, position.y);
-		hole3 = new Vector2(position.x, (position.y)*2);
-		hole4 = new Vector2((position.x)*2, (position.y)*2);
-		hole5 = new Vector2((position.x)*3, (position.y)*2);
-		hole6 = new Vector2(position.x, (position.y)*3);
-		hole7 = new Vector2((position.x)*2, (position.y)*3);
-		hole8 = new Vector2((position.x)*3, (position.y)*3);
-	}*/
 }

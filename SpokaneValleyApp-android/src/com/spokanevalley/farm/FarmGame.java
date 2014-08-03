@@ -1,7 +1,12 @@
 package com.spokanevalley.farm;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,10 +14,14 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.ski.Ski;
 
-public class FarmGame implements ApplicationListener {
+public class FarmGame implements Screen {
 
-	SpriteBatch batch;	
+	final Farm game;
+	private Context context;
+	SpriteBatch batch;
 	Texture mario, backGround, appleScore;
 	Player player;
 	int [] holes;
@@ -25,9 +34,16 @@ public class FarmGame implements ApplicationListener {
 	Sprite back;
 	int goodGuy, badGuy, emptyHole;
 	
-	@Override
-	public void create() {		
-		batch = new SpriteBatch();		
+	private static final String FarmID = "farm42";
+	private static final String tableName = "GameScoreTable";
+	private static final int IDColumns = 0;
+	private static final int ScoreColumns = 1;
+	private static final String TAG = "FARM";
+	
+	public FarmGame(Farm gam, Context context) {	
+		this.game = gam;
+		this.context = context;
+		batch = new SpriteBatch();
 		player = new Player(new Vector2(Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()/4),"farmAssets/Dinasour.png", "farmAssets/Squish.mp3", "farmAssets/appletrees.png", "farmAssets/shovel.png");
 		holes = new int[11];
 		appleScore = new Texture(Gdx.files.internal("farmAssets/apple.png"));
@@ -41,34 +57,38 @@ public class FarmGame implements ApplicationListener {
 		//Setting the holes
 		setHoles6();
 				
-		//Setting background music to play
-		setMusic("farmAssets/RunAmok.mp3");
+
 		
 		//Setting Score
 		setScore();
-		
+
 		//Setting Lives
 		setLives();
-		
+		//Setting background music to play
+		setMusic("farmAssets/RunAmok.mp3");
 		//Setting Background
 		setBackground("farmAssets/url.jpg");
 		
-		
+
 	}
 
 	@Override
 	public void dispose() {
-		batch.dispose();
 	}
 
 	@Override
-	public void render() {		
+	public void render(float delta1) {		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		//If end of game, end game
 		if (holes[holes.length-2] == 0)
+		{
+			int maxScore = saveMaxScore(holes[holes.length-1]);
+			System.out.println("THIS IS THE SCORE: " + maxScore);
+			DatabaseInterface.Create(this.context).saveInitialScoretoDatabase_GreenacresGame(maxScore);
 			Gdx.app.exit();
+		}
 		
 		//If a timer tick has passed, generate a new array
 		long now = System.nanoTime();
@@ -175,7 +195,7 @@ public class FarmGame implements ApplicationListener {
 		
 		//Draw Score
 		batch.draw(appleScore, 25, 100);
-		font.draw(batch, "= " + Integer.toString(holes[holes.length -1]), 150, 200);
+		font.draw(batch, Integer.toString(holes[holes.length -1]), 150, 200);
 		
 		//Draw Lives
 		font.draw(batch, lives + Integer.toString(holes[holes.length -2]), Gdx.graphics.getWidth()/2, 200);
@@ -258,5 +278,47 @@ public class FarmGame implements ApplicationListener {
 				holes[holes.length -1] += 1;
 			holes[i] = (int) (Math.random()*(3-0)+0);
 		}
+	}
+	
+	private int saveMaxScore(int CurrentScore) {
+		Cursor cursor= (DatabaseInterface.Create(context)).getDatabase().getScoreData(tableName,FarmID);
+		
+		int MaxScore = 0;
+		while(cursor.moveToNext()){
+			//loading each element from database
+			String ID = cursor.getString(IDColumns);
+			int MaxScore_temp =  Integer.parseInt(cursor.getString(ScoreColumns));
+				if(MaxScore_temp > MaxScore)
+				{
+					MaxScore = MaxScore_temp ;
+				Log.d(TAG,"MaxScore is"+ MaxScore_temp+ " with ID : " + ID);}
+				System.out.println("MaxScore is"+ MaxScore_temp+ " with ID : " + ID + "****************************************************");
+
+		} // travel to database result
+		
+		if(MaxScore < CurrentScore){
+			long RowIds = (DatabaseInterface.Create(context)).getDatabase().updateScoreTable(tableName, FarmID, String.valueOf(holes[holes.length-1]));
+			if (RowIds == -1)
+				Log.d(TAG, "Error on inserting columns");
+			System.out.println(holes[holes.length-1] + "****************************************************");
+			return CurrentScore;
+		}
+		System.out.println("****************************hello***********************");
+
+		return MaxScore;
+		
+	}
+
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
 	}
 }

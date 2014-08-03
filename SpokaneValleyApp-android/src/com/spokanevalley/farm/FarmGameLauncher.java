@@ -13,15 +13,10 @@ public class FarmGameLauncher extends AndroidApplication {
 
 	public static final String HIGH_SCORE = "highScore";
 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
-
-		
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-
-		initialize(new FarmGame( ), config);
+		initialize(new Farm(getApplicationContext()), config);
 	}
 }

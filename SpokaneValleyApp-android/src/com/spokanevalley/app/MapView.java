@@ -230,6 +230,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		map.getUiSettings().setCompassEnabled(false);
 		map.getUiSettings().setRotateGesturesEnabled(false);
 		map.getUiSettings().setTiltGesturesEnabled(false);
+		updateCornerScoreDisplay();
 	
 	}// end initilizeMap
 
@@ -287,7 +288,6 @@ public class MapView extends Activity implements OnMarkerClickListener,
 						Intent intent = new Intent(MapView.this, SkiActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);
 					}
-		updateCornerScoreDisplay();
     }
 
 	/**

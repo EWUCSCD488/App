@@ -222,7 +222,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		GroundOverlay groundOverlay = map
 				.addGroundOverlay(new GroundOverlayOptions()
 						.image(BitmapDescriptorFactory
-								.fromResource(R.drawable.newmapbg))
+								.fromResource(R.drawable.mapnew))
 						.position(new LatLng(47.670568, -117.239437), 39000)
 						.transparency(0.0f));
 

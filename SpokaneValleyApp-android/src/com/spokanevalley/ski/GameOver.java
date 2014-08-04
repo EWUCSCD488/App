@@ -73,7 +73,7 @@ public class GameOver implements Screen
 		if (Gdx.input.isTouched()) {
 			if (pointInRectangle(button3, touchPos.x, touchPos.y))
 			{
-			dispose();
+				Gdx.app.exit();
 			}
 		}
 	}
@@ -115,9 +115,7 @@ public class GameOver implements Screen
 	@Override
 	public void dispose() {
 		background.dispose();
-        game.getScreen().dispose();
-		
-		game.batch.dispose();
+
 		
 	}
 }

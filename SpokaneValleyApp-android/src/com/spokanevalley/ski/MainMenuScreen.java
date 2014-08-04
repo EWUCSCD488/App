@@ -35,11 +35,6 @@ public class MainMenuScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.WIDTH_GAME, Constants.HEIGHT_GAME);
 		
-		backGround.setEnforcePotImages(false);
-		backGround = new Texture(Gdx.files.internal(Constants.BACKGROUND));
-		back = new Sprite(backGround);
-		back.setSize(800, 480);
-		
 		buttonImage.setEnforcePotImages(false);
 		buttonImage = new Texture(Gdx.files.internal(Constants.IMAGE_BUTTON));
 		button = new Rectangle();
@@ -71,8 +66,15 @@ public class MainMenuScreen implements Screen {
 		howTo.y = 0;
 		howTo.width = 800;
 		howTo.height = 480;
-		
+		create();
 
+	}
+	
+	public void create() {
+		backGround.setEnforcePotImages(false);
+		backGround = new Texture(Gdx.files.internal(Constants.BACKGROUND));
+		back = new Sprite(backGround);
+		back.setSize(800, 480);
 	}
 
 	@Override
@@ -122,7 +124,7 @@ public class MainMenuScreen implements Screen {
 
 				else if (pointInRectangle(button3, touchPos.x, touchPos.y))
 				{
-					dispose();
+					Gdx.app.exit();
 				}
 			}
 			else
@@ -165,7 +167,6 @@ public class MainMenuScreen implements Screen {
 		button2Image.dispose();
 		button3Image.dispose();
         game.getScreen().dispose();
-		
-		game.batch.dispose();
+
 	}
 }

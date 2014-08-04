@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.spokanevalley.ski.Constants;
 
 public class MainMenuScreen implements Screen {
 
@@ -27,10 +28,6 @@ public class MainMenuScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.WIDTH_GAME, Constants.HEIGHT_GAME);
 		
-		backTree.setEnforcePotImages(false);
-		backTree = new Texture(Gdx.files.internal(Constants.BACKGROUND));
-		back = new Sprite(backTree);
-		back.setSize(480, 800);
 		
 		buttonImage.setEnforcePotImages(false);
 		buttonImage = new Texture(Gdx.files.internal(Constants.IMAGE_BUTTON));
@@ -42,6 +39,13 @@ public class MainMenuScreen implements Screen {
 		
 		this.context = context;
 
+	}
+	
+	public void create() {
+		backTree.setEnforcePotImages(false);
+		backTree = new Texture(Gdx.files.internal(Constants.BACKGROUND));
+		back = new Sprite(backTree);
+		back.setSize(800, 480);
 	}
 
 	@Override
@@ -99,8 +103,6 @@ public class MainMenuScreen implements Screen {
 	public void dispose() {
 		backTree.dispose();
 		buttonImage.dispose();
-        game.getScreen().dispose();
-		
-		game.batch.dispose();
+
 	}
 }

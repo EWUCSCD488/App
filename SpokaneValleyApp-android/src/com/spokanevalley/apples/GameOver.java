@@ -92,9 +92,6 @@ public class GameOver implements Screen
 	@Override
 	public void dispose() {
 		backTree.dispose();
-        game.getScreen().dispose();
-		
-		game.batch.dispose();
-		
+
 	}
 }

@@ -320,8 +320,7 @@ public class AppleGame implements Screen {
 		bucketImage.dispose();
 		backTree.dispose();
 		appleSound.dispose();
-		Game.getScreen().dispose();
-		batch.dispose();
+
 
 	}
 

@@ -393,8 +393,6 @@ public class SkiGame implements Screen {
 		flagSound.dispose();
 		bflagSound.dispose();
 		skiMusic.dispose();
-		Game.getScreen().dispose();
-		batch.dispose();
 
 	}
 

@@ -22,7 +22,7 @@ public class FarmGame implements Screen {
 	final Farm game;
 	private Context context;
 	SpriteBatch batch;
-	Texture mario, backGround, appleScore;
+	Texture backGround, appleScore;
 	Player player;
 	int [] holes;
 	long lastTime;
@@ -77,6 +77,11 @@ public class FarmGame implements Screen {
 
 	@Override
 	public void dispose() {
+		batch.dispose();
+		backGround.dispose();
+		appleScore.dispose();
+		backgroundMusic.dispose();
+		font.dispose();
 	}
 
 	@Override
@@ -228,11 +233,7 @@ public class FarmGame implements Screen {
 		lives = "Lives: ";
 		font = new BitmapFont(Gdx.files.internal("fonts/gamefont.fnt"),
 				Gdx.files.internal("fonts/gamefont_0.png"), false);
-		//FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Hyperspace Bold.ttf"));
-		//font.setColor(1.0f,1.0f,1.0f,1.0f);
-		font.setScale(5);
-		//font = gen.generateFont(20);
-		
+		font.setScale(5);	
 	}
 	
 	public void setLives(){

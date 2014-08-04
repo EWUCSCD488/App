@@ -26,6 +26,10 @@ public class GameOver implements Screen
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.WIDTH_GAME, Constants.HEIGHT_GAME);
+		backTree.setEnforcePotImages(false);
+		backTree = new Texture(Gdx.files.internal(Constants.BACKGROUND));
+		back = new Sprite(backTree);
+		back.setSize(480, 800);
 		
 		// grab the score from the game
 		
@@ -36,10 +40,6 @@ public class GameOver implements Screen
 	@Override
 	public void render(float delta) 
 	{
-		backTree.setEnforcePotImages(false);
-		backTree = new Texture(Gdx.files.internal(Constants.BACKGROUND));
-		back = new Sprite(backTree);
-		back.setSize(480, 800);
 
 		camera.update();
 		game.batch.setProjectionMatrix(camera.combined);
@@ -91,7 +91,10 @@ public class GameOver implements Screen
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		backTree.dispose();
+        game.getScreen().dispose();
+		
+		game.batch.dispose();
 		
 	}
 }

@@ -230,7 +230,7 @@ public class SkiGame implements Screen {
 			batch.draw(skierImage, skier.x, skier.y); // draw skier to batch
 		}
 
-		Iterator<Skiob> iter = Objects.iterator();
+
 		if((lasttime) > 1)
 		{
 			speed+= 2;
@@ -243,72 +243,8 @@ public class SkiGame implements Screen {
 			lasttime+= Gdx.graphics.getDeltaTime();
 		}
 	
-		while (iter.hasNext()) {
-			Skiob ob = iter.next();
-			
-			ob.rec.y += speed * Gdx.graphics.getDeltaTime();
-			if(!crashing)
-			{
-			if (ob.rec.y + 48 > 480)
-			{
-				if(!ob.isCollected && !ob.isTree)
-				{
-					score -= 5;
-					if(score < 0)// Ensure score can't go negative
-						score = 0;
-					points = "SCORE: " + score;
-				}
-				iter.remove();
-			}
-
-			batch.draw(ob.image, ob.rec.x, ob.rec.y);
-			if (ob.rec.overlaps(skier) && ob.rec.y >= skier.y) {
-				if(!ob.isCollected)
-				{
-				score = score + ob.points;
-				ob.isCollected=true;
-				if(ob.sound == 0)
-				{
-					treeSound.play();
-				}
-				
-				else if(ob.sound == 1)
-				{
-					flagSound.play();
-				}
-				
-				else
-				{
-					bflagSound.play();
-				}
-				}
-				if(score < 0)// Ensure score can't go negative
-					score = 0;
-				points = "SCORE: " + score;
-				
-				if (ob.isTree) {
-					crash++;
-					speed = 100;
-					spawn = 600000000;
-					crashing = true;
-					
-				}
-				if (crash > 2) {
-
-					 DatabaseInterface.Create(context).saveMaxScore_SkiGame(score);
-
-					Game.setScreen(new GameOver(Game,score,score));//maxscore
-					dispose();
-				}
-				
-			}
-			}
-			
-			else
-			{
-				iter.remove();
-			}
-		}
+		checkOb();
+		
 
 		// score color and size
 		scoreFont.setColor(0.0f, 0.0f, 204.0f, 1.0f);
@@ -319,7 +255,78 @@ public class SkiGame implements Screen {
 
 	}
 
-	
+	private void checkOb()
+	{
+		Iterator<Skiob> iter = Objects.iterator();
+		while (iter.hasNext()) {
+			Skiob ob = iter.next();
+
+			ob.rec.y += speed * Gdx.graphics.getDeltaTime();
+			if(!crashing)
+			{
+				if (ob.rec.y + 48 > 480)
+				{
+					if(!ob.isCollected && !ob.isTree)
+					{
+						score -= 5;
+						if(score < 0)// Ensure score can't go negative
+							score = 0;
+						points = "SCORE: " + score;
+					}
+					ob.dispose();
+					iter.remove();
+				}
+
+				batch.draw(ob.image, ob.rec.x, ob.rec.y);
+				if (ob.rec.overlaps(skier) && ob.rec.y >= skier.y) {
+					if(!ob.isCollected)
+					{
+						score = score + ob.points;
+						ob.isCollected=true;
+						if(ob.sound == 0)
+						{
+							treeSound.play();
+						}
+
+						else if(ob.sound == 1)
+						{
+							flagSound.play();
+						}
+
+						else
+						{
+							bflagSound.play();
+						}
+					}
+					if(score < 0)// Ensure score can't go negative
+						score = 0;
+					points = "SCORE: " + score;
+
+					if (ob.isTree) {
+						crash++;
+						speed = 100;
+						spawn = 600000000;
+						crashing = true;
+
+					}
+					if (crash > 2) {
+
+						DatabaseInterface.Create(context).saveMaxScore_SkiGame(score);
+
+						Game.setScreen(new GameOver(Game,score,score));//maxscore
+						dispose();
+					}
+
+				}
+			}
+
+			else
+			{
+				ob.dispose();
+				iter.remove();
+			}
+		}
+	}
 	private void spawnOb() {
 		Skiob ob = new Skiob();
 		Rectangle rect = new Rectangle();
@@ -374,6 +381,20 @@ public class SkiGame implements Screen {
 
 	@Override
 	public void dispose() {
+		flagImage.dispose();
+		yFlagImage.dispose();
+		pineTreeImage.dispose();
+		skierImage.dispose();
+		skierLImage.dispose();
+		skierRImage.dispose();
+		background.dispose();
+		bflagImage.dispose();
+		treeSound.dispose();
+		flagSound.dispose();
+		bflagSound.dispose();
+		skiMusic.dispose();
+		Game.getScreen().dispose();
+		batch.dispose();
 
 	}
 

@@ -10,9 +10,13 @@ public class Appleob
 	public int points = 1;
 	public boolean isBad=false;
 	
-	Appleob()
+	public Appleob()
 	{
 		rec = new Rectangle();
 	}
 	
+	public void dispose()
+	{
+		image.dispose();
+	}
 }

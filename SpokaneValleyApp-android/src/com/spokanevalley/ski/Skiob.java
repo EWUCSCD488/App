@@ -12,9 +12,13 @@ public class Skiob
 	public boolean isCollected=false;
 	public int sound = 0;
 	
-	Skiob()
+	public Skiob()
 	{
 		rec = new Rectangle();
 	}
 	
+	public void dispose()
+	{
+		image.dispose();
+	}
 }

@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -22,11 +21,16 @@ public class MainMenuScreen implements Screen {
 	
 	private Context context;
 
-	public MainMenuScreen(final Apple gam/*,Context context*/) {
+	public MainMenuScreen(final Apple gam, Context context) {
 		game = gam;
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.WIDTH_GAME, Constants.HEIGHT_GAME);
+		
+		backTree.setEnforcePotImages(false);
+		backTree = new Texture(Gdx.files.internal(Constants.BACKGROUND));
+		back = new Sprite(backTree);
+		back.setSize(480, 800);
 		
 		buttonImage.setEnforcePotImages(false);
 		buttonImage = new Texture(Gdx.files.internal(Constants.IMAGE_BUTTON));
@@ -36,17 +40,12 @@ public class MainMenuScreen implements Screen {
 		button.width = 89;
 		button.height = 39;
 		
-		//this.context = context;
+		this.context = context;
 
 	}
 
 	@Override
 	public void render(float delta) {
-		backTree.setEnforcePotImages(false);
-		backTree = new Texture(Gdx.files.internal(Constants.BACKGROUND));
-		back = new Sprite(backTree);
-		back.setSize(480, 800);
-
 		camera.update();
 		game.batch.setProjectionMatrix(camera.combined);
 
@@ -67,7 +66,7 @@ public class MainMenuScreen implements Screen {
 			if (pointInRectangle(button, touchPos.x, touchPos.y))
 			{
 				
-			game.setScreen(new AppleGame(game,context)); //changed to game,context *****
+			game.setScreen(new AppleGame(game, context)); //changed to game,context *****
 			dispose();
 			}
 		}
@@ -98,5 +97,10 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void dispose() {
+		backTree.dispose();
+		buttonImage.dispose();
+        game.getScreen().dispose();
+		
+		game.batch.dispose();
 	}
 }

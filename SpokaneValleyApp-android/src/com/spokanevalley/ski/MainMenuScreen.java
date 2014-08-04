@@ -35,6 +35,11 @@ public class MainMenuScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.WIDTH_GAME, Constants.HEIGHT_GAME);
 		
+		backGround.setEnforcePotImages(false);
+		backGround = new Texture(Gdx.files.internal(Constants.BACKGROUND));
+		back = new Sprite(backGround);
+		back.setSize(800, 480);
+		
 		buttonImage.setEnforcePotImages(false);
 		buttonImage = new Texture(Gdx.files.internal(Constants.IMAGE_BUTTON));
 		button = new Rectangle();
@@ -72,11 +77,6 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		backGround.setEnforcePotImages(false);
-		backGround = new Texture(Gdx.files.internal(Constants.BACKGROUND));
-		back = new Sprite(backGround);
-		back.setSize(800, 480);
-
 		camera.update();
 		game.batch.setProjectionMatrix(camera.combined);
 
@@ -127,6 +127,7 @@ public class MainMenuScreen implements Screen {
 			}
 			else
 			{
+				
 				how = false;
 				
 			}
@@ -158,5 +159,13 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void dispose() {
+		howTotex.dispose();
+		backGround.dispose();
+		buttonImage.dispose();
+		button2Image.dispose();
+		button3Image.dispose();
+        game.getScreen().dispose();
+		
+		game.batch.dispose();
 	}
 }

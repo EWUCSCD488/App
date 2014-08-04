@@ -94,8 +94,9 @@ public class FarmGame implements Screen {
 		{
 			int score = saveMaxScore(holes[holes.length-1]);
 			System.out.println("THIS IS THE SCORE FOR THIS GAME: " + score);
-			DatabaseInterface.Create(context).saveMaxScore_GreenacresGame(holes[holes.length-1]);
-			Gdx.app.exit();
+			int maxScoreScore = DatabaseInterface.Create(context).saveMaxScore_GreenacresGame(holes[holes.length-1]);
+			game.setScreen(new GameOver(game,score,maxScoreScore));//maxscore
+			//dispose();
 		}
 		
 		//If a timer tick has passed, generate a new array

@@ -6,7 +6,10 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
+/*
+ * @author Kevin Borling
+ * Loads/Disposes all game assets such as fonts, sound effects, and graphics
+ */
 public class Assets {
   /* Atlas/Texture Region Declarations */
   private static TextureAtlas atlas;
@@ -20,12 +23,15 @@ public class Assets {
   public static TextureRegion menubg;
   /* Music/Sound Effect Declarations */
   public static Music backgroundMusic;
+  public static Sound buttonSound;
   public static Sound appleSound;
   public static Sound monsterSound;
   public static Sound invinsibleSound;
   public static Sound invinsibleBubbleleSound;
-  
+  /* Game Font Declarations */
   public static BitmapFont scoreFont;
+  public static BitmapFont buttonFont;
+  public static BitmapFont labelFont;
   
   /*
    * Load the image atlas, audio, score, and sprite images. Located in assets > plantesferryAssets
@@ -37,6 +43,7 @@ public class Assets {
     skinAtlas = new TextureAtlas(Gdx.files.internal("plantesferryAssets/gfx/buttons.pack"));
     /* Load Sound Effects */
     backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("plantesferryAssets/sfx/rainbowbunchie.mp3"));
+    buttonSound = Gdx.audio.newSound(Gdx.files.internal("plantesferryAssets/sfx/menubutton.wav"));
     appleSound = Gdx.audio.newSound(Gdx.files.internal("plantesferryAssets/sfx/bite.wav"));
     invinsibleSound = Gdx.audio.newSound(Gdx.files.internal("plantesferryAssets/sfx/hurt.wav"));
     invinsibleBubbleleSound = Gdx.audio.newSound(Gdx.files.internal("plantesferryAssets/sfx/FX051.mp3"));
@@ -53,6 +60,10 @@ public class Assets {
     /* Load Game Font */
 	scoreFont = new BitmapFont(Gdx.files.internal("fonts/gamefont.fnt"),
 			Gdx.files.internal("fonts/gamefont_0.png"), false);
+	buttonFont = new BitmapFont(Gdx.files.internal("fonts/gamefont.fnt"),
+			 Gdx.files.internal("fonts/gamefont_0.png"), false);
+	labelFont = new BitmapFont(Gdx.files.internal("fonts/gamefont.fnt"),
+			 Gdx.files.internal("fonts/gamefont_0.png"), false);
   } // End load
   
   /*
@@ -61,8 +72,6 @@ public class Assets {
   public static void dispose()
   {
     atlas.dispose();
-    //skinAtlas.dispose();
-    //scoreFont.dispose();
     backgroundMusic.dispose();
     appleSound.dispose();
     invinsibleSound.dispose();

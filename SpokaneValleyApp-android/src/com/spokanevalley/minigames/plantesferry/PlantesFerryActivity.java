@@ -4,7 +4,11 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-
+/*
+ * @author Kevin Borling
+ * Activity set to launch GameSetup class
+ * GLES2 is currently used: (true)
+ */
 public class PlantesFerryActivity extends AndroidApplication {
   @Override
   public void onCreate(Bundle paramBundle)

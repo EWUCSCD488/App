@@ -7,10 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.spokanevalley.database.DatabaseInterface;
-
+/*
+ * @author Kevin Borling
+ * Displays the Game Over Menu to the screen
+ * Will ask the user to "Try Again" or "Return to Map"
+ */
 public class GameOverScreen implements Screen
 {
-//GameScreen gameScreen;
 GameSetup setup;
 PlantesFerry game;
 GameState state;
@@ -56,6 +59,7 @@ public GameOverScreen(GameSetup setup, PlantesFerry game) {
 	this.menuTable.add(this.endGameButton).expandX().center().row();
 	
     this.stage.addActor(this.menuTable);
+    
 } // End Constructor
 
 /*
@@ -82,11 +86,11 @@ public void render(float delta) {
 		this.paramSpriteBatch.end();
 		this.stage.draw();
 		/* Add Listener to Restart Game Button */
-		//TODO: Refactor button for GameOver and Menu so it's duplicated..
 	    this.restartGameButton.addListener(new InputListener() {
 	        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-	                //setup.gameScreen = new GameScreen(setup, game);
 	                setup.setScreen(setup.gameScreen);
+	                Assets.buttonSound.stop();
+	                Assets.buttonSound.play();
 	                game.setScore(0);
 	                game.setLives(3);
 	                return true;
@@ -109,6 +113,7 @@ public void hide() {
 @Override
 public void dispose() {
 	  this.paramSpriteBatch.dispose();
+	  this.menuTable.reset();
 	  this.stage.dispose();
 } // End dispose
 

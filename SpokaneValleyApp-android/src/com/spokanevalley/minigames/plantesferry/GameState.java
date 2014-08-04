@@ -1,8 +1,9 @@
 package com.spokanevalley.minigames.plantesferry;
 /*
+ * @author Kevin Borling
  * Represents the different types of states in the game.
- * This allows the game to be paused, resumed, and stopped.
+ * This allows the game to be played and paused.
  */
 public enum GameState {
-	PLAY,PAUSE,STOP,RESTART;
+	PLAY,PAUSE;
 } // End GameState

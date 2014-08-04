@@ -6,7 +6,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.TimeUtils;
-
+/*
+ * @author Kevin Borling
+ * Creates the Apple/Bubble
+ * Apples grant 1 point per collision
+ * Bubbles grant invinsibility for 10 seconds and grants 3 points for collision with apple or monster
+ * Invinsibility will make the Swimming Dinosaur immune to monsters, therefore the life count will not decrease upon collision 
+ */
 public class Apples extends Actor {
 
 	  PlantesFerry game;
@@ -22,9 +28,8 @@ public class Apples extends Actor {
 		setWidth(Assets.apple.getRegionWidth());
 		setHeight(Assets.apple.getRegionHeight());
 	    setPosition(paramFloat1, paramFloat2 - getHeight() / 2.0F);
-	    
+ 
 	    int rand = MathUtils.random(0, 50);
-	    
 	    if(rand == 50)
 	    	setName(invinsibleBubble);
 
@@ -34,13 +39,11 @@ public class Apples extends Actor {
 	  /*
 	   * Sets bounds in which checkpoints can be spawned.
 	   */
-	  private void updateBounds()
-	  {
+	  private void updateBounds() {
 	    this.bounds.set(getX(), getY(), getWidth(), getHeight());
 	  } // End updateBounds
 	  
-	  public void act(float paramFloat)
-	  {
+	  public void act(float paramFloat) {
 	    super.act(paramFloat);
 	    updateBounds();
 	  } // End act
@@ -55,20 +58,18 @@ public class Apples extends Actor {
 		clearActions();
 		int localScore = game.getScore();
 		
-		if(getName() == invinsibleBubble)
-		{
+		if(getName() == invinsibleBubble) {
 		    Assets.invinsibleBubbleleSound.stop();
 		    Assets.invinsibleBubbleleSound.play();
 	    	game.setInvinsible(true);
 	    	game.setInvinsibleTime(TimeUtils.nanoTime());
 	    	localScore += 3;
-		}
-		else
-		{
+		} // End if
+		else {
 			Assets.appleSound.stop();
 			Assets.appleSound.play();
 	    	localScore++;
-		}
+		} // End else
 		game.setScore(localScore);
 		
 	    addAction(Actions.fadeOut(0.1F));
@@ -88,8 +89,7 @@ public class Apples extends Actor {
 	    	paramSpriteBatch.draw(Assets.apple, getX(), getY(), getWidth() / 2.0F, getHeight() / 2.0F, getWidth(), getHeight(), 1.0F, 1.0F, getRotation());
 	  } // End draw
 	  
-	  public Rectangle getBounds()
-	  {
+	  public Rectangle getBounds() {
 	    return this.bounds;
 	  } // End getBounds
 }

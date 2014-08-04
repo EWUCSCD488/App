@@ -11,7 +11,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.spokanevalley.database.DatabaseInterface;
-
+/*
+ * @author Kevin Borling
+ * Main Game class of Plante's Ferry
+ * Sets the Scrolling Background from ScrollingBg class
+ * Sets the boundaries and the three rows used for spawning and player movement
+ * Creates user controlled Swimming Dinosaur from SwimmingDino class
+ * Creates Monster from Monster class
+ * Creates Apple/Bubble from Apples class
+ * Adds the created objects into individual Array Lists which are continuously iterated throughout the game
+ */
 public class PlantesFerry extends Table {
 
   SwimmingDino playerDino;
@@ -121,10 +130,8 @@ public class PlantesFerry extends Table {
     	setInvinsible(false);
     	setInvinsibleTime(0L);
     }
-    	
 
     Iterator<Monster> monsterIterator = this.monsters.iterator();
-    
     Iterator<Apples> appleIterator = this.apples.iterator();
     
     // Iterate and handle collisions / out of bound elements
@@ -135,17 +142,15 @@ public class PlantesFerry extends Table {
       if (!monsterIterator.hasNext())
     	  return;
 
-    
       Monster localRiverMonster = (Monster)monsterIterator.next();
-      
       Apples localApple = (Apples)appleIterator.next();
       
       // Check bounds
-      boundsCheck2(localApple,appleIterator);
-      boundsCheck(localRiverMonster, monsterIterator);
+      appleBoundsCheck(localApple,appleIterator);
+      monsterBoundsCheck(localRiverMonster, monsterIterator);
       // Check collision
-      collisionCheck2(localApple, appleIterator);
-      collisionCheck(localRiverMonster, monsterIterator);
+      appleCollisionCheck(localApple, appleIterator);
+      monsterCollisionCheck(localRiverMonster, monsterIterator);
       
     } // End continuous for loop
   } // End act
@@ -154,7 +159,7 @@ public class PlantesFerry extends Table {
    * Checks collision between monster and player.
    * Upon collision, the monster is removed.
    */
-  private void collisionCheck(Monster localRiverMonster, Iterator<Monster> monsterIterator) {
+  private void monsterCollisionCheck(Monster localRiverMonster, Iterator<Monster> monsterIterator) {
       if (localRiverMonster.getBounds().overlaps(this.playerDino.getBounds())) {
     	  
         monsterIterator.remove();
@@ -184,7 +189,7 @@ public class PlantesFerry extends Table {
    * Checks if a monster is outside of the set rectangle bounds.
    * Upon being out of bounds, the monster is removed.
    */
-  private void boundsCheck(Monster localRiverMonster, Iterator<Monster> monsterIterator) {
+  private void monsterBoundsCheck(Monster localRiverMonster, Iterator<Monster> monsterIterator) {
       
 	  if (localRiverMonster.getBounds().x + localRiverMonster.getWidth() < 0.1F) {
        monsterIterator.remove();
@@ -194,10 +199,10 @@ public class PlantesFerry extends Table {
   } // End boundsCheck
   
   /*
-   * Checks collision between monster and player.
-   * Upon collision, the monster is removed.
+   * Checks collision between apple and player.
+   * Upon collision, the apple is removed.
    */
-  private void collisionCheck2(Apples localApple, Iterator<Apples> appleIterator) {
+  private void appleCollisionCheck(Apples localApple, Iterator<Apples> appleIterator) {
       if (localApple.getBounds().overlaps(this.playerDino.getBounds())) {
     	  appleIterator.remove();
     	  localApple.collision(true, true);
@@ -206,10 +211,10 @@ public class PlantesFerry extends Table {
   } // End collisionCheck
   
   /*
-   * Checks if a monster is outside of the set rectangle bounds.
-   * Upon being out of bounds, the monster is removed.
+   * Checks if a apple is outside of the set rectangle bounds.
+   * Upon being out of bounds, the apple is removed.
    */
-  private void boundsCheck2(Apples localApple, Iterator<Apples> appleIterator) {
+  private void appleBoundsCheck(Apples localApple, Iterator<Apples> appleIterator) {
 	  if (localApple.getBounds().x + localApple.getWidth() < 0.1F) {
 		  appleIterator.remove();
 	      removeActor(localApple);
@@ -257,5 +262,4 @@ public void setInvinsibleTime(long isInvinsibleTime) {
 	this.isInvinsibleTime = isInvinsibleTime;
 } // End setInvinsibleTime
   
-
-} // End PlantesFerry
+} // End PlantesFerry class

@@ -1,7 +1,11 @@
 package com.spokanevalley.minigames.plantesferry;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-
+/*
+ * @author Kevin Borling
+ * Custom Text Button which is styles by Game Text Button Style
+ * Current dimensions for button are 128 x 64, with a padding of 20
+ */
 public class GameTextButton extends TextButton {
 	
 	static GameTextButtonStyle style = new GameTextButtonStyle();

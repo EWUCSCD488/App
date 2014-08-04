@@ -6,7 +6,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-
+/*
+ * @author Kevin Borling
+ * Displays the Main Menu to the screen
+ * Displays welcome message, "Welcome to Plante's Ferry"
+ * Will ask user to "Start Game" or "Return to Map"
+ */
 public class MenuScreen implements Screen
 {
 GameSetup setup;
@@ -23,6 +28,9 @@ private GameTextButton endGameButton;
 private final float buttonPaddingBottom1 = 25.0F;
 private final float buttonPaddingBottom2 = 10.0F;
 
+/*
+ * Sets the stage, creates main menu table, along with the labels/buttons
+ */
 public MenuScreen(GameSetup setup, PlantesFerry game)
 {
 	this.setup = setup;
@@ -40,8 +48,11 @@ public MenuScreen(GameSetup setup, PlantesFerry game)
     this.menuTable.add(this.endGameButton).expandX().center().row();
     
     this.stage.addActor(this.menuTable);
-}
+} // End MenuScreen constructor
 
+/*
+ * Sets the Viewport to the size of the game: 800 x 480 = current size.
+ */
 @Override
 public void resize(int width,int height)
 {
@@ -49,6 +60,9 @@ public void resize(int width,int height)
     this.stage.getCamera().translate(-this.stage.getGutterWidth(), -this.stage.getGutterHeight(), 0.0F);
 } // End resize
 
+/*
+ * Draws the menu to the screen
+ */
 @Override
 public void render(float delta) {
 	Gdx.gl.glClearColor(0.0F, 0.0F, 0.0F, 1.0F);
@@ -64,6 +78,8 @@ public void render(float delta) {
 	    this.startGameButton.addListener(new InputListener() {
 	        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 	                setup.setScreen(setup.gameScreen);
+	                Assets.buttonSound.stop();
+	                Assets.buttonSound.play();
 	                return true;
 	        } // End touchDown
 	        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {}
@@ -83,6 +99,7 @@ public void hide() {
 @Override
 public void dispose() {
 	  this.paramSpriteBatch.dispose();
+	  this.menuTable.reset();
 	  this.stage.dispose();
 } // End dispose
 

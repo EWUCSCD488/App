@@ -6,7 +6,10 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-
+/*
+ * @author Kevin Borling
+ * Creates a River Monster object that is created from PlantesFerry class
+ */
 public class Monster extends Actor {
 
   PlantesFerry game;

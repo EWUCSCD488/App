@@ -1,10 +1,13 @@
 package com.spokanevalley.minigames.plantesferry;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-
+/*
+ * @author Kevin Borling
+ * Custom Game TextButton Style which sets the button image, located in plantesferryAssets/gfx/buttons.pack
+ * Sets the font for the button
+ */
 public class GameTextButtonStyle extends TextButtonStyle {
 	
 	private final float buttonPressOffsetX = 1.0F;
@@ -13,7 +16,7 @@ public class GameTextButtonStyle extends TextButtonStyle {
 	private final String upButton = "simplebutton";
 	private final String downButton = "simplebutton2";
 	private Skin skin;
-	private BitmapFont scoreFont;
+	private BitmapFont buttonFont;
 
 	public GameTextButtonStyle() {
 		super();
@@ -22,8 +25,8 @@ public class GameTextButtonStyle extends TextButtonStyle {
 		this.down = this.skin.getDrawable(downButton);
 		this.pressedOffsetX = this.buttonPressOffsetX;
 		this.pressedOffsetY = this.buttonPressOffsetY;
-		this.scoreFont = new BitmapFont(Gdx.files.internal("fonts/gamefont.fnt"),
-							 Gdx.files.internal("fonts/gamefont_0.png"), false);
-		this.font = this.scoreFont;
+		this.buttonFont = Assets.buttonFont;
+		this.buttonFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		this.font = this.buttonFont;
 	} // End Constructor
 } // End GameTextButtonStyle class

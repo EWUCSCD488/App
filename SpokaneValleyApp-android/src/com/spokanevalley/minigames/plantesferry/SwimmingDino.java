@@ -4,7 +4,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-
+/*
+ * @author Kevin Borling
+ * Creates the Swimming Dinosaur
+ * Sets the Swimming Dino in the middle of the screen (row 1)
+ * Swimming Dinosaur asset is located in platesferryAssets/gfx/texture.png
+ */
 public class SwimmingDino extends Actor {
 	
   PlantesFerry game;

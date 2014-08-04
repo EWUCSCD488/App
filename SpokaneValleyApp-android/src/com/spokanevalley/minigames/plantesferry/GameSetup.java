@@ -3,7 +3,10 @@ package com.spokanevalley.minigames.plantesferry;
 import android.content.Context;
 
 import com.badlogic.gdx.Game;
-
+/*
+ * @author Kevin Borling
+ * Initializes the Plante's Ferry Game and creates the Main Menu and Game Screens
+ */
 public class GameSetup extends Game {
 	
 	  PlantesFerry game;
@@ -18,7 +21,7 @@ public class GameSetup extends Game {
 
 	  /*
 	   * First creates a new Plantes Ferry game
-	   * Next, the Menu, Game, and Game Over Screens are created
+	   * Next, the Menu, and Game Screens are created
 	   */
 	  @Override
 	  public void create()
@@ -27,7 +30,6 @@ public class GameSetup extends Game {
 	    this.game = new PlantesFerry(this.context);
 	    this.menuScreen = new MenuScreen(this, this.game);
 	    this.gameScreen = new GameScreen(this, this.game);
-	    //this.gameoverScreen = new GameOverScreen(this, this.game);
 	    setScreen(this.menuScreen);
 	  } // End create
 	  
@@ -40,7 +42,6 @@ public class GameSetup extends Game {
 	    Assets.dispose();
 	    this.gameScreen.dispose();
 	    this.menuScreen.dispose();
-	    //this.gameoverScreen.dispose();
 	  } // End dispose
 
 	public Context getContext() {

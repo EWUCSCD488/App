@@ -9,7 +9,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.TimeUtils;
-
+/*
+ * @author Kevin Borling
+ * Displays the Plante's Ferry Game to the screen.
+ */
 public class GameScreen implements Screen, GestureDetector.GestureListener {
 	
   GameSetup setup;
@@ -29,7 +32,6 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
 	this.game = game;
 	this.stage = new Stage();
 	this.stage.addActor(this.game);
-	
 	this.scoreFont = Assets.scoreFont;
 	this.paramSpriteBatch = new SpriteBatch();
   } // End Constructor
@@ -57,6 +59,7 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
   /*
    * Renders and displays the background and moving sprites
    * Displays the number of lives and score
+   * If life count becomes 0, the Game Over Screen is displayed
    */
   public void render(float delta)
   {
@@ -67,23 +70,14 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
 	  		this.stage.act(delta);
 	  		this.stage.draw();
 	  		displayStats();
-	  		
-	  		//TODO: Edit this so it's truely restarts. Right now it just continues with score and life reset.
+
 	  		if(this.game.getLives() < 1) {
 	  			this.setup.gameoverScreen = new GameOverScreen(this.setup, this.game);
 	  			this.setup.setScreen(setup.gameoverScreen);
-	  			//this.setup.setScreen(new GameOverScreen(this.setup, this.game));
 	  		}
 	  		break;
 	  	case PAUSE:
 	  		pause();
-	  		break;
-	  	case STOP:
-	  		break;
-	  	case RESTART:
-	  		game.setLives(3);
-	  		game.setScore(0);
-	  		this.state = GameState.PLAY;
 	  		break;
 	  	default:
 	  		break;

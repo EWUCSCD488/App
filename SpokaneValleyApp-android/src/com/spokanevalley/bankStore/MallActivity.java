@@ -2,16 +2,15 @@ package com.spokanevalley.bankStore;
 
 import java.util.List;
 
-import com.spokanevalley.app.R;
-import com.spokanevalley.database.DatabaseInterface;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.spokanevalley.app.R;
+import com.spokanevalley.database.DatabaseInterface;
 
 public class MallActivity extends Activity {
 	private ListView listView;
@@ -30,7 +29,7 @@ public class MallActivity extends Activity {
 
 		listView = (ListView) findViewById(R.id.mainListView);
 		listView.setAdapter(new ListViewCustomPoolAdapter(context,R.layout.list_item,poolLocationList));
-		
+	
 		listImageView = (ImageView) findViewById(R.id.ListImageView);
 		// you can add image here or in XML
 		

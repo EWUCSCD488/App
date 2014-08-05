@@ -4,10 +4,13 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +18,8 @@ import android.widget.TextView;
 import com.spokanevalley.app.R;
 
 public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
+	
+	public static final String TAG = ListViewCustomPoolAdapter.class.getName();
 	
 	private int resource;
 	private LayoutInflater inflater;
@@ -38,7 +43,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
          }
 
 	        /* Extract the game object to show */
-	        Model game = getItem( position );
+	        final Model game = getItem( position );
 
 	        /* Take the TextView from layout and set the game name */
 	        TextView title = (TextView) convertView.findViewById(R.id.titleItem);
@@ -48,6 +53,16 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 	        TextView description = (TextView) convertView.findViewById(R.id.DescriptionItem);
 	        description.setText(String.valueOf(game.getDescription()));
 
+	        Button buyCoupon = (Button)convertView.findViewById(R.id.buttonGetCoupon);
+	        buyCoupon.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Log.d(TAG, "clicked : "+ game.getTitle());
+				}
+			});
+	        
+	        
 	        /* Take the ImageView from layout and set the game image */
 	        ImageView imageGame = (ImageView) convertView.findViewById(R.id.imageView1);
 	        String uri = "drawable/" + game.getImagePath();

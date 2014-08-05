@@ -59,7 +59,42 @@ public class DatabaseInterface extends NameHolder{
 		
 
 		LoadingDatabasePoolLocation();
-		return POOL_LIST;
+		
+		ArrayList<poolLocation> tempLocationList = new ArrayList<poolLocation>();
+		// remove coupons
+		for(poolLocation location : POOL_LIST){
+			if(location.getTitle().equals(pool1ID))
+				tempLocationList.add(location);
+			if(location.getTitle().equals(pool2ID))
+				tempLocationList.add(location);
+			if(location.getTitle().equals(pool3ID))
+				tempLocationList.add(location);
+		}
+		
+		return tempLocationList;
+		
+		//return POOL_LIST;
+	}
+	
+	public ArrayList<poolLocation> getCouponList() {
+		
+
+		LoadingDatabasePoolLocation();
+		
+		
+		
+		ArrayList<poolLocation> temp_CouponList = new ArrayList<poolLocation>();
+		// remove coupons
+		for(poolLocation location : POOL_LIST){
+			if((	location.getTitle().equals(coupon1ID) 	|| 
+					location.getTitle().equals(coupon2ID) 	||
+					location.getTitle().equals(coupon3ID)) 	&& 
+					location.getIsCouponUsed() == true		)
+					temp_CouponList.add(location);
+		}
+		
+		return temp_CouponList;
+		//return POOL_LIST;
 	}
 	
 	public int getTotalScore(){
@@ -74,6 +109,10 @@ public class DatabaseInterface extends NameHolder{
 		for(int i = 0 ; i < NumPool ; i++){
 			addNewPool(getPoolLocation(i));
 		}
+		
+		for(int i = 0 ; i < NumCoupon ; i++){
+			addNewPool(getCouponLocation(i));
+		}
 	}
 	
 	private poolLocation getPoolLocation(int ID){
@@ -86,6 +125,18 @@ public class DatabaseInterface extends NameHolder{
 			pool = new poolLocation(pool3ID, pool3Address, false, ThumbNailFactory.create().getThumbNail(pool3ID)); 
 		}
 		return pool;
+	}
+	
+	private poolLocation getCouponLocation(int ID){
+		poolLocation coupon = null;
+		if(ID == 0){
+			coupon = new poolLocation(coupon1ID, Coupon1Description, false, ThumbNailFactory.create().getThumbNail(coupon1ID)); 
+		}else if(ID == 1){
+			coupon = new poolLocation(coupon2ID, Coupon2Description, false, ThumbNailFactory.create().getThumbNail(coupon2ID)); 
+		}else if(ID == 2){
+			coupon = new poolLocation(coupon3ID, Coupon3Description, false, ThumbNailFactory.create().getThumbNail(coupon3ID)); 
+		}
+		return coupon;
 	}
 	
 	public ArrayList<gameModel> getScoreList() {

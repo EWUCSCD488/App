@@ -16,11 +16,21 @@ public class NameHolder {
 	protected static final String pool2ID = "Terrace View";
 	protected static final String pool3ID = "Valley Mission Pool";
 	
+	protected static final String coupon1ID = "Park Road Pool Coupon";
+	protected static final String coupon2ID = "Terrace View Coupon";
+	protected static final String coupon3ID = "Valley Mission Pool Coupon ";
+	
 	protected static final String pool1Address = "Buy coupon cost : 10000";
 	protected static final String pool2Address = "Buy coupon cost : 20000";
 	protected static final String pool3Address = "Buy coupon cost : 30000";
+	
+	protected static final String Coupon1Description = "awesome coupon 1 ";
+	protected static final String Coupon2Description = "awesome coupon 2";
+	protected static final String Coupon3Description = "awesome coupon 3";
 		
 	protected static final int NumPool = 3;
+	
+	protected static final int NumCoupon = 3;
 	
 	protected static final int ID_LOCATION_COLUMN = 0 ;
 	protected static final int LATITUDE_LOCATION_COLUMN = 1 ;

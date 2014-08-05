@@ -36,6 +36,14 @@ public class ThumbNailFactory extends NameHolder{
 			return "valleymissionpool";
 		}
 		
+		else if(ID.equals(coupon1ID)){
+			return "coupon_icon1";
+		}else if(ID.equals(coupon2ID)){
+			return "coupon_icon2";
+		}else if(ID.equals(coupon3ID)){
+			return "coupon_icon3";
+		}
+		
 		return null;
 	}
 

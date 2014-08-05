@@ -235,6 +235,16 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			                	snippetUi.setText(arg0.getSnippet());
 			                else
 			                	snippetUi.setText("");
+			                
+			                //setting info
+			                TextView maxScoreUi = ((TextView) view.findViewById(R.id.custom_maxScore));
+			                if (arg0.getSnippet() != null && arg0 != null){
+				                int maxScore = getMaxScoreForWindow(arg0.getTitle());
+				                if(maxScore >= 0)
+				                	maxScoreUi.setText("Max Score: " + maxScore);
+			                }
+			                else
+			                	snippetUi.setText("");
 			 
 			                //Setting click to play option
 			                TextView clickUi = ((TextView) view.findViewById(R.id.custom_click));
@@ -247,6 +257,27 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			                return view;
 			 
 			            }
+
+			            //Factory for recieving maxScore for each specific location.
+						private int getMaxScoreForWindow(String title) {
+							switch (title) {
+					         case "Discovery Park":
+					 			return DatabaseInterface.Create(context).saveMaxScore_DiscoveryGame(0);
+					         case "Terrace View Park And Pool":
+					        	 return DatabaseInterface.Create(context).saveMaxScore_AppleGame(0);
+					         case "Plantes Ferry Park":
+					        	 return DatabaseInterface.Create(context).saveMaxScore_PlantesFerryGame(0);
+					         case "Bank":
+					        	 return -1;
+					         case "Greenacres Park":
+					        	 return DatabaseInterface.Create(context).saveMaxScore_GreenacresGame(0);
+					         case "The Mall":
+					        	 return -1;
+					         case "Ski!":
+					        	 return DatabaseInterface.Create(context).saveMaxScore_SkiGame(0);
+					         default:
+					        	 return -1;
+						}}
 			        });
 		}
 

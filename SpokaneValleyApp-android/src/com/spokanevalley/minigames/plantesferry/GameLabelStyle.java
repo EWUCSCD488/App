@@ -2,14 +2,15 @@ package com.spokanevalley.minigames.plantesferry;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+
 /*
  * @author Kevin Borling
  * Custom Label Style used in the Main and Game Over Menus
  */
 public class GameLabelStyle extends LabelStyle {
-	
+
 	private BitmapFont labelFont;
-	
+
 	public GameLabelStyle() {
 		super();
 		this.labelFont = Assets.labelFont;

@@ -3,13 +3,14 @@ package com.spokanevalley.minigames.plantesferry;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+
 /*
  * @author Kevin Borling
  * Custom Game TextButton Style which sets the button image, located in plantesferryAssets/gfx/buttons.pack
  * Sets the font for the button
  */
 public class GameTextButtonStyle extends TextButtonStyle {
-	
+
 	private final float buttonPressOffsetX = 1.0F;
 	private final float buttonPressOffsetY = -1.0F;
 	/* Set Button String to the attributes in buttons.pack */

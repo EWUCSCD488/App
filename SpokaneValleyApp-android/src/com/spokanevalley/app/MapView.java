@@ -295,7 +295,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	 */
 	private void updateCornerScoreDisplay() {
 		EditText text = (EditText) findViewById(R.id.scoreOnTopOfMap);	
-		String totalScore  = String.valueOf( DatabaseInterface.Create(context).AddDatabaseScores());
+		String totalScore  = String.valueOf( DatabaseInterface.Create(context).getTotalScore());
 		text.setText( totalScore);
 		Log.d(TAG, "total score  : " + totalScore );
 	}
@@ -348,12 +348,13 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			super.onActivityResult(requestCode, resultCode, data);
 
 			if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-				String requiredValue = data.getStringExtra("Key");
+				//String requiredValue = data.getStringExtra("Key");
+				updateCornerScoreDisplay();
 			}
 			
 		} catch (Exception ex) {
-			Toast.makeText(MapView.this, ex.toString(), Toast.LENGTH_SHORT)
-					.show();
+			//Toast.makeText(MapView.this, ex.toString(), Toast.LENGTH_SHORT)
+					//.show();
 		}
 	}
 

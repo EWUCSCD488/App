@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.spokanevalley.database.DatabaseInterface;
 import com.spokanevalley.discoveryGame.Screen.EndSreen;
+import com.spokanevalley.discoveryGame.Screen.MenuSreen;
 import com.spokanevalley.discoveryGame.drawingHandlers.Coins;
 import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour;
 import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour.JUMP_STATE;
@@ -50,7 +51,7 @@ public class WorldController implements GestureListener {
 
 	private void callMenu() {
 		// switch to menu screen
-		game.setScreen(new EndSreen(game));
+		game.setScreen(new MenuSreen(game));
 	}
 
 	public void init() {

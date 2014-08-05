@@ -42,7 +42,7 @@ public class SpecialCoin extends AbstractGameObject {
 	}
 	
 	public int getScore(){
-		return 500;
+		return 50;
 	}
 
 }

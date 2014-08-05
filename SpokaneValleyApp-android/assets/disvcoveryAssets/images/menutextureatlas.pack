@@ -1,0 +1,82 @@
+
+menutextureatlas.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background
+  rotate: false
+  xy: 1, 1258
+  size: 1080, 607
+  orig: 1080, 607
+  offset: 0, 0
+  index: -1
+optionButtonAfter
+  rotate: false
+  xy: 1, 665
+  size: 597, 591
+  orig: 597, 591
+  offset: 0, 0
+  index: -1
+optionButtonBefore
+  rotate: false
+  xy: 1083, 1274
+  size: 597, 591
+  orig: 597, 591
+  offset: 0, 0
+  index: -1
+musicButtonAfter
+  rotate: false
+  xy: 1, 259
+  size: 400, 404
+  orig: 400, 404
+  offset: 0, 0
+  index: -1
+musicButtonBefore
+  rotate: false
+  xy: 600, 852
+  size: 400, 404
+  orig: 400, 404
+  offset: 0, 0
+  index: -1
+soundButtonAfter
+  rotate: false
+  xy: 1682, 1609
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+soundButtonBefore
+  rotate: false
+  xy: 1, 1
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+howToButtonAfter
+  rotate: false
+  xy: 1682, 1401
+  size: 251, 206
+  orig: 251, 206
+  offset: 0, 0
+  index: -1
+howToButtonBefore
+  rotate: false
+  xy: 600, 644
+  size: 251, 206
+  orig: 251, 206
+  offset: 0, 0
+  index: -1
+startButtonafter
+  rotate: false
+  xy: 1682, 1182
+  size: 235, 217
+  orig: 235, 217
+  offset: 0, 0
+  index: -1
+startButtonbefore
+  rotate: false
+  xy: 259, 40
+  size: 235, 217
+  orig: 235, 217
+  offset: 0, 0
+  index: -1

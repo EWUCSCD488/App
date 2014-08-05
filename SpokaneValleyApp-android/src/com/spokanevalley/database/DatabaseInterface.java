@@ -21,6 +21,8 @@ public class DatabaseInterface extends NameHolder{
 	private static ArrayList<Location> LIST = null;
 	private static ArrayList<gameModel> SCORE_LIST = null;
 	private static ArrayList<poolLocation> POOL_LIST = null;
+	private int totalScore = 0;
+	
 	private SpokaneValleyDatabaseHelper helper;
 	
 	public static DatabaseInterface Create(Context context) {
@@ -32,14 +34,16 @@ public class DatabaseInterface extends NameHolder{
 	}
 
 	private DatabaseInterface(Context context) {
-		
-		
 		helper = new SpokaneValleyDatabaseHelper(context);
-		LoadingDatabaseLocations();
-		LoadingDatabaseScores();
-		LoadingAllGamesInitial();
-		//LoadingDatabasePoolLocation();
 
+		saveInitialPoolLocation();				// save initial pools into database
+		saveInitialTotalScore();				// create total score in database
+		LoadingDatabaseTotalScore();
+		LoadingDatabaseScores();
+	}
+
+	private void saveInitialTotalScore() {
+		helper.insertLocationData(TotalScoretableName, totalScoreID, "0");
 	}
 
 	private void LoadingAllGamesInitial() {
@@ -52,13 +56,21 @@ public class DatabaseInterface extends NameHolder{
 	}
 
 	public ArrayList<poolLocation> getPoolList() {
-		POOL_LIST = new ArrayList<poolLocation>();
-		saveInitialPoolLocation();
+		
+
 		LoadingDatabasePoolLocation();
 		return POOL_LIST;
 	}
 	
+	public int getTotalScore(){
+		LoadingDatabaseTotalScore();
+		return totalScore;
+	}
+	
 	private void saveInitialPoolLocation(){
+		
+		POOL_LIST = new ArrayList<poolLocation>();
+		
 		for(int i = 0 ; i < NumPool ; i++){
 			addNewPool(getPoolLocation(i));
 		}
@@ -118,24 +130,19 @@ public class DatabaseInterface extends NameHolder{
 		return null;
 	}
 
-	private void LoadingDatabaseLocations() {
+	private void LoadingDatabaseTotalScore() {
 
-		Cursor cursor = helper.getDataAll(LocationtableName);
+		Cursor cursor = helper.getDataAll(TotalScoretableName);
 
-		//id_counter = cursor.getCount();
-		LIST = new ArrayList<Location>();
 		while (cursor.moveToNext()) {
 			// loading each element from database
-			String ID  = cursor.getString(ID_LOCATION_COLUMN);
-			String Latitude = cursor.getString(LATITUDE_LOCATION_COLUMN);
-			String Longitude = cursor.getString(LONGITUDE_LOCATION_COLUMN);
-			String Title = cursor.getString(TITLE_LOCATION_COLUMN);
-			String Info = cursor.getString(INFO_LOCATION_COLUMN);
-			
-			LIST.add(new Location(ID,Title,Info,Double.parseDouble(Latitude),Double.parseDouble(Longitude)));
-
+			String ID  = cursor.getString(ID_TOTAL_SCORE_COLUMN);
+			String totalPoint = cursor.getString(POINT_TOTAL_SCORE_COLUMN);
+			totalScore = Integer.parseInt(totalPoint);
 		} // travel to database result
 
+		
+		
 	}
 	
 	private void LoadingDatabaseScores() {
@@ -161,6 +168,8 @@ public class DatabaseInterface extends NameHolder{
 		
 		//id_counter = cursor.getCount();
 		
+		POOL_LIST.clear();
+		
 		while (cursor.moveToNext()) {
 			// loading each element from database
 			String ID  = cursor.getString(ID_POOL_LCOATION_COLUMN);
@@ -175,7 +184,9 @@ public class DatabaseInterface extends NameHolder{
 	}
 	
 	private boolean isUsed(String couponType){		// 0 = not used , 1 = used
-		return 0 == Integer.parseInt(couponType);
+		if(1 == Integer.parseInt(couponType))			// used
+			return true;
+		return false;
 	}
 	
 	public void saveInitialScoretoDatabase_AppleGame(int score){
@@ -248,16 +259,39 @@ public class DatabaseInterface extends NameHolder{
 				Log.d(TAG,"MaxScore is"+ MaxScore_temp+ " with ID : " + ID);
 		} // travel to database result
 		
+		addUpTotalScore(CurrentScore);
+		
 		if(MaxScore < CurrentScore){
 			long RowIds = getDatabase().updateScoreTable(ScoretableName, id, String.valueOf(CurrentScore));
 			if (RowIds == -1)
 				Log.d(TAG, "Error on inserting columns");
+
 			return CurrentScore;
 		}
 
 		return MaxScore;
 		
 	}
+	
+	private void addUpTotalScore(int CurrentScore) {
+		Cursor cursor= getDatabase().getTotalScoreData(TotalScoretableName,totalScoreID);
+		
+		int currentTotalScore = 0;
+		while(cursor.moveToNext()){
+			//loading each element from database
+			String ID = cursor.getString(ID_TOTAL_SCORE_COLUMN);
+			int MaxScore_temp =  Integer.parseInt(cursor.getString(POINT_TOTAL_SCORE_COLUMN));
+				if(MaxScore_temp > currentTotalScore)
+					currentTotalScore = MaxScore_temp ;
+				Log.d(TAG,"total score is"+ MaxScore_temp+ " with ID : " + totalScoreID);
+		} // travel to database result
+		
+		//if(MaxScore < CurrentScore){
+			long RowIds = getDatabase().updateTotalScoreTable(TotalScoretableName, totalScoreID, String.valueOf(CurrentScore + currentTotalScore));
+			if (RowIds == -1)
+				Log.d(TAG, "Error on inserting columns");
+	}		
+	
 	
 	public int AddDatabaseScores() {
 

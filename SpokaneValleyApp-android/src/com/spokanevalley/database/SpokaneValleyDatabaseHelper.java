@@ -49,12 +49,17 @@ public class SpokaneValleyDatabaseHelper {
 			// make sure you have right name for database
 			return db.delete(privateDatabaseContent.MAXSCORE_TABLE_NAME, null,null);
 			
-		} else if (table_name.equals(privateDatabaseContent.LOCATION_TABLE_NAME)) {
+		} else if (table_name.equals(privateDatabaseContent.POOL_LOCATION_TABLE_NAME)) {
 
 			SQLiteDatabase db = databaseContent.getWritableDatabase();
-			return db.delete(privateDatabaseContent.LOCATION_TABLE_NAME, null,null);
+			return db.delete(privateDatabaseContent.POOL_LOCATION_TABLE_NAME, null,null);
 			
-		} else {
+		}  else if (table_name.equals(privateDatabaseContent.TOTAL_SCORE_TABLE_NAME)) {
+
+			SQLiteDatabase db = databaseContent.getWritableDatabase();
+			return db.delete(privateDatabaseContent.TOTAL_SCORE_TABLE_NAME, null,null);
+			
+		}else {
 			return 0;
 		}
 
@@ -95,10 +100,10 @@ public class SpokaneValleyDatabaseHelper {
 	 * update (name of table , ContentValues : colums will be changed
 	 * values,whereClase , whereArgs)
 	 */
-	public int updateLocationTable(String tableName,String ID,  String Latitude, String longitude) {
+	public int updateTotalScoreTable(String tableName,String ID,  String point) {
 
 		// If we have multiple tables, there will be more IF statement
-		if (!tableName.equals(privateDatabaseContent.LOCATION_TABLE_NAME))
+		if (!tableName.equals(privateDatabaseContent.TOTAL_SCORE_TABLE_NAME))
 			return 0;
 		else {
 
@@ -106,14 +111,13 @@ public class SpokaneValleyDatabaseHelper {
 
 			// VALUES TO BE CHANGED
 			ContentValues values = new ContentValues();
-			values.put(privateDatabaseContent.LOCATION_LATITUDE, Latitude);
-			values.put(privateDatabaseContent.LOCATION_LONGITUDE, longitude);
+			values.put(privateDatabaseContent.TOTAL_SCORE_POINT, point);
 			
 			// CONDITION WHERE IT SHOULD BE CHANGED
 			String[] whereArgs = { ID };
 
-			return db.update(privateDatabaseContent.LOCATION_TABLE_NAME,
-					values, privateDatabaseContent.LOCATION_ID + " = ?",
+			return db.update(privateDatabaseContent.TOTAL_SCORE_TABLE_NAME,
+					values, privateDatabaseContent.TOTAL_SCORE_ID + " = ?",
 					whereArgs);
 		}//ELSE
 
@@ -125,7 +129,7 @@ public class SpokaneValleyDatabaseHelper {
 	 * update (name of table , ContentValues : colums will be changed
 	 * values,whereClase , whereArgs)
 	 */
-	public int updateLocationTable(String tableName,String ID,  String Latitude, String longitude,String Attitude) {
+	/*public int updateLocationTable(String tableName,String ID,  String Latitude, String longitude,String Attitude) {
 
 		// If we have multiple tables, there will be more IF statement
 		if (!tableName.equals(privateDatabaseContent.LOCATION_TABLE_NAME))
@@ -148,7 +152,7 @@ public class SpokaneValleyDatabaseHelper {
 					whereArgs);
 		}//ELSE
 
-	}
+	}*/
 
 	/*
 	 * INSERT NEW ROW ON SCORE TABLE , null VALUES WILL NOT BE CREATED UNLESS USING
@@ -188,7 +192,7 @@ public class SpokaneValleyDatabaseHelper {
 			ContentValues contentvalue = new ContentValues();
 			contentvalue.put(privateDatabaseContent.POOL_LOCATION_ID, ID);
 			contentvalue.put(privateDatabaseContent.POOL_LOCATION_DESCRIPTION, description);
-			contentvalue.put(privateDatabaseContent.POOL_IS_COUPON_USED, isCouponUsed);
+			contentvalue.put(privateDatabaseContent.POOL_IS_VISITED_USED, isCouponUsed);
 
 			// PERFORM INSERTING
 			SQLiteDatabase db = databaseContent.getWritableDatabase();
@@ -202,29 +206,25 @@ public class SpokaneValleyDatabaseHelper {
 	
 	
 	/*
-	 * INSERT NEW ROW ON LOCATION TABLE , ROW CONTAINS ID,LATITUDE,LONGITUDE,DEFAULT ATTITUDE 0 
+	 * INSERT NEW new total score to database
 	 * null VALUES WILL NOT BE CREATED UNLESS USING
 	 * numColumnHack in insert method
 	 */
-	public long insertLocationData(String tableName, String ID ,String Latitude, String longitude,String title,String info) {
+	public long insertLocationData(String tableName, String ID ,String point) {
 
 		// CHECK IF WE HAVE INSERTING IN RIGHT TABLE
-		if (!tableName.equals(privateDatabaseContent.LOCATION_TABLE_NAME))
+		if (!tableName.equals(privateDatabaseContent.TOTAL_SCORE_TABLE_NAME))
 			return -1;
 		else {
 			// CREATE VALUES FOR A ROW
 			ContentValues contentvalue = new ContentValues();
-			contentvalue.put(privateDatabaseContent.LOCATION_ID, ID);
-			contentvalue.put(privateDatabaseContent.LOCATION_LATITUDE, Latitude);
-			contentvalue.put(privateDatabaseContent.LOCATION_LONGITUDE, longitude);
-			contentvalue.put(privateDatabaseContent.LOCATION_ATTITUDE, "0");
-			contentvalue.put(privateDatabaseContent.LOCATION_TITLE, title);
-			contentvalue.put(privateDatabaseContent.LOCATION_INFO, info);
+			contentvalue.put(privateDatabaseContent.TOTAL_SCORE_ID, ID);
+			contentvalue.put(privateDatabaseContent.TOTAL_SCORE_POINT, point);
 
 			// PERFORM INSERTING
 			SQLiteDatabase db = databaseContent.getWritableDatabase();
 
-			long RowID = db.insert(privateDatabaseContent.LOCATION_TABLE_NAME,
+			long RowID = db.insert(privateDatabaseContent.TOTAL_SCORE_TABLE_NAME,
 					null, contentvalue);
 			// if RowID is -1 , operation fails
 			return RowID;
@@ -236,7 +236,7 @@ public class SpokaneValleyDatabaseHelper {
 	 * null VALUES WILL NOT BE CREATED UNLESS USING
 	 * numColumnHack in insert method
 	 */
-	public long insertLocationData(String tableName, String ID ,String Latitude, String longitude,String Attitude,String title,String info) {
+	/*public long insertLocationData(String tableName, String ID ,String Latitude, String longitude,String Attitude,String title,String info) {
 
 		// CHECK IF WE HAVE INSERTING IN RIGHT TABLE
 		if (!tableName.equals(privateDatabaseContent.LOCATION_TABLE_NAME))
@@ -259,7 +259,7 @@ public class SpokaneValleyDatabaseHelper {
 			// if RowID is -1 , operation fails
 			return RowID;
 		}
-	}
+	}*/
 	
 	/*
 	 * GET ALL DATA FROM TABLENAME GIVEN AS INPUT 
@@ -273,7 +273,7 @@ public class SpokaneValleyDatabaseHelper {
 			String table = privateDatabaseContent.POOL_LOCATION_TABLE_NAME;
 			String[] columns = { privateDatabaseContent.POOL_LOCATION_ID,
 					privateDatabaseContent.POOL_LOCATION_DESCRIPTION,
-					privateDatabaseContent.POOL_IS_COUPON_USED};
+					privateDatabaseContent.POOL_IS_VISITED_USED};
 
 			Cursor cursor = db.query(table, columns, null, null, null, null,
 					null);
@@ -288,15 +288,11 @@ public class SpokaneValleyDatabaseHelper {
 			Cursor cursor = db.query(table, columns, null, null, null, null,
 					null);
 			return cursor;
-		}else if (tableName.equals(privateDatabaseContent.LOCATION_TABLE_NAME)){
+		}else if (tableName.equals(privateDatabaseContent.TOTAL_SCORE_TABLE_NAME)){
 			SQLiteDatabase db = databaseContent.getWritableDatabase();
-			String table = privateDatabaseContent.LOCATION_TABLE_NAME;
-			String[] columns = { privateDatabaseContent.LOCATION_ID,
-					privateDatabaseContent.LOCATION_LATITUDE,
-					privateDatabaseContent.LOCATION_LONGITUDE,
-					privateDatabaseContent.LOCATION_ATTITUDE,
-					privateDatabaseContent.LOCATION_TITLE,
-					privateDatabaseContent.LOCATION_INFO};
+			String table = privateDatabaseContent.TOTAL_SCORE_TABLE_NAME;
+			String[] columns = { privateDatabaseContent.TOTAL_SCORE_ID,
+					privateDatabaseContent.TOTAL_SCORE_POINT};
 
 			Cursor cursor = db.query(table, columns, null, null, null, null,
 					null);
@@ -332,28 +328,25 @@ public class SpokaneValleyDatabaseHelper {
 	}
 	
 	/*
-	 * GET THE LATITUDE AND LONGITUDE AND ATTITUDE COME WITH GIVEN ID IN LOCATION TABLE
+	 * GET total score data based on ID
 	 */
 	
-	public Cursor getLocationData(String tableName,String ID) {
+	public Cursor getTotalScoreData(String tableName,String ID) {
 
-		if (!tableName.equals(privateDatabaseContent.LOCATION_TABLE_NAME))
+		if (!tableName.equals(privateDatabaseContent.TOTAL_SCORE_TABLE_NAME))
 			return null;
 		else {
 
 			SQLiteDatabase db = databaseContent.getWritableDatabase();
 
-			String table = privateDatabaseContent.LOCATION_TABLE_NAME;
-			String[] columns = { privateDatabaseContent.LOCATION_ID,
-					privateDatabaseContent.LOCATION_LATITUDE,
-					privateDatabaseContent.LOCATION_LONGITUDE,
-					privateDatabaseContent.LOCATION_ATTITUDE,
-					privateDatabaseContent.LOCATION_TITLE,
-					privateDatabaseContent.LOCATION_INFO};
+			String table = privateDatabaseContent.TOTAL_SCORE_TABLE_NAME;
+			String[] columns = { privateDatabaseContent.TOTAL_SCORE_ID,
+					privateDatabaseContent.TOTAL_SCORE_POINT};
+			
 			String[] selectionArgs = { ID };
 
 			Cursor cursor = db.query(table, columns,
-					privateDatabaseContent.LOCATION_ID + " = ?", selectionArgs,
+					privateDatabaseContent.TOTAL_SCORE_ID + " = ?", selectionArgs,
 					null, null, null);
 
 			return cursor;
@@ -375,7 +368,7 @@ public class SpokaneValleyDatabaseHelper {
 			String table = privateDatabaseContent.POOL_LOCATION_TABLE_NAME;
 			String[] columns = { privateDatabaseContent.POOL_LOCATION_ID,
 					privateDatabaseContent.POOL_LOCATION_DESCRIPTION,
-					privateDatabaseContent.POOL_IS_COUPON_USED};
+					privateDatabaseContent.POOL_IS_VISITED_USED};
 			String[] selectionArgs = { ID };
 
 			Cursor cursor = db.query(table, columns,
@@ -415,14 +408,14 @@ public class SpokaneValleyDatabaseHelper {
 		// name of columns
 		private static final String POOL_LOCATION_ID = "POOL_ID";
 		private static final String POOL_LOCATION_DESCRIPTION = "POOL_Description";
-		private static final String POOL_IS_COUPON_USED = "POOL_UsedCoupon";
+		private static final String POOL_IS_VISITED_USED = "POOL_Visited";
 
 		// Query to create table , we can have multiple queries to create
 		// multiple tables
 		private static final String CREATE_QUERY_POOL_TABLE = "CREATE TABLE "
 				+ POOL_LOCATION_TABLE_NAME + " (" + POOL_LOCATION_ID
 				+ " VARCHAR(255) PRIMARY KEY ," + POOL_LOCATION_DESCRIPTION
-				+ " VARCHAR(255) ," + POOL_IS_COUPON_USED
+				+ " VARCHAR(255) ," + POOL_IS_VISITED_USED
 				+ " VARCHAR(255));";
 
 		private static final String DROP_TABLE_POOL_TABLE = "DROP TABLE IF EXISTS "
@@ -463,31 +456,23 @@ public class SpokaneValleyDatabaseHelper {
 
 		// Name of table we have in database, we can have multiple tables in one
 		// database
-		private static final String LOCATION_TABLE_NAME = "LocationTable";
+		private static final String TOTAL_SCORE_TABLE_NAME = "totalScoreTable";
 
 		// Name of columns in each table, name starts with name of table , then
 		// name of columns
-		private static final String LOCATION_ID = "LOCATION_ID";
-		private static final String LOCATION_LATITUDE = "Latitude";
-		private static final String LOCATION_LONGITUDE = "Longitude";
-		private static final String LOCATION_ATTITUDE = "Attitude";
-		private static final String LOCATION_TITLE = "Title";
-		private static final String LOCATION_INFO = "Information";
+		private static final String TOTAL_SCORE_ID = "scoreID";
+		private static final String  TOTAL_SCORE_POINT = "total";
 		
 
 		// Query to create table , we can have multiple queries to create
 		// multiple tables
-		private static final String CREATE_QUERY_LOCATION = "CREATE TABLE "
-				+ LOCATION_TABLE_NAME 	+ " (" 
-				+ LOCATION_ID 			+ " VARCHAR(255) PRIMARY KEY ," 
-				+ LOCATION_LATITUDE 	+ " VARCHAR(255) ," 
-				+ LOCATION_LONGITUDE 	+ " VARCHAR(255) ,"
-				+ LOCATION_ATTITUDE 	+ " VARCHAR(255) ,"
-				+ LOCATION_TITLE 		+ " VARCHAR(255) ,"
-				+ LOCATION_INFO 		+ " VARCHAR(255));";
+		private static final String CREATE_QUERY_TOTAL_SCORE = "CREATE TABLE "
+				+ TOTAL_SCORE_TABLE_NAME 	+ " (" 
+				+ TOTAL_SCORE_ID 			+ " VARCHAR(255) PRIMARY KEY ," 
+				+ TOTAL_SCORE_POINT 		+ " VARCHAR(255));";
 
-		private static final String DROP_TABLE_LOCATION = "DROP TABLE IF EXISTS "
-				+ LOCATION_TABLE_NAME;
+		private static final String DROP_TABLE_TOTAL_SCORE = "DROP TABLE IF EXISTS "
+				+ TOTAL_SCORE_TABLE_NAME;
 
 		/*
 		 * *******************************************************************************************
@@ -510,7 +495,7 @@ public class SpokaneValleyDatabaseHelper {
 				Log.d(TAG, "Created database"); // DELETE LATER
 				// CREATE TABLE FOR MAXSCORE AND LOCATION
 				db.execSQL(CREATE_QUERY_MAXSCORE);
-				db.execSQL(CREATE_QUERY_LOCATION);
+				db.execSQL(CREATE_QUERY_TOTAL_SCORE);
 				db.execSQL(CREATE_QUERY_POOL_TABLE);
 			} catch (SQLException e) {
 				Log.d(TAG, "Created database FAILED"); // DELETE LATER
@@ -521,7 +506,7 @@ public class SpokaneValleyDatabaseHelper {
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 			db.execSQL(DROP_TABLE_MAXSCORE);
-			db.execSQL(DROP_TABLE_LOCATION);
+			db.execSQL(DROP_TABLE_TOTAL_SCORE);
 			db.execSQL(DROP_TABLE_POOL_TABLE);
 			onCreate(db);
 		}

@@ -42,7 +42,7 @@ public class Coins extends AbstractGameObject {
 	}
 	
 	public int getScore(){
-		return 100;
+		return 10;
 	}
 
 }

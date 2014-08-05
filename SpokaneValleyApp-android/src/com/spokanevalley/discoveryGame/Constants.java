@@ -10,6 +10,9 @@ public class Constants {
 		
 		public static final String TEXTURE_ATLAS_OBJECTS = "disvcoveryAssets/canyonbunny.pack";
 		public static final String TEXTURE_ATLAS_DINASOUR = "disvcoveryAssets/Dinasour.pack";
+		public static final String MENU_BACKGROUND = "disvcoveryAssets/images/background.jpg";
+		public static final String MENU_ATLAS = "disvcoveryAssets/images/menutextureatlas.pack";
+		public static final String PREFERENCES = "uhhihi";
 		
 		public static final String DINASOUR_NAME = "dinoright";				// need to change later
 		

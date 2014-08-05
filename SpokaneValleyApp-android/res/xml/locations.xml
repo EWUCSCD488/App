@@ -6,13 +6,21 @@
         <Artist></Artist>
         <Latitude>47.677359</Latitude>
         <Longitude>-117.224588</Longitude>
+        <latitudeBottomLeft>47.677576</latitudeBottomLeft>
+        <longitudeBottomLeft>-117.224948</longitudeBottomLeft>
+        <latitudeTopRight>47.678544</latitudeTopRight>
+        <longitudeTopRight>-117.223456</longitudeTopRight>
         <Info>Testing for Discovery Park. Update soon</Info>
          <MarkerImage>bucket_and_shovel.png</MarkerImage>
     </Location>
     <Location>
-        <Title>Terrace View Park And Pool</Title>
+        <Title>Terrace View Park</Title>
         <Latitude>47.636221</Latitude>
         <Longitude>-117.222319</Longitude>
+        <latitudeBottomLeft>47.635201</latitudeBottomLeft>
+        <longitudeBottomLeft>-117.223466</longitudeBottomLeft>
+        <latitudeTopRight>47.636965</latitudeTopRight>
+        <longitudeTopRight>-117.220806</longitudeTopRight>
         <Info>
 			-  Play equipment and horseshoe pit.
 			Swimming pool and lazy river feature.
@@ -25,15 +33,23 @@
         <Title>Plantes Ferry Park</Title>
         <Latitude>47.697924</Latitude>
         <Longitude>-117.241588</Longitude>
+        <latitudeBottomLeft>47.693562</latitudeBottomLeft>
+        <longitudeBottomLeft>-117.242692</longitudeBottomLeft>
+        <latitudeTopRight>47.700336</latitudeTopRight>
+        <longitudeTopRight>-117.233466</longitudeTopRight>
         <Info>
             -  This is a chill Park...
         </Info>
-        <MarkerImage>boat.png</MarkerImage>
+        <MarkerImage>swimming.png</MarkerImage>
     </Location>
     <Location>
         <Title>Bank</Title>
         <Latitude>47.657974</Latitude>
         <Longitude>-117.266581</Longitude>
+        <latitudeBottomLeft>0</latitudeBottomLeft>
+        <longitudeBottomLeft>0</longitudeBottomLeft>
+        <latitudeTopRight>0</latitudeTopRight>
+        <longitudeTopRight>0</longitudeTopRight>
         <Info>
             -  Check for your trophies here...
         </Info>
@@ -43,6 +59,10 @@
         <Title>Greenacres Park</Title>
         <Latitude>47.668969</Latitude>
         <Longitude>-117.165825</Longitude>
+        <latitudeBottomLeft>47.683823</latitudeBottomLeft>
+        <longitudeBottomLeft>-117.228123</longitudeBottomLeft>
+        <latitudeTopRight>47.686141</latitudeTopRight>
+        <longitudeTopRight>-117.224969</longitudeTopRight>
         <Info>
             -  A fun farm themed park!
         </Info>
@@ -52,6 +72,10 @@
         <Title>The Mall</Title>
         <Latitude>47.674313</Latitude>
         <Longitude>-117.207503</Longitude>
+        <latitudeBottomLeft>47.671928</latitudeBottomLeft>
+        <longitudeBottomLeft>-117.210395</longitudeBottomLeft>
+        <latitudeTopRight>47.675020</latitudeTopRight>
+        <longitudeTopRight>-117.204473</longitudeTopRight>
         <Info>
             -  Come here to redeem your apples for cool prizes here!
         </Info>
@@ -61,9 +85,13 @@
         <Title>Ski!</Title>
         <Latitude>47.700621</Latitude>
         <Longitude>-117.249931</Longitude>
+        <latitudeBottomLeft>47.700398</latitudeBottomLeft>
+        <longitudeBottomLeft>-117.250514</longitudeBottomLeft>
+        <latitudeTopRight>47.700969</latitudeTopRight>
+        <longitudeTopRight>-117.249559</longitudeTopRight>
         <Info>
             -  The person who made the ramps for going up and down the mountain lived here!
         </Info>
-        <MarkerImage>marker128.png</MarkerImage>
+        <MarkerImage>snow_man.png</MarkerImage>
     </Location>
 </PreferenceScreen>

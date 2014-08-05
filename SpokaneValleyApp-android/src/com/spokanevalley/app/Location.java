@@ -13,6 +13,10 @@ public class Location {
     private LatLng gpsCoord;
     private double altitude;
     private BitmapDescriptor markerImage;
+	private double latitudeBottomLeft;
+    private double longitudeBottomLeft;
+    private double latitudeTopRight;
+    private double longitudeTopRight;
 
         public Location(String ID,String title,String info,double latitude,double longitude){
         	this.ID = ID;
@@ -99,5 +103,38 @@ public class Location {
 
 	public void setAltitude(double altitude) {
 		this.altitude = altitude;
+	}
+
+	//Corner Points Getters/Setters
+    public double getLatitudeBottomLeft() {
+		return latitudeBottomLeft;
+	}
+
+	public void setLatitudeBottomLeft(double latitudeBottomLeft) {
+		this.latitudeBottomLeft = latitudeBottomLeft;
+	}
+
+	public double getLongitudeBottomLeft() {
+		return longitudeBottomLeft;
+	}
+
+	public void setLongitudeBottomLeft(double longitudeBottomLeft) {
+		this.longitudeBottomLeft = longitudeBottomLeft;
+	}
+
+	public double getLatitudeTopRight() {
+		return latitudeTopRight;
+	}
+
+	public void setLatitudeTopRight(double latitudeTopRight) {
+		this.latitudeTopRight = latitudeTopRight;
+	}
+
+	public double getLongitudeTopRight() {
+		return longitudeTopRight;
+	}
+
+	public void setLongitudeTopRight(double longitudeTopRight) {
+		this.longitudeTopRight = longitudeTopRight;
 	}
 }

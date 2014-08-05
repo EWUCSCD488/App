@@ -32,6 +32,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
+import com.spokanevalley.addScoreGPS.addScoreGPSLauncher;
 import com.spokanevalley.apples.AppleActivity;
 import com.spokanevalley.bankStore.BankActivity;
 import com.spokanevalley.bankStore.MallActivity;
@@ -58,7 +59,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	private LatLng LastLegitLocation = null;
 	private LatLng locationMain = null;
 	private float globalZoom = 0;
-	
+	private LocationManager locationManager;
+
 	//temp values
 	/*private Location location1;
 	private Location location2;
@@ -97,7 +99,60 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		tv.setTypeface(face);
 		
 		updateCornerScoreDisplay();
+		// LOCATION ***********************************************************************
+				locationManager = (LocationManager) this.getSystemService(context.LOCATION_SERVICE);
 
+				LocationListener locationListener = new LocationListener() {
+					@Override
+					public void onLocationChanged(android.location.Location location) {
+						
+						//TODO: Once database is done also add "if has not been visited" into the "if" statement
+						for (Location location2 : LocationList.LIST) {
+							
+							/*//Testing
+							Log.i("MyActivity", "*********latitude bottom left: " + location2.getLatitudeBottomLeft());
+							Log.i("MyActivity", "*********longitude bottom left: " + location2.getLongitudeBottomLeft());
+							Log.i("MyActivity", "*********latitude top right: " + location2.getLatitudeTopRight());
+							Log.i("MyActivity", "*********longitude top right: " + location2.getLongitudeTopRight());
+							Log.i("MyActivity", "*********lattitude: " + location.getLatitude());
+							Log.i("MyActivity", "*********longitude: " + location.getLongitude());
+							*/
+							
+							double temp1 = location.getLatitude();
+							double temp2 = location.getLongitude();
+							if(location2.getLatitudeBottomLeft() <= temp1 && 
+									location2.getLongitudeBottomLeft() <= temp2 &&
+									location2.getLatitudeTopRight() >= temp1 &&
+									location2.getLongitudeTopRight() >= temp2){
+								
+								Intent intent = new Intent(MapView.this, addScoreGPSLauncher.class);
+								startActivityForResult(intent, REQUEST_CODE);
+								/*//Testing
+								LatLng camMove = new LatLng(location.getLatitude(), location.getLongitude());
+						        CameraUpdate camUpdate = CameraUpdateFactory.newLatLng(camMove);
+						        map.animateCamera(camUpdate);*/
+							}
+						}
+
+					}
+		            
+					@Override
+					public void onStatusChanged(String provider, int status,
+		                                        Bundle extras) {
+					}
+		            
+					@Override
+					public void onProviderEnabled(String provider) {
+					}
+		            
+					@Override
+					public void onProviderDisabled(String provider) {
+					}
+				};
+		        
+				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000, 0, locationListener);
+		        
+		// END LOCATION *******************************************************************
 		// for testing only
 				/*location1 = new Location("ID1", "Terace View Park",
 						"Awesome place 1", 47.636221, -117.222319);
@@ -278,9 +333,10 @@ public class MapView extends Activity implements OnMarkerClickListener,
 					}else if(marker.getTitle().equals("Plantes Ferry Park")){
 						Intent intent = new Intent(MapView.this, PlantesFerryActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);
+						//TODO: Chnage back to Greenacres game (was switched to GPS game for testing)
 					}else if(marker.getTitle().equals("Greenacres Park")){
-					Intent intent = new Intent(MapView.this, FarmGameLauncher.class);
-					startActivityForResult(intent, REQUEST_CODE);
+						Intent intent = new Intent(MapView.this, addScoreGPSLauncher.class);
+						startActivityForResult(intent, REQUEST_CODE);
 					}else if(marker.getTitle().equals("The Mall")){
 						Intent intent = new Intent(MapView.this, MallActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);

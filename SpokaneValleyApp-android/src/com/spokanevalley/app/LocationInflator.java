@@ -83,6 +83,49 @@ public class LocationInflator {
                         token = parser.next();
                     }
                 }
+                //latBottomLeft
+                else if ("LatitudeBottomLeft".equals(parser.getName()))
+                {
+                    token = parser.next();
+                    if(token == XmlPullParser.TEXT)
+                    {
+                        double lat = Double.parseDouble(parser.getText());
+                        c_Location.setLatitudeBottomLeft(lat);
+                        token = parser.next();
+                    }
+                }
+                //lonBottomLeft
+                else if ("LongitudeBottomLeft".equals(parser.getName()))
+                {
+                    token = parser.next();
+                    if(token == XmlPullParser.TEXT)
+                    {
+                        double lon = Double.parseDouble(parser.getText());
+                        c_Location.setLongitudeBottomLeft(lon);
+                        token = parser.next();
+                    }
+                }                //lat
+                else if ("LatitudeTopRight".equals(parser.getName()))
+                {
+                    token = parser.next();
+                    if(token == XmlPullParser.TEXT)
+                    {
+                        double lat = Double.parseDouble(parser.getText());
+                        c_Location.setLatitudeTopRight(lat);
+                        token = parser.next();
+                    }
+                }
+                //lon
+                else if ("LongitudeTopRight".equals(parser.getName()))
+                {
+                    token = parser.next();
+                    if(token == XmlPullParser.TEXT)
+                    {
+                        double lon = Double.parseDouble(parser.getText());
+                        c_Location.setLongitudeTopRight(lon);
+                        token = parser.next();
+                    }
+                }
             }
         }
         return locations;

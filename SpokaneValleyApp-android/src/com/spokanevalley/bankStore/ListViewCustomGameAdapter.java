@@ -46,7 +46,7 @@ public class ListViewCustomGameAdapter extends ArrayAdapter<gameModel> {
 
 	        /* Take the TextView from layout and set the game wiki link */
 	        TextView description = (TextView) convertView.findViewById(R.id.DescriptionItem);
-	        description.setText(String.valueOf(game.getMaxScore()));
+	        description.setText(game.getDescription());
 
 	        /* Take the ImageView from layout and set the game image */
 	        ImageView imageGame = (ImageView) convertView.findViewById(R.id.imageView1);

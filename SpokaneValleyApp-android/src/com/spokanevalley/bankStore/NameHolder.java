@@ -20,14 +20,20 @@ public class NameHolder {
 	protected static final String coupon2ID = "Terrace View Coupon";
 	protected static final String coupon3ID = "Valley Mission Pool Coupon ";
 	
-	protected static final String pool1Address = "Buy coupon cost : 10000";
-	protected static final String pool2Address = "Buy coupon cost : 20000";
-	protected static final String pool3Address = "Buy coupon cost : 30000";
+	
 	
 	protected static final String Coupon1Description = "awesome coupon 1 ";
 	protected static final String Coupon2Description = "awesome coupon 2";
 	protected static final String Coupon3Description = "awesome coupon 3";
 		
+	protected static final int Coupon1Cost = 100;
+	protected static final int Coupon2Cost = 200;
+	protected static final int Coupon3Cost = 300;
+	
+	protected static final String pool1Address = "Buy coupon cost : "+  Coupon1Cost;
+	protected static final String pool2Address = "Buy coupon cost : Coupon2Cost";
+	protected static final String pool3Address = "Buy coupon cost : Coupon3Cost";
+	
 	protected static final int NumPool = 3;
 	
 	protected static final int NumCoupon = 3;

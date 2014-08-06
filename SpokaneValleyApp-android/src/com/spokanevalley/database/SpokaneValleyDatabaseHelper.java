@@ -129,10 +129,10 @@ public class SpokaneValleyDatabaseHelper {
 	 * update (name of table , ContentValues : colums will be changed
 	 * values,whereClase , whereArgs)
 	 */
-	/*public int updateLocationTable(String tableName,String ID,  String Latitude, String longitude,String Attitude) {
+	public int updatePoolLocationTable(String tableName,String ID, String isgetCoupon) {
 
 		// If we have multiple tables, there will be more IF statement
-		if (!tableName.equals(privateDatabaseContent.LOCATION_TABLE_NAME))
+		if (!tableName.equals(privateDatabaseContent.POOL_LOCATION_TABLE_NAME))
 			return 0;
 		else {
 
@@ -140,19 +140,17 @@ public class SpokaneValleyDatabaseHelper {
 
 			// VALUES TO BE CHANGED
 			ContentValues values = new ContentValues();
-			values.put(privateDatabaseContent.LOCATION_LATITUDE, Latitude);
-			values.put(privateDatabaseContent.LOCATION_LONGITUDE, longitude);
-			values.put(privateDatabaseContent.LOCATION_ATTITUDE, Attitude);
+			values.put(privateDatabaseContent.POOL_IS_VISITED_USED, isgetCoupon);
 			
 			// CONDITION WHERE IT SHOULD BE CHANGED
 			String[] whereArgs = { ID };
 
-			return db.update(privateDatabaseContent.LOCATION_TABLE_NAME,
-					values, privateDatabaseContent.LOCATION_ID + " = ?",
+			return db.update(privateDatabaseContent.POOL_LOCATION_TABLE_NAME,
+					values, privateDatabaseContent.POOL_LOCATION_ID + " = ?",
 					whereArgs);
 		}//ELSE
 
-	}*/
+	}
 
 	/*
 	 * INSERT NEW ROW ON SCORE TABLE , null VALUES WILL NOT BE CREATED UNLESS USING

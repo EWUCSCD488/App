@@ -29,7 +29,7 @@ public class BankActivity extends Activity {
 		loadFromDatabase();
 
 		listView = (ListView) findViewById(R.id.mainListView);
-		listView.setAdapter(new ListViewCustomPoolAdapter(context,R.layout.list_item,CouponList));
+		listView.setAdapter(new ListViewCustomGameAdapter(context,R.layout.list_item,CouponList));
 		
 		listImageView = (ImageView) findViewById(R.id.ListImageView);
 		// you can add image here or in XML

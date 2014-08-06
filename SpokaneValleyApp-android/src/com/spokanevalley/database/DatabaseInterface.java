@@ -63,11 +63,10 @@ public class DatabaseInterface extends NameHolder{
 		ArrayList<poolLocation> tempLocationList = new ArrayList<poolLocation>();
 		// remove coupons
 		for(poolLocation location : POOL_LIST){
-			if(location.getTitle().equals(pool1ID))
-				tempLocationList.add(location);
-			if(location.getTitle().equals(pool2ID))
-				tempLocationList.add(location);
-			if(location.getTitle().equals(pool3ID))
+			if((	location.getTitle().equals(pool1ID) 	|| 
+					location.getTitle().equals(pool2ID) 	||
+					location.getTitle().equals(pool3ID)) 	&& 
+					location.getIsCouponUsed() == false		)
 				tempLocationList.add(location);
 		}
 		
@@ -324,7 +323,7 @@ public class DatabaseInterface extends NameHolder{
 		
 	}
 	
-	private void addUpTotalScore(int CurrentScore) {
+	public void addUpTotalScore(int CurrentScore) {
 		Cursor cursor= getDatabase().getTotalScoreData(TotalScoretableName,totalScoreID);
 		
 		int currentTotalScore = 0;
@@ -360,7 +359,13 @@ public class DatabaseInterface extends NameHolder{
 		return totalScore;
 	}
 	
+	public void updatePoolwithBoughtCoupon(String ID,boolean isgteCoupon){
+		helper.updatePoolLocationTable(PooltableName, ID, convertToString(isgteCoupon));
+	}
 	
+	public void updateCouponwithBoughtCoupon(String ID,boolean isgetCoupon){
+		helper.updatePoolLocationTable(PooltableName, ID, convertToString(isgetCoupon));
+	}
 	
 	
 }

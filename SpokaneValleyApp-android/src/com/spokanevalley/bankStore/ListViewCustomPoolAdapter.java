@@ -2,20 +2,26 @@ package com.spokanevalley.bankStore;
 
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.spokanevalley.app.R;
+import com.spokanevalley.database.DatabaseInterface;
 
 public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 	
@@ -53,24 +59,138 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 	        TextView description = (TextView) convertView.findViewById(R.id.DescriptionItem);
 	        description.setText(String.valueOf(game.getDescription()));
 
+	        /* Take the ImageView from layout and set the game image */
+	        ImageView imageGame = (ImageView) convertView.findViewById(R.id.imageView1);
+	        String uri = "drawable/" + game.getImagePath();
+	        int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
+	        final Drawable image = context.getResources().getDrawable(imageResource);
+	        imageGame.setImageDrawable(image);
+	        
+	        
+	        
 	        Button buyCoupon = (Button)convertView.findViewById(R.id.buttonGetCoupon);
 	        buyCoupon.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
 					Log.d(TAG, "clicked : "+ game.getTitle());
+					showAlert(image,game);
 				}
 			});
 	        
 	        
-	        /* Take the ImageView from layout and set the game image */
-	        ImageView imageGame = (ImageView) convertView.findViewById(R.id.imageView1);
-	        String uri = "drawable/" + game.getImagePath();
-	        int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
-	        Drawable image = context.getResources().getDrawable(imageResource);
-	        imageGame.setImageDrawable(image);
+	        
 	        return convertView;
 	    }
 	
+	 private void showAlert(Drawable Dimage,final Model game) {
+	        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+	        LinearLayout layout       = new LinearLayout(context);
+	        ImageView image = new ImageView(context);
+	        TextView tvMessage        = new TextView(context);
+	        //final EditText etInput    = new EditText(context);
+	        
+	        tvMessage.setText("Description goes here");				// set text
+	        
+	        
+	        image.setImageDrawable(Dimage);							// set image
+	        int width = 350 ;
+	        int height = 350;
+	        LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
+	        image.setLayoutParams(parms);
+	        
+	        layout.setOrientation(LinearLayout.VERTICAL);			// set layout
+	        layout.addView(image);
+	        layout.setGravity(Gravity.CENTER);
+	        layout.addView(tvMessage);
+	        
+	        
+	        alert.setTitle("Custom alert demo");
+	        alert.setView(layout);
+	 
+	        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	 
+	            @Override
+	            public void onClick(DialogInterface dialog, int which) {
+	                dialog.cancel();
+	            }
+	        });
+	 
+	        alert.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
+	 
+	            @Override
+	            public void onClick(DialogInterface dialog, int which) {
+	               
+	            	checkTotalScoreAndBuyCoupon(game);
+	            	dialog.cancel();
+	            }
+
+
+	        });
+	 
+	        alert.show();
+	    }
+	 
+		private void checkTotalScoreAndBuyCoupon(final Model game) {
+			int price = CouponCostFactory.create().getPrice(game.getTitle());
+			Log.d(TAG, "price is : "+ price);
+			if( price <= DatabaseInterface.Create(context).getTotalScore() ){
+				// buy coupon
+				// prompt another to make sure they want to buy it
+				comfirmationPromptBuyCoupon(game);
+			}else{
+				// don't buy coupon
+				// prompt user that they don't have anough points
+				comfirmationPromptBuyCouponFailed();
+			}
+		}
+		
+		private void comfirmationPromptBuyCoupon(final Model game){
+			AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+            builder1.setMessage("Are you sure you want to buy this coupon ? \n Please redeem coupon in the bank");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("Yes",
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                	// substract coupon cost with total score
+                	DatabaseInterface.Create(context).addUpTotalScore(-1 * CouponCostFactory.create().getPrice(game.getTitle()));
+                	remove((poolLocation) game);			// remove location from list
+					notifyDataSetChanged();					// update location
+					DatabaseInterface.Create(context).updatePoolwithBoughtCoupon(game.getTitle(), true);	// update location in database with true gotCoupon
+                    DatabaseInterface.Create(context).updateCouponwithBoughtCoupon(CouponCostFactory.create().getTheRightCouponFromPool(game.getTitle()), true);
+					dialog.cancel();
+                }
+            });
+            builder1.setNegativeButton("No",
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+		}
+		
+		private void comfirmationPromptBuyCouponFailed(){
+			AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+            builder1.setMessage("You don't have enough point to get this coupon");
+            builder1.setCancelable(false);
+            builder1.setPositiveButton("Okay",
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+           /* builder1.setNegativeButton("No",
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });*/
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+		}
 	
 }

@@ -410,30 +410,32 @@ containing a value of this type.
         public static final int dinohead=0x7f020024;
         public static final int discoverythumbnail=0x7f020025;
         public static final int ferrythumbnail=0x7f020026;
-        public static final int greenacresthumbnail=0x7f020027;
-        public static final int greenbutton=0x7f020028;
-        public static final int ic_launcher=0x7f020029;
-        public static final int ic_plusone_medium_off_client=0x7f02002a;
-        public static final int ic_plusone_small_off_client=0x7f02002b;
-        public static final int ic_plusone_standard_off_client=0x7f02002c;
-        public static final int ic_plusone_tall_off_client=0x7f02002d;
-        public static final int launcher=0x7f02002e;
-        public static final int mapbg=0x7f02002f;
-        public static final int marker128=0x7f020030;
-        public static final int marker256=0x7f020031;
-        public static final int marker512=0x7f020032;
-        public static final int parkroadpool=0x7f020033;
-        public static final int pharrell=0x7f020034;
-        public static final int powered_by_google_dark=0x7f020035;
-        public static final int powered_by_google_light=0x7f020036;
-        public static final int purplebutton=0x7f020037;
-        public static final int redbutton=0x7f020038;
-        public static final int skithumbnail=0x7f020039;
-        public static final int stardust=0x7f02003a;
-        public static final int terracepool=0x7f02003b;
-        public static final int tileable_wood_texture=0x7f02003c;
-        public static final int valleymissionpool=0x7f02003d;
-        public static final int yellowbutton=0x7f02003e;
+        public static final int green_cup=0x7f020027;
+        public static final int greenacresthumbnail=0x7f020028;
+        public static final int greenbutton=0x7f020029;
+        public static final int ic_launcher=0x7f02002a;
+        public static final int ic_plusone_medium_off_client=0x7f02002b;
+        public static final int ic_plusone_small_off_client=0x7f02002c;
+        public static final int ic_plusone_standard_off_client=0x7f02002d;
+        public static final int ic_plusone_tall_off_client=0x7f02002e;
+        public static final int launcher=0x7f02002f;
+        public static final int mapbg=0x7f020030;
+        public static final int marker128=0x7f020031;
+        public static final int marker256=0x7f020032;
+        public static final int marker512=0x7f020033;
+        public static final int parkroadpool=0x7f020034;
+        public static final int pharrell=0x7f020035;
+        public static final int powered_by_google_dark=0x7f020036;
+        public static final int powered_by_google_light=0x7f020037;
+        public static final int purplebutton=0x7f020038;
+        public static final int redbutton=0x7f020039;
+        public static final int skithumbnail=0x7f02003a;
+        public static final int stardust=0x7f02003b;
+        public static final int terracepool=0x7f02003c;
+        public static final int tileable_wood_texture=0x7f02003d;
+        public static final int trophy=0x7f02003e;
+        public static final int valleymissionpool=0x7f02003f;
+        public static final int yellowbutton=0x7f020040;
     }
     public static final class id {
         public static final int DescriptionItem=0x7f07001d;
@@ -476,11 +478,15 @@ containing a value of this type.
     }
     public static final class layout {
         public static final int activity_map_view=0x7f030000;
-        public static final int info_window_layout=0x7f030001;
-        public static final int list_item=0x7f030002;
-        public static final int listviewactivity=0x7f030003;
-        public static final int locations=0x7f030004;
-        public static final int main=0x7f030005;
+        public static final int activity_map_view2=0x7f030001;
+        public static final int info_window_layout=0x7f030002;
+        public static final int info_window_layout2=0x7f030003;
+        public static final int list_item=0x7f030004;
+        public static final int list_item2=0x7f030005;
+        public static final int listviewactivity=0x7f030006;
+        public static final int listviewactivity2=0x7f030007;
+        public static final int locations=0x7f030008;
+        public static final int main=0x7f030009;
     }
     public static final class string {
         public static final int app_name=0x7f050020;

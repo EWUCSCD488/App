@@ -43,7 +43,7 @@ public class Dinasour extends AbstractGameObject {
 		bounds.set(0, 0, dimension.x, dimension.y);
 
 		// set physics values
-		terminalVelocity.set(4.0f, 8.5f);
+		terminalVelocity.set(4.0f, 7.0f);
 		friction.set(12.0f, 0.0f);
 		acceleration.set(0.0f, -25.0f);
 

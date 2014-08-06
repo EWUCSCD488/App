@@ -18,13 +18,13 @@ public class Assets implements Disposable, AssetErrorListener {
 	public static final Assets instance = new Assets();
 	private AssetManager assetManager;
 	
-	public CloudAsset cloud;
-	public CoinAsset coin;
+	public AirplaneAsset cloud;
+	public AppleAsset coin;
 	public DinasourAsset dinasour;
-	public GroundAsset ground;
-	public MountainAsset mountain;
+	public RocketRockAsset ground;
+	public BackgroundFutureAsset mountain;
 	public SkyAsset sky;
-	public SpecialCoinAsset specialCoin;
+	public BadAppleAsset specialCoin;
 	
 	// fonts asset
 	public AssetFonts fonts;
@@ -53,13 +53,13 @@ public class Assets implements Disposable, AssetErrorListener {
 			t.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 			
 			// create game resource objects
-			cloud = new CloudAsset(atlas);
-			coin = new CoinAsset(atlas);
+			cloud = new AirplaneAsset(atlas);
+			coin = new AppleAsset(atlas);
 			dinasour = new DinasourAsset(atlas_dinasour);
-			ground = new GroundAsset(atlas);
-			mountain = new MountainAsset(atlas);
+			ground = new RocketRockAsset(atlas);
+			mountain = new BackgroundFutureAsset(atlas);
 			sky = new SkyAsset(atlas);
-			specialCoin = new SpecialCoinAsset(atlas);
+			specialCoin = new BadAppleAsset(atlas);
 			
 			// create fonts
 			fonts = new AssetFonts();

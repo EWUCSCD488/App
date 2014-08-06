@@ -5,7 +5,6 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.database.DataSetObserver;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -28,10 +27,6 @@ public class MallActivity extends Activity {
 		setContentView(R.layout.listviewactivity);
 		context = this;
 		loadFromDatabase();
-		
-		// Set font for coupon count
-		Typeface face = Typeface.createFromAsset(getAssets(),
-		            "fonts/Bubblegum.otf");
 
 		listView = (ListView) findViewById(R.id.mainListView);
 		listView.setAdapter(new ListViewCustomPoolAdapter(context,R.layout.list_item,poolLocationList));
@@ -54,9 +49,8 @@ public class MallActivity extends Activity {
 			}
 		});
 		
-		listTextView.setTypeface(face);
 	}
-		
+
 	protected void changeScoreDisplaying() {
 		listTextView.setText(redeemedCoupon + " points");
 		

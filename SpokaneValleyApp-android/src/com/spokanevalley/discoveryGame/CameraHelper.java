@@ -19,7 +19,7 @@ public class CameraHelper {
 	
 	public CameraHelper(){
 		position = new Vector2();
-		zoom = 1.0f;
+		zoom = 1.5f;
 	}
 	
 	public void update(float deltaTime){
@@ -57,7 +57,7 @@ public class CameraHelper {
 	}
 	
 	public void applyTo(OrthographicCamera camera){
-		camera.position.x = position.x;
+		camera.position.x = position.x +3;
 		camera.position.y = position.y;
 		camera.zoom = zoom;
 		camera.update();

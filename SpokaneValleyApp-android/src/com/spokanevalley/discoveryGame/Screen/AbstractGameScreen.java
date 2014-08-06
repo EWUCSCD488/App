@@ -5,6 +5,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.spokanevalley.discoveryGame.Atlas_handlers.Assets;
 
+/*
+ * 	abstract screen menu 
+ */
+
 public abstract class AbstractGameScreen implements Screen{
 	
 	protected Game game;

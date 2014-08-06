@@ -3,15 +3,15 @@ package com.spokanevalley.discoveryGame.Screen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
-import com.spokanevalley.discoveryGame.WorldController;
-import com.spokanevalley.discoveryGame.WorldRenderer;
+import com.spokanevalley.discoveryGame.GameLogic;
+import com.spokanevalley.discoveryGame.GameRender;
 
 public class GameScreen extends AbstractGameScreen {
 
 	private static final String TAG = GameScreen.class.getName();
 
-	private WorldRenderer worldRenderer;
-	private WorldController worldController;
+	private GameRender worldRenderer;
+	private GameLogic worldController;
 	private boolean paused;
 	public GameScreen(Game game) {
 		super(game);
@@ -19,20 +19,14 @@ public class GameScreen extends AbstractGameScreen {
 
 	@Override
 	public void render(float deltaTime) {
-		
-		// Do not update game world when paused.
-		if (!paused) {
-			// Update game world by the time that has passed
-			// since last rendered frame.
-			worldController.update(deltaTime);
-		
-		// Sets the clear screen color to: Cornflower Blue
+		if (!paused) {										// Do not update game world when paused.
+			worldController.update(deltaTime);				// Update game world by the time that has passed
+															// since last rendered frame.
 		Gdx.gl.glClearColor(0x64 / 255.0f, 0x95 / 255.0f, 0xed / 255.0f,
-				0xff / 255.0f);
-		// Clears the screen
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		// Render game world to screen
-		worldRenderer.render();
+				0xff / 255.0f);								// Sets the clear screen color to Blue
+
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);			// Clears the screen
+		worldRenderer.render();								// Render game world to screen
 		}
 
 	}
@@ -45,8 +39,8 @@ public class GameScreen extends AbstractGameScreen {
 	@Override
 	public void show() {
 		
-		worldController = new WorldController(game);
-		worldRenderer = new WorldRenderer(worldController);
+		worldController = new GameLogic(game);
+		worldRenderer = new GameRender(worldController);
 		//Gdx.input.setCatchBackKey(true);
 
 	}
@@ -67,7 +61,7 @@ public class GameScreen extends AbstractGameScreen {
 	public void resume() {
 		super.resume();
 		//worldController = new WorldController(game);
-		worldRenderer = new WorldRenderer(worldController);
+		worldRenderer = new GameRender(worldController);
 		// Only called on Android!
 		paused = false;
 	}

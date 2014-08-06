@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -34,8 +35,24 @@ public class MallActivity extends Activity {
 		// you can add image here or in XML
 		
 		listTextView = (TextView ) findViewById(R.id.ListTextView);
-		listTextView.setText(redeemedCoupon + " points");
+		changeScoreDisplaying();
 		
+		listView.getAdapter().registerDataSetObserver(new DataSetObserver() {
+			@Override
+			public void onChanged() {
+				redeemedCoupon = DatabaseInterface.Create(context).getTotalScore();
+				changeScoreDisplaying();
+			}
+			
+			public void onInvalidated() {
+				
+			}
+		});
+		
+	}
+
+	protected void changeScoreDisplaying() {
+		listTextView.setText(redeemedCoupon + " points");
 		
 	}
 

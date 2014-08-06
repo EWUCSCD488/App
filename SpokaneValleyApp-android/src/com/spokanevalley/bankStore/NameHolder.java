@@ -31,8 +31,8 @@ public class NameHolder {
 	protected static final int Coupon3Cost = 300;
 	
 	protected static final String pool1Address = "Buy coupon cost : "+  Coupon1Cost;
-	protected static final String pool2Address = "Buy coupon cost : Coupon2Cost";
-	protected static final String pool3Address = "Buy coupon cost : Coupon3Cost";
+	protected static final String pool2Address = "Buy coupon cost : "+ Coupon2Cost;
+	protected static final String pool3Address = "Buy coupon cost : " + Coupon3Cost;
 	
 	protected static final int NumPool = 3;
 	

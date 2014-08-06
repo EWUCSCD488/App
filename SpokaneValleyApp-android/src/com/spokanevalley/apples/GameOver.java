@@ -1,18 +1,22 @@
 package com.spokanevalley.apples;
-
+//package com.me.mygdxgame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 
 public class GameOver implements Screen
 {
 	final Apple game;
-	Texture backTree;
+	Texture background;
 	Sprite back;
-
+	Texture button3Image;
+	Rectangle button3;
 	OrthographicCamera camera;
 	
 	private int CurrentScore;
@@ -26,10 +30,19 @@ public class GameOver implements Screen
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.WIDTH_GAME, Constants.HEIGHT_GAME);
-		backTree.setEnforcePotImages(false);
-		backTree = new Texture(Gdx.files.internal(Constants.BACKGROUND));
-		back = new Sprite(backTree);
+		
+		background.setEnforcePotImages(false);
+		background = new Texture(Gdx.files.internal(Constants.BACKGROUND));
+		back = new Sprite(background);
 		back.setSize(480, 800);
+		
+		button3Image.setEnforcePotImages(false);
+		button3Image = new Texture(Gdx.files.internal(Constants.IMAGE_BUTTON3));
+		button3 = new Rectangle();
+		button3.x = Constants.WIDTH_GAME / 2 - 89 / 2; // centered horizontally
+		button3.y = 180;
+		button3.width = 100;
+		button3.height = 50;
 		
 		// grab the score from the game
 		
@@ -47,18 +60,28 @@ public class GameOver implements Screen
 		game.batch.begin();
 		back.draw(game.batch);
 		//game.font.setScale((float) 2);
-		game.font.setColor(0.0f, 0.0f, 204.0f, 1.0f);// set font color to red
-		game.font.draw(game.batch, "Game Over", 170, 425);
-		game.font.draw(game.batch, "Current score : " + this.CurrentScore, 170, 525);
-		game.font.draw(game.batch, "High Score :" + this.MaxScore, 170, 625);
+		game.font.setColor(0.0f, 0.0f, 204.0f, 0.0f);// set font color to red
+		game.font.draw(game.batch, "Game Over", 170, 650);
+		game.font.draw(game.batch, "Current score : " + this.CurrentScore, 150, 600);
+		game.font.draw(game.batch, "High Score :" + this.MaxScore, 150, 550);
+		game.batch.draw(button3Image, button3.x, button3.y);
 		game.batch.end();
 
+		Vector3 touchPos = new Vector3();
+		touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+		camera.unproject(touchPos);
 		if (Gdx.input.isTouched()) {
-			//Gdx.app.exit();
-			dispose();
+			if (pointInRectangle(button3, touchPos.x, touchPos.y))
+			{
+				Gdx.app.exit();
+			}
 		}
 	}
 
+	public static boolean pointInRectangle (Rectangle r, float x, float y) {
+	    return r.x <= x && r.x + r.width >= x && r.y <= y && r.y + r.height >= y;
+	}
+	
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
@@ -91,7 +114,8 @@ public class GameOver implements Screen
 
 	@Override
 	public void dispose() {
-		backTree.dispose();
+		background.dispose();
 
+		
 	}
 }

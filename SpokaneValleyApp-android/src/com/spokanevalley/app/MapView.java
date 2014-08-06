@@ -353,7 +353,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 					if(marker.getTitle().equals("Bank")){
 						Intent intent = new Intent(MapView.this, BankActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);
-					}else if(marker.getTitle().equals("Terrace View Park And Pool")){
+					}else if(marker.getTitle().equals("Terrace View Park and Pool")){
 						// INITIALIZE GAME
 						Intent intent = new Intent(MapView.this, AppleActivity.class);
 						startActivityForResult(intent, REQUEST_CODE);

@@ -1,51 +1,80 @@
 package com.spokanevalley.apples;
-
+//package com.me.mygdxgame;
 import android.content.Context;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.spokanevalley.ski.Constants;
 
 public class MainMenuScreen implements Screen {
 
 	final Apple game;
-	Texture backTree;
+	Texture backGround;
 	Texture buttonImage;
 	Rectangle button;
+	Texture button2Image;
+	Rectangle button2;
+	Texture button3Image;
+	Rectangle button3;
+	Texture howTotex;
+	Rectangle howTo;
 	Sprite back;
+	Boolean how= false;
 	OrthographicCamera camera;
 	
 	private Context context;
 
-	public MainMenuScreen(final Apple gam, Context context) {
+	public MainMenuScreen(final Apple gam) {
 		game = gam;
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.WIDTH_GAME, Constants.HEIGHT_GAME);
 		
-		
 		buttonImage.setEnforcePotImages(false);
 		buttonImage = new Texture(Gdx.files.internal(Constants.IMAGE_BUTTON));
 		button = new Rectangle();
 		button.x = Constants.WIDTH_GAME / 2 - 89 / 2; // centered horizontally
-		button.y = 20;
-		button.width = 89;
-		button.height = 39;
+		button.y = 300;
+		button.width = 100;
+		button.height = 50;
 		
-		this.context = context;
+		button2Image.setEnforcePotImages(false);
+		button2Image = new Texture(Gdx.files.internal(Constants.IMAGE_BUTTON2));
+		button2 = new Rectangle();
+		button2.x = Constants.WIDTH_GAME / 2 - 89 / 2; // centered horizontally
+		button2.y = 240;
+		button2.width = 100;
+		button2.height = 50;
+		
+		button3Image.setEnforcePotImages(false);
+		button3Image = new Texture(Gdx.files.internal(Constants.IMAGE_BUTTON3));
+		button3 = new Rectangle();
+		button3.x = Constants.WIDTH_GAME / 2 - 89 / 2; // centered horizontally
+		button3.y = 180;
+		button3.width = 100;
+		button3.height = 50;
+		
+		howTotex.setEnforcePotImages(false);
+		howTotex = new Texture(Gdx.files.internal(Constants.HOWTO_APPLE));
+		howTo = new Rectangle();
+		howTo.x = 0; // centered horizontally
+		howTo.y = 0;
+		howTo.width = 480;
+		howTo.height = 800;
+		create();
 
 	}
 	
 	public void create() {
-		backTree.setEnforcePotImages(false);
-		backTree = new Texture(Gdx.files.internal(Constants.BACKGROUND));
-		back = new Sprite(backTree);
-		back.setSize(800, 480);
+		backGround.setEnforcePotImages(false);
+		backGround = new Texture(Gdx.files.internal(Constants.BACKGROUND));
+		back = new Sprite(backGround);
+		back.setSize(480, 800);
 	}
 
 	@Override
@@ -55,11 +84,21 @@ public class MainMenuScreen implements Screen {
 
 		game.batch.begin();
 		back.draw(game.batch);
-		//game.font.setScale((float) 2);
-		game.font.setColor(0.0f, 0.0f, 204.0f, 1.0f);// set font color to red
-		game.font.draw(game.batch, "Welcome to Apple Catch! ", 90, 445);
-		game.font.draw(game.batch, "Tap the button to play", 102, 395);
-		game.batch.draw(buttonImage, button.x, button.y);
+		if(!how)
+		{
+			//game.font.setScale((float) 2);
+			game.font.setColor(0.0f, 0.0f, 204.0f, 1.0f);// set font color to red
+			game.font.draw(game.batch, "Welcome to Apple Game! ", 100, 600);
+			game.font.draw(game.batch, "Tap the button to play", 112, 550);
+			game.batch.draw(buttonImage, button.x, button.y);
+			game.batch.draw(button2Image, button2.x, button2.y);
+			game.batch.draw(button3Image, button3.x, button3.y);
+		}
+		
+		else
+		{
+			game.batch.draw(howTotex, howTo.x, howTo.y);
+		}
 		game.batch.end();
 
 		Vector3 touchPos = new Vector3();
@@ -67,11 +106,32 @@ public class MainMenuScreen implements Screen {
 		camera.unproject(touchPos);
 		if (Gdx.input.justTouched()) 
 		{
-			if (pointInRectangle(button, touchPos.x, touchPos.y))
+			if(!how)
+			{
+				if (pointInRectangle(button, touchPos.x, touchPos.y))
+				{
+
+					game.setScreen(new AppleGame(game,context));
+					dispose();
+				}
+
+				else if (pointInRectangle(button2, touchPos.x, touchPos.y))
+				{
+
+					how = true;
+					
+				}
+
+				else if (pointInRectangle(button3, touchPos.x, touchPos.y))
+				{
+					Gdx.app.exit();
+				}
+			}
+			else
 			{
 				
-			game.setScreen(new AppleGame(game, context)); //changed to game,context *****
-			dispose();
+				how = false;
+				
 			}
 		}
 	}
@@ -101,8 +161,12 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		backTree.dispose();
+		howTotex.dispose();
+		backGround.dispose();
 		buttonImage.dispose();
+		button2Image.dispose();
+		button3Image.dispose();
+
 
 	}
 }

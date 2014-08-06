@@ -19,7 +19,7 @@ public class Constants {
 	public static final String GAME_FONT = "fonts/gamefont.fnt";
 	public static final String MENU_FONT = "fonts/myriad.fnt";
 	
-	public static final String SOUND_MUSIC = "skiAssets/sfx/BadApple.mp3";
+	public static final String SOUND_MUSIC = "skiAssets/sfx/GameOn.mp3";
 	public static final String SOUND_TREE = "skiAssets/sfx/treeSound.mp3";
 	public static final String SOUND_FLAG = "skiAssets/sfx/ding.mp3";
 	public static final String SOUND_BFLAG = "skiAssets/sfx/bDing.mp3";

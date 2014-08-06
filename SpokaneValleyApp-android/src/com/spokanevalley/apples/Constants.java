@@ -1,7 +1,10 @@
 package com.spokanevalley.apples;
 
 public class Constants {
+	public static final String HOWTO_APPLE = "appleAssets/gfx/Applehow.png";
 	public static final String IMAGE_BUTTON = "appleAssets/gfx/button.png";
+	public static final String IMAGE_BUTTON2 = "appleAssets/gfx/button2.png";
+	public static final String IMAGE_BUTTON3= "appleAssets/gfx/button3.png";
 	public static final String IMAGE_BUCKET = "appleAssets/gfx/bucket.png";
 	public static final String IMAGE_APPLE = "appleAssets/gfx/apple.png";
 	public static final String IMAGE_GAPPLE = "appleAssets/gfx/goldapple.png";

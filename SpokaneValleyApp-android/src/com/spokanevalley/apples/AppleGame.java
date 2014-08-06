@@ -47,9 +47,6 @@ public class AppleGame implements Screen {
 	private int score;
 	private Context context;
 	
-
-
-	private static final String TAG = AppleGame.class.getName();
 	
 	
 	private String applesCaught;
@@ -133,7 +130,7 @@ public class AppleGame implements Screen {
 		checkApple();
 
 		// score color and size
-		scoreFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		scoreFont.setColor(0.0f, 0.0f, 204.0f, 0.0f);
 		//scoreFont.setScale((float) 2);
 		scoreFont.draw(batch, applesCaught, 190, 750);
 		batch.end(); // end batch, write all drawings to screen
@@ -166,10 +163,9 @@ public class AppleGame implements Screen {
 					badApples++;
 				}
 				if (badApples > 2) {
+					DatabaseInterface.Create(context).saveMaxScore_AppleGame(score);
 
-					int MaxScore =  DatabaseInterface.Create(context).saveMaxScore_AppleGame(score);
-
-					Game.setScreen(new GameOver(Game,score,MaxScore)); //maxScore*****
+					Game.setScreen(new GameOver(Game,score,DatabaseInterface.Create(context).saveMaxScore_AppleGame(0))); //maxScore*****
 					dispose();
 				}
 				Apple.dispose();

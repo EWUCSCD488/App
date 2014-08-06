@@ -87,7 +87,7 @@ public class MainMenuScreen implements Screen {
 		if(!how)
 		{
 			//game.font.setScale((float) 2);
-			game.font.setColor(0.0f, 0.0f, 204.0f, 1.0f);// set font color to red
+			game.font.setColor(0.0f, 0.0f, 204.0f, 1.0f);// set font color to blue
 			game.font.draw(game.batch, "Welcome to Ski Game! ", 280, 445);
 			game.font.draw(game.batch, "Tap the button to play", 280, 395);
 			game.batch.draw(buttonImage, button.x, button.y);
@@ -166,7 +166,7 @@ public class MainMenuScreen implements Screen {
 		buttonImage.dispose();
 		button2Image.dispose();
 		button3Image.dispose();
-        game.getScreen().dispose();
+
 
 	}
 }

@@ -17,6 +17,6 @@ public class Appleob
 	
 	public void dispose()
 	{
-		image.dispose();
+
 	}
 }

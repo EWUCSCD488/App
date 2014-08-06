@@ -7,7 +7,7 @@ public class Skiob
 {
 	public Texture image;
 	public Rectangle rec;
-	public int points = 20;
+	public int points = 3;
 	public boolean isTree=false;
 	public boolean isCollected=false;
 	public int sound = 0;
@@ -19,6 +19,5 @@ public class Skiob
 	
 	public void dispose()
 	{
-		image.dispose();
 	}
 }

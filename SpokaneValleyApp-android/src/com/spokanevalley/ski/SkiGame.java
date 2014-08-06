@@ -313,7 +313,7 @@ public class SkiGame implements Screen {
 
 						DatabaseInterface.Create(context).saveMaxScore_SkiGame(score);
 
-						Game.setScreen(new GameOver(Game,score,score));//maxscore
+						Game.setScreen(new GameOver(Game,score,DatabaseInterface.Create(context).saveMaxScore_SkiGame(0)));//maxscore
 						dispose();
 					}
 
@@ -344,7 +344,7 @@ public class SkiGame implements Screen {
 		} else if (rand >= 225 && rand < 240) {
 			ob.sound = 3;
 			ob.image = yFlagImage;
-			ob.points = 40;
+			ob.points = 5;
 			rect.width = 64;
 			rect.height = 14;
 		} else {

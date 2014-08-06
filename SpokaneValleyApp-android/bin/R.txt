@@ -108,7 +108,7 @@ int drawable ic_plusone_small_off_client 0x7f02002b
 int drawable ic_plusone_standard_off_client 0x7f02002c
 int drawable ic_plusone_tall_off_client 0x7f02002d
 int drawable launcher 0x7f02002e
-int drawable mapnew 0x7f02002f
+int drawable mapbg 0x7f02002f
 int drawable marker128 0x7f020030
 int drawable marker256 0x7f020031
 int drawable marker512 0x7f020032

@@ -418,7 +418,7 @@ containing a value of this type.
         public static final int ic_plusone_standard_off_client=0x7f02002c;
         public static final int ic_plusone_tall_off_client=0x7f02002d;
         public static final int launcher=0x7f02002e;
-        public static final int mapnew=0x7f02002f;
+        public static final int mapbg=0x7f02002f;
         public static final int marker128=0x7f020030;
         public static final int marker256=0x7f020031;
         public static final int marker512=0x7f020032;

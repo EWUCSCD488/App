@@ -296,7 +296,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			locationMain = center; // place where it loads
 		}
 		if (globalZoom == 0) {
-			globalZoom = 12.1f; // Scaling when it loads *****
+			globalZoom = 12.3f; // Scaling when it loads *****
 		}
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(locationMain,
 				globalZoom)); // second number is zoom unit
@@ -308,8 +308,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		GroundOverlay groundOverlay = map
 				.addGroundOverlay(new GroundOverlayOptions()
 						.image(BitmapDescriptorFactory
-								.fromResource(R.drawable.mapbg))
-						.position(new LatLng(47.670568, -117.239437), 39000)
+								.fromResource(R.drawable.mapbg2))
+						.position(new LatLng(47.670568, -117.239437), 32000)
 						.transparency(0.0f));
 
 		// Removes all street names

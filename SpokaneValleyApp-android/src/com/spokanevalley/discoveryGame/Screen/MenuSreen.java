@@ -35,10 +35,7 @@ public class MenuSreen extends AbstractGameScreen {
 	private Button ExitOptions; // exit game button
 	private Button MenuSound; // mute sound effects or leave music on
 	private Button MenuMusic; // mute background music or leave music on
-	private boolean isMutedMusic = true; // load from Libgdx database to check
-											// for music on or off
-	private boolean isMutedSound = true; // load from Libgdx database to check
-											// for sound on or off
+
 
 	private TextButtonStyle textButtonStyle_sound_music; // music Button
 															// background, fonts
@@ -63,9 +60,8 @@ public class MenuSreen extends AbstractGameScreen {
 	 */
 	public MenuSreen(Game game) {
 		super(game);
-		GameMusicSoundPref.create().initialSave();
-		isMutedMusic = GameMusicSoundPref.create().loadMusic();
-		isMutedSound = GameMusicSoundPref.create().loadSound();
+		GameMusicSoundPref.create();
+		GameMusicSoundPref.create().playbackground1();
 	}
 
 	/*
@@ -111,12 +107,15 @@ public class MenuSreen extends AbstractGameScreen {
 	@Override
 	public void hide() {
 		skinDinasourMenu.dispose();
-		;
+		GameMusicSoundPref.create().stopBackground1();
+		GameMusicSoundPref.create().stopBackground2();
+		GameMusicSoundPref.create().disposeSound();
 		atlas.dispose();
 		stage.dispose();
 	}
 
 	/*
+	 * 
 	 *	this method is called when users hit home button or app switching button at bottom Android bar
 	 *	I don't use this method because menu will call show method after they get back to game.
 	 */
@@ -167,14 +166,14 @@ public class MenuSreen extends AbstractGameScreen {
 		table.left().top();							// draw buttons at top left corner
 		table.pad(10, 10, 0, 0);					// 10pixels away from top and left edges
 		MenuMusic = new Button(textButtonStyle_sound_music);					// load music button
+		onClickedMusicPress();
 		table.add(MenuMusic).width(Constants.VIEWPORT_GUI_WIDTH / 8)			// set sizes based on screen resolution
 				.height(Constants.VIEWPORT_GUI_HEIGHT / 8).pad(10);
 		MenuMusic.addListener(new ChangeListener() {							// if click, then button image to no music and reverse
 
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				isMutedMusic = !isMutedMusic;									// switch logic
-				GameMusicSoundPref.create().save(isMutedMusic, isMutedSound);		// save logic to database for next use
+				GameMusicSoundPref.create().MusicLogicChange();								// switch logic
 				onClickedMusicPress();											// draw image based on logic above
 			}
 
@@ -182,14 +181,14 @@ public class MenuSreen extends AbstractGameScreen {
 
 		table.row();													// draw sound underneath music button
 		MenuSound = new Button(textButtonStyle_sound_sound);				// load button
+		onClickedSoundPress();
 		table.add(MenuSound).width(Constants.VIEWPORT_GUI_WIDTH / 8)		// set size based on screen resolution
 				.height(Constants.VIEWPORT_GUI_HEIGHT / 8).pad(10);			// 10 pixels away from music button
 		MenuSound.addListener(new ChangeListener() {					// set what happens when users click
 
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				isMutedSound = !isMutedSound;								// switch logic
-				GameMusicSoundPref.create().save(isMutedMusic, isMutedSound);	// save logic to database
+				GameMusicSoundPref.create().SOundLogicChange();							// switch logic
 				onClickedSoundPress();										// draw background based on logic above
 
 			}
@@ -198,13 +197,13 @@ public class MenuSreen extends AbstractGameScreen {
 
 		return table;
 	}
-
+	
 	/*
 	 * draw sound background after sound button is clicked
 	 */
 	
 	protected void onClickedSoundPress() {
-		if (isMutedSound)
+		if (GameMusicSoundPref.create().getSound())
 			MenuSound.setStyle(textButtonStyle_sound_sound);
 		else
 			MenuSound.setStyle(textButtonStyle_sound_noSound);
@@ -216,7 +215,7 @@ public class MenuSreen extends AbstractGameScreen {
 	 */
 	
 	private void onClickedMusicPress() {
-		if (isMutedMusic)
+		if (GameMusicSoundPref.create().getMusic())
 			MenuMusic.setStyle(textButtonStyle_sound_music);
 		else
 			MenuMusic.setStyle(textButtonStyle_sound_noMusic);
@@ -269,6 +268,8 @@ public class MenuSreen extends AbstractGameScreen {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				onClickedStartPress();
+				GameMusicSoundPref.create().playStartButton();
+				GameMusicSoundPref.create().playbackground2();
 
 			}
 		});
@@ -281,6 +282,7 @@ public class MenuSreen extends AbstractGameScreen {
 
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				GameMusicSoundPref.create().playExitButton();
 				onClickedExitPress();
 
 			}
@@ -313,6 +315,6 @@ public class MenuSreen extends AbstractGameScreen {
 	}
 
 	private void onClickedExitPress() {
-		
+		Gdx.app.exit();
 	}
 }

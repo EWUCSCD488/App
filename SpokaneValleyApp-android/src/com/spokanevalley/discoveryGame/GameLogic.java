@@ -12,6 +12,7 @@ import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.discoveryGame.Screen.GameMusicSoundPref;
 import com.spokanevalley.discoveryGame.Screen.MenuSreen;
 import com.spokanevalley.discoveryGame.drawingHandlers.Apples;
 import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour;
@@ -86,19 +87,30 @@ public class GameLogic implements GestureListener {
 					+ dinasour.origin.y;
 			dinasour.jumpState = JUMP_STATE.GROUNDED;
 			break;
-		case JUMP_RISING:
-			dinasour.position.y = rock.position.y + dinasour.bounds.height
+		case JUMP_RISING:{
+				
+				dinasour.position.y = rock.position.y + dinasour.bounds.height
 					+ dinasour.origin.y;
-			break;
+				break;
+			}
 		}
 	}
 
 	private void onCollisionWithCoin(Apples coin) {
 		coin.collected = true;
 		score += coin.getScore();
+		GameMusicSoundPref.create().playEatingApple();
 		Gdx.app.log(TAG, "Gold coin collected");
 	}
 
+	private void onCollisionBunnyWithSpecialCoins(BadApples specialCoin) {
+		specialCoin.collected = true;
+		score += specialCoin.getScore();
+		GameMusicSoundPref.create().playEatingBadApple();
+		level.dinasour.setSpecialCoinPowerUp(true);
+		Gdx.app.log(TAG, "Special collected");
+	}
+	
 	private void testCollisions() {
 		r1.set(level.dinasour.position.x, level.dinasour.position.y,
 				level.dinasour.bounds.width, level.dinasour.bounds.height);
@@ -134,13 +146,6 @@ public class GameLogic implements GestureListener {
 			onCollisionBunnyWithSpecialCoins(feather);
 			break;
 		}
-	}
-
-	private void onCollisionBunnyWithSpecialCoins(BadApples specialCoin) {
-		specialCoin.collected = true;
-		score += specialCoin.getScore();
-		level.dinasour.setSpecialCoinPowerUp(true);
-		Gdx.app.log(TAG, "Special collected");
 	}
 
 	public int getLives() {
@@ -192,9 +197,10 @@ public class GameLogic implements GestureListener {
 
 			if (!isGameOver() && isPlayerInWater()) {
 				lives--;
-				if (isGameOver())
+				if (isGameOver()){
+					GameMusicSoundPref.create().playFalling();
 					timeLeftGameOverDelay = Constants.TIME_DELAY_GAME_OVER;
-				else {
+				}else {
 					initLevel();
 					// level.dinasour.update(deltaTime);
 					// level.dinasour.velocity.x = 0;

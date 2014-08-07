@@ -8,6 +8,6 @@ public class AppleAsset {
 	public final AtlasRegion coin;
 	
 	public AppleAsset(TextureAtlas atlas){
-		coin = atlas.findRegion(Constants.COIN_NAME);
+		coin = atlas.findRegion(Constants.APPLE_NAME);
 	}
 }

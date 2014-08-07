@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.spokanevalley.discoveryGame.Constants;
 import com.spokanevalley.discoveryGame.Atlas_handlers.Assets;
+import com.spokanevalley.discoveryGame.Screen.GameMusicSoundPref;
 
 public class Dinasour extends AbstractGameObject {
 
@@ -72,6 +73,7 @@ public class Dinasour extends AbstractGameObject {
 		case JUMP_RISING: // character fumping from the rock or flatform
 			if (!jumpKeyPressed) {
 				jumpState = JUMP_STATE.JUMP_FALLING;
+				GameMusicSoundPref.create().playJumping();
 			}
 			break;
 

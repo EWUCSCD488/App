@@ -1,0 +1,68 @@
+
+game.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+airplane1
+  rotate: false
+  xy: 1, 1068
+  size: 630, 825
+  orig: 630, 825
+  offset: 0, 0
+  index: -1
+background_left
+  rotate: false
+  xy: 633, 1413
+  size: 960, 480
+  orig: 960, 480
+  offset: 0, 0
+  index: -1
+background_right
+  rotate: false
+  xy: 633, 1413
+  size: 960, 480
+  orig: 960, 480
+  offset: 0, 0
+  index: -1
+airplane2
+  rotate: false
+  xy: 633, 1001
+  size: 960, 410
+  orig: 960, 410
+  offset: 0, 0
+  index: -1
+airplane3
+  rotate: false
+  xy: 1, 359
+  size: 720, 640
+  orig: 720, 640
+  offset: 0, 0
+  index: -1
+rock_middle
+  rotate: false
+  xy: 1595, 1537
+  size: 86, 356
+  orig: 86, 356
+  offset: 0, 0
+  index: -1
+rock_edge
+  rotate: false
+  xy: 1, 1
+  size: 63, 356
+  orig: 63, 356
+  offset: 0, 0
+  index: -1
+apple
+  rotate: false
+  xy: 723, 871
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+badApple
+  rotate: false
+  xy: 1683, 1765
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1

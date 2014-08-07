@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
 import com.spokanevalley.discoveryGame.Atlas_handlers.Assets;
+import com.spokanevalley.discoveryGame.Screen.GameMusicSoundPref;
 
 public class GameRender implements Disposable {
 
@@ -50,12 +51,12 @@ public class GameRender implements Disposable {
 	}
 
 	private void renderGuiGameOverMessages(SpriteBatch batch) {
-		float x = cameraGUI.viewportWidth / 2
-				- Assets.instance.fonts.defaultBig.getScaleX();
-		float y = cameraGUI.viewportHeight / 2
-				- Assets.instance.fonts.defaultBig.getScaleY();
+		float x = Constants.VIEWPORT_GUI_WIDTH / 2
+				+ 100f;
+		float y = Constants.VIEWPORT_GUI_HEIGHT / 2;
 
 		if (worldController.isGameOver()) {
+	
 			BitmapFont fontGameOver = Assets.instance.fonts.defaultBig;
 			fontGameOver.setColor(1, 0.75f, 0.25f, 1);
 			fontGameOver.drawMultiLine(batch, "GAME OVER", x, y, 0,

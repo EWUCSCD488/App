@@ -9,7 +9,7 @@ public class BackgroundFutureAsset {
 	public final AtlasRegion moutainRight;
 	
 	public BackgroundFutureAsset(TextureAtlas atlas){
-		moutainLeft = atlas.findRegion(Constants.MOUNTAIN_LEFT);
-		moutainRight = atlas.findRegion(Constants.MOUNTIAN_RIGHT);
+		moutainLeft = atlas.findRegion(Constants.BACKGROUND_LEFT);
+		moutainRight = atlas.findRegion(Constants.BACKGROUND_RIGHT);
 	}
 }

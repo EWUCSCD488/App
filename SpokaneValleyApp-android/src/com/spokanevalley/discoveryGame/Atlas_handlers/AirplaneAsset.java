@@ -10,9 +10,9 @@ public class AirplaneAsset {
 	public final AtlasRegion cloud3;
 	
 	public AirplaneAsset(TextureAtlas atlas){
-		cloud1 = atlas.findRegion(Constants.CLOUD1);
-		cloud2 = atlas.findRegion(Constants.CLOUD2);
-		cloud3 = atlas.findRegion(Constants.CLOUD3);
+		cloud1 = atlas.findRegion(Constants.AIRPLANE1);
+		cloud2 = atlas.findRegion(Constants.AIRPLANE2);
+		cloud3 = atlas.findRegion(Constants.AIRPLANE3);
 		
 	}
 }

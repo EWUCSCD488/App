@@ -47,7 +47,7 @@ public class GameScreen extends AbstractGameScreen {
 
 	@Override
 	public void hide() {
-		//
+
 		//Gdx.input.setCatchBackKey(false);
 
 	}
@@ -69,6 +69,7 @@ public class GameScreen extends AbstractGameScreen {
 	@Override
 	public void dispose() {
 		worldRenderer.dispose();
+		
 		// TODO Auto-generated method stub
 
 	}

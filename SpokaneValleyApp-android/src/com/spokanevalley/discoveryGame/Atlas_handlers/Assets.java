@@ -23,7 +23,7 @@ public class Assets implements Disposable, AssetErrorListener {
 	public DinasourAsset dinasour;
 	public RocketRockAsset ground;
 	public BackgroundFutureAsset mountain;
-	public SkyAsset sky;
+	//public SkyAsset sky;
 	public BadAppleAsset specialCoin;
 	
 	// fonts asset
@@ -58,7 +58,7 @@ public class Assets implements Disposable, AssetErrorListener {
 			dinasour = new DinasourAsset(atlas_dinasour);
 			ground = new RocketRockAsset(atlas);
 			mountain = new BackgroundFutureAsset(atlas);
-			sky = new SkyAsset(atlas);
+			//sky = new SkyAsset(atlas);
 			specialCoin = new BadAppleAsset(atlas);
 			
 			// create fonts

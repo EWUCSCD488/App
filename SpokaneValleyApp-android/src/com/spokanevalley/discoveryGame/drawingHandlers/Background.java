@@ -17,7 +17,7 @@ public class Background extends AbstractGameObject {
 	}
 
 	private void init() {
-		dimension.set(10, 5);
+		dimension.set(20,15);
 
 		regMountainLeft = Assets.instance.mountain.moutainLeft;
 		regMountainRight = Assets.instance.mountain.moutainRight;
@@ -62,11 +62,11 @@ public class Background extends AbstractGameObject {
 	@Override
 	public void render(SpriteBatch batch) {
 		// distant mountains (dark gray)
-		drawMountain(batch, 0.5f, 0.5f, 0.5f);
+		drawMountain(batch, -0.5f, -0.25f, 0.5f);
 		// distant mountains (gray)
-		drawMountain(batch, 0.25f, 0.25f, 0.7f);
+		//drawMountain(batch, 0.25f, 0.25f, 0.7f);
 		// distant mountains (light gray)
-		drawMountain(batch, 0.0f, 0.0f, 0.9f);	
+		//drawMountain(batch, 0.0f, 0.0f, 0.0f);	
 	}
 
 }

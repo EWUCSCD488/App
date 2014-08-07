@@ -45,13 +45,19 @@ public class LevelLoader {
 	public Dinasour dinasour;
 	public Array<Apples> apples;
 	public Array<BadApples> badApples;
+	private int numMap = 1;
+	private int nextMapoffset = 8;
 
 	public LevelLoader(String filename) {
 		init(filename);
-		init1("disvcoveryAssets/levels/level-01test2.png");
 		dinasour.setJumping(false);
 	}
 
+	public void loadNextMap(){
+		init1("disvcoveryAssets/levels/level-01test2.png");
+		numMap++;
+	}
+	
 	private void init1(String filename) {
 		// dinasour = null;
 		// coins = new Array<Coins>();
@@ -82,7 +88,7 @@ public class LevelLoader {
 						obj = new RocketRocks();
 						float heightIncreaseFactor = 0.25f;
 						offsetHeight = -2.5f;
-						obj.position.set(pixelX + pixmap.getWidth() - 5,
+						obj.position.set(pixelX + pixmap.getWidth()*numMap - nextMapoffset,
 								baseHeight * obj.dimension.y
 										* heightIncreaseFactor + offsetHeight);
 						rocketRocks.add((RocketRocks) obj);
@@ -93,7 +99,7 @@ public class LevelLoader {
 																			// coin
 					obj = new Apples();
 					offsetHeight = -0.75f;
-					obj.position.set(pixelX + pixmap.getWidth(), baseHeight
+					obj.position.set(pixelX + pixmap.getWidth()*numMap - nextMapoffset, baseHeight
 							* obj.dimension.y + offsetHeight);
 					apples.add((Apples) obj);
 					// } else if
@@ -103,7 +109,7 @@ public class LevelLoader {
 																				// coin
 					obj = new BadApples();
 					offsetHeight = -0.75f;
-					obj.position.set(pixelX + pixmap.getWidth(), baseHeight
+					obj.position.set(pixelX + pixmap.getWidth()*numMap - nextMapoffset, baseHeight
 							* obj.dimension.y + offsetHeight);
 					badApples.add((BadApples) obj);
 				} else {

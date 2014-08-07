@@ -26,9 +26,10 @@ public abstract class AbstractGameScreen implements Screen{
 	public void resume(){
 		Assets.instance.init(new AssetManager());
 	}
-	
+	@Override
 	public void dispose(){
 		Assets.instance.dispose();
+		//GameMusicSoundPref.create().disposeSound();
 	}
 	
 }

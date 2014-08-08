@@ -8,6 +8,14 @@ package com.spokanevalley.bankStore;
 
 public class gameModel extends Model{
 
+	/**
+	 * gameModel Constructor
+	 * 
+	 * @param ID
+	 * @param maxScore
+	 * @param imagePath
+	 */
+	
 	public gameModel(String ID, int maxScore, String imagePath) {
 		super(ID, maxScore, imagePath);
 	}

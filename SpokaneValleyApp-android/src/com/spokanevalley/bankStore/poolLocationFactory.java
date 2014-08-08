@@ -9,7 +9,7 @@ import com.spokanevalley.database.DatabaseCustomAccess;
 
 /**
  * 
- * @author quyen_000
+ * @author Quyen Ha
  * Eastern Washington University
  */
 

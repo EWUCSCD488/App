@@ -18,8 +18,9 @@ import com.spokanevalley.app.R;
 import com.spokanevalley.database.DatabaseCustomAccess;
 
 /**
+ * Coupon Activity
  * 
- * @author quyen_000
+ * @author Quyen Ha
  * Eastern Washington University
  */
 
@@ -41,12 +42,12 @@ public class CouponActivity extends Activity{
 		
 		/* Take the ImageView from layout and set the game image */
 		imageView = (ImageView) findViewById(R.id.couponImage);
-        
         imageView.setImageDrawable(getDrawablefromCouponCostFactory(Couponid));
 		
+        /* Handle howtoPlay button */
 		howtoButton = (Button) findViewById(R.id.couponhowto);
         
-        
+		/* Handle use button */
 		useButton = (Button) findViewById(R.id.couponOkayButtons);
 		useButton.setOnClickListener(new OnClickListener() {
 			
@@ -56,16 +57,24 @@ public class CouponActivity extends Activity{
 			}
 		});
 		
+		/* Handle cancel button */
 		cancelButton = (Button) findViewById(R.id.couponCancelButton);		
 		cancelButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				finish();
+				finish();					// close activity
 			}
 		});
 	}
 
+	/**
+	 * generate Drawable of coupon from CouponCostFatory
+	 * 
+	 * @param id of coupon
+	 * @return Drawable file of coupon thumbnail
+	 */
+	
 	private Drawable getDrawablefromCouponCostFactory(String id){
 		String uri = "drawable/" + CouponCostFactory.create().getCouponImagePath(id);
         int imageResource = getResources().getIdentifier(uri, null, getPackageName());
@@ -73,12 +82,26 @@ public class CouponActivity extends Activity{
         return image;
 	}
 	
+	/**
+	 * generate Drawable of coupon from CouponCostFatory
+	 * 
+	 * @param id of coupon as String
+	 * @return Drawable file of coupon thumbnail
+	 */
+	
 	private Drawable getDrawablefromThumbNailFactory(String id){
 		String uri = "drawable/" + ThumbNailFactory.create().getThumbNail(id);
         int imageResource = getResources().getIdentifier(uri, null, getPackageName());
         Drawable image = getResources().getDrawable(imageResource);
         return image;
 	}
+	
+	/**
+	 * Build Alert dialog
+	 * 
+	 * @param id of coupon
+	 * @param view of application
+	 */
 	
 	private void showAlert(final String id,View v) {
         AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
@@ -105,10 +128,10 @@ public class CouponActivity extends Activity{
         layout.addView(tvMessage);
         
         
-        alert.setTitle("Comfirmation !!");
+        alert.setTitle("Comfirmation !!");					// add title
         alert.setView(layout);
  
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {			// set cancel button
  
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -117,7 +140,7 @@ public class CouponActivity extends Activity{
             }
         });
  
-        alert.setPositiveButton("Redeem", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton("Redeem", new DialogInterface.OnClickListener() {			// set redeem button
  
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -14,6 +14,7 @@ import com.spokanevalley.app.R;
 
 /**
  * @author Kevin Borling
+ * @author Quyen Ha
  * Pool Activity is responsible for displaying information regarding each swimming pool
  * Pool Activity is called when user selects "More Info." from the mall location
  */

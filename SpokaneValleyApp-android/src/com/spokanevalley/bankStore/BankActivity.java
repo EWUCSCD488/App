@@ -17,18 +17,27 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 /**
+ * Bank store Acitivity
  * 
  * @author Quyen Ha Eastern Washington University
  */
 
 public class BankActivity extends Activity {
-	protected static final int REQUEST_CODE = 1;
+
+	protected static final int REQUEST_CODE = 1; // check for status of Activity
+													// sent from BankAcitivity
+
 	private ListView listView;
 	private ImageView listImageView;
 	private TextView listTextView;
 	private Context context;
+
 	private List<poolLocation> CouponList;
-	public static final String TAG = MallActivity.class.getName();
+
+	public static final String TAG = MallActivity.class.getName(); // for
+																	// debugging
+																	// only
+
 	private int redeemedCoupon;
 
 	@Override
@@ -54,27 +63,29 @@ public class BankActivity extends Activity {
 		listTextView.setTypeface(face);
 	}
 
+	/**
+	 * check result of Activity sent from BankActivity
+	 */
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		try {
-			super.onActivityResult(requestCode, resultCode, data);
+				super.onActivityResult(requestCode, resultCode, data);
 
-			// if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-			// String requiredValue = data.getStringExtra("Key");
-			loadFromDatabase();
-			listView.setAdapter(new ListViewCustomCouponAdapter(context,
+				loadFromDatabase();
+				listView.setAdapter(new ListViewCustomCouponAdapter(context,
 					R.layout.list_item2, CouponList));
-
-			// }
-
-		} catch (Exception ex) {
+			} catch (Exception ex) {
 			// Toast.makeText(MapView.this, ex.toString(), Toast.LENGTH_SHORT)
 			// .show();
-		}
+			}
 	}
 
+	/**
+	 * get updates from databases
+	 */
+	
 	private void loadFromDatabase() {
-		// poolLocationFactory.create();
 		CouponList = DatabaseCustomAccess.Create(context).getCouponList();
 		redeemedCoupon = DatabaseCustomAccess.Create(context).getTotalScore();
 

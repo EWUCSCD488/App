@@ -1,23 +1,36 @@
 package com.spokanevalley.bankStore;
 
 /**
+ * generate coupon costs based on couponID or poolID, convert poolID to couponID and backward
+ * generate trophy image paths for pool locations's trophies
  * 
- * @author quyen_000
+ * @author Quyen Ha
  * Eastern Washington University
  */
 
 public class CouponCostFactory extends NameHolder{
 
 	private static CouponCostFactory couponCostFactory= null;
-	public static CouponCostFactory create(){
+	public static CouponCostFactory create(){						// implement singleton pattern
 		if(couponCostFactory == null)
 			couponCostFactory = new CouponCostFactory();
 		return couponCostFactory;
 	}
 	
+	/**
+	 * default constructor
+	 */
+	
 	private CouponCostFactory() {
 		
 	}
+	
+	/**
+	 * get trophy image path based on id
+	 * 
+	 * @param id
+	 * @return String image path or null
+	 */
 	
 	public String getCouponImagePath(String id){
 		
@@ -31,6 +44,13 @@ public class CouponCostFactory extends NameHolder{
 		return null;
 	}
 	
+	/**
+	 * get price of coupon based on pool ID
+	 * 
+	 * @param id
+	 * @return price of coupon
+	 */
+	
 	public int getPrice(String id){
 		if(id.equals(pool1ID)){
 			return Coupon1Cost;
@@ -42,6 +62,13 @@ public class CouponCostFactory extends NameHolder{
 		return 1000000;				// ensure they will not get free coupon
 	}
 	
+	/**
+	 * get coupon ID based on pool ID
+	 * 
+	 * @param id
+	 * @return coupon ID or "unknown"
+	 */
+	
 	public String getTheRightCouponFromPool(String id){
 		if(id.equals(pool1ID)){
 			return coupon1ID;
@@ -52,6 +79,13 @@ public class CouponCostFactory extends NameHolder{
 		}
 		return "unknown";
 	}
+	
+	/**
+	 * get pool ID based on coupon ID
+	 * 
+	 * @param id for coupon
+	 * @return pool ID or "Unknown"
+	 */
 	
 	public String getTheRightPoolFromCoupon(String id){
 		if(id.equals(coupon1ID)){

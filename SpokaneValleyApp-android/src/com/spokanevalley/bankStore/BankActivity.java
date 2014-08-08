@@ -36,9 +36,6 @@ public class BankActivity extends Activity {
 
 	public static final String TAG = MallActivity.class.getName(); // for
 																	// debugging
-																	// only
-
-	private int redeemedCoupon;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,7 +55,7 @@ public class BankActivity extends Activity {
 		// you can add image here or in XML
 
 		listTextView = (TextView) findViewById(R.id.ListTextView);
-		listTextView.setText(CouponList.size() + " coupons");
+		changeScoreDisplaying();
 
 		listTextView.setTypeface(face);
 	}
@@ -71,23 +68,30 @@ public class BankActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		try {
 				super.onActivityResult(requestCode, resultCode, data);
-
-				loadFromDatabase();
+				CouponList = DatabaseCustomAccess.Create(context).getCouponList();
 				listView.setAdapter(new ListViewCustomCouponAdapter(context,
 					R.layout.list_item2, CouponList));
+				changeScoreDisplaying();
+				
 			} catch (Exception ex) {
 			// Toast.makeText(MapView.this, ex.toString(), Toast.LENGTH_SHORT)
 			// .show();
 			}
 	}
 
+	protected void changeScoreDisplaying() {
+		if(CouponList.size() <=1)
+			listTextView.setText(CouponList.size() + " coupon");
+		else
+			listTextView.setText(CouponList.size() + " coupons");
+	}
+	
 	/**
 	 * get updates from databases
 	 */
 	
 	private void loadFromDatabase() {
 		CouponList = DatabaseCustomAccess.Create(context).getCouponList();
-		redeemedCoupon = DatabaseCustomAccess.Create(context).getTotalScore();
 
 	}
 }

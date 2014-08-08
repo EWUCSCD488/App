@@ -30,12 +30,15 @@ public class CouponActivity extends Activity{
 	private Button useButton;
 	private Button cancelButton;
 	private Button howtoButton;
+	private ButtonSoundFactory buttonSounds;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.coupon_layout);
-
+		buttonSounds = new ButtonSoundFactory(getApplicationContext());
+		
+		
 		//get value pass from coupon list
 		Intent intent = getIntent();
 		final String Couponid = intent.getStringExtra(ListViewCustomCouponAdapter.COUPON_ID);
@@ -46,13 +49,21 @@ public class CouponActivity extends Activity{
 		
         /* Handle howtoPlay button */
 		howtoButton = (Button) findViewById(R.id.couponhowto);
-        
+		howtoButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				buttonSounds.playsound7();
+				//showAlert(Couponid,v);
+			}
+		});
 		/* Handle use button */
 		useButton = (Button) findViewById(R.id.couponOkayButtons);
 		useButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				buttonSounds.playsound5();
 				showAlert(Couponid,v);
 			}
 		});
@@ -63,6 +74,7 @@ public class CouponActivity extends Activity{
 			
 			@Override
 			public void onClick(View v) {
+				buttonSounds.playsound6();
 				finish();					// close activity
 			}
 		});
@@ -135,6 +147,7 @@ public class CouponActivity extends Activity{
  
             @Override
             public void onClick(DialogInterface dialog, int which) {
+            	buttonSounds.playsound6();
                 dialog.cancel();
            
             }
@@ -147,6 +160,7 @@ public class CouponActivity extends Activity{
             	// delete coupon from couponList
             	DatabaseCustomAccess.Create(getApplicationContext()).updatePoolwithBoughtCoupon(CouponCostFactory.create().getTheRightPoolFromCoupon(id), false);	// update location in database with true gotCoupon
                 DatabaseCustomAccess.Create(getApplicationContext()).updateCouponwithBoughtCoupon(id, false);
+                buttonSounds.playsound5();
             	dialog.cancel();
             	finish();
             }

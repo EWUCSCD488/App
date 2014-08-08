@@ -24,8 +24,9 @@ import com.spokanevalley.app.R;
 import com.spokanevalley.database.DatabaseCustomAccess;
 
 /**
+ * construct layout for pool location list in Mall Activity
  * 
- * @author quyen_000
+ * @author Quyen Ha
  * Eastern Washington University
  */
 
@@ -33,9 +34,18 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 	
 	public static final String TAG = ListViewCustomPoolAdapter.class.getName();
 	
+	private ButtonSoundFactory buttonsounds;
 	private int resource;
 	private LayoutInflater inflater;
 	private Context context;
+	
+	/**
+	 * Constructor for pool adapter
+	 * 
+	 * @param context
+	 * @param resource
+	 * @param objects
+	 */
 	
 	public ListViewCustomPoolAdapter(Context context, int resource, List objects) {
 		super(context, resource, objects);
@@ -43,6 +53,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 		this.resource = resource;
 		this.inflater = LayoutInflater.from(context);
 		this.context = context;
+		buttonsounds = new ButtonSoundFactory(context);		// register for sounds
 	}
 
 	
@@ -79,7 +90,8 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 				
 				@Override
 				public void onClick(View v) {
-					Log.d(TAG, "clicked : "+ game.getTitle());
+					buttonsounds.playsound1();			// play button sound
+					
 					showAlert(image,game);
 				}
 			});
@@ -118,6 +130,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 	 
 	            @Override
 	            public void onClick(DialogInterface dialog, int which) {
+	            	buttonsounds.playsound3();
 	                dialog.cancel();
 	            }
 	        });
@@ -128,6 +141,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 	            public void onClick(DialogInterface dialog, int which) {
 	               
 	            	checkTotalScoreAndBuyCoupon(game);
+	            	buttonsounds.playsound2();
 	            	dialog.cancel();
 	            }
 
@@ -164,12 +178,14 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 					notifyDataSetChanged();					// update location
 					DatabaseCustomAccess.Create(context).updatePoolwithBoughtCoupon(game.getTitle(), true);	// update location in database with true gotCoupon
                     DatabaseCustomAccess.Create(context).updateCouponwithBoughtCoupon(CouponCostFactory.create().getTheRightCouponFromPool(game.getTitle()), true);
+                    buttonsounds.playsound2();
 					dialog.cancel();
                 }
             });
             builder1.setNegativeButton("No",
                     new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
+                	buttonsounds.playsound3();
                     dialog.cancel();
                 }
             });
@@ -185,6 +201,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
             builder1.setPositiveButton("Okay",
                     new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
+                	buttonsounds.playsound2();
                     dialog.cancel();
                 }
             });

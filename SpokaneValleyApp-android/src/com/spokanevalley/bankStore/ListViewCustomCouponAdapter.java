@@ -21,6 +21,7 @@ import com.spokanevalley.app.MapView;
 import com.spokanevalley.app.R;
 
 /**
+ * create layout for each coupon
  * 
  * @author Quyen Ha
  * Eastern Washington University
@@ -29,10 +30,21 @@ import com.spokanevalley.app.R;
 public class ListViewCustomCouponAdapter extends ArrayAdapter<gameModel> {
 	
 	protected static final int REQUEST_CODE = 1;
-	public static final String COUPON_ID = "couponID";
+	public static final String COUPON_ID = "couponID";				// use to send coupon ID to trophy Acitivity
+	
+	private ButtonSoundFactory buttoSounds;
+	
 	private int resource;
 	private LayoutInflater inflater;
 	private Context context;
+	
+	/**
+	 * Default constructor 
+	 * 
+	 * @param context
+	 * @param resource
+	 * @param objects
+	 */
 	
 	public ListViewCustomCouponAdapter(Context context, int resource, List objects) {
 		super(context, resource, objects);
@@ -40,8 +52,13 @@ public class ListViewCustomCouponAdapter extends ArrayAdapter<gameModel> {
 		this.resource = resource;
 		this.inflater = LayoutInflater.from(context);
 		this.context = context;
+		buttoSounds = new ButtonSoundFactory(context);
 	}
 
+	/**
+	 * constructor layout for each coupon
+	 * 
+	 */
 	
 	 @Override
 	    public View getView ( int position, View convertView, ViewGroup parent ) {
@@ -68,6 +85,7 @@ public class ListViewCustomCouponAdapter extends ArrayAdapter<gameModel> {
 				
 				@Override
 				public void onClick(View v) {
+					buttoSounds.playsound4();
 					Intent intent = new Intent(context,CouponActivity.class);
 					intent.putExtra(COUPON_ID, game.getTitle());
 					((Activity) context).startActivityForResult(intent, REQUEST_CODE);

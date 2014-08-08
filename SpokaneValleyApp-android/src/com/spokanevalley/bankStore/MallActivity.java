@@ -22,6 +22,8 @@ import com.spokanevalley.database.DatabaseCustomAccess;
  */
 
 public class MallActivity extends Activity {
+	
+	
 	private ListView listView;
 	private ImageView listImageView;
 	private TextView listTextView;
@@ -29,13 +31,19 @@ public class MallActivity extends Activity {
 	private List<poolLocation> poolLocationList;
 	public static final String TAG = MallActivity.class.getName();
 	private int redeemedCoupon;
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		
+		// prepare
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listviewactivity);
 		context = this;
 		loadFromDatabase();
-
+		
+		
+		// cook
 		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/Bubblegum.otf");
 		
 		listView = (ListView) findViewById(R.id.mainListView);

@@ -7,6 +7,7 @@ import com.spokanevalley.database.DatabaseInterface;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -24,30 +25,32 @@ public class BankActivity extends Activity {
 	private Context context;
 	private List<poolLocation> CouponList;
 	public static final String TAG = MallActivity.class.getName();
-	private int redeemedCoupon;
+	//private int redeemedCoupon;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.listviewactivity);
+		setContentView(R.layout.listviewactivity2);
 		context = this;
 		loadFromDatabase();
-
+		
+		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/Bubblegum.otf");
+		
 		listView = (ListView) findViewById(R.id.mainListView);
-		listView.setAdapter(new ListViewCustomGameAdapter(context,R.layout.list_item,CouponList));
+		listView.setAdapter(new ListViewCustomGameAdapter(context,R.layout.list_item2,CouponList));
 		
 		listImageView = (ImageView) findViewById(R.id.ListImageView);
 		// you can add image here or in XML
 		
 		listTextView = (TextView ) findViewById(R.id.ListTextView);
-		listTextView.setText(redeemedCoupon + " points");
+		listTextView.setText(CouponList.size() + " points");
 		
-		
+		listTextView.setTypeface(face);
 	}
 
 	private void loadFromDatabase() {
 		//poolLocationFactory.create();
 		CouponList = DatabaseInterface.Create(context).getCouponList();
-		redeemedCoupon = DatabaseInterface.Create(context).getTotalScore();
+		//redeemedCoupon = DatabaseInterface.Create(context).getTotalScore();
 		
 		
 	}

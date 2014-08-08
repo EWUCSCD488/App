@@ -1,5 +1,13 @@
 package com.spokanevalley.bankStore;
 
+/**
+ *  model for pool locations, max scores and coupons
+ * 
+ * @author Quyen Ha
+ * Eastern Washington University
+ *
+ */
+
 public class Model {
 	private String title;
 	private String description;

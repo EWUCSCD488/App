@@ -1,5 +1,11 @@
 package com.spokanevalley.bankStore;
 
+/**
+ * 
+ * @author quyen_000
+ * Eastern Washington University
+ */
+
 public class ThumbNailFactory extends NameHolder{
 
 	private static ThumbNailFactory thumbNailFactory= null;

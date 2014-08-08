@@ -36,7 +36,7 @@ import com.spokanevalley.addScoreGPS.addScoreGPSLauncher;
 import com.spokanevalley.apples.AppleActivity;
 import com.spokanevalley.bankStore.BankActivity;
 import com.spokanevalley.bankStore.MallActivity;
-import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.database.DatabaseCustomAccess;
 import com.spokanevalley.discoveryGame.DiscoveryActivity;
 import com.spokanevalley.farm.FarmGameLauncher;
 import com.spokanevalley.minigames.plantesferry.PlantesFerryActivity;
@@ -79,7 +79,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		setContentView(R.layout.activity_map_view);
 
 		mOverscrollHandler.sendEmptyMessageDelayed(0, 100);
-		DatabaseInterface.Create(context);
+		DatabaseCustomAccess.Create(context);
 		// Initialize Location List
 		try {
 			LocationList
@@ -262,19 +262,19 @@ public class MapView extends Activity implements OnMarkerClickListener,
 						private int getMaxScoreForWindow(String title) {
 							switch (title) {
 					         case "Discovery Park":
-					 			return DatabaseInterface.Create(context).saveMaxScore_DiscoveryGame(0);
+					 			return DatabaseCustomAccess.Create(context).saveMaxScore_DiscoveryGame(0);
 					         case "Terrace View Park And Pool":
-					        	 return DatabaseInterface.Create(context).saveMaxScore_AppleGame(0);
+					        	 return DatabaseCustomAccess.Create(context).saveMaxScore_AppleGame(0);
 					         case "Plantes Ferry Park":
-					        	 return DatabaseInterface.Create(context).saveMaxScore_PlantesFerryGame(0);
+					        	 return DatabaseCustomAccess.Create(context).saveMaxScore_PlantesFerryGame(0);
 					         case "Bank":
 					        	 return -1;
 					         case "Greenacres Park":
-					        	 return DatabaseInterface.Create(context).saveMaxScore_GreenacresGame(0);
+					        	 return DatabaseCustomAccess.Create(context).saveMaxScore_GreenacresGame(0);
 					         case "The Mall":
 					        	 return -1;
 					         case "Ski!":
-					        	 return DatabaseInterface.Create(context).saveMaxScore_SkiGame(0);
+					        	 return DatabaseCustomAccess.Create(context).saveMaxScore_SkiGame(0);
 					         default:
 					        	 return -1;
 						}}
@@ -382,7 +382,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	 */
 	private void updateCornerScoreDisplay() {
 		EditText text = (EditText) findViewById(R.id.scoreOnTopOfMap);	
-		String totalScore  = String.valueOf( DatabaseInterface.Create(context).getTotalScore());
+		String totalScore  = String.valueOf( DatabaseCustomAccess.Create(context).getTotalScore());
 		text.setText( totalScore);
 		Log.d(TAG, "total score  : " + totalScore );
 	}

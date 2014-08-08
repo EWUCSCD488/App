@@ -5,7 +5,13 @@ import java.util.List;
 
 import android.content.Context;
 
-import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.database.DatabaseCustomAccess;
+
+/**
+ * 
+ * @author quyen_000
+ * Eastern Washington University
+ */
 
 public class poolLocationFactory extends NameHolder{
 	

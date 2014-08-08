@@ -31,7 +31,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 //import com.spokanevalley.app.GameLauncher;
-import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.database.DatabaseCustomAccess;
 import com.spokanevalley.database.SpokaneValleyDatabaseHelper;
 
 public class SkiGame implements Screen {
@@ -153,7 +153,7 @@ public class SkiGame implements Screen {
 		scoreFont = new BitmapFont(Gdx.files.internal(Constants.GAME_FONT), false);
 		
 		// save max score to database
-		DatabaseInterface.Create(context).saveInitialScoretoDatabase_SkiGame(score);
+		DatabaseCustomAccess.Create(context).saveInitialScoretoDatabase_SkiGame(score);
 	}
 
 	@Override
@@ -311,9 +311,9 @@ public class SkiGame implements Screen {
 					}
 					if (crash > 2) {
 
-						DatabaseInterface.Create(context).saveMaxScore_SkiGame(score);
+						DatabaseCustomAccess.Create(context).saveMaxScore_SkiGame(score);
 
-						Game.setScreen(new GameOver(Game,score,DatabaseInterface.Create(context).saveMaxScore_SkiGame(0)));//maxscore
+						Game.setScreen(new GameOver(Game,score,DatabaseCustomAccess.Create(context).saveMaxScore_SkiGame(0)));//maxscore
 						dispose();
 					}
 

@@ -13,7 +13,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.spokanevalley.app.R;
-import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.database.DatabaseCustomAccess;
+
+/**
+ * 
+ * @author quyen_000
+ * Eastern Washington University
+ */
 
 public class MallActivity extends Activity {
 	private ListView listView;
@@ -44,7 +50,7 @@ public class MallActivity extends Activity {
 		listView.getAdapter().registerDataSetObserver(new DataSetObserver() {
 			@Override
 			public void onChanged() {
-				redeemedCoupon = DatabaseInterface.Create(context).getTotalScore();
+				redeemedCoupon = DatabaseCustomAccess.Create(context).getTotalScore();
 				changeScoreDisplaying();
 			}
 			
@@ -62,8 +68,8 @@ public class MallActivity extends Activity {
 
 	private void loadFromDatabase() {
 		//poolLocationFactory.create();
-		poolLocationList = DatabaseInterface.Create(context).getPoolList();
-		redeemedCoupon = DatabaseInterface.Create(context).getTotalScore();
+		poolLocationList = DatabaseCustomAccess.Create(context).getPoolList();
+		redeemedCoupon = DatabaseCustomAccess.Create(context).getTotalScore();
 		
 		
 	}

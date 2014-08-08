@@ -21,7 +21,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.database.DatabaseCustomAccess;
 
 public class AppleGame implements Screen {
 
@@ -86,7 +86,7 @@ public class AppleGame implements Screen {
 		applesCaught = "SCORE: 0";
 		scoreFont = new BitmapFont(Gdx.files.internal(Constants.GAME_FONT), false);
 		
-		DatabaseInterface.Create(context).saveInitialScoretoDatabase_AppleGame(score);
+		DatabaseCustomAccess.Create(context).saveInitialScoretoDatabase_AppleGame(score);
 		
 		
 	}
@@ -163,9 +163,9 @@ public class AppleGame implements Screen {
 					badApples++;
 				}
 				if (badApples > 2) {
-					DatabaseInterface.Create(context).saveMaxScore_AppleGame(score);
+					DatabaseCustomAccess.Create(context).saveMaxScore_AppleGame(score);
 
-					Game.setScreen(new GameOver(Game,score,DatabaseInterface.Create(context).saveMaxScore_AppleGame(0))); //maxScore*****
+					Game.setScreen(new GameOver(Game,score,DatabaseCustomAccess.Create(context).saveMaxScore_AppleGame(0))); //maxScore*****
 					dispose();
 				}
 				Apple.dispose();

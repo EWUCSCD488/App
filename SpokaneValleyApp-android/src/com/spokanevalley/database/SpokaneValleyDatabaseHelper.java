@@ -1,17 +1,19 @@
 package com.spokanevalley.database;
 
-import java.util.UUID;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
+
+/**
+ * Define important database tables and create access to database
+ * 
+ * @author : Quyen Ha
+ * Eastern Washington University
+ */
 
 public class SpokaneValleyDatabaseHelper {
 
@@ -22,6 +24,11 @@ public class SpokaneValleyDatabaseHelper {
 	privateDatabaseContent databaseContent;
 	Context context;
 
+	/**
+	 * Constructor takes in context of Android application and activate database
+	 * @param context
+	 */
+	
 	public SpokaneValleyDatabaseHelper(Context context) {
 
 		databaseContent = new privateDatabaseContent(context);
@@ -34,9 +41,12 @@ public class SpokaneValleyDatabaseHelper {
 		this.context = context;
 	}
 
-	/*
+	/**
 	 * THIS METHODS DELETE ALL ROWS IN THE TABLE , THE TABLE AND COLUMNS ARE
 	 * STILL THERE
+	 * 
+	 * @param context
+	 * @return how many lines it deletes in table 
 	 */
 	public int deleteTable(String table_name) {
 
@@ -65,11 +75,16 @@ public class SpokaneValleyDatabaseHelper {
 
 	}  
  
-	/*
+	/**
 	 * THIS METHOD UPDATE ROWS IN TABLE MAXSCORE AT GIVEN ID WITH NEW MAX SCORE
 	 * 
 	 * update (name of table , ContentValues : colums will be changed
 	 * values,whereClase , whereArgs)
+	 * 
+	 * @param tableName
+	 * @param ID of row  to update
+	 * @param score value to update
+	 * @return how many rows it updates in database
 	 */
 	public int updateScoreTable(String tableName, String ID, String score) {
 
@@ -94,11 +109,15 @@ public class SpokaneValleyDatabaseHelper {
 
 	}
 	
-	/*
-	 * THIS METHOD UPDATE ROWS IN TABLE LOCATION WITH ID , LATITUDE,LONGITUDE ONLY , DEFAULT ATTITUDE 0
+	/**
+	 * THIS METHOD UPDATE ROWS IN TOTAL SCORE WITH ID AND TOTAL POINT
 	 * 
 	 * update (name of table , ContentValues : colums will be changed
 	 * values,whereClase , whereArgs)
+	 * 
+	 * @param table Name
+	 * @param ID of total score
+	 * @param score point
 	 */
 	public int updateTotalScoreTable(String tableName,String ID,  String point) {
 
@@ -123,13 +142,18 @@ public class SpokaneValleyDatabaseHelper {
 
 	}
 
-	/*
-	 * THIS METHOD UPDATE ROWS IN TABLE LOCATION WITH ID , LATITUDE,LONGITUDE AND ATTITUDE
+	/**
+	 * THIS METHOD UPDATE ROWS IN TABLE LOCATION WITH ID ,isUsed boolean AS String
 	 * 
 	 * update (name of table , ContentValues : colums will be changed
 	 * values,whereClase , whereArgs)
+	 * 
+	 * @param table Name
+	 * @param ID of locations
+	 * @param ID is used(1) or not(0)
+	 * @return how many rows changed
 	 */
-	public int updatePoolLocationTable(String tableName,String ID, String isgetCoupon) {
+	public int updatePoolLocationTable(String tableName,String ID, String isUsed) {
 
 		// If we have multiple tables, there will be more IF statement
 		if (!tableName.equals(privateDatabaseContent.POOL_LOCATION_TABLE_NAME))
@@ -140,7 +164,7 @@ public class SpokaneValleyDatabaseHelper {
 
 			// VALUES TO BE CHANGED
 			ContentValues values = new ContentValues();
-			values.put(privateDatabaseContent.POOL_IS_VISITED_USED, isgetCoupon);
+			values.put(privateDatabaseContent.POOL_IS_VISITED_USED, isUsed);
 			
 			// CONDITION WHERE IT SHOULD BE CHANGED
 			String[] whereArgs = { ID };
@@ -152,9 +176,14 @@ public class SpokaneValleyDatabaseHelper {
 
 	}
 
-	/*
+	/**
 	 * INSERT NEW ROW ON SCORE TABLE , null VALUES WILL NOT BE CREATED UNLESS USING
 	 * numColumnHack in insert method
+	 * 
+	 * @param table Name
+	 * @param ID of game
+	 * @param max score of game
+	 * @return how many row changed
 	 */
 	public long insertScoreData(String tableName, String ID, String Maxscore) {
 
@@ -177,8 +206,15 @@ public class SpokaneValleyDatabaseHelper {
 		}
 	}
 	
-	/* INSERT NEW ROW ON Pool Location table , null VALUES WILL NOT BE CREATED UNLESS USING
+	/** 
+	 * INSERT NEW ROW ON Pool Location table , null VALUES WILL NOT BE CREATED UNLESS USING
 	 * numColumnHack in insert method
+	 * 
+	 * @param table Name
+	 * @param ID location
+	 * @param description about location
+	 * @param isUsed boolean is used(1) or not(0)
+	 * @retun how many row changed
 	 */
 	public long insertPoolLocation(String tableName, String ID, String description,String isCouponUsed) {
 
@@ -203,12 +239,17 @@ public class SpokaneValleyDatabaseHelper {
 	}
 	
 	
-	/*
+	/**
 	 * INSERT NEW new total score to database
 	 * null VALUES WILL NOT BE CREATED UNLESS USING
 	 * numColumnHack in insert method
+	 * 
+	 * @param table Name
+	 * @param ID of location
+	 * @param total point
+	 * @return how many rows changed
 	 */
-	public long insertLocationData(String tableName, String ID ,String point) {
+	public long insertTotalScoreData(String tableName, String ID ,String point) {
 
 		// CHECK IF WE HAVE INSERTING IN RIGHT TABLE
 		if (!tableName.equals(privateDatabaseContent.TOTAL_SCORE_TABLE_NAME))
@@ -229,13 +270,16 @@ public class SpokaneValleyDatabaseHelper {
 		}
 	}
 	
-	/*
+	/**
 	 * GET ALL DATA FROM TABLENAME GIVEN AS INPUT 
 	 * query (String tablename, String[] columns, String slection, String[]
 	 * selectionArgs , String groupBy , String having, String orderBy)
+	 * 
+	 * @param table name
+	 * @return Cursor of temporary in-memory table contains result of all data in table
 	 */
 	public Cursor getDataAll(String tableName) {
-		if (tableName.equals(privateDatabaseContent.POOL_LOCATION_TABLE_NAME)){
+		if (tableName.equals(privateDatabaseContent.POOL_LOCATION_TABLE_NAME)){				// get all data in  pool location table
 
 			SQLiteDatabase db = databaseContent.getWritableDatabase();
 			String table = privateDatabaseContent.POOL_LOCATION_TABLE_NAME;
@@ -246,7 +290,7 @@ public class SpokaneValleyDatabaseHelper {
 			Cursor cursor = db.query(table, columns, null, null, null, null,
 					null);
 			return cursor;
-		}else if (tableName.equals(privateDatabaseContent.MAXSCORE_TABLE_NAME)){
+		}else if (tableName.equals(privateDatabaseContent.MAXSCORE_TABLE_NAME)){			// get all data in max score table
 
 			SQLiteDatabase db = databaseContent.getWritableDatabase();
 			String table = privateDatabaseContent.MAXSCORE_TABLE_NAME;
@@ -256,7 +300,7 @@ public class SpokaneValleyDatabaseHelper {
 			Cursor cursor = db.query(table, columns, null, null, null, null,
 					null);
 			return cursor;
-		}else if (tableName.equals(privateDatabaseContent.TOTAL_SCORE_TABLE_NAME)){
+		}else if (tableName.equals(privateDatabaseContent.TOTAL_SCORE_TABLE_NAME)){			// get all data in total score table
 			SQLiteDatabase db = databaseContent.getWritableDatabase();
 			String table = privateDatabaseContent.TOTAL_SCORE_TABLE_NAME;
 			String[] columns = { privateDatabaseContent.TOTAL_SCORE_ID,
@@ -270,8 +314,12 @@ public class SpokaneValleyDatabaseHelper {
 		}
 	}
 	
-	/*
+	/**
 	 * GET THE MAX SCORE COMES WITH GIVEN ID IN MAXSCORE TABLE
+	 * 
+	 * @param tableName
+	 * @param ID of game
+	 * @return cursor contains result
 	 */
 	
 	public Cursor getScoreData(String tableName, String ID) {
@@ -295,8 +343,12 @@ public class SpokaneValleyDatabaseHelper {
 		}
 	}
 	
-	/*
+	/**
 	 * GET total score data based on ID
+	 * 
+	 * @param table Name
+	 * @param ID of total score row
+	 * @return Cursor contains result
 	 */
 	
 	public Cursor getTotalScoreData(String tableName,String ID) {
@@ -321,8 +373,10 @@ public class SpokaneValleyDatabaseHelper {
 		}
 	}
 	
-	/*
-	 * GET THE LATITUDE AND LONGITUDE AND ATTITUDE COME WITH GIVEN ID IN LOCATION TABLE
+	/**
+	 * GET POOL LOCATION DATA BASED ON ID
+	 * 
+	 * @param
 	 */
 	
 	public Cursor getPoolLocationData(String tableName,String ID) {
@@ -348,9 +402,16 @@ public class SpokaneValleyDatabaseHelper {
 	}
 
 
-	/*
+	/**
 	 * THIS CLASS CONTAINS VALUES OF DATABASE . IF CHANGING ANY INFORMATION
 	 * BELOW, DATABASE WILL CRASH
+	 * 
+	 * NOTE  : POOL LOCATIONS TABLE IS USED TO STORE POOL LOCATIONS AND COUPONS BECAUSE THEY HAVE SAME SET OF ATTRIBUTES
+	 * 
+	 * @version 1.0
+	 * 
+	 * @author  Quyen Ha
+	 * 
 	 */
 
 	private class privateDatabaseContent extends SQLiteOpenHelper {

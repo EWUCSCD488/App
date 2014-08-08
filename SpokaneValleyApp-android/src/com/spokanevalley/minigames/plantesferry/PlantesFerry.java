@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.database.DatabaseCustomAccess;
 
 /*
  * @author Kevin Borling
@@ -67,7 +67,7 @@ public class PlantesFerry extends Table {
 		this.setScore(0);
 		this.setLives(3);
 
-		DatabaseInterface.Create(this.context)
+		DatabaseCustomAccess.Create(this.context)
 				.saveInitialScoretoDatabase_PlantesFerryGame(0);
 	} // End PlantesFerry Constructor
 

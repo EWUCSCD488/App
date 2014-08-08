@@ -11,7 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spokanevalley.app.R;
-/*
+
+/**
  * @author Kevin Borling
  * Pool Activity is responsible for displaying information regarding each swimming pool
  * Pool Activity is called when user selects "More Info." from the mall location

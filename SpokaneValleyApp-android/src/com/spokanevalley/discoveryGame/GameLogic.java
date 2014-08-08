@@ -11,7 +11,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.database.DatabaseCustomAccess;
 import com.spokanevalley.discoveryGame.Screen.GameMusicSoundPref;
 import com.spokanevalley.discoveryGame.Screen.MenuSreen;
 import com.spokanevalley.discoveryGame.drawingHandlers.Apples;
@@ -61,7 +61,7 @@ public class GameLogic implements GestureListener {
 		Gdx.input.setInputProcessor(new GestureDetector(this));
 		lives = Constants.LIVES_START;
 		initLevel();
-		DatabaseInterface.Create(context).saveInitialScoretoDatabase_DiscoveryGame(score);
+		DatabaseCustomAccess.Create(context).saveInitialScoretoDatabase_DiscoveryGame(score);
 
 	}
 
@@ -183,7 +183,7 @@ public class GameLogic implements GestureListener {
 			timeLeftGameOverDelay -= deltaTime;
 			if (timeLeftGameOverDelay < 0){
 				callMenu();
-				DatabaseInterface.Create(context).saveMaxScore_DiscoveryGame(score);
+				DatabaseCustomAccess.Create(context).saveMaxScore_DiscoveryGame(score);
 			}
 				
 		} else {

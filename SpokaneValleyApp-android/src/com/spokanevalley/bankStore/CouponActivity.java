@@ -15,7 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.spokanevalley.app.R;
-import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.database.DatabaseCustomAccess;
+
+/**
+ * 
+ * @author quyen_000
+ * Eastern Washington University
+ */
 
 public class CouponActivity extends Activity{
 
@@ -31,7 +37,7 @@ public class CouponActivity extends Activity{
 
 		//get value pass from coupon list
 		Intent intent = getIntent();
-		final String Couponid = intent.getStringExtra(ListViewCustomGameAdapter.COUPON_ID);
+		final String Couponid = intent.getStringExtra(ListViewCustomCouponAdapter.COUPON_ID);
 		
 		/* Take the ImageView from layout and set the game image */
 		imageView = (ImageView) findViewById(R.id.couponImage);
@@ -116,8 +122,8 @@ public class CouponActivity extends Activity{
             @Override
             public void onClick(DialogInterface dialog, int which) {
             	// delete coupon from couponList
-            	DatabaseInterface.Create(getApplicationContext()).updatePoolwithBoughtCoupon(CouponCostFactory.create().getTheRightPoolFromCoupon(id), false);	// update location in database with true gotCoupon
-                DatabaseInterface.Create(getApplicationContext()).updateCouponwithBoughtCoupon(id, false);
+            	DatabaseCustomAccess.Create(getApplicationContext()).updatePoolwithBoughtCoupon(CouponCostFactory.create().getTheRightPoolFromCoupon(id), false);	// update location in database with true gotCoupon
+                DatabaseCustomAccess.Create(getApplicationContext()).updateCouponwithBoughtCoupon(id, false);
             	dialog.cancel();
             	finish();
             }

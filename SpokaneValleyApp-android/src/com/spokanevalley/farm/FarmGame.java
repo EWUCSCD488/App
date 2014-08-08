@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.database.DatabaseCustomAccess;
 import com.spokanevalley.ski.Ski;
 
 public class FarmGame implements Screen {
@@ -51,7 +51,7 @@ public class FarmGame implements Screen {
 		badGuy = 1;
 		
 		//Set initial databse score to zero
-	    DatabaseInterface.Create(this.context).saveInitialScoretoDatabase_GreenacresGame(0);
+	    DatabaseCustomAccess.Create(this.context).saveInitialScoretoDatabase_GreenacresGame(0);
 		
 		//Setting up Timer Tick
 		timerT = 0.2D;
@@ -94,7 +94,7 @@ public class FarmGame implements Screen {
 		{
 			int score = saveMaxScore(holes[holes.length-1]);
 			System.out.println("THIS IS THE SCORE FOR THIS GAME: " + score);
-			int maxScoreScore = DatabaseInterface.Create(context).saveMaxScore_GreenacresGame(holes[holes.length-1]);
+			int maxScoreScore = DatabaseCustomAccess.Create(context).saveMaxScore_GreenacresGame(holes[holes.length-1]);
 			game.setScreen(new GameOver(game,score,maxScoreScore));//maxscore
 			//dispose();
 		}
@@ -286,7 +286,7 @@ public class FarmGame implements Screen {
 	}
 	
 	private int saveMaxScore(int CurrentScore) {
-		Cursor cursor= (DatabaseInterface.Create(context)).getDatabase().getScoreData(tableName,FarmID);
+		Cursor cursor= (DatabaseCustomAccess.Create(context)).getDatabase().getScoreData(tableName,FarmID);
 		
 		int MaxScore = 0;
 		while(cursor.moveToNext()){
@@ -302,7 +302,7 @@ public class FarmGame implements Screen {
 		} // travel to database result
 		
 		if(MaxScore < CurrentScore){
-			long RowIds = (DatabaseInterface.Create(context)).getDatabase().updateScoreTable(tableName, FarmID, String.valueOf(holes[holes.length-1]));
+			long RowIds = (DatabaseCustomAccess.Create(context)).getDatabase().updateScoreTable(tableName, FarmID, String.valueOf(holes[holes.length-1]));
 			if (RowIds == -1)
 				Log.d(TAG, "Error on inserting columns");
 			System.out.println(holes[holes.length-1] + "****************************************************");

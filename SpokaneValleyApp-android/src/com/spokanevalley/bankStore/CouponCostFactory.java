@@ -1,7 +1,9 @@
 package com.spokanevalley.bankStore;
 
-/*
- * factory returns coupons and price of coupons 
+/**
+ * 
+ * @author quyen_000
+ * Eastern Washington University
  */
 
 public class CouponCostFactory extends NameHolder{

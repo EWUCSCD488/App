@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.database.DatabaseCustomAccess;
 
 /*
  * @author Kevin Borling
@@ -40,7 +40,7 @@ public class GameOverScreen implements Screen {
 		this.paramSpriteBatch = new SpriteBatch();
 		/* Save High Score to database */
 		int score = game.getScore();
-		int maxScore = DatabaseInterface.Create(setup.getContext())
+		int maxScore = DatabaseCustomAccess.Create(setup.getContext())
 				.saveMaxScore_PlantesFerryGame(score);
 
 		this.menuTable = new MenuTable();

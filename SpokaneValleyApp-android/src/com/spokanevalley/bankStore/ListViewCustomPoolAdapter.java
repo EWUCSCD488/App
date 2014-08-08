@@ -21,7 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.spokanevalley.app.R;
-import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.database.DatabaseCustomAccess;
+
+/**
+ * 
+ * @author quyen_000
+ * Eastern Washington University
+ */
 
 public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 	
@@ -134,7 +140,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 		private void checkTotalScoreAndBuyCoupon(final Model game) {
 			int price = CouponCostFactory.create().getPrice(game.getTitle());
 			Log.d(TAG, "price is : "+ price);
-			if( price <= DatabaseInterface.Create(context).getTotalScore() ){
+			if( price <= DatabaseCustomAccess.Create(context).getTotalScore() ){
 				// buy coupon
 				// prompt another to make sure they want to buy it
 				comfirmationPromptBuyCoupon(game);
@@ -153,11 +159,11 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
                     new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                 	// substract coupon cost with total score
-                	DatabaseInterface.Create(context).addUpTotalScore(-1 * CouponCostFactory.create().getPrice(game.getTitle()));
+                	DatabaseCustomAccess.Create(context).addUpTotalScore(-1 * CouponCostFactory.create().getPrice(game.getTitle()));
                 	remove((poolLocation) game);			// remove location from list
 					notifyDataSetChanged();					// update location
-					DatabaseInterface.Create(context).updatePoolwithBoughtCoupon(game.getTitle(), true);	// update location in database with true gotCoupon
-                    DatabaseInterface.Create(context).updateCouponwithBoughtCoupon(CouponCostFactory.create().getTheRightCouponFromPool(game.getTitle()), true);
+					DatabaseCustomAccess.Create(context).updatePoolwithBoughtCoupon(game.getTitle(), true);	// update location in database with true gotCoupon
+                    DatabaseCustomAccess.Create(context).updateCouponwithBoughtCoupon(CouponCostFactory.create().getTheRightCouponFromPool(game.getTitle()), true);
 					dialog.cancel();
                 }
             });

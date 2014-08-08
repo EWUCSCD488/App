@@ -3,7 +3,7 @@ package com.spokanevalley.bankStore;
 import java.util.List;
 
 import com.spokanevalley.app.R;
-import com.spokanevalley.database.DatabaseInterface;
+import com.spokanevalley.database.DatabaseCustomAccess;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,8 +16,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-/*
- * Banks loads coupons for access to specific pools
+/**
+ * 
+ * @author Quyen Ha Eastern Washington University
  */
 
 public class BankActivity extends Activity {
@@ -29,6 +30,7 @@ public class BankActivity extends Activity {
 	private List<poolLocation> CouponList;
 	public static final String TAG = MallActivity.class.getName();
 	private int redeemedCoupon;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,17 +38,19 @@ public class BankActivity extends Activity {
 		context = this;
 		loadFromDatabase();
 
-		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/Bubblegum.otf");
-		
+		Typeface face = Typeface.createFromAsset(getAssets(),
+				"fonts/Bubblegum.otf");
+
 		listView = (ListView) findViewById(R.id.mainListView);
-		listView.setAdapter(new ListViewCustomGameAdapter(context,R.layout.list_item2,CouponList));
-		
+		listView.setAdapter(new ListViewCustomCouponAdapter(context,
+				R.layout.list_item2, CouponList));
+
 		listImageView = (ImageView) findViewById(R.id.ListImageView);
 		// you can add image here or in XML
-		
-		listTextView = (TextView ) findViewById(R.id.ListTextView);
+
+		listTextView = (TextView) findViewById(R.id.ListTextView);
 		listTextView.setText(CouponList.size() + " coupons");
-		
+
 		listTextView.setTypeface(face);
 	}
 
@@ -55,24 +59,24 @@ public class BankActivity extends Activity {
 		try {
 			super.onActivityResult(requestCode, resultCode, data);
 
-			//if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-				//String requiredValue = data.getStringExtra("Key");
+			// if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+			// String requiredValue = data.getStringExtra("Key");
 			loadFromDatabase();
-			listView.setAdapter(new ListViewCustomGameAdapter(context,R.layout.list_item2,CouponList));
-				
-			//}
-			
+			listView.setAdapter(new ListViewCustomCouponAdapter(context,
+					R.layout.list_item2, CouponList));
+
+			// }
+
 		} catch (Exception ex) {
-			//Toast.makeText(MapView.this, ex.toString(), Toast.LENGTH_SHORT)
-					//.show();
+			// Toast.makeText(MapView.this, ex.toString(), Toast.LENGTH_SHORT)
+			// .show();
 		}
 	}
-	
+
 	private void loadFromDatabase() {
-		//poolLocationFactory.create();
-		CouponList = DatabaseInterface.Create(context).getCouponList();
-		redeemedCoupon = DatabaseInterface.Create(context).getTotalScore();
-		
-		
+		// poolLocationFactory.create();
+		CouponList = DatabaseCustomAccess.Create(context).getCouponList();
+		redeemedCoupon = DatabaseCustomAccess.Create(context).getTotalScore();
+
 	}
 }

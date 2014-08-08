@@ -51,7 +51,13 @@ public class CouponActivity extends Activity{
 		});
 		
 		cancelButton = (Button) findViewById(R.id.couponCancelButton);		
-		
+		cancelButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 	private Drawable getDrawablefromCouponCostFactory(String id){

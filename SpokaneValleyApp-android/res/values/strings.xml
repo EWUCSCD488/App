@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Dino Valley</string>
+    <string name="use_coupon">Use Coupon</string>
+     <string name="cancel_coupon">Cancel</string>
+     <string name="howtoredeem">How to redeem</string>
+      <string name="aboutus">About us</string>
     <style name="ButtonText">
     <item name="android:layout_width">fill_parent</item>
     <item name="android:layout_height">wrap_content</item>
@@ -15,4 +19,5 @@
     <item name="android:shadowRadius">2</item>
 </style>
     <string name="total_score_preview">The Score!</string>
+    
 </resources>

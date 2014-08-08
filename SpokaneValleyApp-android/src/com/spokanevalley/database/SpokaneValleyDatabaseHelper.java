@@ -230,36 +230,6 @@ public class SpokaneValleyDatabaseHelper {
 	}
 	
 	/*
-	 * INSERT NEW ROW ON LOCATION TABLE , ROW CONTAINS ID,LATITUDE,LONGITUDE, AND ATTITUDE
-	 * null VALUES WILL NOT BE CREATED UNLESS USING
-	 * numColumnHack in insert method
-	 */
-	/*public long insertLocationData(String tableName, String ID ,String Latitude, String longitude,String Attitude,String title,String info) {
-
-		// CHECK IF WE HAVE INSERTING IN RIGHT TABLE
-		if (!tableName.equals(privateDatabaseContent.LOCATION_TABLE_NAME))
-			return -1;
-		else {
-			// CREATE VALUES FOR A ROW
-			ContentValues contentvalue = new ContentValues();
-			contentvalue.put(privateDatabaseContent.LOCATION_ID, ID);
-			contentvalue.put(privateDatabaseContent.LOCATION_LATITUDE, Latitude);
-			contentvalue.put(privateDatabaseContent.LOCATION_LONGITUDE, longitude);
-			contentvalue.put(privateDatabaseContent.LOCATION_ATTITUDE, Latitude);
-			contentvalue.put(privateDatabaseContent.LOCATION_TITLE, title);
-			contentvalue.put(privateDatabaseContent.LOCATION_INFO, info);
-
-			// PERFORM INSERTING
-			SQLiteDatabase db = databaseContent.getWritableDatabase();
-
-			long RowID = db.insert(privateDatabaseContent.LOCATION_TABLE_NAME,
-					null, contentvalue);
-			// if RowID is -1 , operation fails
-			return RowID;
-		}
-	}*/
-	
-	/*
 	 * GET ALL DATA FROM TABLENAME GIVEN AS INPUT 
 	 * query (String tablename, String[] columns, String slection, String[]
 	 * selectionArgs , String groupBy , String having, String orderBy)

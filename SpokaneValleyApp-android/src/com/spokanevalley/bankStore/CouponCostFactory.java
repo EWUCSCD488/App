@@ -17,6 +17,18 @@ public class CouponCostFactory extends NameHolder{
 		
 	}
 	
+	public String getCouponImagePath(String id){
+		
+		if(id.equals(coupon1ID)){
+			return coupon1ImagePath;
+		}else if(id.equals(coupon2ID)){
+			return coupon2ImagePath;
+		}else if(id.equals(coupon3ID)){
+			return coupon3ImagePath;
+		}
+		return null;
+	}
+	
 	public int getPrice(String id){
 		if(id.equals(pool1ID)){
 			return Coupon1Cost;
@@ -35,6 +47,17 @@ public class CouponCostFactory extends NameHolder{
 			return coupon2ID;
 		}else if(id.equals(pool3ID)){
 			return coupon3ID;
+		}
+		return "unknown";
+	}
+	
+	public String getTheRightPoolFromCoupon(String id){
+		if(id.equals(coupon1ID)){
+			return pool1ID;
+		}else if(id.equals(coupon2ID)){
+			return pool2ID;
+		}else if(id.equals(coupon3ID)){
+			return pool3ID;
 		}
 		return "unknown";
 	}

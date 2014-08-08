@@ -4,5 +4,6 @@
     <dimen name="activity_horizontal_margin">13dp</dimen>
     <dimen name="activity_vertical_margin">20dp</dimen>
     <dimen name="activity_horizontal_margin_after_apple">41dp</dimen>
-    <dimen name="activity_vertical_margin_after_apple">12dp</dimen>	
+    <dimen name="activity_vertical_margin_after_apple">12dp</dimen>
+     <dimen name="coupon_how_to_text_size">20sp</dimen>	
 </resources>

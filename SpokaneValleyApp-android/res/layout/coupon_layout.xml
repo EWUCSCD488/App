@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <Button
+        android:id="@+id/couponhowto"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+       	android:gravity="center"
+       	android:layout_margin="5dp"
+        android:text="@string/howtoredeem"
+        android:textSize="@dimen/coupon_how_to_text_size" />
+    
+    <ImageView
+        android:id="@+id/couponImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:background="@drawable/coupon_icon1" />
+   
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+        android:orientation="horizontal">
+        
+        <Button 
+            android:id="@+id/couponOkayButtons"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+           	android:layout_margin="15dp"
+           	android:text="@string/use_coupon"/>
+        
+        <Button 
+            android:id="@+id/couponCancelButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:layout_margin="15dp"
+            android:text="@string/cancel_coupon"/>
+        
+    </LinearLayout>
+    
+</LinearLayout>

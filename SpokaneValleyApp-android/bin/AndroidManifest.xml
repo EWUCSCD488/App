@@ -59,6 +59,11 @@
             android:screenOrientation="portrait"
             android:label="@string/app_name">
         </activity>
+        <activity
+            android:name="com.spokanevalley.bankStore.CouponActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name">
+        </activity>
          <activity
             android:name="com.spokanevalley.discoveryGame.DiscoveryActivity"
             android:screenOrientation="landscape"

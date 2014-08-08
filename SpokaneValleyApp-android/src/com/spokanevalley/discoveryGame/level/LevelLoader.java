@@ -50,6 +50,7 @@ public class LevelLoader {
 
 	public LevelLoader(String filename) {
 		init(filename);
+		loadNextMap();
 		dinasour.setJumping(false);
 	}
 

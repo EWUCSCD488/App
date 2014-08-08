@@ -445,11 +445,13 @@ containing a value of this type.
     }
     public static final class id {
         public static final int DescriptionItem=0x7f070021;
-        public static final int ListImageView=0x7f070023;
-        public static final int ListTextView=0x7f070024;
+        public static final int ListImageView=0x7f070024;
+        public static final int ListTextView=0x7f070025;
         public static final int book_now=0x7f070010;
         public static final int btnSurrey=0x7f070015;
         public static final int buttonGetCoupon=0x7f070022;
+        public static final int buttonGetCoupon2=0x7f070028;
+        public static final int buttonMoreInfo=0x7f070023;
         public static final int buyButton=0x7f07000a;
         public static final int buy_now=0x7f07000f;
         public static final int buy_with_google=0x7f07000e;
@@ -467,11 +469,11 @@ containing a value of this type.
         public static final int holo_light=0x7f070006;
         public static final int hybrid=0x7f070004;
         public static final int imageView1=0x7f070016;
-        public static final int mainListView=0x7f070025;
+        public static final int mainListView=0x7f070026;
         public static final int map=0x7f070014;
         public static final int match_parent=0x7f07000c;
-        public static final int menu_aboutus=0x7f070027;
-        public static final int menu_howto=0x7f070026;
+        public static final int menu_aboutus=0x7f07002a;
+        public static final int menu_howto=0x7f070029;
         public static final int monochrome=0x7f070013;
         public static final int none=0x7f070000;
         public static final int normal=0x7f070001;
@@ -482,6 +484,7 @@ containing a value of this type.
         public static final int selectionDetails=0x7f07000b;
         public static final int strict_sandbox=0x7f070009;
         public static final int terrain=0x7f070003;
+        public static final int textView1=0x7f070027;
         public static final int titleItem=0x7f070020;
         public static final int wrap_content=0x7f07000d;
     }
@@ -499,6 +502,7 @@ containing a value of this type.
         public static final int listviewactivity2=0x7f030007;
         public static final int locations=0x7f030008;
         public static final int main=0x7f030009;
+        public static final int pool_desc_layout=0x7f03000a;
     }
     public static final class menu {
         public static final int coupon_menu=0x7f0b0000;

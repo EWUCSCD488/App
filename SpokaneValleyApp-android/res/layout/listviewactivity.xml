@@ -36,8 +36,8 @@
         android:id="@+id/mainListView"
         android:layout_width="fill_parent"
         android:layout_height="442dp"
-        android:dividerHeight="2dp"
-        android:paddingTop="10dp" >
+        android:dividerHeight="2dp" >
+
     </ListView>
     
 </LinearLayout>

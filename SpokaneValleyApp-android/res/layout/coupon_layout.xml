@@ -6,11 +6,13 @@
     
     <Button
         android:id="@+id/couponhowto"
+        style="@style/ButtonText"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="5dp"
         android:layout_weight="0.15"
-       	android:gravity="center"
-       	android:layout_margin="5dp"
+        android:background="@drawable/yellowbutton"
+        android:gravity="center"
         android:text="@string/howtoredeem"
         android:textSize="@dimen/coupon_how_to_text_size" />
     
@@ -18,8 +20,7 @@
         android:id="@+id/couponImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7"
-        android:background="@drawable/coupon_icon1" />
+        android:layout_weight="0.7" />
    
     <LinearLayout 
         android:layout_width="match_parent"
@@ -27,21 +28,27 @@
         android:layout_weight="0.15"
         android:orientation="horizontal">
         
-        <Button 
+        <Button
             android:id="@+id/couponOkayButtons"
+            style="@style/ButtonText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
-           	android:layout_margin="15dp"
-           	android:text="@string/use_coupon"/>
-        
-        <Button 
-            android:id="@+id/couponCancelButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
             android:layout_margin="15dp"
-            android:text="@string/cancel_coupon"/>
+            android:layout_weight="0.5"
+            android:background="@drawable/greenbutton"
+            android:text="@string/use_coupon"
+            android:textSize="20sp" />
+        
+        <Button
+            android:id="@+id/couponCancelButton"
+            style="@style/ButtonText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/redbutton"
+            android:text="@string/cancel_coupon"
+            android:textSize="20sp" />
         
     </LinearLayout>
     

@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -31,10 +32,12 @@ public class BankActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.listviewactivity);
+		setContentView(R.layout.listviewactivity2);
 		context = this;
 		loadFromDatabase();
 
+		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/Bubblegum.otf");
+		
 		listView = (ListView) findViewById(R.id.mainListView);
 		listView.setAdapter(new ListViewCustomGameAdapter(context,R.layout.list_item2,CouponList));
 		
@@ -42,9 +45,9 @@ public class BankActivity extends Activity {
 		// you can add image here or in XML
 		
 		listTextView = (TextView ) findViewById(R.id.ListTextView);
-		listTextView.setText(redeemedCoupon + " points");
+		listTextView.setText(CouponList.size() + " coupons");
 		
-		
+		listTextView.setTypeface(face);
 	}
 
 	@Override

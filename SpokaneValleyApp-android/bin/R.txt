@@ -133,11 +133,13 @@ int drawable valleymissionpool 0x7f020043
 int drawable valleymissiontrophy 0x7f020044
 int drawable yellowbutton 0x7f020045
 int id DescriptionItem 0x7f070021
-int id ListImageView 0x7f070023
-int id ListTextView 0x7f070024
+int id ListImageView 0x7f070024
+int id ListTextView 0x7f070025
 int id book_now 0x7f070010
 int id btnSurrey 0x7f070015
 int id buttonGetCoupon 0x7f070022
+int id buttonGetCoupon2 0x7f070028
+int id buttonMoreInfo 0x7f070023
 int id buyButton 0x7f07000a
 int id buy_now 0x7f07000f
 int id buy_with_google 0x7f07000e
@@ -155,11 +157,11 @@ int id holo_dark 0x7f070005
 int id holo_light 0x7f070006
 int id hybrid 0x7f070004
 int id imageView1 0x7f070016
-int id mainListView 0x7f070025
+int id mainListView 0x7f070026
 int id map 0x7f070014
 int id match_parent 0x7f07000c
-int id menu_aboutus 0x7f070027
-int id menu_howto 0x7f070026
+int id menu_aboutus 0x7f07002a
+int id menu_howto 0x7f070029
 int id monochrome 0x7f070013
 int id none 0x7f070000
 int id normal 0x7f070001
@@ -170,6 +172,7 @@ int id scoreOnTopOfMap 0x7f070017
 int id selectionDetails 0x7f07000b
 int id strict_sandbox 0x7f070009
 int id terrain 0x7f070003
+int id textView1 0x7f070027
 int id titleItem 0x7f070020
 int id wrap_content 0x7f07000d
 int integer google_play_services_version 0x7f080000
@@ -183,6 +186,7 @@ int layout listviewactivity 0x7f030006
 int layout listviewactivity2 0x7f030007
 int layout locations 0x7f030008
 int layout main 0x7f030009
+int layout pool_desc_layout 0x7f03000a
 int menu coupon_menu 0x7f0b0000
 int string aboutus 0x7f050024
 int string app_name 0x7f050020

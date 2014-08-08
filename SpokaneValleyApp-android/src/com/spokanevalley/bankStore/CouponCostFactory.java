@@ -1,5 +1,9 @@
 package com.spokanevalley.bankStore;
 
+/*
+ * factory returns coupons and price of coupons 
+ */
+
 public class CouponCostFactory extends NameHolder{
 
 	private static CouponCostFactory couponCostFactory= null;

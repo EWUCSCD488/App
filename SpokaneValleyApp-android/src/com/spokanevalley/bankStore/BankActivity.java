@@ -13,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/*
+ * Banks loads coupons for access to specific pools
+ */
+
 public class BankActivity extends Activity {
 	private ListView listView;
 	private ImageView listImageView;

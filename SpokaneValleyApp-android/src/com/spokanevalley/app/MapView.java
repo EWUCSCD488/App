@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.VisibleRegion;
 import com.spokanevalley.addScoreGPS.addScoreGPSLauncher;
 import com.spokanevalley.apples.AppleActivity;
 import com.spokanevalley.bankStore.BankActivity;
+import com.spokanevalley.bankStore.ButtonSoundFactory;
 import com.spokanevalley.bankStore.MallActivity;
 import com.spokanevalley.database.DatabaseCustomAccess;
 import com.spokanevalley.discoveryGame.DiscoveryActivity;
@@ -60,6 +61,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	private LatLng locationMain = null;
 	private float globalZoom = 0;
 	private LocationManager locationManager;
+	private ButtonSoundFactory sounds;
 
 	//temp values
 	/*private Location location1;
@@ -77,7 +79,9 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map_view);
-
+		sounds = new ButtonSoundFactory(context);
+		sounds.playBackground();
+		
 		mOverscrollHandler.sendEmptyMessageDelayed(0, 100);
 		DatabaseCustomAccess.Create(context);
 		// Initialize Location List
@@ -327,6 +331,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 
 		super.onPause();
 
+		sounds.stopbackground();
+		
 		VisibleRegion region = map.getProjection().getVisibleRegion();
 		LatLngBounds cameraBounds = region.latLngBounds;
 		LatLng myLatLng = map.getCameraPosition().target;
@@ -342,6 +348,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	protected void onResume() {
 		super.onResume();
 		initilizeMap();
+		sounds.playBackground();
 
 	}// end onResume
 
@@ -593,5 +600,6 @@ public class MapView extends Activity implements OnMarkerClickListener,
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+	
 }// end MapView
 

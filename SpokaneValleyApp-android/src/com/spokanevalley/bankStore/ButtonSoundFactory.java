@@ -13,7 +13,7 @@ public class ButtonSoundFactory {
 	private MediaPlayer playsound5;
 	private MediaPlayer playsound6;
 	private MediaPlayer playsound7;
-
+	private MediaPlayer playbackground;
 	
 	public ButtonSoundFactory(Context context) {
 		playsound1 = MediaPlayer.create(context, R.raw.button_1);
@@ -23,10 +23,19 @@ public class ButtonSoundFactory {
 		playsound5 = MediaPlayer.create(context, R.raw.button_5);
 		playsound6 = MediaPlayer.create(context, R.raw.button_6);
 		playsound7 = MediaPlayer.create(context, R.raw.button_7);
+		playbackground = MediaPlayer.create(context, R.raw.backgroundmusic2);
 
 
 	}
 	
+	public void playBackground(){
+		playbackground.setLooping(true);
+		playbackground.start();
+	}
+	
+	public void stopbackground(){
+		playbackground.pause();
+	}
 	public void playsound1(){
 		playsound1.start();
 	}

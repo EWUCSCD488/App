@@ -42,7 +42,7 @@ public class BankActivity extends Activity {
 		// you can add image here or in XML
 		
 		listTextView = (TextView ) findViewById(R.id.ListTextView);
-		listTextView.setText(CouponList.size() + " points");
+		listTextView.setText(CouponList.size() + " coupons");
 		
 		listTextView.setTypeface(face);
 	}

@@ -48,7 +48,7 @@ public class PoolActivity extends Activity {
 		/* Pool Location Main Image */
 		imageView = (ImageView) findViewById(R.id.poolViewImage);
 		/* Take the ImageView from layout and set the game image */
-        String uri = "drawable/" + ThumbNailFactory.create().getThumbNail(poolID);
+        String uri = "drawable/" + ThumbNailFactory.create().getActualPoolPicture(poolID);
         int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
         Drawable image = context.getResources().getDrawable(imageResource);
         imageView.setImageDrawable(image);

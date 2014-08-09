@@ -35,11 +35,11 @@ public class CouponCostFactory extends NameHolder{
 	public String getCouponImagePath(String id){
 		
 		if(id.equals(coupon1ID)){
-			return coupon1ImagePath;
+			return coupon1TrophyImagePath;
 		}else if(id.equals(coupon2ID)){
-			return coupon2ImagePath;
+			return coupon2TrophyImagePath;
 		}else if(id.equals(coupon3ID)){
-			return coupon3ImagePath;
+			return coupon3TrophyImagePath;
 		}
 		return null;
 	}

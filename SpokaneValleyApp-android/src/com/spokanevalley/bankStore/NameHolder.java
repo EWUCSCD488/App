@@ -23,15 +23,25 @@ public class NameHolder {
 	protected static final String pool2ID = "Terrace View";
 	protected static final String pool3ID = "Valley Mission Pool";
 	
+	protected static final String pool1ThumbnailImagePath = "parkroadpool";								// pool thumbnails image path
+	protected static final String pool2ThumbnailImagePath = "terracepool";
+	protected static final String pool3ThumbnailImagePath = "valleymissionpool";
+	
+	protected static final String pool1ActualImagePath = "parkroadpool_actual";								// pool actual image path
+	protected static final String pool2ActualImagePath = "terracepool_actual";
+	protected static final String pool3ActualImagePath = "valleymissionpool_actual";
+	
 	protected static final String coupon1ID = "Park Road Pool Coupon";						// coupon IDs
 	protected static final String coupon2ID = "Terrace View Coupon";
 	protected static final String coupon3ID = "Valley Mission Pool Coupon ";
 	
-	protected static final String coupon1ImagePath = "parkroadtrophy";								// coupon thumbnail image paths
-	protected static final String coupon2ImagePath = "terraceviewtrophy";
-	protected static final String coupon3ImagePath = "valleymissiontrophy";
+	protected static final String coupon1TrophyImagePath = "parkroadtrophy";								// coupon thumbnail image paths
+	protected static final String coupon2TrophyImagePath = "terraceviewtrophy";
+	protected static final String coupon3TrophyImagePath = "valleymissiontrophy";
 	
-	
+	protected static final String coupon1ImagePath = "coupon_icon1";								// coupon thumbnail image paths
+	protected static final String coupon2ImagePath = "coupon_icon2";
+	protected static final String coupon3ImagePath = "coupon_icon3";
 	
 	protected static final String Coupon1Description = "awesome coupon 1 ";					// coupon descriptions
 	protected static final String Coupon2Description = "awesome coupon 2";

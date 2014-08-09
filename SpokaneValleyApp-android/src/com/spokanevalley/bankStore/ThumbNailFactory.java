@@ -35,22 +35,34 @@ public class ThumbNailFactory extends NameHolder {
 		}
 
 		else if (ID.equals(pool1ID)) {
-			return "parkroadpool";
+			return pool1ThumbnailImagePath;
 		} else if (ID.equals(pool2ID)) {
-			return "terracepool";
+			return pool2ThumbnailImagePath;
 		} else if (ID.equals(pool3ID)) {
-			return "valleymissionpool";
+			return pool3ThumbnailImagePath;
 		}
 
 		else if (ID.equals(coupon1ID)) {
-			return "coupon_icon1";
+			return coupon1ImagePath;
 		} else if (ID.equals(coupon2ID)) {
-			return "coupon_icon2";
+			return coupon2ImagePath;
 		} else if (ID.equals(coupon3ID)) {
-			return "coupon_icon3";
+			return coupon3ImagePath;
 		}
 
 		return null;
 	}
 
+	public String getActualPoolPicture(String ID){
+		if (ID.equals(pool1ID)) {
+			return pool1ActualImagePath;
+		} else if (ID.equals(pool2ID)) {
+			return pool2ActualImagePath;
+		} else if (ID.equals(pool3ID)) {
+			return pool3ActualImagePath;
+		}
+
+		return null;
+	}
+	
 }

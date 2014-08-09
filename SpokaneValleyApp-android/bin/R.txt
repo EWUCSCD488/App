@@ -198,6 +198,7 @@ int raw button_4 0x7f050005
 int raw button_5 0x7f050006
 int raw button_6 0x7f050007
 int raw button_7 0x7f050008
+int raw gettrophy 0x7f050009
 int string aboutus 0x7f060024
 int string app_name 0x7f060020
 int string auth_client_needs_enabling_title 0x7f060001

@@ -109,7 +109,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 				LocationListener locationListener = new LocationListener() {
 					@Override
 					public void onLocationChanged(android.location.Location location) {
-						
+	
 						//TODO: Once database is done also add "if has not been visited" into the "if" statement
 						for (Location location2 : LocationList.LIST) {
 							
@@ -356,6 +356,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 
     public void onInfoWindowClick(Marker marker) 
     {
+    	sounds.playsound1(); // Play Menu Button Sound
     	Log.d(TAG, marker.getTitle());
 					if(marker.getTitle().equals("Bank")){
 						Intent intent = new Intent(MapView.this, BankActivity.class);
@@ -399,6 +400,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	 */
 	@Override
 	public boolean onMarkerClick(Marker arg0) {
+		
+		sounds.playsound1(); // Play Menu Button Sound
 		
 		// Check if there is an open info window
         if (lastMarkerSelected != null) {

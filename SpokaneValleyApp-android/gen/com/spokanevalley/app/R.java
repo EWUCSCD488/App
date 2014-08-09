@@ -525,6 +525,7 @@ containing a value of this type.
         public static final int button_6=0x7f050007;
         public static final int button_7=0x7f050008;
         public static final int gettrophy=0x7f050009;
+        public static final int menubutton=0x7f05000a;
     }
     public static final class string {
         public static final int aboutus=0x7f060024;

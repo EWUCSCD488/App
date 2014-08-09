@@ -16,13 +16,13 @@ public class ButtonSoundFactory {
 	private MediaPlayer playbackground;
 	
 	public ButtonSoundFactory(Context context) {
-		playsound1 = MediaPlayer.create(context, R.raw.button_1);
-		playsound2 = MediaPlayer.create(context, R.raw.button_2);
-		playsound3 = MediaPlayer.create(context, R.raw.button_3);
-		playsound4 = MediaPlayer.create(context, R.raw.button_4);
-		playsound5 = MediaPlayer.create(context, R.raw.button_5);
-		playsound6 = MediaPlayer.create(context, R.raw.button_6);
-		playsound7 = MediaPlayer.create(context, R.raw.button_7);
+		playsound1 = MediaPlayer.create(context, R.raw.menubutton);
+		playsound2 = MediaPlayer.create(context, R.raw.menubutton);
+		playsound3 = MediaPlayer.create(context, R.raw.menubutton);
+		playsound4 = MediaPlayer.create(context, R.raw.menubutton);
+		playsound5 = MediaPlayer.create(context, R.raw.menubutton);
+		playsound6 = MediaPlayer.create(context, R.raw.menubutton);
+		playsound7 = MediaPlayer.create(context, R.raw.menubutton);
 		playbackground = MediaPlayer.create(context, R.raw.background);
 
 

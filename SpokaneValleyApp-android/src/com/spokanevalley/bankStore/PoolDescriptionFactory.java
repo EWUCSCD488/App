@@ -5,9 +5,9 @@ public class PoolDescriptionFactory extends NameHolder{
 	private static PoolDescriptionFactory poolDescriptionFactory = null;
 	
 	// WRITE DESCRIPTION ABOUT POOL HERE
-	private String descriptionPool1 = "hello 1";
-	private String descriptionPool2 = "hello 2";
-	private String descriptionPool3 = "hello 3";
+	private String descriptionPool1 = "Park Road Pool\n\n With a Slide Feature\nAddress: 906 N. Park Road\nPhone: 509-926-1840"; // Park Road Pool
+	private String descriptionPool2 = "Terrace View Pool\n\n With a Lazy River Feature\nAddress: 13525 E. 24th Ave.\nPhone: 509-924-4707"; // Terrace View Pool
+	private String descriptionPool3 = "Valley Mission Pool\n\n With a Zero Depth Entry Pool Feature \nAddress: 11123 E. Mission Ave.\nPhone: 509-922-7091"; // Valley Mission Pool
 	
 	public static PoolDescriptionFactory create(){
 		if(poolDescriptionFactory == null)

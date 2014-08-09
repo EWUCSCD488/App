@@ -37,6 +37,8 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 	
 	public static final String TAG = ListViewCustomPoolAdapter.class.getName();
 	
+	public static final String POOL_ID = "poolID";				// use to send pool ID to poolAcitivity
+	protected static final int REQUEST_CODE = 1;
 	private ButtonSoundFactory buttonsounds;
 	private int resource;
 	private LayoutInflater inflater;
@@ -86,6 +88,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 	        final Drawable image = context.getResources().getDrawable(imageResource);
 	        imageGame.setImageDrawable(image);
 	        
+	        /* handle buy coupon */
 	        Button buyCoupon = (Button)convertView.findViewById(R.id.buttonGetCoupon);
 	        buyCoupon.setOnClickListener(new OnClickListener() {
 				
@@ -109,7 +112,8 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 					Activity activity = (MallActivity) getContext();
 					buttonsounds.playsound1();			// play button sound
 					Intent intent = new Intent(context, PoolActivity.class);
-					activity.startActivity(intent);
+					intent.putExtra(POOL_ID, game.getTitle());
+					((Activity) context).startActivityForResult(intent, REQUEST_CODE);
 				}
 			});
 	        

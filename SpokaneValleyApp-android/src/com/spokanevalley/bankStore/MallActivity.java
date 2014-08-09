@@ -78,6 +78,25 @@ public class MallActivity extends Activity {
 		
 	}
 
+	/**
+	 * check result of Activity sent from PoolActivity
+	 */
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		try {
+				super.onActivityResult(requestCode, resultCode, data);
+				poolLocationList = DatabaseCustomAccess.Create(context).getPoolList();
+				listView.setAdapter(new ListViewCustomPoolAdapter(context,
+					R.layout.list_item, poolLocationList));
+				changeScoreDisplaying();
+				
+			} catch (Exception ex) {
+			// Toast.makeText(MapView.this, ex.toString(), Toast.LENGTH_SHORT)
+			// .show();
+			}
+	}
+	
 	private void loadFromDatabase() {
 		//poolLocationFactory.create();
 		poolLocationList = DatabaseCustomAccess.Create(context).getPoolList();

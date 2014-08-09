@@ -5,77 +5,63 @@ filter: Nearest,Nearest
 repeat: none
 background
   rotate: false
-  xy: 1, 521
-  size: 960, 480
-  orig: 960, 480
-  offset: 0, 0
-  index: -1
-howToplayAfter
-  rotate: false
-  xy: 1, 263
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-howToplayBefore
-  rotate: false
-  xy: 1, 5
-  size: 256, 256
-  orig: 256, 256
+  xy: 1, 389
+  size: 1024, 512
+  orig: 1024, 512
   offset: 0, 0
   index: -1
 optionButtonAfter
   rotate: false
-  xy: 259, 263
+  xy: 1, 131
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 optionButtonBefore
   rotate: false
-  xy: 259, 5
+  xy: 1027, 645
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 startButtonafter
   rotate: false
-  xy: 517, 263
+  xy: 259, 131
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 startButtonbefore
   rotate: false
-  xy: 517, 5
+  xy: 1285, 645
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 musicButtonAfter
   rotate: false
-  xy: 775, 391
+  xy: 1, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 musicButtonBefore
   rotate: false
-  xy: 775, 261
+  xy: 1027, 515
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 soundButtonAfter
   rotate: false
-  xy: 775, 131
+  xy: 517, 259
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 soundButtonBefore
   rotate: false
-  xy: 775, 1
+  xy: 1543, 773
   size: 128, 128
   orig: 128, 128
   offset: 0, 0

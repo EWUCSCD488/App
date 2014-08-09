@@ -167,7 +167,7 @@ public class MenuSreen extends AbstractGameScreen {
 		table.pad(10, 10, 0, 0);					// 10pixels away from top and left edges
 		MenuMusic = new Button(textButtonStyle_sound_music);					// load music button
 		onClickedMusicPress();
-		table.add(MenuMusic).width(Constants.VIEWPORT_GUI_WIDTH / 8)			// set sizes based on screen resolution
+		table.add(MenuMusic).width(Constants.VIEWPORT_GUI_WIDTH / 10)			// set sizes based on screen resolution
 				.height(Constants.VIEWPORT_GUI_HEIGHT / 8).pad(10);
 		MenuMusic.addListener(new ChangeListener() {							// if click, then button image to no music and reverse
 
@@ -182,7 +182,7 @@ public class MenuSreen extends AbstractGameScreen {
 		table.row();													// draw sound underneath music button
 		MenuSound = new Button(textButtonStyle_sound_sound);				// load button
 		onClickedSoundPress();
-		table.add(MenuSound).width(Constants.VIEWPORT_GUI_WIDTH / 8)		// set size based on screen resolution
+		table.add(MenuSound).width(Constants.VIEWPORT_GUI_WIDTH / 10)		// set size based on screen resolution
 				.height(Constants.VIEWPORT_GUI_HEIGHT / 8).pad(10);			// 10 pixels away from music button
 		MenuSound.addListener(new ChangeListener() {					// set what happens when users click
 
@@ -259,10 +259,13 @@ public class MenuSreen extends AbstractGameScreen {
 		textButtonStyle_option.pressedOffsetY = 1;
 
 		table.right().bottom();							// draw buttons at bottom right corner
-		table.pad(0, 0, 50, 50);						
+		table.pad(0, 0, 25, 25);						
+		
+
+		table.row();	
+		
 		MenuPlay = new Button(textButtonStyle_start);
-		table.add(MenuPlay).width(Constants.VIEWPORT_GUI_WIDTH / 5)
-				.height(Constants.VIEWPORT_GUI_HEIGHT / 5).pad(10);
+		
 		MenuPlay.addListener(new ChangeListener() {
 
 			@Override
@@ -273,11 +276,9 @@ public class MenuSreen extends AbstractGameScreen {
 
 			}
 		});
-
-		table.row();													
+		
 		ExitOptions = new Button(textButtonStyle_option);
-		table.add(ExitOptions).width(Constants.VIEWPORT_GUI_WIDTH / 5)
-				.height(Constants.VIEWPORT_GUI_HEIGHT / 5).pad(10);
+		
 		ExitOptions.addListener(new ChangeListener() {
 
 			@Override
@@ -288,6 +289,11 @@ public class MenuSreen extends AbstractGameScreen {
 			}
 
 		});
+		
+		table.add(MenuPlay).width(Constants.VIEWPORT_GUI_WIDTH / 8)
+		.height(Constants.VIEWPORT_GUI_HEIGHT / 6).pad(7);
+		table.add(ExitOptions).width(Constants.VIEWPORT_GUI_WIDTH / 8)
+		.height(Constants.VIEWPORT_GUI_HEIGHT / 6).pad(7);
 
 		return table;
 	}

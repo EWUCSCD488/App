@@ -300,7 +300,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			locationMain = center; // place where it loads
 		}
 		if (globalZoom == 0) {
-			globalZoom = 12.4f; // Scaling when it loads *****
+			globalZoom = 12.9f; // Scaling when it loads *****
 		}
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(locationMain,
 				globalZoom)); // second number is zoom unit
@@ -551,14 +551,14 @@ public class MapView extends Activity implements OnMarkerClickListener,
 								locationMain, 11.8f, position.tilt,
 								position.bearing);
 						map.animateCamera(CameraUpdateFactory
-								.newCameraPosition(newPosition), 100, null);
+								.newCameraPosition(newPosition), 250, null);
 					} else {
 						CameraPosition newPosition = new CameraPosition(
 								LastLegitLocation, position.zoom,
 								position.tilt, position.bearing);
 
 						map.animateCamera(CameraUpdateFactory
-								.newCameraPosition(newPosition), 100, null);
+								.newCameraPosition(newPosition), 250, null);
 					}
 
 					// LastLegitLocation = new LatLng(position.target.latitude,

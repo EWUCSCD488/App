@@ -17,7 +17,7 @@ public class Background extends AbstractGameObject {
 	}
 
 	private void init() {
-		dimension.set(20,15);
+		dimension.set(20,9);
 
 		regMountainLeft = Assets.instance.mountain.moutainLeft;
 		regMountainRight = Assets.instance.mountain.moutainRight;
@@ -30,7 +30,7 @@ public class Background extends AbstractGameObject {
 	private void drawMountain(SpriteBatch batch, float offsetX, float offsetY,
 			float tintColor) {
 		TextureRegion reg = null;
-		batch.setColor(tintColor, tintColor, tintColor, 1);
+		//batch.setColor(tintColor, tintColor, tintColor, 1);
 		float xRel = dimension.x * offsetX;
 		float yRel = dimension.y * offsetY;
 		// mountains span the whole level
@@ -62,7 +62,7 @@ public class Background extends AbstractGameObject {
 	@Override
 	public void render(SpriteBatch batch) {
 		// distant mountains (dark gray)
-		drawMountain(batch, -0.5f, -0.25f, 0.5f);
+		drawMountain(batch, 0, -0.19f, 0);
 		// distant mountains (gray)
 		//drawMountain(batch, 0.25f, 0.25f, 0.7f);
 		// distant mountains (light gray)

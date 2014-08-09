@@ -133,7 +133,7 @@ public class GameMusicSoundPref {
 				if(!backgroundMusic2.isPlaying()){
 					backgroundMusic1.stop();
 					backgroundMusic2.setLooping(true);
-					backgroundMusic2.setVolume(0.25f);
+					//backgroundMusic2.setVolume(0.25f);
 					backgroundMusic2.play();
 				}
 			}else{

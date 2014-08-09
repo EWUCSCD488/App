@@ -40,7 +40,7 @@ public class Airplanes extends AbstractGameObject {
 	}
 
 	private void init() {
-		dimension.set(3.0f, 1.5f);
+		dimension.set(1.5f, 0.75f);
 		regClouds = new Array<TextureRegion>();
 		regClouds.add(Assets.instance.cloud.cloud1);
 		regClouds.add(Assets.instance.cloud.cloud2);

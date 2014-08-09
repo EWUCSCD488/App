@@ -8,6 +8,6 @@ public class BadAppleAsset {
 public final AtlasRegion Specialcoin;
 	
 	public BadAppleAsset(TextureAtlas atlas){
-		Specialcoin = atlas.findRegion(Constants.APPLE_NAME);
+		Specialcoin = atlas.findRegion(Constants.BAD_APPLE_NAME);
 	}
 }

@@ -47,9 +47,9 @@ public class NameHolder {
 	protected static final String Coupon2Description = "awesome coupon 2";
 	protected static final String Coupon3Description = "awesome coupon 3";
 		
-	protected static final int Coupon1Cost = 1;										// coupon prices
-	protected static final int Coupon2Cost = 2;
-	protected static final int Coupon3Cost = 3;
+	protected static final int Coupon1Cost = 20000;										// coupon prices
+	protected static final int Coupon2Cost = 10000;
+	protected static final int Coupon3Cost = 10000;
 	
 	protected static final String pool1Description = "Buy coupon cost : "+  Coupon1Cost;			// pool descriptions
 	protected static final String pool2Description = "Buy coupon cost : "+ Coupon2Cost;

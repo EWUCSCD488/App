@@ -124,7 +124,7 @@ public class CouponActivity extends Activity{
         
         tvMessage.setTextSize(20);
         tvMessage.setGravity(Gravity.CENTER);
-        tvMessage.setText("Are you sure you want to redeem this coupon ??");				// set text
+        tvMessage.setText("Are you sure you want to redeem this coupon?");				// set text
         
         
         
@@ -140,7 +140,7 @@ public class CouponActivity extends Activity{
         layout.addView(tvMessage);
         
         
-        alert.setTitle("Comfirmation !!");					// add title
+        alert.setTitle("Comfirmation!");					// add title
         alert.setView(layout);
  
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {			// set cancel button

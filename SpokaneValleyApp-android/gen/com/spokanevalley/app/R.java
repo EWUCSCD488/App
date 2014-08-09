@@ -449,6 +449,7 @@ containing a value of this type.
         public static final int ListTextView=0x7f080025;
         public static final int book_now=0x7f080010;
         public static final int btnSurrey=0x7f080015;
+        public static final int buttonCancel=0x7f080029;
         public static final int buttonGetCoupon=0x7f080022;
         public static final int buttonGetCoupon2=0x7f080028;
         public static final int buttonMoreInfo=0x7f080023;
@@ -471,13 +472,13 @@ containing a value of this type.
         public static final int mainListView=0x7f080026;
         public static final int map=0x7f080014;
         public static final int match_parent=0x7f08000c;
-        public static final int menu_aboutus=0x7f08002a;
-        public static final int menu_howto=0x7f080029;
+        public static final int menu_aboutus=0x7f08002b;
+        public static final int menu_howto=0x7f08002a;
         public static final int monochrome=0x7f080013;
         public static final int none=0x7f080000;
         public static final int normal=0x7f080001;
         public static final int poolDesc=0x7f080027;
-        public static final int poolView=0x7f080016;
+        public static final int poolViewImage=0x7f080016;
         public static final int production=0x7f080007;
         public static final int sandbox=0x7f080008;
         public static final int satellite=0x7f080002;

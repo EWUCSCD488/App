@@ -1,7 +1,11 @@
 package com.spokanevalley.bankStore;
 
+import java.util.List;
+
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spokanevalley.app.R;
+import com.spokanevalley.database.DatabaseCustomAccess;
 
 /**
  * @author Kevin Borling
@@ -22,36 +27,54 @@ public class PoolActivity extends Activity {
  
 	private ImageView imageView;
 	private TextView textView;
-	private Button button;
+	private Button getCoupon, cancel;
+	private Context context;
+	private List<poolLocation> poolLocationList;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.pool_desc_layout);
-		
+		context = this;
+		loadFromDatabase();
+
 		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/Bubblegum.otf");
 		/* Pool Location Main Image */
-		imageView = (ImageView) findViewById(R.id.poolView);
+		imageView = (ImageView) findViewById(R.id.poolViewImage);
+		
 		/* Pool Location Information */
 		textView = (TextView) findViewById(R.id.poolDesc);
 		
-		button = (Button) findViewById(R.id.buttonGetCoupon2);
+		getCoupon = (Button) findViewById(R.id.buttonGetCoupon2);
 		
-		button.setOnClickListener(new OnClickListener() {
+		getCoupon.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				
 			} // End onClick
-		});
+		}); // End setOnClickListener
 		
+		cancel = (Button) findViewById(R.id.buttonCancel);
 		
-		button.setTypeface(face);
+		cancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			} // End onClick
+		}); // End setOnClickListener
 		
+		/* Set Font */
+		getCoupon.setTypeface(face);
+		cancel.setTypeface(face);
 		textView.setTypeface(face);
 		
 	}// End onCreate
+	
+	private void loadFromDatabase() {
+		poolLocationList = DatabaseCustomAccess.Create(context).getPoolList();
+	}
 	
 	
 } // End PoolActivity class

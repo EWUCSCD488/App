@@ -137,6 +137,7 @@ int id ListImageView 0x7f080024
 int id ListTextView 0x7f080025
 int id book_now 0x7f080010
 int id btnSurrey 0x7f080015
+int id buttonCancel 0x7f080029
 int id buttonGetCoupon 0x7f080022
 int id buttonGetCoupon2 0x7f080028
 int id buttonMoreInfo 0x7f080023
@@ -159,13 +160,13 @@ int id hybrid 0x7f080004
 int id mainListView 0x7f080026
 int id map 0x7f080014
 int id match_parent 0x7f08000c
-int id menu_aboutus 0x7f08002a
-int id menu_howto 0x7f080029
+int id menu_aboutus 0x7f08002b
+int id menu_howto 0x7f08002a
 int id monochrome 0x7f080013
 int id none 0x7f080000
 int id normal 0x7f080001
 int id poolDesc 0x7f080027
-int id poolView 0x7f080016
+int id poolViewImage 0x7f080016
 int id production 0x7f080007
 int id sandbox 0x7f080008
 int id satellite 0x7f080002

@@ -96,7 +96,7 @@ public class ListViewCustomCouponAdapter extends ArrayAdapter<gameModel> {
 			});
 
 	        /* Take the ImageView from layout and set the game image */
-	        ImageView imageGame = (ImageView) convertView.findViewById(R.id.poolView);
+	        ImageView imageGame = (ImageView) convertView.findViewById(R.id.poolViewImage);
 	        String uri = "drawable/" + game.getImagePath();
 	        int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
 	        Drawable image = context.getResources().getDrawable(imageResource);

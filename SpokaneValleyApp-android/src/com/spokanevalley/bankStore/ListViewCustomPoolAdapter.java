@@ -44,6 +44,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 	private LayoutInflater inflater;
 	private Context context;
 
+
 	/**
 	 * Constructor for pool adapter
 	 * 

@@ -62,7 +62,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	private float globalZoom = 0;
 	private LocationManager locationManager;
 	private ButtonSoundFactory sounds;
-
+	
 	//temp values
 	/*private Location location1;
 	private Location location2;

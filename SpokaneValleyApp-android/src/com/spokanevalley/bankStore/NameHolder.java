@@ -23,9 +23,9 @@ public class NameHolder {
 	protected static final String pool2ID = "Terrace View";
 	protected static final String pool3ID = "Valley Mission Pool";
 	
-	protected static final String pool1ThumbnailImagePath = "parkroadpool";								// pool thumbnails image path
-	protected static final String pool2ThumbnailImagePath = "terracepool";
-	protected static final String pool3ThumbnailImagePath = "valleymissionpool";
+	protected static final String pool1ThumbnailImagePath = "parkroadpoolthumb";								// pool thumbnails image path
+	protected static final String pool2ThumbnailImagePath = "terraceviewthumb";
+	protected static final String pool3ThumbnailImagePath = "valleymissionthumb";
 	
 	protected static final String pool1ActualImagePath = "parkroadpool_actual";								// pool actual image path
 	protected static final String pool2ActualImagePath = "terracepool_actual";

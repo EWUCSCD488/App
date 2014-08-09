@@ -2,9 +2,11 @@ package com.spokanevalley.bankStore;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.spokanevalley.app.R;
+import com.spokanevalley.bankStore.PoolActivity;
 import com.spokanevalley.database.DatabaseCustomAccess;
 
 /**
@@ -38,7 +41,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 	private int resource;
 	private LayoutInflater inflater;
 	private Context context;
-	
+
 	/**
 	 * Constructor for pool adapter
 	 * 
@@ -77,13 +80,11 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 	        description.setText(String.valueOf(game.getDescription()));
 
 	        /* Take the ImageView from layout and set the game image */
-	        ImageView imageGame = (ImageView) convertView.findViewById(R.id.imageView1);
+	        ImageView imageGame = (ImageView) convertView.findViewById(R.id.poolView);
 	        String uri = "drawable/" + game.getImagePath();
 	        int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
 	        final Drawable image = context.getResources().getDrawable(imageResource);
 	        imageGame.setImageDrawable(image);
-	        
-	        
 	        
 	        Button buyCoupon = (Button)convertView.findViewById(R.id.buttonGetCoupon);
 	        buyCoupon.setOnClickListener(new OnClickListener() {
@@ -94,9 +95,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 					
 					showAlert(image,game);
 				}
-			});
-	        
-	        
+			}); 
 	        
 	        return convertView;
 	    }

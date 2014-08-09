@@ -27,13 +27,14 @@ public class PoolActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.pool_desc_layout);
 		
 		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/Bubblegum.otf");
 		/* Pool Location Main Image */
-		imageView = (ImageView) findViewById(R.id.ListImageView);
+		imageView = (ImageView) findViewById(R.id.poolView);
 		/* Pool Location Information */
-		textView = (TextView ) findViewById(R.id.ListTextView);
+		textView = (TextView) findViewById(R.id.poolDesc);
 		
 		button = (Button) findViewById(R.id.buttonGetCoupon2);
 		
@@ -47,7 +48,9 @@ public class PoolActivity extends Activity {
 		
 		
 		button.setTypeface(face);
+		
 		textView.setTypeface(face);
+		
 	}// End onCreate
 	
 	

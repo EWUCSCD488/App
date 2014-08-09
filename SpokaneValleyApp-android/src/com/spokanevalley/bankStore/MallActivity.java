@@ -28,13 +28,10 @@ import com.spokanevalley.database.DatabaseCustomAccess;
 
 public class MallActivity extends Activity {
 	
-	
 	private ListView listView;
 	private ImageView listImageView;
 	private TextView listTextView;
 	private Context context;
-	private Button moreInfo;
-	private LayoutInflater inflater;
 	private List<poolLocation> poolLocationList;
 	public static final String TAG = MallActivity.class.getName();
 	private int redeemedCoupon;
@@ -47,9 +44,7 @@ public class MallActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listviewactivity);
 		context = this;
-		this.inflater = LayoutInflater.from(context);
 		loadFromDatabase();
-		
 		
 		// cook
 		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/Bubblegum.otf");
@@ -62,24 +57,6 @@ public class MallActivity extends Activity {
 		
 		listTextView = (TextView) findViewById(R.id.ListTextView);
 		changeScoreDisplaying();
-		
-		
-		/* Get list_item view to assign action to moreInfo button */
-		View itemView = (LinearLayout)  this.inflater.inflate(R.layout.list_item, null);
-		moreInfo = (Button)itemView.findViewById(R.id.buttonMoreInfo);
-		/* Assign Click Event to "More Info" button */
-        moreInfo.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				//buttonsounds.playsound1();			// play button sound
-				System.out.println("More Info Clicked");
-				/* Must create new Intent to launch PoolActivity */
-				Intent intent = new Intent(MallActivity.this.getApplicationContext(), PoolActivity.class);
-				startActivity(intent);
-			}
-		});
-		
 		
 		listView.getAdapter().registerDataSetObserver(new DataSetObserver() {
 			@Override

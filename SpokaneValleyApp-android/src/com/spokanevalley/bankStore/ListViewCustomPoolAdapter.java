@@ -97,6 +97,23 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 				}
 			}); 
 	        
+	        
+
+			Button moreInfo = (Button)convertView.findViewById(R.id.buttonMoreInfo);
+			/* Assign Click Event to "More Info" button */
+			
+	        moreInfo.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Activity activity = (MallActivity) getContext();
+					buttonsounds.playsound1();			// play button sound
+					Intent intent = new Intent(context, PoolActivity.class);
+					activity.startActivity(intent);
+				}
+			});
+	        
+      
 	        return convertView;
 	    }
 	

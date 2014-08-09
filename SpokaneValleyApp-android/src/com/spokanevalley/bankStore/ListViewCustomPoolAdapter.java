@@ -183,7 +183,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 		
 		private void comfirmationPromptBuyCoupon(final Model game){
 			AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-            builder1.setMessage("Are you sure you want to buy this coupon ? \n Please redeem coupon in the bank");
+            builder1.setMessage("Are you sure you want to buy this coupon? \n Please redeem the coupon in the bank");
             builder1.setCancelable(true);
             builder1.setPositiveButton("Yes",
                     new DialogInterface.OnClickListener() {
@@ -212,7 +212,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 		
 		private void comfirmationPromptBuyCouponFailed(){
 			AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-            builder1.setMessage("You don't have enough point to get this coupon");
+            builder1.setMessage("You don't have enough points to get this coupon");
             builder1.setCancelable(false);
             builder1.setPositiveButton("Okay",
                     new DialogInterface.OnClickListener() {

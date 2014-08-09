@@ -44,7 +44,7 @@ public class PoolActivity extends Activity {
 		
 		/* Pool Location Information */
 		textView = (TextView) findViewById(R.id.poolDesc);
-		
+
 		getCoupon = (Button) findViewById(R.id.buttonGetCoupon2);
 		
 		getCoupon.setOnClickListener(new OnClickListener() {

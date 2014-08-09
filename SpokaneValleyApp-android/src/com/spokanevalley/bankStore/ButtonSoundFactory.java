@@ -23,7 +23,7 @@ public class ButtonSoundFactory {
 		playsound5 = MediaPlayer.create(context, R.raw.button_5);
 		playsound6 = MediaPlayer.create(context, R.raw.button_6);
 		playsound7 = MediaPlayer.create(context, R.raw.button_7);
-		playbackground = MediaPlayer.create(context, R.raw.backgroundmusic2);
+		playbackground = MediaPlayer.create(context, R.raw.background);
 
 
 	}

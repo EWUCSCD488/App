@@ -509,14 +509,15 @@ containing a value of this type.
         public static final int coupon_menu=0x7f0c0000;
     }
     public static final class raw {
-        public static final int backgroundmusic2=0x7f050000;
-        public static final int button_1=0x7f050001;
-        public static final int button_2=0x7f050002;
-        public static final int button_3=0x7f050003;
-        public static final int button_4=0x7f050004;
-        public static final int button_5=0x7f050005;
-        public static final int button_6=0x7f050006;
-        public static final int button_7=0x7f050007;
+        public static final int background=0x7f050000;
+        public static final int backgroundmusic2=0x7f050001;
+        public static final int button_1=0x7f050002;
+        public static final int button_2=0x7f050003;
+        public static final int button_3=0x7f050004;
+        public static final int button_4=0x7f050005;
+        public static final int button_5=0x7f050006;
+        public static final int button_6=0x7f050007;
+        public static final int button_7=0x7f050008;
     }
     public static final class string {
         public static final int aboutus=0x7f060024;

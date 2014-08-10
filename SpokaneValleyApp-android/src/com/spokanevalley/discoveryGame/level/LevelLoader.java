@@ -144,14 +144,15 @@ public class LevelLoader {
 		}// first for loop
 
 		// decoration
-		// clouds = new Clouds(pixmap.getWidth());
-		// clouds.position.set(0, 2);
-		// mountains = new Mountains(pixmap.getWidth());
-		// mountains.position.set(pixmap.getWidth(), pixmap.getHeight());
+		// decoration
+				airplanes = new Airplanes(pixmap.getWidth()* numMap);
+				airplanes.position.set(0, 2);
+				background = new Background(pixmap.getWidth() * numMap);
+				background.position.set(-3, -3);
 
 		// free memory
 		pixmap.dispose();
-		Gdx.app.debug(TAG, "level '" + filename + "' loaded");
+		//Gdx.app.debug(TAG, "level '" + filename + "' loaded");
 
 	}
 
@@ -239,7 +240,7 @@ public class LevelLoader {
 
 		// free memory
 		pixmap.dispose();
-		Gdx.app.debug(TAG, "level '" + filename + "' loaded");
+		//Gdx.app.debug(TAG, "level '" + filename + "' loaded");
 
 	}
 
@@ -266,14 +267,14 @@ public class LevelLoader {
 	}
 
 	public void update(float deltaTime) {
-
+		airplanes.update(deltaTime);
 		for (RocketRocks rock : rocketRocks)
 			rock.update(deltaTime);
 		for (Apples goldCoin : apples)
 			goldCoin.update(deltaTime);
 		for (BadApples feather : badApples)
 			feather.update(deltaTime);
-		airplanes.update(deltaTime);
+		
 
 		delay += deltaTime;
 		if (delay > 1.0f)

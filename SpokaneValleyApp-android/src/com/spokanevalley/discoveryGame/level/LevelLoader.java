@@ -1,16 +1,19 @@
 package com.spokanevalley.discoveryGame.level;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.spokanevalley.discoveryGame.Constants;
 import com.spokanevalley.discoveryGame.drawingHandlers.AbstractGameObject;
 import com.spokanevalley.discoveryGame.drawingHandlers.Airplanes;
 import com.spokanevalley.discoveryGame.drawingHandlers.Apples;
-import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour;
 import com.spokanevalley.discoveryGame.drawingHandlers.Background;
-import com.spokanevalley.discoveryGame.drawingHandlers.RocketRocks;
 import com.spokanevalley.discoveryGame.drawingHandlers.BadApples;
+import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour;
+import com.spokanevalley.discoveryGame.drawingHandlers.RocketRocks;
 
 public class LevelLoader {
 	public static final String TAG = LevelLoader.class.getName();
@@ -46,7 +49,7 @@ public class LevelLoader {
 	public Array<Apples> apples;
 	public Array<BadApples> badApples;
 	private int numMap = 1;
-	private int nextMapoffset = 8;
+	private int nextMapoffset = 10;
 
 	public LevelLoader(String filename) {
 		init(filename);
@@ -55,7 +58,19 @@ public class LevelLoader {
 	}
 
 	public void loadNextMap(){
-		init1("disvcoveryAssets/levels/level-01test2.png");
+		Random rand = new Random();
+
+		int  n = rand.nextInt(Constants.NUM_MAP) + 1;
+		if(n == 1)
+			init1(Constants.LEVEL_02);
+		else if (n == 2)
+			init1(Constants.LEVEL_03);
+		else if (n == 3)
+			init1(Constants.LEVEL_04);
+		else if (n == 4){
+			init1(Constants.LEVEL_05);
+		}
+		
 		numMap++;
 	}
 	
@@ -89,7 +104,7 @@ public class LevelLoader {
 						obj = new RocketRocks();
 						float heightIncreaseFactor = 0.25f;
 						offsetHeight = -2.5f;
-						obj.position.set(pixelX + pixmap.getWidth()*numMap - nextMapoffset,
+						obj.position.set(pixelX + (pixmap.getWidth() - nextMapoffset)*numMap,
 								baseHeight * obj.dimension.y
 										* heightIncreaseFactor + offsetHeight);
 						rocketRocks.add((RocketRocks) obj);
@@ -100,7 +115,7 @@ public class LevelLoader {
 																			// coin
 					obj = new Apples();
 					offsetHeight = -0.75f;
-					obj.position.set(pixelX + pixmap.getWidth()*numMap - nextMapoffset, baseHeight
+					obj.position.set(pixelX + (pixmap.getWidth() - nextMapoffset)*numMap, baseHeight
 							* obj.dimension.y + offsetHeight);
 					apples.add((Apples) obj);
 					// } else if
@@ -110,17 +125,17 @@ public class LevelLoader {
 																				// coin
 					obj = new BadApples();
 					offsetHeight = -0.75f;
-					obj.position.set(pixelX + pixmap.getWidth()*numMap - nextMapoffset, baseHeight
+					obj.position.set(pixelX + (pixmap.getWidth() - nextMapoffset)*numMap, baseHeight
 							* obj.dimension.y + offsetHeight);
 					badApples.add((BadApples) obj);
 				} else {
-					int r = 0xff & (currentPixel >>> 24); // red color channel
-					int g = 0xff & (currentPixel >>> 16); // green color channel
-					int b = 0xff & (currentPixel >>> 8); // blue color channel
-					int a = 0xff & currentPixel; // alpha channel
-					Gdx.app.error(TAG, "Unknown object at x<" + pixelX + "> y<"
-							+ pixelY + ">: r<" + r + "> g<" + g + "> b<" + b
-							+ "> a<" + a + ">");
+					//int r = 0xff & (currentPixel >>> 24); // red color channel
+					//int g = 0xff & (currentPixel >>> 16); // green color channel
+					//int b = 0xff & (currentPixel >>> 8); // blue color channel
+					//int a = 0xff & currentPixel; // alpha channel
+					//Gdx.app.error(TAG, "Unknown object at x<" + pixelX + "> y<"
+					//		+ pixelY + ">: r<" + r + "> g<" + g + "> b<" + b
+					//		+ "> a<" + a + ">");
 				}
 
 				lastPixel = currentPixel;
@@ -219,7 +234,7 @@ public class LevelLoader {
 		// decoration
 		airplanes = new Airplanes(pixmap.getWidth());
 		airplanes.position.set(0, 2);
-		background = new Background(pixmap.getWidth() * 2);
+		background = new Background(pixmap.getWidth() * Constants.NUM_MAP);
 		background.position.set(-3, -3);
 
 		// free memory

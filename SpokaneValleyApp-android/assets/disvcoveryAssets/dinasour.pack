@@ -1,0 +1,12 @@
+
+dinasour.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+dino
+  rotate: false
+  xy: 1, 1
+  size: 2703, 2665
+  orig: 2703, 2665
+  offset: 0, 0
+  index: -1

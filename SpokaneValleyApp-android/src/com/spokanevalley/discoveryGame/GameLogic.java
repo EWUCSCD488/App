@@ -11,14 +11,16 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.spokanevalley.database.DatabaseCustomAccess;
 import com.spokanevalley.discoveryGame.Screen.GameMusicSoundPref;
 import com.spokanevalley.discoveryGame.Screen.MenuSreen;
 import com.spokanevalley.discoveryGame.drawingHandlers.Apples;
+import com.spokanevalley.discoveryGame.drawingHandlers.BadApples;
 import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour;
 import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour.JUMP_STATE;
 import com.spokanevalley.discoveryGame.drawingHandlers.RocketRocks;
-import com.spokanevalley.discoveryGame.drawingHandlers.BadApples;
 import com.spokanevalley.discoveryGame.level.LevelLoader;
 
 public class GameLogic implements GestureListener {
@@ -33,7 +35,7 @@ public class GameLogic implements GestureListener {
 	private Rectangle r1 = new Rectangle();
 	private Rectangle r2 = new Rectangle();
 	private float timeLeftGameOverDelay;
-
+	private Task task;
 	private Game game;
 
 	public GameLogic(Game game) {
@@ -62,6 +64,8 @@ public class GameLogic implements GestureListener {
 		lives = Constants.LIVES_START;
 		initLevel();
 		DatabaseCustomAccess.Create(context).saveInitialScoretoDatabase_DiscoveryGame(score);
+		
+		
 
 	}
 
@@ -155,7 +159,17 @@ public class GameLogic implements GestureListener {
 	private void initLevel() {
 		level = null;
 		level = new LevelLoader(Constants.LEVEL_01);
+		
+		 Timer.schedule(task = new Task(){
+             @Override
+             public void run() {
+            	 level.loadNextMap();
+             }
+         }
+         ,22,22);
+		
 		score = 0;
+		
 		cameraHelper.setTarget(level.dinasour);
 	}
 
@@ -199,6 +213,7 @@ public class GameLogic implements GestureListener {
 				lives--;
 				if (isGameOver()){
 					GameMusicSoundPref.create().playFalling();
+					task.cancel();
 					timeLeftGameOverDelay = Constants.TIME_DELAY_GAME_OVER;
 				}else {
 					initLevel();

@@ -9,13 +9,13 @@ public class Constants {
 		public static final float VIEWPORT_GUI_HEIGHT = 480.0f;
 		
 		public static final String TEXTURE_ATLAS_OBJECTS = "disvcoveryAssets/game.pack";
-		public static final String TEXTURE_ATLAS_DINASOUR = "disvcoveryAssets/Dinasour.pack";
+		public static final String TEXTURE_ATLAS_DINASOUR = "disvcoveryAssets/dinasour.pack";
 		
 		public static final String MENU_BACKGROUND = "disvcoveryAssets/images/background.jpg";
 		public static final String MENU_ATLAS = "disvcoveryAssets/images/menutextureatlas.pack";
 		public static final String PREFERENCES = "uhhihi";
 		
-		public static final String DINASOUR_NAME = "dinoright";				// need to change later
+		public static final String DINASOUR_NAME = "dino";				// need to change later
 		
 		public static final String GROUND_EDGE = "rock_edge";
 		public static final String GROUND_MIDDLE = "rock_middle";
@@ -33,12 +33,18 @@ public class Constants {
 		public static final String BACKGROUND_RIGHT = "background_right";
 		
 		// Location of image file for level 01
-		 public static final String LEVEL_01 = "disvcoveryAssets/levels/level-01test1.png";
+		public static final String LEVEL_01 = "disvcoveryAssets/levels/level-01test1.png";
+		public static final String LEVEL_02 = "disvcoveryAssets/levels/level-01test2.png";
+		public static final String LEVEL_03 = "disvcoveryAssets/levels/Map1.png";
+		public static final String LEVEL_04 = "disvcoveryAssets/levels/Map2.png";
+		public static final String LEVEL_05 = "disvcoveryAssets/levels/Map3.png";
 		 
 		 public static final int LIVES_START = 1;
 		public static final String GAMEFONTS = "fonts/funfont.fnt";
 		public static final float ITEM_FEATHER_POWERUP_DURATION = 5;
 		public static final float TIME_DELAY_GAME_OVER = 3;
+		public static final float TIMER_GENERATE_NEW_MAP = 20;
+		public static final int NUM_MAP = 4;
 		
 		// Sound and music 
 		public static final String BACKGROUNDMUSIC1 = "disvcoveryAssets/sounds/backgroundmusic1.mp3";

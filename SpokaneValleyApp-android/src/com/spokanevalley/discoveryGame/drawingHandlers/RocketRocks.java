@@ -6,7 +6,8 @@ import com.spokanevalley.discoveryGame.Atlas_handlers.Assets;
 
 public class RocketRocks extends AbstractGameObject {
 	
-	private TextureRegion regEdge;
+	private TextureRegion regEdgeLeft;
+	private TextureRegion regEdgeRight;
 	private TextureRegion regMiddle;
 	private int length;
 	
@@ -16,7 +17,7 @@ public class RocketRocks extends AbstractGameObject {
 	
 	private void init() {
 		dimension.set(1, 1.5f);
-		regEdge = Assets.instance.ground.edge;
+		regEdgeLeft = Assets.instance.ground.edge;
 		regMiddle = Assets.instance.ground.middle;
 		// starting length at 1
 		length = 1;
@@ -40,7 +41,7 @@ public class RocketRocks extends AbstractGameObject {
 		float relY = 0;
 		
 		// draw left edge
-		reg = regEdge;
+		reg = regEdgeLeft;
 		relX -=dimension.x /4;
 		
 		batch.draw(reg.getTexture(),
@@ -70,7 +71,7 @@ public class RocketRocks extends AbstractGameObject {
 		}
 		
 		// Draw right edge
-		 reg = regEdge;
+		 reg = regEdgeLeft;
 		 
 		 batch.draw(reg.getTexture(),
 				 position.x + relX, position.y + relY,

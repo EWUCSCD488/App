@@ -1,19 +1,24 @@
 package com.spokanevalley.bankStore;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.spokanevalley.app.R;
 import com.spokanevalley.database.DatabaseCustomAccess;
 
@@ -115,6 +120,7 @@ public class CouponActivity extends Activity{
 	 * @param view of application
 	 */
 	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	private void showAlert(final String id,View v) {
         AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
         LinearLayout layout       = new LinearLayout(v.getContext());
@@ -129,15 +135,22 @@ public class CouponActivity extends Activity{
         
         
         image.setImageDrawable(getDrawablefromCouponCostFactory(id));							// set image
-        int width = 350 ;
-        int height = 350;
-        LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
-        image.setLayoutParams(parms);
+		WindowManager wm = (WindowManager)getApplicationContext()
+				.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		int width = size.x;
+		int height = size.y;
+		LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width
+				- (width / 5), width - (width / 5));
+		image.setLayoutParams(parms);
         
         layout.setOrientation(LinearLayout.VERTICAL);			// set layout
-        layout.addView(image);
+        
         layout.setGravity(Gravity.CENTER);
         layout.addView(tvMessage);
+        layout.addView(image);
         
         
         alert.setTitle("Comfirmation!");					// add title

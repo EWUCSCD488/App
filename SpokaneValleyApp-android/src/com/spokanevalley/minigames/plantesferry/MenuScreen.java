@@ -20,12 +20,10 @@ public class MenuScreen implements Screen {
 	private Stage stage;
 	private MenuTable menuTable;
 	private SpriteBatch paramSpriteBatch;
-	private GameLabel welcomeLabel;
 	/* Buttons */
 	private GameTextButton startGameButton;
 	private GameTextButton endGameButton;
 	/* Table Values */
-	private final float buttonPaddingBottom1 = 25.0F;
 	private final float buttonPaddingBottom2 = 10.0F;
 
 	/*
@@ -79,10 +77,15 @@ public class MenuScreen implements Screen {
 	@Override
 	public void show() {
 		Gdx.input.setInputProcessor(this.stage);
+		
+		Assets.backgroundMusic.play();
+		Assets.backgroundMusic.setLooping(true);
+		Assets.backgroundMusic.setVolume(0.25f);
 		/* Start Game button Listener */
 		this.startGameButton.addListener(new InputListener() {
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
+				Assets.backgroundMusic.stop();
 				setup.setScreen(setup.gameScreen);
 				Assets.buttonSound.stop();
 				Assets.buttonSound.play();

@@ -122,6 +122,7 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
 
 		// Set background music and loop it forever
 		Assets.backgroundMusic.play();
+		Assets.backgroundMusic.setVolume(1.0f);
 		Assets.backgroundMusic.setLooping(true);
 	} // End displayStats
 

@@ -22,7 +22,6 @@ public class GameOverScreen implements Screen {
 	private MenuTable menuTable;
 	private SpriteBatch paramSpriteBatch;
 	/* Labels */
-	private GameLabel gameoverLabel;
 	private GameLabel scoreLabel;
 	private GameLabel highscoreLabel;
 	/* Buttons */

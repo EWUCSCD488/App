@@ -58,7 +58,7 @@ public class CouponActivity extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				buttonSounds.playsound7();
+				buttonSounds.playsound1();
 				//showAlert(Couponid,v);
 			}
 		});
@@ -68,7 +68,7 @@ public class CouponActivity extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				buttonSounds.playsound5();
+				buttonSounds.playsound2();
 				showAlert(Couponid,v);
 			}
 		});
@@ -79,7 +79,7 @@ public class CouponActivity extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				buttonSounds.playsound6();
+				buttonSounds.playsound1();
 				finish();					// close activity
 			}
 		});
@@ -153,14 +153,14 @@ public class CouponActivity extends Activity{
         layout.addView(image);
         
         
-        alert.setTitle("Comfirmation!");					// add title
+        alert.setTitle("Confirmation!");					// add title
         alert.setView(layout);
  
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {			// set cancel button
  
             @Override
             public void onClick(DialogInterface dialog, int which) {
-            	buttonSounds.playsound6();
+            	buttonSounds.playsound1();
                 dialog.cancel();
            
             }
@@ -173,7 +173,7 @@ public class CouponActivity extends Activity{
             	// delete coupon from couponList
             	DatabaseCustomAccess.Create(getApplicationContext()).updatePoolwithBoughtCoupon(CouponCostFactory.create().getTheRightPoolFromCoupon(id), false);	// update location in database with true gotCoupon
                 DatabaseCustomAccess.Create(getApplicationContext()).updateCouponwithBoughtCoupon(id, false);
-                buttonSounds.playsound5();
+                buttonSounds.playsound3();
             	dialog.cancel();
             	finish();
             }

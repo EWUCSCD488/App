@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
@@ -98,7 +99,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 
 			@Override
 			public void onClick(View v) {
-				buttonsounds.playsound1(); // play button sound
+				buttonsounds.playsound2(); // play button sound
 
 				showAlert(image, game);
 			}
@@ -152,7 +153,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 		image.setLayoutParams(parms);
 		layout.addView(image);
 
-		alert.setTitle("Confirmation !");
+		alert.setTitle("Confirmation!");
 		alert.setView(layout);
 
 		alert.setNegativeButton("Cancel",
@@ -160,7 +161,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						buttonsounds.playsound3();
+						buttonsounds.playsound1();
 						dialog.cancel();
 					}
 				});
@@ -218,13 +219,13 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 										CouponCostFactory.create()
 												.getTheRightCouponFromPool(
 														game.getTitle()), true);
-						buttonsounds.playsound2();
+						buttonsounds.playsound3();
 						dialog.cancel();
 					}
 				});
 		builder1.setNegativeButton("No", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				buttonsounds.playsound3();
+				buttonsounds.playsound1();
 				dialog.cancel();
 			}
 		});
@@ -240,7 +241,7 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 		builder1.setPositiveButton("Okay",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						buttonsounds.playsound2();
+						buttonsounds.playsound1();
 						dialog.cancel();
 					}
 				});

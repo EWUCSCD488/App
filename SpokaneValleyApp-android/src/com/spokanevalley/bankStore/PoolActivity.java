@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -76,7 +75,7 @@ public class PoolActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				buttonSounds.playsound3();
+				buttonSounds.playsound1();
 				finish();
 			} // End onClick
 		}); // End setOnClickListener
@@ -98,7 +97,7 @@ public class PoolActivity extends Activity {
 			comfirmationPromptBuyCoupon(poolID);
 		}else{
 			// don't buy coupon
-			// prompt user that they don't have anough points
+			// prompt user that they don't have enough points
 			comfirmationPromptBuyCouponFailed();
 		}
 	}
@@ -116,7 +115,7 @@ public class PoolActivity extends Activity {
 				//notifyDataSetChanged();					// update location
 				DatabaseCustomAccess.Create(context).updatePoolwithBoughtCoupon(poolID, true);	// update location in database with true gotCoupon
                 DatabaseCustomAccess.Create(context).updateCouponwithBoughtCoupon(CouponCostFactory.create().getTheRightCouponFromPool(poolID), true);
-                buttonSounds.playsound2();
+                buttonSounds.playsound3();
                 finish();
 				dialog.cancel();
             }
@@ -124,7 +123,7 @@ public class PoolActivity extends Activity {
         builder1.setNegativeButton("No",
                 new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-            	buttonSounds.playsound3();
+            	buttonSounds.playsound1();
                 dialog.cancel();
             }
         });

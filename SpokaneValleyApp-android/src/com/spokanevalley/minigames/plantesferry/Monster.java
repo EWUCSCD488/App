@@ -39,7 +39,7 @@ public class Monster extends Actor {
 		}
 		int rare = MathUtils.random(0, 25);
 
-		if (rare == 25)
+		if (rare > 20)
 			setName(rareMonster);
 
 		// Adjust speed of Monsters here :(1.5, 4.5) = Most Balanced Speed

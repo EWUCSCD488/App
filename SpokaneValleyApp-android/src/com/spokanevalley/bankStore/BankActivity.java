@@ -2,19 +2,17 @@ package com.spokanevalley.bankStore;
 
 import java.util.List;
 
-import com.spokanevalley.app.R;
-import com.spokanevalley.database.DatabaseCustomAccess;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.spokanevalley.app.R;
+import com.spokanevalley.database.DatabaseCustomAccess;
 
 /**
  * Bank store Acitivity
@@ -80,7 +78,7 @@ public class BankActivity extends Activity {
 	}
 
 	protected void changeScoreDisplaying() {
-		if(CouponList.size() <=1)
+		if(CouponList.size() == 1)
 			listTextView.setText(CouponList.size() + " coupon");
 		else
 			listTextView.setText(CouponList.size() + " coupons");

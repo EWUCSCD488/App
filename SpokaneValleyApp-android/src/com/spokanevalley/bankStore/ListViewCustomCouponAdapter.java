@@ -85,7 +85,7 @@ public class ListViewCustomCouponAdapter extends ArrayAdapter<gameModel> {
 				
 				@Override
 				public void onClick(View v) {
-					buttoSounds.playsound4();
+					buttoSounds.playsound2();
 					Intent intent = new Intent(context,CouponActivity.class);
 					intent.putExtra(COUPON_ID, game.getTitle());
 					((Activity) context).startActivityForResult(intent, REQUEST_CODE);

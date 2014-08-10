@@ -46,15 +46,12 @@ public class GameOverScreen implements Screen {
 		this.menuTable = new MenuTable();
 
 		/* Create Labels and Buttons */
-		this.gameoverLabel = new GameLabel("Game Over");
 		this.scoreLabel = new GameLabel("Score: " + score);
 		this.highscoreLabel = new GameLabel("High Score: " + maxScore);
 		this.restartGameButton = new GameTextButton("Try Again");
 		this.endGameButton = new EndGameButton("Return to Map");
 
 		/* Add buttons and score labels to table */
-		this.menuTable.add(this.gameoverLabel).expandX().center()
-				.padBottom(this.buttonPaddingBottom1).row();
 		this.menuTable.add(this.scoreLabel).expandX().center()
 				.padBottom(this.buttonPaddingBottom2).row();
 		this.menuTable.add(this.highscoreLabel).expandX().center()
@@ -89,7 +86,7 @@ public class GameOverScreen implements Screen {
 		this.stage.act(delta);
 		/* Draw Background Image */
 		this.paramSpriteBatch.begin();
-		this.paramSpriteBatch.draw(Assets.menubg, 0.0F, 0.0f,
+		this.paramSpriteBatch.draw(Assets.gameoverMenubg, 0.0F, 0.0f,
 				Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		this.paramSpriteBatch.end();
 		this.stage.draw();

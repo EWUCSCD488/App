@@ -38,12 +38,11 @@ public class MenuScreen implements Screen {
 		this.menuTable = new MenuTable();
 		this.paramSpriteBatch = new SpriteBatch();
 
-		this.welcomeLabel = new GameLabel("Welcome to Plante's Ferry");
+		//this.welcomeLabel = new GameLabel("Welcome to Plante's Ferry");
 		this.startGameButton = new GameTextButton("Start Game");
 		this.endGameButton = new EndGameButton("Return to Map");
 
-		this.menuTable.add(this.welcomeLabel).expandX().center()
-				.padBottom(this.buttonPaddingBottom1).row();
+		//this.menuTable.add(this.welcomeLabel).expandX().center().padBottom(this.buttonPaddingBottom1).row();
 		this.menuTable.add(this.startGameButton).expandX().center()
 				.padBottom(this.buttonPaddingBottom2).row();
 		this.menuTable.add(this.endGameButton).expandX().center().row();
@@ -71,7 +70,7 @@ public class MenuScreen implements Screen {
 		this.stage.act(delta);
 		/* Draw Background Image */
 		this.paramSpriteBatch.begin();
-		paramSpriteBatch.draw(Assets.menubg, 0.0F, 0.0f,
+		paramSpriteBatch.draw(Assets.startMenubg, 0.0F, 0.0f,
 				Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		this.paramSpriteBatch.end();
 		this.stage.draw();

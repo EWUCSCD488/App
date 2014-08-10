@@ -14,8 +14,8 @@ public class GameTextButtonStyle extends TextButtonStyle {
 	private final float buttonPressOffsetX = 1.0F;
 	private final float buttonPressOffsetY = -1.0F;
 	/* Set Button String to the attributes in buttons.pack */
-	private final String upButton = "simplebutton";
-	private final String downButton = "simplebutton2";
+	private final String upButton = "buttonon";
+	private final String downButton = "buttonoff";
 	private Skin skin;
 	private BitmapFont buttonFont;
 

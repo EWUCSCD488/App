@@ -141,20 +141,14 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
 	public void pause() {
 		Assets.backgroundMusic.pause();
 		this.paramSpriteBatch.begin();
-		this.paramSpriteBatch.draw(Assets.menubg, 0.0F, 0.0f,
+		this.paramSpriteBatch.draw(Assets.pauseMenubg, 0.0F, 0.0f,
 				Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		this.scoreFont.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		this.scoreFont.setScale(2.5f);
 		this.scoreFont
-				.draw(this.paramSpriteBatch, "Paused",
-						Gdx.graphics.getWidth() / 2.0F,
+				.draw(this.paramSpriteBatch, "Tap Once to Resume",
+						Gdx.graphics.getWidth() / 2.8F,
 						Gdx.graphics.getHeight() / 2.0F);
-		this.paramSpriteBatch.end();
-		this.paramSpriteBatch.begin();
-		this.scoreFont.setScale(1.5f);
-		this.scoreFont.draw(this.paramSpriteBatch, "Tap Once to resume",
-				(Gdx.graphics.getWidth() / 2.0F) - 50.0F,
-				(Gdx.graphics.getHeight() / 2.0F) - 100.0F);
 		this.paramSpriteBatch.end();
 	} // End pause
 

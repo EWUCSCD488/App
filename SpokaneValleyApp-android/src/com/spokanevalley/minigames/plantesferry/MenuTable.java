@@ -1,5 +1,6 @@
 package com.spokanevalley.minigames.plantesferry;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 /*
@@ -9,5 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 public class MenuTable extends Table {
 	public MenuTable() {
 		this.setFillParent(true);
+		this.padTop(65.0f);
+		this.padRight(25.0f);
 	} // End Constructor
 } // End MenuTable class

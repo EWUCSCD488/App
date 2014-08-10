@@ -3,6 +3,7 @@ package com.spokanevalley.minigames.plantesferry;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,26 +14,29 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class Assets {
 	/* Atlas/Texture Region Declarations */
-	private static TextureAtlas atlas;
-	public static TextureAtlas skinAtlas;
-	public static TextureRegion playerDino;
-	public static TextureRegion monster;
-	public static TextureRegion rareMonster;
-	public static TextureRegion apple;
-	public static TextureRegion bubble;
-	public static TextureRegion underwaterbg;
-	public static TextureRegion menubg;
+	private static TextureAtlas spriteAtlas;
+	private static TextureAtlas bgAtlas;
+	protected static TextureAtlas skinAtlas;
+	protected static TextureRegion playerDino;
+	protected static TextureRegion monster;
+	protected static TextureRegion rareMonster;
+	protected static TextureRegion apple;
+	protected static TextureRegion bubble;
+	protected static TextureRegion underwaterbg;
+	protected static TextureRegion pauseMenubg;
+	protected static TextureRegion startMenubg;
+	protected static TextureRegion gameoverMenubg;
 	/* Music/Sound Effect Declarations */
-	public static Music backgroundMusic;
-	public static Sound buttonSound;
-	public static Sound appleSound;
-	public static Sound monsterSound;
-	public static Sound invinsibleSound;
-	public static Sound invinsibleBubbleleSound;
+	protected static Music backgroundMusic;
+	protected static Sound buttonSound;
+	protected static Sound appleSound;
+	protected static Sound monsterSound;
+	protected static Sound invinsibleSound;
+	protected static Sound invinsibleBubbleleSound;
 	/* Game Font Declarations */
-	public static BitmapFont scoreFont;
-	public static BitmapFont buttonFont;
-	public static BitmapFont labelFont;
+	protected static BitmapFont scoreFont;
+	protected static BitmapFont buttonFont;
+	protected static BitmapFont labelFont;
 
 	/*
 	 * Load the image atlas, audio, score, and sprite images. Located in assets
@@ -40,10 +44,12 @@ public class Assets {
 	 */
 	public static void load() {
 		/* Load Image Atlas */
-		atlas = new TextureAtlas(
+		spriteAtlas = new TextureAtlas(
 				Gdx.files.internal("plantesferryAssets/gfx/texture.atlas"));
+		bgAtlas = new TextureAtlas(
+				Gdx.files.internal("plantesferryAssets/gfx/bgtexture.atlas"));
 		skinAtlas = new TextureAtlas(
-				Gdx.files.internal("plantesferryAssets/gfx/buttons.pack"));
+				Gdx.files.internal("plantesferryAssets/gfx/button.pack"));
 		/* Load Sound Effects */
 		backgroundMusic = Gdx.audio.newMusic(Gdx.files
 				.internal("plantesferryAssets/sfx/rainbowbunchie.mp3"));
@@ -59,13 +65,15 @@ public class Assets {
 				.internal("plantesferryAssets/sfx/youch.wav"));
 
 		/* Load Character / Background Sprites */
-		underwaterbg = atlas.findRegion("underwater");
-		menubg = atlas.findRegion("menu");
-		playerDino = atlas.findRegion("waterdino");
-		monster = atlas.findRegion("seaurchin");
-		rareMonster = atlas.findRegion("whalemonster");
-		apple = atlas.findRegion("apple32");
-		bubble = atlas.findRegion("bubble64");
+		underwaterbg = spriteAtlas.findRegion("underwater");
+		startMenubg = bgAtlas.findRegion("startmenu");
+		pauseMenubg = bgAtlas.findRegion("pausemenu");
+		gameoverMenubg = bgAtlas.findRegion("gameovermenu");
+		playerDino = spriteAtlas.findRegion("waterdino");
+		monster = spriteAtlas.findRegion("seaurchin");
+		rareMonster = spriteAtlas.findRegion("whalemonster");
+		apple = spriteAtlas.findRegion("apple32");
+		bubble = spriteAtlas.findRegion("bubble64");
 		/* Load Game Font */
 		scoreFont = new BitmapFont(Gdx.files.internal("fonts/gamefont.fnt"),
 				Gdx.files.internal("fonts/gamefont_0.png"), false);
@@ -79,7 +87,7 @@ public class Assets {
 	 * Dispose the current image atlas, skin atlas, font, and sound effects
 	 */
 	public static void dispose() {
-		atlas.dispose();
+		spriteAtlas.dispose();
 		backgroundMusic.dispose();
 		appleSound.dispose();
 		invinsibleSound.dispose();

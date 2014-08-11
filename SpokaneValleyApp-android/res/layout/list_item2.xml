@@ -11,6 +11,7 @@
         android:id="@+id/poolViewImage"
         android:layout_width="90dp"
         android:layout_height="90dp"
+        android:layout_marginLeft="3dp"
         android:src="@drawable/apple128" />
 
     <LinearLayout
@@ -52,7 +53,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.20"
                 android:background="@drawable/greenbutton"
-                android:text="Redeem Now" /> 
+                android:text="Redeem Now"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </LinearLayout>

@@ -64,7 +64,8 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
+		
+		Typeface face = Typeface.createFromAsset(this.context.getAssets(),"fonts/Bubblegum.otf");
 		/* create a new view of my layout and inflate it in the row */
 		if (null == convertView) {
 			convertView = (LinearLayout) inflater.inflate(resource, null);
@@ -100,7 +101,6 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 			@Override
 			public void onClick(View v) {
 				buttonsounds.playsound2(); // play button sound
-
 				showAlert(image, game);
 			}
 		});
@@ -121,6 +121,12 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 						REQUEST_CODE);
 			}
 		});
+		
+		/* Set Font */
+		moreInfo.setTypeface(face);
+		buyCoupon.setTypeface(face);
+		description.setTypeface(face);
+		title.setTypeface(face);
 
 		return convertView;
 	}

@@ -31,29 +31,29 @@ public class NameHolder {
 	protected static final String pool2ActualImagePath = "terracepool_actual";
 	protected static final String pool3ActualImagePath = "valleymissionpool_actual";
 	
-	protected static final String coupon1ID = "Park Road Pool Coupon";						// coupon IDs
+	protected static final String coupon1ID = "Park Road Coupon";						// coupon IDs
 	protected static final String coupon2ID = "Terrace View Coupon";
-	protected static final String coupon3ID = "Valley Mission Pool Coupon ";
+	protected static final String coupon3ID = "Valley Mission Coupon ";
 	
 	protected static final String coupon1TrophyImagePath = "parkroadtrophy";								// coupon thumbnail image paths
 	protected static final String coupon2TrophyImagePath = "terraceviewtrophy";
 	protected static final String coupon3TrophyImagePath = "valleymissiontrophy";
 	
-	protected static final String coupon1ImagePath = "coupon_icon1";								// coupon thumbnail image paths
-	protected static final String coupon2ImagePath = "coupon_icon2";
-	protected static final String coupon3ImagePath = "coupon_icon3";
+	protected static final String coupon1ImagePath = "parkroadtrophy";								// coupon thumbnail image paths
+	protected static final String coupon2ImagePath = "terraceviewtrophy";
+	protected static final String coupon3ImagePath = "valleymissiontrophy";
 	
-	protected static final String Coupon1Description = "awesome coupon 1 ";					// coupon descriptions
-	protected static final String Coupon2Description = "awesome coupon 2";
-	protected static final String Coupon3Description = "awesome coupon 3";
+	protected static final String Coupon1Description = "Redeem this at\n Park Road Pool\nin Spokane Valley";					// coupon descriptions
+	protected static final String Coupon2Description = "Redeem this at\n Terrace View Pool\nin Spokane Valley";
+	protected static final String Coupon3Description = "Redeem this at\n Valley Mission Pool\nin Spokane Valley";
 		
 	protected static final int Coupon1Cost = 2;										// coupon prices
 	protected static final int Coupon2Cost = 1;
 	protected static final int Coupon3Cost = 1;
 	
-	protected static final String pool1Description = "Buy coupon cost : "+  Coupon1Cost;			// pool descriptions
-	protected static final String pool2Description = "Buy coupon cost : "+ Coupon2Cost;
-	protected static final String pool3Descrption = "Buy coupon cost : " + Coupon3Cost;
+	protected static final String pool1Description = "Coupon Cost: " + Coupon1Cost;			// pool descriptions
+	protected static final String pool2Description = "Coupon Cost: " + Coupon2Cost;
+	protected static final String pool3Descrption = "Coupon Cost: " + Coupon3Cost;
 	
 	protected static final int NumPool = 3;												// number of pool locations
 	

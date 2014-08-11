@@ -14,7 +14,7 @@
         android:background="@drawable/yellowbutton"
         android:gravity="center"
         android:text="@string/howtoredeem"
-        android:textSize="@dimen/coupon_how_to_text_size" />
+        android:textSize="30sp" />
     
     <ImageView
         android:id="@+id/couponImage"
@@ -37,7 +37,7 @@
             android:layout_weight="0.5"
             android:background="@drawable/greenbutton"
             android:text="@string/use_coupon"
-            android:textSize="20sp" />
+            android:textSize="25sp" />
         
         <Button
             android:id="@+id/couponCancelButton"
@@ -48,7 +48,7 @@
             android:layout_weight="0.5"
             android:background="@drawable/redbutton"
             android:text="@string/cancel_coupon"
-            android:textSize="20sp" />
+            android:textSize="25sp" />
         
     </LinearLayout>
     

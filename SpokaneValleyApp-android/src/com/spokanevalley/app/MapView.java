@@ -291,7 +291,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		map.setMyLocationEnabled(false);
 
 		// coordinates of center of Spokane Valley
-		LatLng center = new LatLng(47.717924, -117.221588);
+		LatLng center = new LatLng(47.688258, -117.241587);
 
 		if (LastLegitLocation == null)
 			LastLegitLocation = center;
@@ -300,7 +300,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			locationMain = center; // place where it loads
 		}
 		if (globalZoom == 0) {
-			globalZoom = 12.9f; // Scaling when it loads *****
+			globalZoom = 12.85f; // Scaling when it loads *****
 		}
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(locationMain,
 				globalZoom)); // second number is zoom unit

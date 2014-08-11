@@ -1,5 +1,5 @@
 package com.spokanevalley.farm;
-//package com.me.mygdxgame;
+
 public class Constants {
 	public static final String HOWTO_SKI = "gfx/Skihow.png";
 	public static final String IMAGE_BUTTON = "gfx/button.png";

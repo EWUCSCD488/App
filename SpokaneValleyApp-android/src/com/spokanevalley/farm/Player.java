@@ -1,19 +1,13 @@
-/**
- * 
- */
+
 package com.spokanevalley.farm;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-/**
- * @author akozlov
- *
- */
+
 public class Player{
 
-	private static final long serialVersionUID = 1L;
 	Vector2 position;
 	Texture mario, flower, pipe;
 	Sound squashSound;
@@ -28,6 +22,11 @@ public class Player{
 		setHoles6();
 	}
 	
+	/***
+	 * Check if the holes match up where the screen was touched. If so, take proper action.
+	 * @param holes Array of the current game.
+	 * @return The game array back for further game use.
+	 */
 	public int [] update(int [] holes){//first row of 3
 		if(Gdx.input.getX() >= (hole0.x-100) && Gdx.input.getX() <= (hole0.x+180) 
 				&& Gdx.input.getY() >= (hole0.y-100) && Gdx.input.getY() <= (hole0.y+100)
@@ -74,37 +73,55 @@ public class Player{
 				&& (holes[8] == 1 || holes[8] == 2)){
 			holes = doScore(8, holes);
 		}
-		
-		//For Testing
-		if(Gdx.input.isTouched()){
-			System.out.println("X:      " + Gdx.input.getX() + "          Y: " + Gdx.input.getY());
-			System.out.println("hole0X: " + hole0.x + "     hole0Y: " + hole0.y);
-			System.out.println("--------------------------------------------------------------------");
-		}
-		
 		return holes;
 	}
 	
+	/***
+	 * Returns the position of the first hole.
+	 * @return Vector of the first hole
+	 */
 	public Vector2 getPosition(){
 		return position;
 	}
 	
+	/***
+	 * Set the position of the first hole.
+	 * @param position Vector of the first hole.
+	 */
 	public void setPosition(Vector2 position){
 		this.position = position;
 	}
 
+	/***
+	 * Return the image of the bad guy.
+	 * @return Bitmap image of the bad guy. 
+	 */
 	public Texture getTextureMario(){
 		return this.mario;
 	}
 	
+	/***
+	 * Return the image of the good guy.
+	 * @return Bitmap image of the good guy.
+	 */
 	public Texture getTextureFlower(){
 		return this.flower;
 	}
 	
+	/***
+	 * Return image of the shovel(nothing happening).
+	 * @return Bitmap image of the shovel(nothing happening)
+	 */
 	public Texture getTextureHole(){
 		return this.pipe;
 	}
 	
+	/***
+	 * If good guy is hit then remove one life, if bad guy is hit then add one point to the score. Initialize the hole hit back to a neutral state (shovel).
+	 * @param arraySpot The hole that was hit.
+	 * @param holes Array of the current game.
+	 * @return Array of the current game.
+	 */
 	private int [] doScore(int arraySpot, int [] holes){
 		if(holes[arraySpot] == 1)
 			holes[holes.length-1] += 1;
@@ -117,6 +134,9 @@ public class Player{
 		return holes;
 	}
 	
+	/***
+	 * Initialize the locations of the holes based on the screen resolution/size.
+	 */
 	public void setHoles6(){
 		hole0 = new Vector2(position.x, (position.y)*3);
 		hole1 = new Vector2((position.x)*2, (position.y)*3);

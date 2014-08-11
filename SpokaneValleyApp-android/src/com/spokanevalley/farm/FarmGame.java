@@ -1,10 +1,6 @@
 package com.spokanevalley.farm;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.util.Log;
-
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
@@ -15,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.spokanevalley.database.DatabaseCustomAccess;
-import com.spokanevalley.ski.Ski;
 
 public class FarmGame implements Screen {
 
@@ -30,27 +25,29 @@ public class FarmGame implements Screen {
 	Vector2 hole0, hole1, hole2, hole3, hole4, hole5, hole6, hole7, hole8;
 	Music backgroundMusic;
 	private BitmapFont font;
-	private String score, lives;
+	private String lives;
 	Sprite back;
 	int goodGuy, badGuy, emptyHole;
-	
-	private static final String FarmID = "farm42";
-	private static final String tableName = "GameScoreTable";
-	private static final int IDColumns = 0;
-	private static final int ScoreColumns = 1;
-	private static final String TAG = "FARM";
 	
 	public FarmGame(Farm gam, Context context) {	
 		this.game = gam;
 		this.context = context;
 		batch = new SpriteBatch();
-		player = new Player(new Vector2(Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()/4),"farmAssets/Dinasour.png", "farmAssets/Squish.mp3", "farmAssets/appletrees.png", "farmAssets/shovel.png");
+		player = new Player(new Vector2(Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()/4),"farmAssets/Dinasour.png", "farmAssets/Squish.mp3", "farmAssets/sprout.png", "farmAssets/shovel.png");
+		
+		//New array of holes with second to last value being the amount of lives and last value being your score.
 		holes = new int[11];
+		
+		//Image for score
 		appleScore = new Texture(Gdx.files.internal("farmAssets/apple.png"));
+		
+		//Things you want to not press will be "2" in the array
 		goodGuy = 2;
+		
+		//Things you want to press will be "1" in the array
 		badGuy = 1;
 		
-		//Set initial databse score to zero
+		//Set initial database score to zero
 	    DatabaseCustomAccess.Create(this.context).saveInitialScoretoDatabase_GreenacresGame(0);
 		
 		//Setting up Timer Tick
@@ -59,22 +56,23 @@ public class FarmGame implements Screen {
 		
 		//Setting the holes
 		setHoles6();
-				
-
 		
 		//Setting Score
 		setScore();
 
 		//Setting Lives
 		setLives();
+		
 		//Setting background music to play
 		setMusic("farmAssets/RunAmok.mp3");
-		//Setting Background
-		setBackground("farmAssets/url.jpg");
 		
-
+		//Setting Background
+		setBackground("farmAssets/grasshole.png");
 	}
 
+	/***
+	 * Garbage collection management.
+	 */
 	@Override
 	public void dispose() {
 		batch.dispose();
@@ -84,19 +82,22 @@ public class FarmGame implements Screen {
 		font.dispose();
 	}
 
+	/***
+	 * Runs 60 times a second updating the screen as soon as possible.
+	 */
 	@Override
 	public void render(float delta1) {		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		//If end of game, end game
+		//If end of game, end game (number of lives is zero)
 		if (holes[holes.length-2] == 0)
 		{
-			int score = saveMaxScore(holes[holes.length-1]);
-			System.out.println("THIS IS THE SCORE FOR THIS GAME: " + score);
+			int score = holes[holes.length-1];
 			int maxScoreScore = DatabaseCustomAccess.Create(context).saveMaxScore_GreenacresGame(holes[holes.length-1]);
-			game.setScreen(new GameOver(game,score,maxScoreScore));//maxscore
-			//dispose();
+			
+			//Initialize the game over screen and pass in the score you got this time and the max score for all times you have ever played.
+			game.setScreen(new GameOver(game,score,maxScoreScore));
 		}
 		
 		//If a timer tick has passed, generate a new array
@@ -104,12 +105,14 @@ public class FarmGame implements Screen {
 		delta += (now - lastTime) / ns;
 		pelta += (now - lastTime) / (1000000000/0.1D);
 		lastTime = now;
+		
 		//If it's time then change the array
 		if(delta >= 1){
 			fillArray();
 			delta--;
 		}
-		//Makes sure speed increases gradually every 10ish seconds up untill a point
+		
+		//Makes sure speed increases gradually every 10ish seconds up until a point
 		if(pelta >= 1 && timerT < 1){
 			timerT += 0.1;
 			ns = 1000000000 / timerT;
@@ -122,7 +125,7 @@ public class FarmGame implements Screen {
 		//Draw Background
 		back.draw(batch);
 		
-		//Draw the Marios, Pipes, and Flowers based on the array
+		//Draw the badGuys(Dinos), Shovels, and goodGuys (apple tree sprouts) based on the array
 		if(holes[0] == badGuy)
 			batch.draw(player.getTextureMario(), hole0.x, hole0.y);
 		else if(holes[0] == goodGuy)
@@ -203,16 +206,17 @@ public class FarmGame implements Screen {
 			batch.draw(player.getTextureHole(), hole8.x, hole8.y);
 		
 		//Draw Score
-		batch.draw(appleScore, 25, 100);
-		font.draw(batch, Integer.toString(holes[holes.length -1]), 150, 200);
+		batch.draw(appleScore, 40, 30);
+		font.draw(batch, Integer.toString(holes[holes.length -1]), 150, 100);
 		
 		//Draw Lives
-		font.draw(batch, lives + Integer.toString(holes[holes.length -2]), Gdx.graphics.getWidth()/2, 200);
+		font.draw(batch, lives + Integer.toString(holes[holes.length -2]), Gdx.graphics.getWidth()/2, 100);
 		
-		//Check for touches
+		//Check for touches if the screen was touched.
 		if(Gdx.input.justTouched())
 			holes = player.update(holes);
-
+		
+		//End drawing.
 		batch.end();
 	}
 
@@ -228,31 +232,49 @@ public class FarmGame implements Screen {
 	public void resume() {
 	}
 	
+	/***
+	 * Set the score up the first time.
+	 */
 	public void setScore(){
 		holes[holes.length-1]= 0; // The score so we can pass between classes
-		score = "Score: ";
 		lives = "Lives: ";
-		font = new BitmapFont(Gdx.files.internal("fonts/gamefont.fnt"),
-				Gdx.files.internal("fonts/gamefont_0.png"), false);
-		font.setScale(5);	
+		
+		font = new BitmapFont(Gdx.files.internal("fonts/funfont2.fnt"), false);
+		font.setScale(3);	
 	}
 	
+	/***
+	 * Initialize the amount of lives at the beginning of the game.
+	 */
 	public void setLives(){
 		holes[holes.length -2] = 3;
 	}
 	
+	/***
+	 * Initialize the background from the location passed in.
+	 * @param background
+	 */
 	public void setBackground(String background){
 		backGround = new Texture(Gdx.files.internal(background));
 		back = new Sprite(backGround);
 		back.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 	
+	/***
+	 * Initialize the background music from the location of the track passed in.
+	 * @param music
+	 */
 	public void setMusic(String music){
 		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal(music));
+		
+		//Set the track to loop forever.
 		backgroundMusic.setLooping(true);
 		backgroundMusic.play();
 	}
 	
+	/***
+	 * Initialize the spots on the screen for the holes based on the screen resolution/size.
+	 */
 	public void setHoles6(){
 		hole0 = new Vector2(player.getPosition().x, player.getPosition().y);
 		hole1 = new Vector2((player.getPosition().x)*2, player.getPosition().y);
@@ -265,6 +287,10 @@ public class FarmGame implements Screen {
 		hole8 = new Vector2((player.getPosition().x)*3, (player.getPosition().y)*3);
 	}
 	
+	/***
+	 * Initialize the timer tick and how fast it ticks.
+	 * @param howFast Controls how fast the timer ticks.
+	 */
 	public void setTimerTick(double howFast){
 		lastTime = System.nanoTime();
 		amountOfTicks = howFast;
@@ -273,47 +299,20 @@ public class FarmGame implements Screen {
 		pelta = 0;
 	}
 	
+	/***
+	 * Fills the array with random elements every single time the method is called.
+	 */
 	public void fillArray(){
 		//Fill the array with random ints from 0 to 2
 		for(int i = 0; i < holes.length -2; i++){
 			//If person still hasn't hit the bad object subtract points
-			if(holes[i] == badGuy)
+			if(holes[i] == badGuy && holes[holes.length -1] > 0)
 				holes[holes.length -1] -= 1;
 			else if(holes[i] == goodGuy)
 				holes[holes.length -1] += 1;
 			holes[i] = (int) (Math.random()*(3-0)+0);
 		}
 	}
-	
-	private int saveMaxScore(int CurrentScore) {
-		Cursor cursor= (DatabaseCustomAccess.Create(context)).getDatabase().getScoreData(tableName,FarmID);
-		
-		int MaxScore = 0;
-		while(cursor.moveToNext()){
-			//loading each element from database
-			String ID = cursor.getString(IDColumns);
-			int MaxScore_temp =  Integer.parseInt(cursor.getString(ScoreColumns));
-				if(MaxScore_temp > MaxScore)
-				{
-					MaxScore = MaxScore_temp ;
-				Log.d(TAG,"MaxScore is"+ MaxScore_temp+ " with ID : " + ID);}
-				System.out.println("MaxScore is"+ MaxScore_temp+ " with ID : " + ID + "****************************************************");
-
-		} // travel to database result
-		
-		if(MaxScore < CurrentScore){
-			long RowIds = (DatabaseCustomAccess.Create(context)).getDatabase().updateScoreTable(tableName, FarmID, String.valueOf(holes[holes.length-1]));
-			if (RowIds == -1)
-				Log.d(TAG, "Error on inserting columns");
-			System.out.println(holes[holes.length-1] + "****************************************************");
-			return CurrentScore;
-		}
-		System.out.println("****************************hello***********************");
-
-		return MaxScore;
-		
-	}
-
 
 	@Override
 	public void show() {

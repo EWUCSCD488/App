@@ -1,5 +1,5 @@
 package com.spokanevalley.addScoreGPS;
-//package com.me.mygdxgame;
+
 public class Constants {
 	public static final String HOWTO_SKI = "skiAssets/gfx/Skihow.png";
 	public static final String IMAGE_BUTTON = "skiAssets/gfx/button.png";

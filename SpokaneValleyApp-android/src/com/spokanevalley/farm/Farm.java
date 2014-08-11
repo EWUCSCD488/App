@@ -15,10 +15,16 @@ public class Farm extends Game {
 		this.context = context;
 	}
 	
+	/***
+	 * Initialize once things.
+	 */
 	public void create() {
 		batch = new SpriteBatch();
-		// Set font to custom font.
-		font = new BitmapFont(Gdx.files.internal("fonts/gamefont.fnt"), false);
+		
+		//Setting custom font
+		font = new BitmapFont(Gdx.files.internal("fonts/funfont2.fnt"), false);
+		
+		//Load the main menu screen
 		this.setScreen(new MainMenuScreen(this,context));
 	}
 
@@ -26,6 +32,9 @@ public class Farm extends Game {
 		super.render();
 	}
 
+	/***
+	 * Garbage collection management.
+	 */
 	public void dispose() {
 		batch.dispose();
 		font.dispose();

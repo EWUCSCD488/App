@@ -1,18 +1,16 @@
 package com.spokanevalley.addScoreGPS;
 
-import android.content.Context;
 import android.os.Bundle;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.spokanevalley.apples.Apple;
 
 public class addScoreGPSLauncher extends AndroidApplication {
 
 	public static final String HIGH_SCORE = "highScore";
 
+	/***
+	 * Initialize the GPS location check game.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -21,12 +21,10 @@
         <longitudeBottomLeft>-117.223466</longitudeBottomLeft>
         <latitudeTopRight>47.636965</latitudeTopRight>
         <longitudeTopRight>-117.220806</longitudeTopRight>
-        <Info>
-			-  Play equipment and horseshoe pit.
+        <Info>-  Play equipment and horseshoe pit.
 			Swimming pool and lazy river feature.
 			Pool shade structure and furniture.
-			Ball field and basketball court.
-        </Info>
+			Ball field and basketball court.</Info>
         <MarkerImage>bucket.png</MarkerImage>
     </Location>
     <Location>
@@ -37,9 +35,7 @@
         <longitudeBottomLeft>-117.242692</longitudeBottomLeft>
         <latitudeTopRight>47.700336</latitudeTopRight>
         <longitudeTopRight>-117.233466</longitudeTopRight>
-        <Info>
-            -  This is a chill Park...
-        </Info>
+        <Info>-  This is a chill Park...</Info>
         <MarkerImage>plantesferryicon.png</MarkerImage>
     </Location>
     <Location>
@@ -50,9 +46,7 @@
         <longitudeBottomLeft>0</longitudeBottomLeft>
         <latitudeTopRight>0</latitudeTopRight>
         <longitudeTopRight>0</longitudeTopRight>
-        <Info>
-            -  Check for your trophies here...
-        </Info>
+        <Info>-  Check for your trophies here...</Info>
         <MarkerImage>piggy_bank.png</MarkerImage>
     </Location>
     <Location>
@@ -63,9 +57,7 @@
         <longitudeBottomLeft>-117.228123</longitudeBottomLeft>
         <latitudeTopRight>47.686141</latitudeTopRight>
         <longitudeTopRight>-117.224969</longitudeTopRight>
-        <Info>
-            -  A fun farm themed park!
-        </Info>
+        <Info>-  A fun farm themed park!</Info>
         <MarkerImage>farm.png</MarkerImage>
     </Location>
     <Location>
@@ -76,22 +68,18 @@
         <longitudeBottomLeft>-117.210395</longitudeBottomLeft>
         <latitudeTopRight>47.675020</latitudeTopRight>
         <longitudeTopRight>-117.204473</longitudeTopRight>
-        <Info>
-            -  Come here to redeem your apples for cool prizes here!
-        </Info>
+        <Info>-  Come here to redeem your apples for cool prizes here!</Info>
         <MarkerImage>mall.png</MarkerImage>
     </Location>
     <Location>
         <Title>Ski!</Title>
-        <Latitude>47.700621</Latitude>
-        <Longitude>-117.249931</Longitude>
-        <latitudeBottomLeft>47.700398</latitudeBottomLeft>
-        <longitudeBottomLeft>-117.250514</longitudeBottomLeft>
-        <latitudeTopRight>47.700969</latitudeTopRight>
-        <longitudeTopRight>-117.249559</longitudeTopRight>
-        <Info>
-            -  The person who made the ramps for going up and down the mountain lived here!
-        </Info>
+        <Latitude>47.692244</Latitude>
+        <Longitude>-117.263818</Longitude>
+        <latitudeBottomLeft>0</latitudeBottomLeft>
+        <longitudeBottomLeft>0</longitudeBottomLeft>
+        <latitudeTopRight>0</latitudeTopRight>
+        <longitudeTopRight>0</longitudeTopRight>
+        <Info>-  The person who made the ramps for going up and down the mountain lived here!</Info>
         <MarkerImage>snow_man.png</MarkerImage>
     </Location>
 </PreferenceScreen>

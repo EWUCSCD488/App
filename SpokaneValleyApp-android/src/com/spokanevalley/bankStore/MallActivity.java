@@ -19,8 +19,11 @@ import com.spokanevalley.database.DatabaseCustomAccess;
  * 
  * @author Quyen Ha
  * Eastern Washington University
+ * Responsible for populating the pool listings inside of the Mall
+ * User is able to view each available pool location from a list
+ * User can get more information or purchase coupon for the select pool location
+ * Purchased coupons are transferred to the Bank, handled by BankActivity
  */
-
 public class MallActivity extends Activity {
 	
 	private ListView listView;
@@ -31,7 +34,9 @@ public class MallActivity extends Activity {
 	public static final String TAG = MallActivity.class.getName();
 	private int redeemedCoupon;
 	
-	
+	/**
+	 * Populates list_item.xml with appropriate thumbnail, title, and description of each pool location
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
@@ -46,10 +51,10 @@ public class MallActivity extends Activity {
 		
 		listView = (ListView) findViewById(R.id.mainListView);
 		listView.setAdapter(new ListViewCustomPoolAdapter(context,R.layout.list_item,poolLocationList));
-	
+		/* Pool Thumbnail */
 		listImageView = (ImageView) findViewById(R.id.ListImageView);
 		// you can add image here or in XML
-		
+		/* Pool Description */
 		listTextView = (TextView) findViewById(R.id.ListTextView);
 		changeScoreDisplaying();
 		
@@ -58,25 +63,24 @@ public class MallActivity extends Activity {
 			public void onChanged() {
 				redeemedCoupon = DatabaseCustomAccess.Create(context).getTotalScore();
 				changeScoreDisplaying();
-			}
-			
-			public void onInvalidated() {
-				
-			}
-		});
+			} // End onChanged
+			public void onInvalidated() {} // End onInvalidated
+		}); // End DataSetObserver
 		
+		/* Set Font */
 		listTextView.setTypeface(face);
-	}
-
+	} // End onCreate
+	
+	/**
+	 * Updates score after coupon is purchased
+	 */
 	protected void changeScoreDisplaying() {
 		listTextView.setText(redeemedCoupon + " points");
-		
-	}
+	} // End changeScoreDisplaying
 
 	/**
-	 * check result of Activity sent from PoolActivity
+	 * Check result of Activity sent from PoolActivity
 	 */
-
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		try {
@@ -85,18 +89,18 @@ public class MallActivity extends Activity {
 				listView.setAdapter(new ListViewCustomPoolAdapter(context,
 					R.layout.list_item, poolLocationList));
 				changeScoreDisplaying();
-				
 			} catch (Exception ex) {
 			// Toast.makeText(MapView.this, ex.toString(), Toast.LENGTH_SHORT)
 			// .show();
-			}
-	}
-	
+			} // End catch
+	} // End onActivityResult
+	/**
+	 * Populates Array List of pool locations and gets the users score
+	 */
 	private void loadFromDatabase() {
 		//poolLocationFactory.create();
 		poolLocationList = DatabaseCustomAccess.Create(context).getPoolList();
 		redeemedCoupon = DatabaseCustomAccess.Create(context).getTotalScore();
-		
-		
-	}
-}
+	} // End loadFromDatabase
+	
+} // End MallActivity class

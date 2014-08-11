@@ -24,44 +24,45 @@ public class BankActivity extends Activity {
 
 	protected static final int REQUEST_CODE = 1; // check for status of Activity
 													// sent from BankAcitivity
-
 	private ListView listView;
 	private ImageView listImageView;
 	private TextView listTextView;
 	private Context context;
-
 	private List<poolLocation> CouponList;
 
 	public static final String TAG = MallActivity.class.getName(); // for
 																	// debugging
-
+	/**
+	 * Populates list_item2 with coupon thumbnail, description, and title
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listviewactivity2);
-		context = this;
+		this.context = this;
 		loadFromDatabase();
 
 		Typeface face = Typeface.createFromAsset(getAssets(),
 				"fonts/Bubblegum.otf");
 
-		listView = (ListView) findViewById(R.id.mainListView);
-		listView.setAdapter(new ListViewCustomCouponAdapter(context,
+		this.listView = (ListView) findViewById(R.id.mainListView);
+		this.listView.setAdapter(new ListViewCustomCouponAdapter(context,
 				R.layout.list_item2, CouponList));
-
-		listImageView = (ImageView) findViewById(R.id.ListImageView);
+		/* Coupon Thumbnail */
+		this.listImageView = (ImageView) findViewById(R.id.ListImageView);
 		// you can add image here or in XML
-
-		listTextView = (TextView) findViewById(R.id.ListTextView);
+		
+		/* Coupon Description */
+		this.listTextView = (TextView) findViewById(R.id.ListTextView);
 		changeScoreDisplaying();
-
-		listTextView.setTypeface(face);
-	}
+		
+		/* Set Font */
+		this.listTextView.setTypeface(face);
+	} // End onCreate
 
 	/**
 	 * check result of Activity sent from BankActivity
 	 */
-
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		try {
@@ -74,22 +75,24 @@ public class BankActivity extends Activity {
 			} catch (Exception ex) {
 			// Toast.makeText(MapView.this, ex.toString(), Toast.LENGTH_SHORT)
 			// .show();
-			}
-	}
-
+			} // End catch
+	} // End onActivityResult
+	
+	/**
+	 * Sets the proper pronounced word based on quantity of coupons
+	 */
 	protected void changeScoreDisplaying() {
 		if(CouponList.size() == 1)
 			listTextView.setText(CouponList.size() + " coupon");
 		else
 			listTextView.setText(CouponList.size() + " coupons");
-	}
+	} // End changeScoreDisplaying
 	
 	/**
 	 * get updates from databases
 	 */
-	
 	private void loadFromDatabase() {
 		CouponList = DatabaseCustomAccess.Create(context).getCouponList();
-
-	}
-}
+	} // End loadFromDatabase
+	
+} // End BankActivity class

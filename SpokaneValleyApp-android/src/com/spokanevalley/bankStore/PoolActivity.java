@@ -1,7 +1,5 @@
 package com.spokanevalley.bankStore;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -31,37 +29,37 @@ public class PoolActivity extends Activity {
 	private TextView textView;
 	private Button getCoupon, cancel;
 	private Context context;
-	private List<poolLocation> poolLocationList;
 	private ButtonSoundFactory buttonSounds;
 	
+	/**
+	 * Populates pool_desc_layout.xml with the appropriate image, and description of pool location
+	 * Also assigns click events to the "Get Coupon" and "Cancel" buttons
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pool_desc_layout);
-		context = this;
-		buttonSounds = new ButtonSoundFactory(context);
+		this.context = this;
+		this.buttonSounds = new ButtonSoundFactory(context);
 		Intent intent = getIntent();
 		final String poolID = intent.getStringExtra(ListViewCustomPoolAdapter.POOL_ID);
 		
 		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/Bubblegum.otf");
 		/* Pool Location Main Image */
-		imageView = (ImageView) findViewById(R.id.poolViewImage);
+		this.imageView = (ImageView) findViewById(R.id.poolViewImage);
 		/* Take the ImageView from layout and set the game image */
         String uri = "drawable/" + ThumbNailFactory.create().getActualPoolPicture(poolID);
         int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
         Drawable image = context.getResources().getDrawable(imageResource);
-        imageView.setImageDrawable(image);
-		
+        this.imageView.setImageDrawable(image);
 		
 		/* Pool Location Information */
-		textView = (TextView) findViewById(R.id.poolDesc);
-		textView.setText(PoolDescriptionFactory.create().getDescription(poolID));
+        this.textView = (TextView) findViewById(R.id.poolDesc);
+        this.textView.setText(PoolDescriptionFactory.create().getDescription(poolID));
 		
+        this.getCoupon = (Button) findViewById(R.id.buttonGetCoupon2);
 		
-		getCoupon = (Button) findViewById(R.id.buttonGetCoupon2);
-		
-		getCoupon.setOnClickListener(new OnClickListener() {
-			
+        this.getCoupon.setOnClickListener(new OnClickListener() {	
 			@Override
 			public void onClick(View v) {
 				checkTotalScoreAndBuyCoupon(poolID);
@@ -69,10 +67,9 @@ public class PoolActivity extends Activity {
 			} // End onClick
 		}); // End setOnClickListener
 		
-		cancel = (Button) findViewById(R.id.buttonCancel);
+        this.cancel = (Button) findViewById(R.id.buttonCancel);
 		
-		cancel.setOnClickListener(new OnClickListener() {
-			
+        this.cancel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				buttonSounds.playsound1();
@@ -81,27 +78,31 @@ public class PoolActivity extends Activity {
 		}); // End setOnClickListener
 		
 		/* Set Font */
-		getCoupon.setTypeface(face);
-		cancel.setTypeface(face);
-		textView.setTypeface(face);
+        this.getCoupon.setTypeface(face);
+        this.cancel.setTypeface(face);
+        this.textView.setTypeface(face);
 		
 	}// End onCreate
 
-	
+	/**
+	 * Checks the user's score against the cost of the coupon
+	 * A user is able to purchase a coupon if they have points >= cost of coupon
+	 * If the user attempts to purchase a coupon that cost more than there current points
+	 * a prompt is displayed notifying the user
+	 * @param poolID
+	 */
 	private void checkTotalScoreAndBuyCoupon(final String poolID) {
 		int price = CouponCostFactory.create().getPrice(poolID);
 		//Log.d(TAG, "price is : "+ price);
-		if( price <= DatabaseCustomAccess.Create(context).getTotalScore() ){
-			// buy coupon
-			// prompt another to make sure they want to buy it
+		if( price <= DatabaseCustomAccess.Create(context).getTotalScore())
 			comfirmationPromptBuyCoupon(poolID);
-		}else{
-			// don't buy coupon
-			// prompt user that they don't have enough points
-			comfirmationPromptBuyCouponFailed();
-		}
-	}
-	
+		else
+			confirmationPromptBuyCouponFailed();
+	} // End checkTotalScoreAndBuyCoupon
+	/**
+	 * Prompts the user with a dialog requesting confirmation of coupon purchase
+	 * @param poolID
+	 */
 	private void comfirmationPromptBuyCoupon(final String poolID){
 		AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
         builder1.setMessage("Are you sure you want to buy this coupon? \n Please redeem the coupon in the bank");
@@ -109,7 +110,7 @@ public class PoolActivity extends Activity {
         builder1.setPositiveButton("Yes",
                 new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-            	// substract coupon cost with total score
+            	// subtract coupon cost from the total score
             	DatabaseCustomAccess.Create(context).addUpTotalScore(-1 * CouponCostFactory.create().getPrice(poolID));
             	//remove((poolLocation) game);			// remove location from list
 				//notifyDataSetChanged();					// update location
@@ -118,21 +119,22 @@ public class PoolActivity extends Activity {
                 buttonSounds.playsound3();
                 finish();
 				dialog.cancel();
-            }
-        });
+            } // End onClick
+        }); // End OnClickListener
         builder1.setNegativeButton("No",
                 new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
             	buttonSounds.playsound1();
                 dialog.cancel();
-            }
-        });
-
+            } // End onClick
+        }); // End OnClickListener
         AlertDialog alert11 = builder1.create();
         alert11.show();
-	}
-	
-	private void comfirmationPromptBuyCouponFailed(){
+	} // End comfirmationPromptBuyCoupon
+	/**
+	 * Prompts a dialog to the user if they don't have the required points for coupon purchase
+	 */
+	private void confirmationPromptBuyCouponFailed(){
 		AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
         builder1.setMessage("You don't have enough points to get this coupon");
         builder1.setCancelable(false);
@@ -141,17 +143,18 @@ public class PoolActivity extends Activity {
             public void onClick(DialogInterface dialog, int id) {
             	buttonSounds.playsound2();
                 dialog.cancel();
-            }
-        });
+            } // End onClick
+        }); // End OnClickListener
+        
        /* builder1.setNegativeButton("No",
                 new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
         });*/
-
+        
         AlertDialog alert11 = builder1.create();
         alert11.show();
-	}
+	} // End confirmationPromptBuyCouponFailed
 	
 } // End PoolActivity class

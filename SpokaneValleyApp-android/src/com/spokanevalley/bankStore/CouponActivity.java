@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ import com.spokanevalley.database.DatabaseCustomAccess;
  * Eastern Washington University
  */
 
-public class CouponActivity extends Activity{
+public class CouponActivity extends Activity {
 
 	private ImageView imageView;
 	private Button useButton;
@@ -37,12 +38,16 @@ public class CouponActivity extends Activity{
 	private Button howtoButton;
 	private ButtonSoundFactory buttonSounds;
 	
+	/**
+	 * Populates coupon_layout.xml with the appropriate image of the specified coupon
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.coupon_layout);
 		buttonSounds = new ButtonSoundFactory(getApplicationContext());
 		
+		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/Bubblegum.otf");
 		
 		//get value pass from coupon list
 		Intent intent = getIntent();
@@ -55,7 +60,6 @@ public class CouponActivity extends Activity{
         /* Handle howtoPlay button */
 		howtoButton = (Button) findViewById(R.id.couponhowto);
 		howtoButton.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				buttonSounds.playsound1();
@@ -65,25 +69,29 @@ public class CouponActivity extends Activity{
 		/* Handle use button */
 		useButton = (Button) findViewById(R.id.couponOkayButtons);
 		useButton.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				buttonSounds.playsound2();
 				showAlert(Couponid,v);
-			}
-		});
+			} // End onClick
+		}); // End setOnClickListener
 		
 		/* Handle cancel button */
 		cancelButton = (Button) findViewById(R.id.couponCancelButton);		
 		cancelButton.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				buttonSounds.playsound1();
-				finish();					// close activity
-			}
-		});
-	}
+				finish(); // close activity
+			} // End onClick
+		}); // End setOnClickListener
+		
+		/* Set Font */
+		howtoButton.setTypeface(face);
+		cancelButton.setTypeface(face);
+		useButton.setTypeface(face);
+		
+	} // End onCreate
 
 	/**
 	 * generate Drawable of coupon from CouponCostFatory
@@ -91,13 +99,12 @@ public class CouponActivity extends Activity{
 	 * @param id of coupon
 	 * @return Drawable file of coupon thumbnail
 	 */
-	
 	private Drawable getDrawablefromCouponCostFactory(String id){
 		String uri = "drawable/" + CouponCostFactory.create().getCouponImagePath(id);
         int imageResource = getResources().getIdentifier(uri, null, getPackageName());
         Drawable image = getResources().getDrawable(imageResource);
         return image;
-	}
+	} // End getDrawablefromCouponCostFactory
 	
 	/**
 	 * generate Drawable of coupon from CouponCostFatory
@@ -105,13 +112,12 @@ public class CouponActivity extends Activity{
 	 * @param id of coupon as String
 	 * @return Drawable file of coupon thumbnail
 	 */
-	
 	private Drawable getDrawablefromThumbNailFactory(String id){
 		String uri = "drawable/" + ThumbNailFactory.create().getThumbNail(id);
         int imageResource = getResources().getIdentifier(uri, null, getPackageName());
         Drawable image = getResources().getDrawable(imageResource);
         return image;
-	}
+	} // End getDrawablefromThumbNailFactory
 	
 	/**
 	 * Build Alert dialog
@@ -130,11 +136,9 @@ public class CouponActivity extends Activity{
         
         tvMessage.setTextSize(20);
         tvMessage.setGravity(Gravity.CENTER);
-        tvMessage.setText("Are you sure you want to redeem this coupon?");				// set text
+        tvMessage.setText("Are you sure you want to redeem this coupon?"); // set text
         
-        
-        
-        image.setImageDrawable(getDrawablefromCouponCostFactory(id));							// set image
+        image.setImageDrawable(getDrawablefromCouponCostFactory(id)); // set image
 		WindowManager wm = (WindowManager)getApplicationContext()
 				.getSystemService(Context.WINDOW_SERVICE);
 		Display display = wm.getDefaultDisplay();
@@ -146,28 +150,25 @@ public class CouponActivity extends Activity{
 				- (width / 5), width - (width / 5));
 		image.setLayoutParams(parms);
         
-        layout.setOrientation(LinearLayout.VERTICAL);			// set layout
+        layout.setOrientation(LinearLayout.VERTICAL); // set layout
         
         layout.setGravity(Gravity.CENTER);
         layout.addView(tvMessage);
         layout.addView(image);
         
-        
-        alert.setTitle("Confirmation!");					// add title
+        alert.setTitle("Confirmation!"); // add title
         alert.setView(layout);
- 
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {			// set cancel button
- 
+        /* Set Cancel Button */
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             	buttonSounds.playsound1();
                 dialog.cancel();
-           
-            }
-        });
- 
-        alert.setPositiveButton("Redeem", new DialogInterface.OnClickListener() {			// set redeem button
- 
+            } // End onClick
+        }); // End OnClickListener
+        
+        /* Set Redeem Button */
+        alert.setPositiveButton("Redeem", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             	// delete coupon from couponList
@@ -176,12 +177,9 @@ public class CouponActivity extends Activity{
                 buttonSounds.playsound3();
             	dialog.cancel();
             	finish();
-            }
-
-
-        });
- 
+            } // End onClick
+        }); // End OnClickListener
         alert.show();
-    }
+    } // End showAlert
 	
-}
+} // End CouponActivity class

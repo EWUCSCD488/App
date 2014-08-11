@@ -14,8 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,20 +37,16 @@ import com.spokanevalley.bankStore.ButtonSoundFactory;
 import com.spokanevalley.bankStore.MallActivity;
 import com.spokanevalley.database.DatabaseCustomAccess;
 import com.spokanevalley.discoveryGame.DiscoveryActivity;
-import com.spokanevalley.farm.FarmGameLauncher;
 import com.spokanevalley.plantesferry.PlantesFerryActivity;
 import com.spokanevalley.ski.SkiActivity;
 
-@SuppressWarnings("deprecation")
 public class MapView extends Activity implements OnMarkerClickListener,
 		LocationListener, OnInfoWindowClickListener {
 
 	public static final String TAG = MapView.class.getName();
 
-	//NEED TO CONFIGURE BOUNDS AFTER WE PUT IN ALL OUR LOCATIONS!*****
 	// bounds for limiting scolling and zooming.
-	private final LatLngBounds BOUNDS = new LatLngBounds(new LatLng(47.594413,
-			-117.399280), new LatLng(47.750088, -117.035187));
+	private final LatLngBounds BOUNDS = new LatLngBounds(new LatLng(47.594413,-117.399280), new LatLng(47.750088, -117.035187));
 	private overscrollHandler mOverscrollHandler = new overscrollHandler();
 	final Context context = this;
 	private GoogleMap map;
@@ -61,13 +55,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	private LatLng locationMain = null;
 	private float globalZoom = 0;
 	private LocationManager locationManager;
-	private ButtonSoundFactory sounds;
-	
-	//temp values
-	/*private Location location1;
-	private Location location2;
-	private Location location3;*/
-	
+	private ButtonSoundFactory sounds;	
 	public static final int REQUEST_CODE = 1;
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -79,15 +67,17 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map_view);
+		
+		//Play the sounds
 		sounds = new ButtonSoundFactory(context);
 		sounds.playBackground();
 		
 		mOverscrollHandler.sendEmptyMessageDelayed(0, 100);
 		DatabaseCustomAccess.Create(context);
-		// Initialize Location List
+		
+		// Initialize Location List from the locations.XML file
 		try {
-			LocationList
-					.Create(LocationInflator.inflate(this, R.xml.locations));
+			LocationList.Create(LocationInflator.inflate(this, R.xml.locations));
 		} catch (Exception e) {
 			Log.e("Inflator Error", e.getMessage());
 		}
@@ -95,81 +85,67 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		// location checking...
 		LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 		String provider = lm.getBestProvider(new Criteria(), true);
-		lm.requestLocationUpdates(provider, 1000, 0, this); // change these
+		//Default location checking values
+		lm.requestLocationUpdates(provider, 1000, 0, this);
 		
 		//Changing font of score in the corner to our apps font
 		TextView tv = (TextView) findViewById(R.id.scoreOnTopOfMap);
 		Typeface face = Typeface.createFromAsset(getAssets(),"fonts/Bubblegum.otf");
 		tv.setTypeface(face);
 		
-		updateCornerScoreDisplay();
 		// LOCATION ***********************************************************************
-				locationManager = (LocationManager) this.getSystemService(context.LOCATION_SERVICE);
-
-				LocationListener locationListener = new LocationListener() {
-					@Override
-					public void onLocationChanged(android.location.Location location) {
-	
-						//TODO: Once database is done also add "if has not been visited" into the "if" statement
-						for (Location location2 : LocationList.LIST) {
-							
-							/*//Testing
-							Log.i("MyActivity", "*********latitude bottom left: " + location2.getLatitudeBottomLeft());
-							Log.i("MyActivity", "*********longitude bottom left: " + location2.getLongitudeBottomLeft());
-							Log.i("MyActivity", "*********latitude top right: " + location2.getLatitudeTopRight());
-							Log.i("MyActivity", "*********longitude top right: " + location2.getLongitudeTopRight());
-							Log.i("MyActivity", "*********lattitude: " + location.getLatitude());
-							Log.i("MyActivity", "*********longitude: " + location.getLongitude());
-							*/
-							
-							double temp1 = location.getLatitude();
-							double temp2 = location.getLongitude();
-							if(location2.getLatitudeBottomLeft() <= temp1 && 
-									location2.getLongitudeBottomLeft() <= temp2 &&
-									location2.getLatitudeTopRight() >= temp1 &&
-									location2.getLongitudeTopRight() >= temp2){
+		locationManager = (LocationManager) this.getSystemService(context.LOCATION_SERVICE);
+		LocationListener locationListener = new LocationListener() {
+					
+			@Override
+			public void onLocationChanged(android.location.Location location) {
+				//TODO: Once database is done also add "if has not been visited" into the "if" statement
+				for (Location location2 : LocationList.LIST) {
 								
-								Intent intent = new Intent(MapView.this, addScoreGPSLauncher.class);
-								startActivityForResult(intent, REQUEST_CODE);
 								/*//Testing
-								LatLng camMove = new LatLng(location.getLatitude(), location.getLongitude());
-						        CameraUpdate camUpdate = CameraUpdateFactory.newLatLng(camMove);
-						        map.animateCamera(camUpdate);*/
-							}
+								Log.i("MyActivity", "*********latitude bottom left: " + location2.getLatitudeBottomLeft());
+								Log.i("MyActivity", "*********longitude bottom left: " + location2.getLongitudeBottomLeft());
+								Log.i("MyActivity", "*********latitude top right: " + location2.getLatitudeTopRight());
+								Log.i("MyActivity", "*********longitude top right: " + location2.getLongitudeTopRight());
+								Log.i("MyActivity", "*********lattitude: " + location.getLatitude());
+								Log.i("MyActivity", "*********longitude: " + location.getLongitude());
+								*/
+					double temp1 = location.getLatitude();
+					double temp2 = location.getLongitude();
+					if(location2.getLatitudeBottomLeft() <= temp1 && 
+							location2.getLongitudeBottomLeft() <= temp2 &&
+							location2.getLatitudeTopRight() >= temp1 &&
+							location2.getLongitudeTopRight() >= temp2){
+						Intent intent = new Intent(MapView.this, addScoreGPSLauncher.class);
+						startActivityForResult(intent, REQUEST_CODE);
+									/*//Testing
+									LatLng camMove = new LatLng(location.getLatitude(), location.getLongitude());
+							        CameraUpdate camUpdate = CameraUpdateFactory.newLatLng(camMove);
+							        map.animateCamera(camUpdate);*/
 						}
-
 					}
-		            
-					@Override
-					public void onStatusChanged(String provider, int status,
-		                                        Bundle extras) {
-					}
-		            
-					@Override
-					public void onProviderEnabled(String provider) {
-					}
-		            
-					@Override
-					public void onProviderDisabled(String provider) {
-					}
-				};
-		        
-				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000, 0, locationListener);
-		        
-		// END LOCATION *******************************************************************
-		// for testing only
-				/*location1 = new Location("ID1", "Terace View Park",
-						"Awesome place 1", 47.636221, -117.222319);
-				location2 = new Location("ID2", "Plantes Ferry Park",
-						"Awesome place 2", 47.697924, -117.241588);
+				}
+			
+			@Override
+			public void onStatusChanged(String provider, int status, Bundle extras) {
 				
-				location3 = new Location("ID3", "Discovery Park",
-						"Awesome place 3", 47.678063, -117.224036);
-				
-				(DatabaseInterface.Create(context)).addNewLocation(location1);
-				(DatabaseInterface.Create(context)).addNewLocation(location2);
-				(DatabaseInterface.Create(context)).addNewLocation(location3);*/
-  
+			}
+			            
+			@Override
+			public void onProviderEnabled(String provider) {
+			
+			}
+			            
+			@Override
+			public void onProviderDisabled(String provider) {
+			
+			}
+		};
+		
+		//Request for updates on GPS every so often time and every so often feet moved
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 20000, 0, locationListener);
+		        
+		// END LOCATION *******************************************************************  
 	}// end onCreate
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -180,8 +156,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	public void initilizeMap() {
 
 		//Setting fragment to map
-		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
-				.getMap();
+		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
 		//Makes a clear map
 		map.setMapType(GoogleMap.MAP_TYPE_NONE); 
@@ -204,7 +179,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 					map.setOnInfoWindowClickListener(this);
 					// Setting a custom info window adapter for the google map
 					map.setInfoWindowAdapter(new InfoWindowAdapter() {
-						 
+				
 			            // Use default InfoWindow frame
 				        @Override
 				        public View getInfoContents(Marker marker) {
@@ -214,7 +189,6 @@ public class MapView extends Activity implements OnMarkerClickListener,
 				            }
 				            return null;
 				        }
-			 
 			            // Defines the contents of the InfoWindow (Have to use this one to use custom info-bubble)
 			            @Override
 			            public View getInfoWindow(Marker arg0) {
@@ -240,9 +214,9 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			                else
 			                	snippetUi.setText("");
 			                
-			                //setting info
+			                //MaxScore
 			                TextView maxScoreUi = ((TextView) view.findViewById(R.id.custom_maxScore));
-			                if (arg0.getSnippet() != null && arg0 != null){
+			                if (arg0 != null){
 				                int maxScore = getMaxScoreForWindow(arg0.getTitle());
 				                if(maxScore >= 0)
 				                	maxScoreUi.setText("Max Score: " + maxScore);
@@ -259,15 +233,14 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			                
 			                // Returning the view containing InfoWindow contents
 			                return view;
-			 
-			            }
+			            }//end getInfoWindow
 
-			            //Factory for recieving maxScore for each specific location.
+			            //Factory for recieving maxScore for each specific location. Checks the name of the marker title and based on the title calls a specific database method that correlates to that location. Return -1 if this location should not have a maxScore. **If you add a location you need to add a specific case here**
 						private int getMaxScoreForWindow(String title) {
 							switch (title) {
 					         case "Discovery Park":
 					 			return DatabaseCustomAccess.Create(context).saveMaxScore_DiscoveryGame(0);
-					         case "Terrace View Park And Pool":
+					         case "Terrace View Park and Pool":
 					        	 return DatabaseCustomAccess.Create(context).saveMaxScore_AppleGame(0);
 					         case "Plantes Ferry Park":
 					        	 return DatabaseCustomAccess.Create(context).saveMaxScore_PlantesFerryGame(0);
@@ -291,48 +264,53 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		map.setMyLocationEnabled(false);
 
 		// coordinates of center of Spokane Valley
-		LatLng center = new LatLng(47.688258, -117.241587);
+		LatLng center = new LatLng(47.717924, -117.221588);
 
 		if (LastLegitLocation == null)
 			LastLegitLocation = center;
-
+		
+		// Place where the map loads on startup
 		if (locationMain == null) {
-			locationMain = center; // place where it loads
+			locationMain = center; 
 		}
+		
+		// Scaling when it loads (how zoomed in the map is)
 		if (globalZoom == 0) {
-			globalZoom = 12.85f; // Scaling when it loads *****
+			globalZoom = 12.9f; 
 		}
-		map.moveCamera(CameraUpdateFactory.newLatLngZoom(locationMain,
-				globalZoom)); // second number is zoom unit
+		
+		//Move the view to center adn specified zoom
+		map.moveCamera(CameraUpdateFactory.newLatLngZoom(locationMain, globalZoom));
 
-		// marker info window listener
+		// Marker info window listener
 		map.setOnMarkerClickListener(this);
 
 		// This adds an image over the google map
 		GroundOverlay groundOverlay = map
 				.addGroundOverlay(new GroundOverlayOptions()
-						.image(BitmapDescriptorFactory
-								.fromResource(R.drawable.mapbg))
-						.position(new LatLng(47.670568, -117.239437), 32000)
-						.transparency(0.0f));
+				.image(BitmapDescriptorFactory
+				.fromResource(R.drawable.mapbg))
+				.position(new LatLng(47.670568, -117.239437), 32000)
+				.transparency(0.0f));
 
-		// Removes all street names
+		//Remove un-needed functionality
 		map.getUiSettings().setCompassEnabled(false);
 		map.getUiSettings().setRotateGesturesEnabled(false);
 		map.getUiSettings().setTiltGesturesEnabled(false);
+		
+		//Update the score in the corner of the map every time the map loads
 		updateCornerScoreDisplay();
 	
 	}// end initilizeMap
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+	/**
+	 * Does this when map page is paused.
+	 */
 	@Override
 	protected void onPause() {
-
 		super.onPause();
-
 		sounds.stopbackground();
-		
 		VisibleRegion region = map.getProjection().getVisibleRegion();
 		LatLngBounds cameraBounds = region.latLngBounds;
 		LatLng myLatLng = map.getCameraPosition().target;
@@ -340,6 +318,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		globalZoom = position.zoom;
 		locationMain = myLatLng;
 	}// end onPause
+
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	/**
 	 * Does this when map page is brought up again after being left.
@@ -349,51 +329,64 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		super.onResume();
 		initilizeMap();
 		sounds.playBackground();
-
 	}// end onResume
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public void onInfoWindowClick(Marker marker) 
     {
-    	sounds.playsound1(); // Play Menu Button Sound
+    	// Play Menu Button Sound
+    	sounds.playsound1(); 
     	Log.d(TAG, marker.getTitle());
-					if(marker.getTitle().equals("Bank")){
-						Intent intent = new Intent(MapView.this, BankActivity.class);
-						startActivityForResult(intent, REQUEST_CODE);
-					}else if(marker.getTitle().equals("Terrace View Park and Pool")){
-						// INITIALIZE GAME
-						Intent intent = new Intent(MapView.this, AppleActivity.class);
-						startActivityForResult(intent, REQUEST_CODE);
-					}else if(marker.getTitle().equals("Discovery Park")){
-						// INITIALIZE GAME
-						Intent intent = new Intent(MapView.this, DiscoveryActivity.class);
-						startActivityForResult(intent, REQUEST_CODE);
-					}else if(marker.getTitle().equals("Plantes Ferry Park")){
-						Intent intent = new Intent(MapView.this, PlantesFerryActivity.class);
-						startActivityForResult(intent, REQUEST_CODE);
-						//TODO: Chnage back to Greenacres game (was switched to GPS game for testing)
-					}else if(marker.getTitle().equals("Greenacres Park")){
-						Intent intent = new Intent(MapView.this, addScoreGPSLauncher.class);
-						startActivityForResult(intent, REQUEST_CODE);
-					}else if(marker.getTitle().equals("The Mall")){
-						Intent intent = new Intent(MapView.this, MallActivity.class);
-						startActivityForResult(intent, REQUEST_CODE);
-					}else if(marker.getTitle().equals("Ski!")){
-						Intent intent = new Intent(MapView.this, SkiActivity.class);
-						startActivityForResult(intent, REQUEST_CODE);
-					}
+    	
+    	// Initializing game Factory. Reads the title of the marker and plays the specific game that correlates to that marker. **If you add location then make sure to link your game to the marker location in here**
+		if(marker.getTitle().equals("Bank")){
+			Intent intent = new Intent(MapView.this, BankActivity.class);
+			startActivityForResult(intent, REQUEST_CODE);
+		}else if(marker.getTitle().equals("Terrace View Park and Pool")){
+			// INITIALIZE GAME
+			Intent intent = new Intent(MapView.this, AppleActivity.class);
+			startActivityForResult(intent, REQUEST_CODE);
+		}else if(marker.getTitle().equals("Discovery Park")){
+			// INITIALIZE GAME
+			Intent intent = new Intent(MapView.this, DiscoveryActivity.class);
+			startActivityForResult(intent, REQUEST_CODE);
+		}else if(marker.getTitle().equals("Plantes Ferry Park")){
+			Intent intent = new Intent(MapView.this, PlantesFerryActivity.class);
+			startActivityForResult(intent, REQUEST_CODE);
+			//TODO: Chnage back to Greenacres game (was switched to GPS game for testing)
+		}else if(marker.getTitle().equals("Greenacres Park")){
+			Intent intent = new Intent(MapView.this, addScoreGPSLauncher.class);
+			startActivityForResult(intent, REQUEST_CODE);
+		}else if(marker.getTitle().equals("The Mall")){
+			Intent intent = new Intent(MapView.this, MallActivity.class);
+			startActivityForResult(intent, REQUEST_CODE);
+		}else if(marker.getTitle().equals("Ski!")){
+			Intent intent = new Intent(MapView.this, SkiActivity.class);
+			startActivityForResult(intent, REQUEST_CODE);
+		}
+		
+		//Closing the info window after the game has been clicked so that the maxScore can get updated once they come back to the map again (otherwise when they come back to the map the info window will still be open and the maxScore in the infoWindow might not be up to date)
+		if(lastMarkerSelected != null){
+			lastMarkerSelected.hideInfoWindow();
+			lastMarkerSelected = null;
+		}
     }
 
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	/**
-	 * 
+	 * Updates the total score in the database which in turn updates the score in the corner of the map as well
 	 */
 	private void updateCornerScoreDisplay() {
 		EditText text = (EditText) findViewById(R.id.scoreOnTopOfMap);	
 		String totalScore  = String.valueOf( DatabaseCustomAccess.Create(context).getTotalScore());
-		text.setText( totalScore);
+		text.setText(totalScore);
 		Log.d(TAG, "total score  : " + totalScore );
 	}
+	
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 	/**
 	 * Responds to marker click
 	 * 
@@ -401,7 +394,8 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	@Override
 	public boolean onMarkerClick(Marker arg0) {
 		
-		sounds.playsound1(); // Play Menu Button Sound
+		// Play Menu Button Sound
+		sounds.playsound1(); 
 		
 		// Check if there is an open info window
         if (lastMarkerSelected != null) {
@@ -430,6 +424,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 
         // Create a camera update with the new latlng to move to            
         CameraUpdate camUpdate = CameraUpdateFactory.newLatLng(camMove);
+        
         // Move the map to this position
         map.animateCamera(camUpdate);
 
@@ -439,19 +434,22 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		return true;
 	}
 
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	/**
+	 * Runs after an activity/game has been run
+	 * 
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		try {
 			super.onActivityResult(requestCode, resultCode, data);
 
 			if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-				//String requiredValue = data.getStringExtra("Key");
-				updateCornerScoreDisplay();
 			}
 			
 		} catch (Exception ex) {
-			//Toast.makeText(MapView.this, ex.toString(), Toast.LENGTH_SHORT)
-					//.show();
+
 		}
 	}
 
@@ -520,60 +518,31 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		public void handleMessage(Message msg) {
 			CameraPosition position = map.getCameraPosition();
 			VisibleRegion region = map.getProjection().getVisibleRegion();
-
-			/*
-			 * LatLng correction = getLatLngCorrection(region.latLngBounds);
-			 * 
-			 * LatLng center = new LatLng(47.670568, -117.239437);
-			 * 
-			 * 
-			 * if(correction.latitude != 0 || correction.longitude != 0) {
-			 * CameraPosition newPosition = new CameraPosition(center, 11.8f,
-			 * position.tilt, position.bearing);
-			 * 
-			 * map.animateCamera(CameraUpdateFactory.newCameraPosition(newPosition
-			 * ),100, null);
-			 * 
-			 * }
-			 */
 			int counter = getLatLngCorrection(region.latLngBounds);
 			if (position != null) {
 
 				if (counter == 0) {
-
-					LastLegitLocation = new LatLng(position.target.latitude,
-							position.target.longitude);
-
-					//Log.d(TAG, "center of screen is : " + LastLegitLocation);
-				} else if (counter >= 1) {
+					LastLegitLocation = new LatLng(position.target.latitude, position.target.longitude);
+				} 
+				else if (counter >= 1) {
 					if (counter > 2) {
 						CameraPosition newPosition = new CameraPosition(
 								locationMain, 11.8f, position.tilt,
 								position.bearing);
-						map.animateCamera(CameraUpdateFactory
-								.newCameraPosition(newPosition), 250, null);
-					} else {
+						map.animateCamera(CameraUpdateFactory.newCameraPosition(newPosition), 250, null);
+					} 
+					else {
 						CameraPosition newPosition = new CameraPosition(
 								LastLegitLocation, position.zoom,
 								position.tilt, position.bearing);
-
-						map.animateCamera(CameraUpdateFactory
-								.newCameraPosition(newPosition), 250, null);
+						map.animateCamera(CameraUpdateFactory.newCameraPosition(newPosition), 250, null);
 					}
-
-					// LastLegitLocation = new LatLng(position.target.latitude,
-					// position.target.longitude);
-					// map.moveCamera(CameraUpdateFactory.newLatLngZoom(LastLegitLocation,
-					// position.zoom));
 				}
-
 			}
-
 			sendEmptyMessageDelayed(0, 100);
 		}
-	}
+	} // overscrollHandler
 
-	// end overscroll handler
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	@Override
@@ -602,7 +571,5 @@ public class MapView extends Activity implements OnMarkerClickListener,
 	}
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	
 }// end MapView
 

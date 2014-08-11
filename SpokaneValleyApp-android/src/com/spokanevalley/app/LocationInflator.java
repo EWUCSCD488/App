@@ -1,21 +1,19 @@
 package com.spokanevalley.app;
 
 import java.util.ArrayList;
-
 import org.xmlpull.v1.XmlPullParser;
-
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 
-
+/**
+ * Reads the xml file and parses out the location information and bundles it together in a location object.
+ */
 public class LocationInflator {
     public static ArrayList<Location> inflate(Context context, int xmlFileResId)
         throws Exception
     {
         ArrayList<Location> locations = new ArrayList<Location>();
-
         XmlResourceParser parser = context.getResources().getXml(R.xml.locations);
-
         Location c_Location = null;
         int token;
 
@@ -23,7 +21,7 @@ public class LocationInflator {
         while ((token = parser.next()) != XmlPullParser.END_DOCUMENT)
         {
             if(token == XmlPullParser.START_TAG)
-            {   //start of location
+            {   //start of a new location
                 if("Location".equals(parser.getName()))
                 {
                     c_Location = new Location();
@@ -104,7 +102,8 @@ public class LocationInflator {
                         c_Location.setLongitudeBottomLeft(lon);
                         token = parser.next();
                     }
-                }                //lat
+                }                
+                //latTopRight
                 else if ("LatitudeTopRight".equals(parser.getName()))
                 {
                     token = parser.next();
@@ -115,7 +114,7 @@ public class LocationInflator {
                         token = parser.next();
                     }
                 }
-                //lon
+                //lonTopRight
                 else if ("LongitudeTopRight".equals(parser.getName()))
                 {
                     token = parser.next();

@@ -86,7 +86,7 @@ public class addScoreGPSMain extends Game {
 			{
 				buttonImage = new Texture(Gdx.files.internal("addScoreGPSAssets/bucket.png"));
 				batch.draw(buttonImage, button.x, button.y);
-				//TODO: Database call to save the prize (500 apples)
+				DatabaseCustomAccess.Create(context).addUpTotalScore(10000);
 			}
 			else if (pointInRectangle(button3, touchPos.x, touchPos.y))
 			{

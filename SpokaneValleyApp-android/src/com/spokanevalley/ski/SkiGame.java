@@ -38,7 +38,6 @@ public class SkiGame implements Screen {
 	Sound treeSound;
 	Sound flagSound;
 	Sound bflagSound;
-	Music skiMusic;
 	OrthographicCamera camera;
 	SpriteBatch batch;
 	Rectangle skier;
@@ -112,14 +111,7 @@ public class SkiGame implements Screen {
 				.internal(Constants.SOUND_FLAG));
 		bflagSound = Gdx.audio.newSound(Gdx.files
 				.internal(Constants.SOUND_BFLAG));
-		skiMusic = Gdx.audio.newMusic(Gdx.files
-				.internal(Constants.SOUND_MUSIC)); // music is stored in
-													// internal and stream from
-													// it
-
-		// start the background music immediately
-		skiMusic.setLooping(true);
-		skiMusic.play();
+		
 
 		// create camera and SpriteBatch class to draw objects to screen
 		camera = new OrthographicCamera();
@@ -400,13 +392,13 @@ public class SkiGame implements Screen {
 		treeSound.dispose();
 		flagSound.dispose();
 		bflagSound.dispose();
-		skiMusic.dispose();
+		
 
 	}
 
 	@Override
 	public void show() {
-		skiMusic.play();
+		
 
 	}
 

@@ -36,7 +36,6 @@ public class AppleGame implements Screen {
 	Texture backTree;
 	Sprite back;
 	Sound appleSound;
-	Music appleMusic;
 	OrthographicCamera camera;
 	SpriteBatch batch;
 	Rectangle bucket;
@@ -228,11 +227,7 @@ public class AppleGame implements Screen {
 	{
 		// load the apple sound effect
 		appleSound = Gdx.audio.newSound(Gdx.files.internal(Constants.SOUND_APPLE));
-		appleMusic = Gdx.audio.newMusic(Gdx.files.internal(Constants.SOUND_MUSIC)); 
-
-		// start the background music immediately
-		appleMusic.setLooping(true);
-		appleMusic.play();
+		
 	}
 	
 	//This method sets the apple's spawn rate based on the current score of the game
@@ -323,7 +318,6 @@ public class AppleGame implements Screen {
 
 	@Override
 	public void dispose() {
-		appleMusic.dispose();
 		appleImage.dispose();
 		goldAppleImage.dispose();
 		rotAppleImage.dispose();
@@ -336,7 +330,7 @@ public class AppleGame implements Screen {
 
 	@Override
 	public void show() {
-		appleMusic.play();
+		
 
 	}
 

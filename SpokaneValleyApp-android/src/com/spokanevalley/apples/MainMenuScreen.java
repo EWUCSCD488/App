@@ -8,6 +8,7 @@ import android.content.Context;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,6 +28,7 @@ public class MainMenuScreen implements Screen {
 	Rectangle button3;
 	Texture howTotex;
 	Rectangle howTo;
+	Music appleMusic;
 	Sprite back;
 	Boolean how= false;
 	OrthographicCamera camera;
@@ -36,6 +38,12 @@ public class MainMenuScreen implements Screen {
 	public MainMenuScreen(final Apple gam) {
 		game = gam;
 
+		appleMusic = Gdx.audio.newMusic(Gdx.files.internal(Constants.SOUND_MUSIC)); 
+
+		// start the background music immediately
+		appleMusic.setLooping(true);
+		appleMusic.play();
+		
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.WIDTH_GAME, Constants.HEIGHT_GAME);
 		
@@ -159,6 +167,7 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void show() {
+		appleMusic.play();
 	}
 
 	@Override

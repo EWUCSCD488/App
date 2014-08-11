@@ -8,6 +8,7 @@ import android.content.Context;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,6 +28,7 @@ public class MainMenuScreen implements Screen {
 	Rectangle button3;
 	Texture howTotex;
 	Rectangle howTo;
+	Music skiMusic;
 	Sprite back;
 	Boolean how= false;
 	OrthographicCamera camera;
@@ -38,6 +40,15 @@ public class MainMenuScreen implements Screen {
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.WIDTH_GAME, Constants.HEIGHT_GAME);
+		
+		skiMusic = Gdx.audio.newMusic(Gdx.files
+				.internal(Constants.SOUND_MUSIC)); // music is stored in
+													// internal and stream from
+													// it
+
+		// start the background music immediately
+		skiMusic.setLooping(true);
+		skiMusic.play();
 		
 		//initialize the button images
 		buttonImage.setEnforcePotImages(false);
@@ -159,6 +170,7 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void show() {
+		skiMusic.play();
 	}
 
 	@Override

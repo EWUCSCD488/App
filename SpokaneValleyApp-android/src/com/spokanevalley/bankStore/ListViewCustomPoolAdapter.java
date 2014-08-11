@@ -131,6 +131,13 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 		return convertView;
 	}
 
+	/**
+	 * show dialog box with image and confirmation question for buying coupon or not
+	 * 
+	 * @param Dimage
+	 * @param game
+	 */
+	
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	private void showAlert(Drawable Dimage, final Model game) {
 		AlertDialog.Builder alert = new AlertDialog.Builder(context);
@@ -187,6 +194,11 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 		alert.show();
 	}
 
+	/**
+	 * if kids decide to buy coupon, check for database for response
+	 * @param game
+	 */
+	
 	private void checkTotalScoreAndBuyCoupon(final Model game) {
 		int price = CouponCostFactory.create().getPrice(game.getTitle());
 		Log.d(TAG, "price is : " + price);
@@ -201,6 +213,11 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 		}
 	}
 
+	/**
+	 * process buying coupon and double confirming
+	 * @param game
+	 */
+	
 	private void comfirmationPromptBuyCoupon(final Model game) {
 		AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
 		builder1.setMessage("Are you sure you want to buy this coupon? \n Please redeem the coupon in the bank");
@@ -240,6 +257,10 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 		alert11.show();
 	}
 
+	/**
+	 * buy coupon failed due to total balance
+	 */
+	
 	private void comfirmationPromptBuyCouponFailed() {
 		AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
 		builder1.setMessage("You don't have enough points to get this coupon");
@@ -251,11 +272,6 @@ public class ListViewCustomPoolAdapter extends ArrayAdapter<poolLocation> {
 						dialog.cancel();
 					}
 				});
-		/*
-		 * builder1.setNegativeButton("No", new
-		 * DialogInterface.OnClickListener() { public void
-		 * onClick(DialogInterface dialog, int id) { dialog.cancel(); } });
-		 */
 
 		AlertDialog alert11 = builder1.create();
 		alert11.show();

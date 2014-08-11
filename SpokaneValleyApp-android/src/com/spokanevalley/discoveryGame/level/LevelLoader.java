@@ -15,10 +15,32 @@ import com.spokanevalley.discoveryGame.drawingHandlers.BadApples;
 import com.spokanevalley.discoveryGame.drawingHandlers.Dinasour;
 import com.spokanevalley.discoveryGame.drawingHandlers.RocketRocks;
 
+/**
+ * Loading all objects in game based on image
+ * image is created by GIMP program. image will be counted pixel-by-pixel.
+ * this class will go through each pixel and determine what color each pixel is
+ * based on color set of objects, class will render objects
+ * background will be black
+ * rock is green pixel
+ * dinosaur is white pixel , only draw this pixel once
+ * apple is yello pixel
+ * bad apple is  purple pixel
+ * image is create in dimesion 128x32
+ * 
+ * @author Quyen Ha
+ *
+ */
+
 public class LevelLoader {
-	public static final String TAG = LevelLoader.class.getName();
 	private float delay = 0;
 
+	/**
+	 * Define color for pixel and compare method
+	 * 
+	 * @author Quyen Ha
+	 *
+	 */
+	
 	public enum BLOCK_TYPE {
 		EMPTY(0, 0, 0), // black
 		ROCKETROCK(0, 255, 0), // green
@@ -42,6 +64,7 @@ public class LevelLoader {
 
 	}// enum
 
+	// objects
 	public Array<RocketRocks> rocketRocks;
 	public Background background;
 	public Airplanes airplanes;
@@ -51,35 +74,46 @@ public class LevelLoader {
 	private int numMap = 1;
 	private int nextMapoffset = 10;
 
+	/**
+	 * constructor , load image into bitmap and load the first map, then load second map
+	 * @param filename
+	 */
+	
 	public LevelLoader(String filename) {
-		init(filename);
+		initilizeFirstMap(filename);
 		loadNextMap();
 		dinasour.setJumping(false);
 	}
 
-	public void loadNextMap(){
+	/**
+	 * create a next random map after certain time.
+	 */
+	
+	public void loadNextMap() {
 		Random rand = new Random();
 
-		int  n = rand.nextInt(Constants.NUM_MAP) + 1;
-		if(n == 1)
-			init1(Constants.LEVEL_02);
+		int n = rand.nextInt(Constants.NUM_MAP) + 1;
+		if (n == 1)
+			inilizeNextMap(Constants.LEVEL_02);
 		else if (n == 2)
-			init1(Constants.LEVEL_03);
+			inilizeNextMap(Constants.LEVEL_03);
 		else if (n == 3)
-			init1(Constants.LEVEL_04);
-		else if (n == 4){
-			init1(Constants.LEVEL_05);
+			inilizeNextMap(Constants.LEVEL_04);
+		else if (n == 4) {
+			inilizeNextMap(Constants.LEVEL_05);
 		}
-		
+
 		numMap++;
 	}
-	
-	private void init1(String filename) {
-		// dinasour = null;
-		// coins = new Array<Coins>();
-		// specialCoin = new Array<SpecialCoin>();
 
-		// rocks = new Array<Rocks>();
+	/**
+	 * read file and extend the map in game
+	 * 
+	 * @param filename
+	 */
+	
+	private void inilizeNextMap(String filename) {
+
 		// load image file that represenets the level data
 		Pixmap pixmap = new Pixmap(Gdx.files.internal(filename));
 		// scan pixels from top left to bottom right
@@ -104,7 +138,8 @@ public class LevelLoader {
 						obj = new RocketRocks();
 						float heightIncreaseFactor = 0.25f;
 						offsetHeight = -2.5f;
-						obj.position.set(pixelX + (pixmap.getWidth() - nextMapoffset)*numMap,
+						obj.position.set(pixelX
+								+ (pixmap.getWidth() - nextMapoffset) * numMap,
 								baseHeight * obj.dimension.y
 										* heightIncreaseFactor + offsetHeight);
 						rocketRocks.add((RocketRocks) obj);
@@ -115,8 +150,9 @@ public class LevelLoader {
 																			// coin
 					obj = new Apples();
 					offsetHeight = -0.75f;
-					obj.position.set(pixelX + (pixmap.getWidth() - nextMapoffset)*numMap, baseHeight
-							* obj.dimension.y + offsetHeight);
+					obj.position.set(pixelX
+							+ (pixmap.getWidth() - nextMapoffset) * numMap,
+							baseHeight * obj.dimension.y + offsetHeight);
 					apples.add((Apples) obj);
 					// } else if
 					// (BLOCK_TYPE.PLAYER_SPAWMPOINT.sameColor(currentPixel)){
@@ -125,17 +161,12 @@ public class LevelLoader {
 																				// coin
 					obj = new BadApples();
 					offsetHeight = -0.75f;
-					obj.position.set(pixelX + (pixmap.getWidth() - nextMapoffset)*numMap, baseHeight
-							* obj.dimension.y + offsetHeight);
+					obj.position.set(pixelX
+							+ (pixmap.getWidth() - nextMapoffset) * numMap,
+							baseHeight * obj.dimension.y + offsetHeight);
 					badApples.add((BadApples) obj);
 				} else {
-					//int r = 0xff & (currentPixel >>> 24); // red color channel
-					//int g = 0xff & (currentPixel >>> 16); // green color channel
-					//int b = 0xff & (currentPixel >>> 8); // blue color channel
-					//int a = 0xff & currentPixel; // alpha channel
-					//Gdx.app.error(TAG, "Unknown object at x<" + pixelX + "> y<"
-					//		+ pixelY + ">: r<" + r + "> g<" + g + "> b<" + b
-					//		+ "> a<" + a + ">");
+					
 				}
 
 				lastPixel = currentPixel;
@@ -144,19 +175,22 @@ public class LevelLoader {
 		}// first for loop
 
 		// decoration
-		// decoration
-				airplanes = new Airplanes(pixmap.getWidth()* numMap);
-				airplanes.position.set(0, 2);
-				background = new Background(pixmap.getWidth() * numMap);
-				background.position.set(-3, -3);
+		airplanes = new Airplanes(pixmap.getWidth() * numMap);
+		airplanes.position.set(0, 2);
+		background = new Background(pixmap.getWidth() * numMap);
+		background.position.set(-3, -3);
 
 		// free memory
 		pixmap.dispose();
-		//Gdx.app.debug(TAG, "level '" + filename + "' loaded");
 
 	}
 
-	public void init(String filename) {
+	/**
+	 * read image with dinosaur
+	 * @param filename
+	 */
+	
+	public void initilizeFirstMap(String filename) {
 
 		dinasour = null;
 		apples = new Array<Apples>();
@@ -218,13 +252,7 @@ public class LevelLoader {
 							+ offsetHeight);
 					badApples.add((BadApples) obj);
 				} else {
-					int r = 0xff & (currentPixel >>> 24); // red color channel
-					int g = 0xff & (currentPixel >>> 16); // green color channel
-					int b = 0xff & (currentPixel >>> 8); // blue color channel
-					int a = 0xff & currentPixel; // alpha channel
-					Gdx.app.error(TAG, "Unknown object at x<" + pixelX + "> y<"
-							+ pixelY + ">: r<" + r + "> g<" + g + "> b<" + b
-							+ "> a<" + a + ">");
+
 				}
 
 				lastPixel = currentPixel;
@@ -233,23 +261,27 @@ public class LevelLoader {
 		}// first for loop
 
 		// decoration
-		airplanes = new Airplanes(pixmap.getWidth());
+		airplanes = new Airplanes(pixmap.getWidth() * numMap);
 		airplanes.position.set(0, 2);
-		background = new Background(pixmap.getWidth() * Constants.NUM_MAP);
+		background = new Background(pixmap.getWidth() * numMap);
 		background.position.set(-3, -3);
 
 		// free memory
 		pixmap.dispose();
-		//Gdx.app.debug(TAG, "level '" + filename + "' loaded");
 
 	}
 
+	/**
+	 * rendering objects
+	 * 
+	 * @param batch
+	 */
+	
 	public void render(SpriteBatch batch) {
 		// Draw Mountains
 		background.render(batch);
-		// Draw Rocks
-		for (RocketRocks rock : rocketRocks)
-			rock.render(batch);
+		// Draw Clouds
+		airplanes.render(batch);
 
 		// Draw gold coins
 		for (Apples coin : apples)
@@ -259,22 +291,28 @@ public class LevelLoader {
 		for (BadApples coin : badApples)
 			coin.render(batch);
 
-		// Draw Clouds
-		airplanes.render(batch);
+		// Draw Rocks
+		for (RocketRocks rock : rocketRocks)
+			rock.render(batch);
 
 		// Draw Player character
 		dinasour.render(batch);
 	}
 
+	/**
+	 * update objects based on FPS
+	 * 
+	 * @param deltaTime
+	 */
+	
 	public void update(float deltaTime) {
 		airplanes.update(deltaTime);
 		for (RocketRocks rock : rocketRocks)
 			rock.update(deltaTime);
-		for (Apples goldCoin : apples)
-			goldCoin.update(deltaTime);
-		for (BadApples feather : badApples)
-			feather.update(deltaTime);
-		
+		for (Apples apple : apples)
+			apple.update(deltaTime);
+		for (BadApples badApple : badApples)
+			badApple.update(deltaTime);
 
 		delay += deltaTime;
 		if (delay > 1.0f)

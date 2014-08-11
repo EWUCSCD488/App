@@ -12,19 +12,24 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Disposable;
 import com.spokanevalley.discoveryGame.Constants;
 
+/**
+ * Objects creation controller
+ * 
+ * @author Quyen Ha
+ *
+ */
+
 public class Assets implements Disposable, AssetErrorListener {
 
-	public static final String TAG = Assets.class.getName();
-	public static final Assets instance = new Assets();
-	private AssetManager assetManager;
+	public static final Assets instance = new Assets();		// singleton pattern
+	private AssetManager assetManager;						// object loader
 	
-	public AirplaneAsset cloud;
-	public AppleAsset coin;
-	public DinasourAsset dinasour;
+	public AirplaneAsset airplane;					
+	public AppleAsset apple;
+	public DinasourAsset dinosaur;
 	public RocketRockAsset ground;
-	public BackgroundFutureAsset mountain;
-	//public SkyAsset sky;
-	public BadAppleAsset specialCoin;
+	public BackgroundDiscoveryAsset background;
+	public BadAppleAsset badApple;
 	
 	// fonts asset
 	public AssetFonts fonts;
@@ -35,31 +40,26 @@ public class Assets implements Disposable, AssetErrorListener {
 	
 	public void init(AssetManager assetManager){
 		this.assetManager = assetManager;
-		this.assetManager.setErrorListener(this);
-		this.assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
+		this.assetManager.setErrorListener(this);		// for debugging
+		this.assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);		// load all objects in game
 		this.assetManager.finishLoading();
-		this.assetManager.load(Constants.TEXTURE_ATLAS_DINASOUR, TextureAtlas.class);
+		this.assetManager.load(Constants.TEXTURE_ATLAS_DINOSAUR, TextureAtlas.class);		// load dinosaur
 		this.assetManager.finishLoading();
-		Log.d(TAG, "Number of assets loaded: "+ this.assetManager.getAssetNames().size);
 		
-		for(String element :  this.assetManager.getAssetNames()){
-			Log.d(TAG, "asset : "+ element);
-		}
+		TextureAtlas atlas = this.assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);		// call in-game object atlas
+		TextureAtlas atlas_dinosaur = this.assetManager.get(Constants.TEXTURE_ATLAS_DINOSAUR);	// call dinosaur atlas
 		
-		TextureAtlas atlas = this.assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
-		TextureAtlas atlas_dinasour = this.assetManager.get(Constants.TEXTURE_ATLAS_DINASOUR);
 		// anable texture filtering for pixel smoothing
 		for( Texture t : atlas.getTextures() ){
 			t.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 			
 			// create game resource objects
-			cloud = new AirplaneAsset(atlas);
-			coin = new AppleAsset(atlas);
-			dinasour = new DinasourAsset(atlas_dinasour);
+			airplane = new AirplaneAsset(atlas);
+			apple = new AppleAsset(atlas);
+			dinosaur = new DinasourAsset(atlas_dinosaur);
 			ground = new RocketRockAsset(atlas);
-			mountain = new BackgroundFutureAsset(atlas);
-			//sky = new SkyAsset(atlas);
-			specialCoin = new BadAppleAsset(atlas);
+			background = new BackgroundDiscoveryAsset(atlas);
+			badApple = new BadAppleAsset(atlas);
 			
 			// create fonts
 			fonts = new AssetFonts();
@@ -69,7 +69,7 @@ public class Assets implements Disposable, AssetErrorListener {
 		
 	@Override
 	public void error(String fileName, Class type, Throwable throwable) {
-		Log.d(TAG, "cound not load "+ fileName + " at " + (Exception)throwable);
+
 	}
 
 	@Override

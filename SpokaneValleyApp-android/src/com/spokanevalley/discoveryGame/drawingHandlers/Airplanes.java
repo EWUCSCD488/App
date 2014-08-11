@@ -7,12 +7,27 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.spokanevalley.discoveryGame.Atlas_handlers.Assets;
 
+/**
+ * Create cloud objects at first objects only contains cloud, but I added more
+ * airplanes and helicopter objects
+ * 
+ * @author Quyen Ha
+ * 
+ */
+
 public class Airplanes extends AbstractGameObject {
 
 	private float length;
 	private Array<TextureRegion> regClouds;
 	private Array<Cloud> clouds;
 
+	
+	/**
+	 * private class to define cloud properties and rendering
+	 * 
+	 * @author Quyen Ha
+	 *
+	 */
 	private class Cloud extends AbstractGameObject {
 		private TextureRegion regCloud;
 
@@ -32,20 +47,24 @@ public class Airplanes extends AbstractGameObject {
 					reg.getRegionY(), reg.getRegionWidth(),
 					reg.getRegionHeight(), false, false);
 		}
-	}
+	}// end Cloud
 
 	public Airplanes(float length) {
-		this.length = length;
+		this.length = length;			// how many airplanes in one random
 		init();
 	}
 
+	/**
+	 * initialize airplanes
+	 */
+	
 	private void init() {
 		dimension.set(1.5f, 0.75f);
 		regClouds = new Array<TextureRegion>();
-		regClouds.add(Assets.instance.cloud.cloud1);
-		regClouds.add(Assets.instance.cloud.cloud2);
-		regClouds.add(Assets.instance.cloud.cloud3);
-		int distFac = 5;
+		regClouds.add(Assets.instance.airplane.airplane1);
+		regClouds.add(Assets.instance.airplane.airplane2);
+		regClouds.add(Assets.instance.airplane.airplane3);
+		int distFac = 5;			// distance between 2 airplanes
 		int numClouds = (int) (length / distFac);
 		clouds = new Array<Cloud>(2 * numClouds);
 		for (int i = 0; i < numClouds; i++) {
@@ -55,6 +74,11 @@ public class Airplanes extends AbstractGameObject {
 		}
 	}
 
+	/**
+	 * create cloud,airplane,helicopter in random order
+	 * @return
+	 */
+	
 	private Cloud spawnCloud() {
 		Cloud cloud = new Cloud();
 		cloud.dimension.set(dimension);
@@ -71,6 +95,10 @@ public class Airplanes extends AbstractGameObject {
 		return cloud;
 	}
 
+	/**
+	 * rendering
+	 */
+	
 	@Override
 	public void render(SpriteBatch batch) {
 		for (Cloud cloud : clouds)

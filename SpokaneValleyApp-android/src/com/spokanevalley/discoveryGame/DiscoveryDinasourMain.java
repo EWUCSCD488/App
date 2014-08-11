@@ -7,6 +7,13 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.spokanevalley.discoveryGame.Atlas_handlers.Assets;
 import com.spokanevalley.discoveryGame.Screen.MenuSreen;
 
+/**
+ * loading objects in game at first , then launch the menu
+ * 
+ * @author Quyen Ha
+ *
+ */
+
 public class DiscoveryDinasourMain extends Game{
 	@Override
 	public void create () {

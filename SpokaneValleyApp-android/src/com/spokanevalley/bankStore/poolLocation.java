@@ -2,7 +2,7 @@ package com.spokanevalley.bankStore;
 
 /**
  * 
- * @author quyen_000
+ * @author Quyen Ha
  * Eastern Washington University
  */
 

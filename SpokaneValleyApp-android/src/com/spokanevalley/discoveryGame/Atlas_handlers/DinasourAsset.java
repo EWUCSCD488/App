@@ -4,9 +4,16 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.spokanevalley.discoveryGame.Constants;
 
+/**
+ * Define AtlasRegion for dinosaur
+ * 
+ * @author Quyen Ha
+ *
+ */
+
 public class DinasourAsset {
-	public final AtlasRegion cuteDinasour;
+	public final AtlasRegion cuteDinosaur;
 	public DinasourAsset(TextureAtlas atlas){
-		cuteDinasour  = atlas.findRegion(Constants.DINASOUR_NAME);
+		cuteDinosaur  = atlas.findRegion(Constants.DINOSAUR_NAME);
 	}
 }

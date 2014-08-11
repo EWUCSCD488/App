@@ -4,10 +4,17 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.spokanevalley.discoveryGame.Constants;
 
+/**
+ * Define AtlasRegion for apple
+ * 
+ * @author Quyen Ha
+ *
+ */
+
 public class AppleAsset {
-	public final AtlasRegion coin;
+	public final AtlasRegion apple;
 	
 	public AppleAsset(TextureAtlas atlas){
-		coin = atlas.findRegion(Constants.APPLE_NAME);
+		apple = atlas.findRegion(Constants.APPLE_NAME);
 	}
 }

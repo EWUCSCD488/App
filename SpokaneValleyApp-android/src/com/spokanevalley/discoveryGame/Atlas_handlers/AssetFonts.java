@@ -5,6 +5,15 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.spokanevalley.discoveryGame.Constants;
 
+/**
+ * define BitmapFont for game
+ * small font is scaled about 75% original size
+ * big font is scaled about 150% original size
+ * 
+ * @author Quyen Ha
+ *
+ */
+
 public class AssetFonts {
 	public final BitmapFont defaultSmall;
 	public final BitmapFont defaultNormal;

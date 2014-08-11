@@ -5,13 +5,19 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.spokanevalley.discoveryGame.Atlas_handlers.Assets;
 
-/*
+/**
  * 	abstract screen menu 
+ * @author Quyen Ha
  */
 
 public abstract class AbstractGameScreen implements Screen{
 	
 	protected Game game;
+	
+	/**
+	 * pass in hosting game into menu
+	 * @param game
+	 */
 	
 	public AbstractGameScreen(Game game) {
 		this.game = game;

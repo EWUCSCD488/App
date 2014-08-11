@@ -5,32 +5,55 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.spokanevalley.discoveryGame.Atlas_handlers.Assets;
 
+/**
+ * Define background
+ * 
+ * @author Quyen Ha
+ * 
+ */
 public class Background extends AbstractGameObject {
 
 	private TextureRegion regMountainLeft;
 	private TextureRegion regMountainRight;
 	private int length;
 
+	/**
+	 * pass in how long background can be
+	 * 
+	 * @param leng
+	 */
+
 	public Background(int leng) {
 		this.length = leng;
 		init();
 	}
 
-	private void init() {
-		dimension.set(20,9);
+	/**
+	 * set up properties of background
+	 */
 
-		regMountainLeft = Assets.instance.mountain.moutainLeft;
-		regMountainRight = Assets.instance.mountain.moutainRight;
+	private void init() {
+		dimension.set(20, 9);
+
+		regMountainLeft = Assets.instance.background.backgroundLeft;
+		regMountainRight = Assets.instance.background.backgroundRight;
 
 		// shift moutain and extend length
 		origin.x = -dimension.x * 2;
 		length += dimension.x * 2;
 	}
 
-	private void drawMountain(SpriteBatch batch, float offsetX, float offsetY,
-			float tintColor) {
+	/**
+	 * rendering
+	 * 
+	 * @param batch
+	 * @param offsetX
+	 * @param offsetY
+	 * @param tintColor
+	 */
+	
+	private void drawMountain(SpriteBatch batch, float offsetX, float offsetY) {
 		TextureRegion reg = null;
-		//batch.setColor(tintColor, tintColor, tintColor, 1);
 		float xRel = dimension.x * offsetX;
 		float yRel = dimension.y * offsetY;
 		// mountains span the whole level
@@ -61,12 +84,7 @@ public class Background extends AbstractGameObject {
 
 	@Override
 	public void render(SpriteBatch batch) {
-		// distant mountains (dark gray)
-		drawMountain(batch, 0, -0.19f, 0);
-		// distant mountains (gray)
-		//drawMountain(batch, 0.25f, 0.25f, 0.7f);
-		// distant mountains (light gray)
-		//drawMountain(batch, 0.0f, 0.0f, 0.0f);	
+		drawMountain(batch, 0, -0.19f);			// (0,-19f) will set rocks at 40% of background from bottom
 	}
 
 }

@@ -6,17 +6,26 @@ import com.badlogic.gdx.graphics.GL10;
 import com.spokanevalley.discoveryGame.GameLogic;
 import com.spokanevalley.discoveryGame.GameRender;
 
+/**
+ * Screen to display game
+ * 
+ * @author Quyen Ha
+ *
+ */
+
 public class GameScreen extends AbstractGameScreen {
 
-	private static final String TAG = GameScreen.class.getName();
-
-	private GameRender worldRenderer;
-	private GameLogic worldController;
+	private GameRender worldRenderer;			// game render
+	private GameLogic worldController;			// game logic
 	private boolean paused;
 	public GameScreen(Game game) {
 		super(game);
 	}
 
+	/**
+	 * rendering game
+	 */
+	
 	@Override
 	public void render(float deltaTime) {
 		if (!paused) {										// Do not update game world when paused.
@@ -31,11 +40,19 @@ public class GameScreen extends AbstractGameScreen {
 
 	}
 
+	/**
+	 * game reszies after resuming
+	 */
+	
 	@Override
 	public void resize(int width, int height) {
 		worldRenderer.resize(width, height);
 	}
 
+	/**
+	 * initialize game logic and game render again , then show screen
+	 */
+	
 	@Override
 	public void show() {
 		
@@ -45,6 +62,10 @@ public class GameScreen extends AbstractGameScreen {
 
 	}
 
+	/**
+	 * it's called when game is over, returning back to menu
+	 */
+	
 	@Override
 	public void hide() {
 
@@ -52,11 +73,19 @@ public class GameScreen extends AbstractGameScreen {
 
 	}
 
+	/**
+	 *  called when game is paused
+	 */
+	
 	@Override
 	public void pause() {
-		paused = true;
+		paused = true;		// if true, stop rendering logic in game
 	}
 
+	/**
+	 * called when game is resumed
+	 */
+	
 	@Override
 	public void resume() {
 		super.resume();
@@ -66,6 +95,10 @@ public class GameScreen extends AbstractGameScreen {
 		paused = false;
 	}
 
+	/**
+	 * dispose method
+	 */
+	
 	@Override
 	public void dispose() {
 		worldRenderer.dispose();

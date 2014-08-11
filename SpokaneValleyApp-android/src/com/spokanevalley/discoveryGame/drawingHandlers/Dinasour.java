@@ -6,9 +6,14 @@ import com.spokanevalley.discoveryGame.Constants;
 import com.spokanevalley.discoveryGame.Atlas_handlers.Assets;
 import com.spokanevalley.discoveryGame.Screen.GameMusicSoundPref;
 
-public class Dinasour extends AbstractGameObject {
+/**
+ * Difine Dinosaur in game
+ * 
+ * @author Quyen Ha
+ *
+ */
 
-	public static final String TAG = Dinasour.class.getName();
+public class Dinasour extends AbstractGameObject {
 
 	private final float JUMP_TIME_MAX = 0.3f;
 	private final float JUMP_TIME_MIN = 0.1f;
@@ -26,16 +31,24 @@ public class Dinasour extends AbstractGameObject {
 	public VIEW_DIRECTION viewDirection;
 	public float timeJumping;
 	public JUMP_STATE jumpState;
-	public boolean hasSpecialCoinPowerUp;
-	public float timeLeftSpecialCoinPowerUp;
+	public boolean hasbadAppleSpeedingUp;
+	public float timeLeftBadAppleSpeedingUp;
 
+	/**
+	 * initializing
+	 */
+	
 	public Dinasour() {
 		init();
 	}
 
+	/**
+	 * set properties for dinosaur
+	 */
+	
 	public void init() {
 		dimension.set(1, 1);
-		regDinasour = Assets.instance.dinasour.cuteDinasour;
+		regDinasour = Assets.instance.dinosaur.cuteDinosaur;
 
 		// center images on game onject
 		origin.set(dimension.x / 2, dimension.y / 2);
@@ -56,10 +69,16 @@ public class Dinasour extends AbstractGameObject {
 		timeJumping = 0;
 
 		// power ups
-		hasSpecialCoinPowerUp = false;
-		timeLeftSpecialCoinPowerUp = 0;
+		hasbadAppleSpeedingUp = false;
+		timeLeftBadAppleSpeedingUp = 0;
 	}
 
+	/**
+	 * set jumping state for dinosaur
+	 * 
+	 * @param jumpKeyPressed
+	 */
+	
 	public void setJumping(boolean jumpKeyPressed) {
 		switch (jumpState) {
 		case GROUNDED: // character standing on the rock or flatform
@@ -81,7 +100,7 @@ public class Dinasour extends AbstractGameObject {
 			break;
 
 		case JUMP_FALLING: // character FALLING FOWNN the rock or flatform
-			if (jumpKeyPressed && hasSpecialCoinPowerUp) {
+			if (jumpKeyPressed && hasbadAppleSpeedingUp) {
 				timeJumping = JUMP_TIME_OFFSET_FLYING;
 				jumpState = JUMP_STATE.JUMP_RISING;
 			}
@@ -92,10 +111,16 @@ public class Dinasour extends AbstractGameObject {
 		}
 	}
 
-	public void setSpecialCoinPowerUp(boolean pickedUp) {
-		hasSpecialCoinPowerUp = pickedUp;
+	/**
+	 * set speed up dinosaur
+	 * 
+	 * @param pickedUp
+	 */
+	
+	public void setBadAppleSpeedUp(boolean pickedUp) {
+		hasbadAppleSpeedingUp = pickedUp;
 		if (pickedUp) {
-			timeLeftSpecialCoinPowerUp = Constants.ITEM_FEATHER_POWERUP_DURATION;
+			timeLeftBadAppleSpeedingUp = Constants.ITEM_BAD_APPLE_SPEEDING_UP_DURATION;
 			//velocity.x = terminalVelocity.x*5;			// double speed for special coins
 		}
 		else{
@@ -104,15 +129,24 @@ public class Dinasour extends AbstractGameObject {
 		
 	}
 
-	public boolean hasSpecialCoinPowerUp() {
-		return hasSpecialCoinPowerUp && timeLeftSpecialCoinPowerUp > 0;
+	/**
+	 * check if dinasour is still in speeding up time or not
+	 * @return
+	 */
+	
+	public boolean hasbadAppleSpeedingUp() {
+		return hasbadAppleSpeedingUp && timeLeftBadAppleSpeedingUp > 0;
 	}
 
+	/**
+	 * rendering
+	 */
+	
 	@Override
 	public void render(SpriteBatch batch) {
 		TextureRegion reg = null;
 		// Set special color when game object has a feather power-up
-		if (hasSpecialCoinPowerUp)
+		if (hasbadAppleSpeedingUp)
 			batch.setColor(1.0f, 0.8f, 0.0f, 1.0f);
 		// Draw image
 		reg = regDinasour;
@@ -125,6 +159,10 @@ public class Dinasour extends AbstractGameObject {
 		batch.setColor(1, 1, 1, 1);
 	}
 
+	/**
+	 * update based on FPS of game
+	 */
+	
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
@@ -134,16 +172,20 @@ public class Dinasour extends AbstractGameObject {
 					: VIEW_DIRECTION.RIGHT;
 		}
 
-		if (timeLeftSpecialCoinPowerUp > 0) {
-			timeLeftSpecialCoinPowerUp -= deltaTime;
-			if (timeLeftSpecialCoinPowerUp < 0) {
+		if (timeLeftBadAppleSpeedingUp > 0) {
+			timeLeftBadAppleSpeedingUp -= deltaTime;
+			if (timeLeftBadAppleSpeedingUp < 0) {
 				// disable power up
-				timeLeftSpecialCoinPowerUp = 0;
-				setSpecialCoinPowerUp(false);
+				timeLeftBadAppleSpeedingUp = 0;
+				setBadAppleSpeedUp(false);
 			}// if(timeLeftSpecialCoinPowerUp <0
 		}// if(timeLeftSpecialCoinPowerUp >0 ){
 	}// update
 
+	/**
+	 * update dinosaur state based on FPS
+	 */
+	
 	@Override
 	protected void updateMotionY(float deltaTime) {
 		switch (jumpState) {

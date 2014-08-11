@@ -4,16 +4,26 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.spokanevalley.discoveryGame.Atlas_handlers.Assets;
 
+/**
+ * define rocks
+ * 
+ * @author Quyen Ha
+ *
+ */
+
 public class RocketRocks extends AbstractGameObject {
 	
 	private TextureRegion regEdgeLeft;
-	private TextureRegion regEdgeRight;
 	private TextureRegion regMiddle;
 	private int length;
 	
 	public RocketRocks(){
 		init();
 	}
+	
+	/**
+	 * set up properties
+	 */
 	
 	private void init() {
 		dimension.set(1, 1.5f);
@@ -24,16 +34,30 @@ public class RocketRocks extends AbstractGameObject {
 		bounds.set(0, 0, dimension.x * length, dimension.y);
 	}
 	
+	/**
+	 * set length of rocks
+	 * @param length
+	 */
+	
 	public void setLength(int length){
 		this.length = length;
 		// update boucing box for collision detection
 		bounds.set(0, 0, dimension.x * length, dimension.y);
 	}
 	
+	/**
+	 * increase lenth of rocks
+	 * @param amount
+	 */
+	
 	public void increaseLenth(int amount){
 		setLength(this.length + amount);
 	}
 
+	/**
+	 * rendering
+	 */
+	
 	@Override
 	public void render(SpriteBatch batch) {
 		TextureRegion reg = null;
@@ -81,7 +105,7 @@ public class RocketRocks extends AbstractGameObject {
 				 rotation,
 				 reg.getRegionX(), reg.getRegionY(),
 				 reg.getRegionWidth(), reg.getRegionHeight(),
-				 true, false);
+				 true, false);		// rotate left edge to create right edge
 		 
 		
 	}

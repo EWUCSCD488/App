@@ -4,6 +4,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.spokanevalley.discoveryGame.Atlas_handlers.Assets;
 
+/**
+ * Defind bad apple
+ * 
+ * @author Quyen Ha
+ *
+ */
+
 public class BadApples extends AbstractGameObject {
 
 	private TextureRegion regSpecialCoin;
@@ -16,7 +23,7 @@ public class BadApples extends AbstractGameObject {
 	
 	private void init() {
 		dimension.set(0.5f, 0.5f);
-		regSpecialCoin = Assets.instance.specialCoin.Specialcoin;
+		regSpecialCoin = Assets.instance.badApple.badApple;
 		// set bound box for collision detection
 		bounds.set(0, 0, dimension.x, dimension.y);
 		collected = false;		// not collected

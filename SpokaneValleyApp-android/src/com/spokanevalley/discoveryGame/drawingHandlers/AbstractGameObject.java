@@ -5,7 +5,16 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * define common properties of objects
+ * 
+ * @author Quyen HaS
+ *
+ */
+
 public abstract class AbstractGameObject {
+	
+	// in-game object position variables
 	public Vector2 position;
 	public Vector2 dimension;
 	public Vector2 origin;
@@ -18,6 +27,11 @@ public abstract class AbstractGameObject {
 	public Vector2 friction;						//opposite force to slow down character
 	public Vector2 acceleration;					// 
 	public Rectangle bounds;
+	
+	/**
+	 * constructor
+	 * 
+	 */
 	
 	public AbstractGameObject(){
 		position = new Vector2();
@@ -32,6 +46,12 @@ public abstract class AbstractGameObject {
 		acceleration = new Vector2();
 		bounds = new Rectangle();
 	}
+	
+	/**
+	 * update velocity of object based on friction and accelerationS in dimension x
+	 * 
+	 * @param deltaTime
+	 */
 	
 	protected void updateMotionX(float deltaTime){
 		if(velocity.x != 0){
@@ -49,6 +69,12 @@ public abstract class AbstractGameObject {
 		// check max speed of character
 		velocity.x = MathUtils.clamp(velocity.x, -terminalVelocity.x, terminalVelocity.x);
 	}
+	
+	/**
+	 * update velocity of object based on friction and accelerationS in dimension y
+	 * 
+	 * @param deltaTime
+	 */
 	
 	protected void updateMotionY(float deltaTime){
 		if (velocity.y != 0) {
@@ -68,6 +94,12 @@ public abstract class AbstractGameObject {
 		// positive or negative terminal velocity
 		velocity.y = MathUtils.clamp(velocity.y,-terminalVelocity.y, terminalVelocity.y);
 	}
+	
+	/**
+	 * update position x and y of object
+	 * 
+	 * @param deltaTime
+	 */
 	
 	public void update(float deltaTime){
 		updateMotionX(deltaTime);

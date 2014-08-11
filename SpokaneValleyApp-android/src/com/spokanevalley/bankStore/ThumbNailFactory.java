@@ -21,6 +21,13 @@ public class ThumbNailFactory extends NameHolder {
 
 	}
 
+	/**
+	 * return thumbnail image path based on ID
+	 * 
+	 * @param ID
+	 * @return
+	 */
+	
 	public String getThumbNail(String ID) {
 		if (ID.equals(AppleID)) {
 			return "applethumbnail";
@@ -53,6 +60,12 @@ public class ThumbNailFactory extends NameHolder {
 		return null;
 	}
 
+	/**
+	 * return image path of pool image based on ID
+	 * @param ID
+	 * @return
+	 */
+	
 	public String getActualPoolPicture(String ID){
 		if (ID.equals(pool1ID)) {
 			return pool1ActualImagePath;

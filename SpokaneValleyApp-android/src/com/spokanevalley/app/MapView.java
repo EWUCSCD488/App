@@ -37,6 +37,7 @@ import com.spokanevalley.bankStore.ButtonSoundFactory;
 import com.spokanevalley.bankStore.MallActivity;
 import com.spokanevalley.database.DatabaseCustomAccess;
 import com.spokanevalley.discoveryGame.DiscoveryActivity;
+import com.spokanevalley.farm.FarmGameLauncher;
 import com.spokanevalley.plantesferry.PlantesFerryActivity;
 import com.spokanevalley.ski.SkiActivity;
 
@@ -356,7 +357,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			startActivityForResult(intent, REQUEST_CODE);
 			//TODO: Chnage back to Greenacres game (was switched to GPS game for testing)
 		}else if(marker.getTitle().equals("Greenacres Park")){
-			Intent intent = new Intent(MapView.this, addScoreGPSLauncher.class);
+			Intent intent = new Intent(MapView.this, FarmGameLauncher.class);
 			startActivityForResult(intent, REQUEST_CODE);
 		}else if(marker.getTitle().equals("The Mall")){
 			Intent intent = new Intent(MapView.this, MallActivity.class);

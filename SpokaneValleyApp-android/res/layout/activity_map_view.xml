@@ -42,16 +42,6 @@
             android:text="@string/total_score_preview"
             android:textSize="35sp" />
 
-        <Button
-            android:id="@+id/TuturorialButtonOnTopOfMap"
-            style="@style/ButtonText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.3"
-            android:background="@drawable/greenbutton"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:text="@string/tutorial" />
-
     </LinearLayout>
 
 </FrameLayout>

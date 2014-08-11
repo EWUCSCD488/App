@@ -239,7 +239,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			            //Factory for recieving maxScore for each specific location. Checks the name of the marker title and based on the title calls a specific database method that correlates to that location. Return -1 if this location should not have a maxScore. **If you add a location you need to add a specific case here**
 						private int getMaxScoreForWindow(String title) {
 							switch (title) {
-					         case "Discovery Park":
+					         case "Discovery Playground":
 					 			return DatabaseCustomAccess.Create(context).saveMaxScore_DiscoveryGame(0);
 					         case "Terrace View Park and Pool":
 					        	 return DatabaseCustomAccess.Create(context).saveMaxScore_AppleGame(0);
@@ -265,7 +265,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		map.setMyLocationEnabled(false);
 
 		// coordinates of center of Spokane Valley
-		LatLng center = new LatLng(47.717924, -117.221588);
+		LatLng center = new LatLng(47.633430, -117.226525);
 
 		if (LastLegitLocation == null)
 			LastLegitLocation = center;
@@ -348,14 +348,13 @@ public class MapView extends Activity implements OnMarkerClickListener,
 			// INITIALIZE GAME
 			Intent intent = new Intent(MapView.this, AppleActivity.class);
 			startActivityForResult(intent, REQUEST_CODE);
-		}else if(marker.getTitle().equals("Discovery Park")){
+		}else if(marker.getTitle().equals("Discovery Playground")){
 			// INITIALIZE GAME
 			Intent intent = new Intent(MapView.this, DiscoveryActivity.class);
 			startActivityForResult(intent, REQUEST_CODE);
 		}else if(marker.getTitle().equals("Plantes Ferry Park")){
 			Intent intent = new Intent(MapView.this, PlantesFerryActivity.class);
 			startActivityForResult(intent, REQUEST_CODE);
-			//TODO: Chnage back to Greenacres game (was switched to GPS game for testing)
 		}else if(marker.getTitle().equals("Greenacres Park")){
 			Intent intent = new Intent(MapView.this, FarmGameLauncher.class);
 			startActivityForResult(intent, REQUEST_CODE);

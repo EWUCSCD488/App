@@ -137,6 +137,13 @@ public class Location {
 	}
 
     /**
+     * Returns the ID of the location.
+     */
+	public void setID(String ID) {
+		this.ID = ID;
+	}
+	
+    /**
      * Return the altitude of the location.
      */
 	public double getAltitude() {

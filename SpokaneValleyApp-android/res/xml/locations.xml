@@ -2,7 +2,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
      <Location>
-        <Title>Discovery Park</Title>
+        <Title>Discovery Playground</Title>
         <Artist></Artist>
         <Latitude>47.677359</Latitude>
         <Longitude>-117.224588</Longitude>
@@ -73,8 +73,8 @@
     </Location>
     <Location>
         <Title>Ski!</Title>
-        <Latitude>47.692244</Latitude>
-        <Longitude>-117.263818</Longitude>
+        <Latitude>47.694963</Latitude>
+        <Longitude>-117.276478</Longitude>
         <latitudeBottomLeft>0</latitudeBottomLeft>
         <longitudeBottomLeft>0</longitudeBottomLeft>
         <latitudeTopRight>0</latitudeTopRight>

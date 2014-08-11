@@ -1,3 +1,7 @@
+/*
+ * This is the class that creates the Main Menu for the game. It handles the all of the button presses and creates the how to screen when needed.
+ */
+
 package com.spokanevalley.ski;
 //package com.me.mygdxgame;
 import android.content.Context;
@@ -35,6 +39,7 @@ public class MainMenuScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.WIDTH_GAME, Constants.HEIGHT_GAME);
 		
+		//initialize the button images
 		buttonImage.setEnforcePotImages(false);
 		buttonImage = new Texture(Gdx.files.internal(Constants.IMAGE_BUTTON));
 		button = new Rectangle();
@@ -59,6 +64,7 @@ public class MainMenuScreen implements Screen {
 		button3.width = 100;
 		button3.height = 50;
 		
+		//Initialize the how to screen, which is just a rectangle that covers the whole screen
 		howTotex.setEnforcePotImages(false);
 		howTotex = new Texture(Gdx.files.internal(Constants.HOWTO_SKI));
 		howTo = new Rectangle();
@@ -71,12 +77,15 @@ public class MainMenuScreen implements Screen {
 	}
 	
 	public void create() {
+		//Initialize the background
 		backGround.setEnforcePotImages(false);
-		backGround = new Texture(Gdx.files.internal(Constants.BACKGROUND));
+		backGround = new Texture(Gdx.files.internal(Constants.MENU_BACKGROUND));
 		back = new Sprite(backGround);
 		back.setSize(800, 480);
 	}
 
+	
+	//This is the main method for the menu as it handles the button presses and the how to screen.
 	@Override
 	public void render(float delta) {
 		camera.update();
@@ -88,13 +97,14 @@ public class MainMenuScreen implements Screen {
 		{
 			//game.font.setScale((float) 2);
 			game.font.setColor(0.0f, 0.0f, 204.0f, 1.0f);// set font color to blue
-			game.font.draw(game.batch, "Welcome to Ski Game! ", 280, 445);
-			game.font.draw(game.batch, "Tap the button to play", 280, 395);
+			game.font.draw(game.batch, "Welcome to Downhill Skiing! ", 240, 445);
+			game.font.draw(game.batch, "Tap the button to play", 260, 395);
 			game.batch.draw(buttonImage, button.x, button.y);
 			game.batch.draw(button2Image, button2.x, button2.y);
 			game.batch.draw(button3Image, button3.x, button3.y);
 		}
 		
+		//This is only called when the how to play button is pressed
 		else
 		{
 			game.batch.draw(howTotex, howTo.x, howTo.y);
@@ -104,6 +114,9 @@ public class MainMenuScreen implements Screen {
 		Vector3 touchPos = new Vector3();
 		touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 		camera.unproject(touchPos);
+		
+		//Compute which button was pressed and act accordingly
+		
 		if (Gdx.input.justTouched()) 
 		{
 			if(!how)
@@ -136,6 +149,7 @@ public class MainMenuScreen implements Screen {
 		}
 	}
 
+	//This method is used to compute if the user is touching one of the buttons
 	public static boolean pointInRectangle (Rectangle r, float x, float y) {
 	    return r.x <= x && r.x + r.width >= x && r.y <= y && r.y + r.height >= y;
 	}

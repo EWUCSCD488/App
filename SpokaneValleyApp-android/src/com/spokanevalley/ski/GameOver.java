@@ -1,3 +1,7 @@
+/*
+ * This is the class that creates the Game Over screen for the game. It handles the all of the button presses and ends the activity
+ */
+
 package com.spokanevalley.ski;
 //package com.me.mygdxgame;
 
@@ -31,8 +35,10 @@ public class GameOver implements Screen
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.WIDTH_GAME, Constants.HEIGHT_GAME);
 		
+		//Initialize the background and the exit button
+		
 		background.setEnforcePotImages(false);
-		background = new Texture(Gdx.files.internal(Constants.BACKGROUND));
+		background = new Texture(Gdx.files.internal(Constants.MENU_BACKGROUND));
 		back = new Sprite(background);
 		back.setSize(800, 480);
 		
@@ -44,12 +50,12 @@ public class GameOver implements Screen
 		button3.width = 100;
 		button3.height = 50;
 		
-		// grab the score from the game
 		
 		
 
 	}
 
+	//This is the main method for the menu as it handles the button presses and and displays your scores
 	@Override
 	public void render(float delta) 
 	{
@@ -62,14 +68,15 @@ public class GameOver implements Screen
 		//game.font.setScale((float) 2);
 		game.font.setColor(0.0f, 0.0f, 204.0f, 1.0f);// set font color to blue
 		game.font.draw(game.batch, "Game Over", (Constants.WIDTH_GAME / 2 - 89 / 2) - 20, 445);
-		game.font.draw(game.batch, "Current score : " + this.CurrentScore, (Constants.WIDTH_GAME / 2 - 89 / 2) - 60, 395);
-		game.font.draw(game.batch, "High Score : " + this.MaxScore, (Constants.WIDTH_GAME / 2 - 89 / 2) - 55, 345);
+		game.font.draw(game.batch, "Current score : " + this.CurrentScore, (Constants.WIDTH_GAME / 2 - 89 / 2) - 50, 395);
+		game.font.draw(game.batch, "High Score : " + this.MaxScore, (Constants.WIDTH_GAME / 2 - 89 / 2) - 45, 345);
 		game.batch.draw(button3Image, button3.x, button3.y);
 		game.batch.end();
 
 		Vector3 touchPos = new Vector3();
 		touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 		camera.unproject(touchPos);
+		//Determine if the exit button is pressed
 		if (Gdx.input.isTouched()) {
 			if (pointInRectangle(button3, touchPos.x, touchPos.y))
 			{

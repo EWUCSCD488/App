@@ -4,13 +4,13 @@
 package com.spokanevalley.app;
 
 import com.badlogic.gdx.Game;
-import com.spokanevalley.app.screens.Splash;
+//import com.spokanevalley.app.screens.Splash;
 
 public class SpokaneValleyApp extends Game {
 
 	@Override
 	public void create() {
-		setScreen(new Splash());
+		//setScreen(new Splash());
 	}
 
 	@Override

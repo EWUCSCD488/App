@@ -1,3 +1,7 @@
+/*
+ * This class is used to store all of the filepaths for each asset used in the game including the music and sprites.
+ */
+
 package com.spokanevalley.apples;
 
 public class Constants {
@@ -11,8 +15,8 @@ public class Constants {
 	public static final String IMAGE_RAPPLE = "appleAssets/gfx/rotapple.png";
 	public static final String BACKGROUND = "appleAssets/gfx/appletreenew.png";
 	
-	public static final String GAME_FONT = "fonts/gamefont.fnt";
-	public static final String MENU_FONT = "fonts/myriad.fnt";
+	public static final String GAME_FONT = "fonts/funfont2.fnt";
+	public static final String MENU_FONT = "fonts/funfont2.fnt";
 	
 	public static final String SOUND_MUSIC = "appleAssets/sfx/BadApple.mp3";
 	public static final String SOUND_APPLE = "appleAssets/sfx/basket.wav";

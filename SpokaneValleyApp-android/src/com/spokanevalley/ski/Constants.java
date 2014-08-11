@@ -1,3 +1,7 @@
+/*
+ * This class is used to store all of the filepaths for each asset used in the game including the music and sprites.
+ */
+
 package com.spokanevalley.ski;
 //package com.me.mygdxgame;
 public class Constants {
@@ -15,9 +19,10 @@ public class Constants {
 	public static final String IMAGE_YFLAG = "skiAssets/gfx/goldflags.png";
 	public static final String IMAGE_PTREE = "skiAssets/gfx/skitree.png";
 	public static final String BACKGROUND = "skiAssets/gfx/snow.png";
+	public static final String MENU_BACKGROUND = "skiAssets/gfx/mount.png";
 	
-	public static final String GAME_FONT = "fonts/gamefont.fnt";
-	public static final String MENU_FONT = "fonts/myriad.fnt";
+	public static final String GAME_FONT = "fonts/funfont2.fnt";
+	public static final String MENU_FONT = "fonts/funfont2.fnt";
 	
 	public static final String SOUND_MUSIC = "skiAssets/sfx/GameOn.mp3";
 	public static final String SOUND_TREE = "skiAssets/sfx/treeSound.mp3";

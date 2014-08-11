@@ -1,3 +1,7 @@
+/*
+ * This class is a container used to store all of the attributes for the trees and flags used in the game.
+ */
+
 package com.spokanevalley.ski;
 //package com.me.mygdxgame;
 import com.badlogic.gdx.graphics.Texture;

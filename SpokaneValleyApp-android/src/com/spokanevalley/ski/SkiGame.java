@@ -1,21 +1,11 @@
-//package com.me.mygdxgame;
+/*
+ * This is the main class for the ski mini game. This controls everything in the main game screen such as spawning the trees and flags
+ * as well as keeping track of the score and uploading it to the database.
+ */
 package com.spokanevalley.ski;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
-import java.util.Locale;
-import java.util.UUID;
-
 import android.content.Context;
-import android.database.Cursor;
-import android.util.Log;
-import android.widget.Toast;
-
-
-
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -32,7 +22,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 //import com.spokanevalley.app.GameLauncher;
 import com.spokanevalley.database.DatabaseCustomAccess;
-import com.spokanevalley.database.SpokaneValleyDatabaseHelper;
 
 public class SkiGame implements Screen {
 
@@ -84,7 +73,7 @@ public class SkiGame implements Screen {
 		this.context = context;
 		
 		
-		
+		//initilize all of the textures used by the game as well as the background
 		flagImage = new Texture(Gdx.files.internal(Constants.IMAGE_FLAG)); // internal
 		bflagImage = new Texture(Gdx.files.internal(Constants.IMAGE_BFLAG));																	// files																		// folder
 		skierImage = new Texture(Gdx.files.internal(Constants.IMAGE_SKIER));
@@ -97,6 +86,8 @@ public class SkiGame implements Screen {
 		back = new Sprite(background);
 		back.setSize(800, 480);
 
+		//initilize the control buttons
+		
 		buttonLImage.setEnforcePotImages(false);
 		buttonLImage = new Texture(Gdx.files.internal(Constants.IMAGE_BUTTONL));
 		buttonL = new Rectangle();
@@ -114,7 +105,7 @@ public class SkiGame implements Screen {
 		buttonR.height = 57;
 		
 		
-		// load the apple sound effect
+		// load the sound effects
 		treeSound = Gdx.audio.newSound(Gdx.files
 				.internal(Constants.SOUND_TREE)); // Sound is stored in memory
 		flagSound = Gdx.audio.newSound(Gdx.files
@@ -161,10 +152,14 @@ public class SkiGame implements Screen {
 
 	}
 	
+	//this method is used to compute if the user is touching one of the controls
 	public static boolean pointInRectangle (Rectangle r, float x, float y) {
 	    return r.x <= x && r.x + r.width >= x && r.y <= y && r.y + r.height >= y;
 	}
 
+	//This is the main method for the game in that almost all of the objects are rendered here and the score is updated as you ski through the gates
+	//This method constantly runs its while loop until the player has crashed 3 times which at that point the sprites are disposed and the game over screen is called
+	
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1); // set color to blue
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // clear the screen
@@ -183,7 +178,9 @@ public class SkiGame implements Screen {
 		camera.unproject(touchPos);
 		left = false;
 		right = false;
-		if (Gdx.input.isTouched()) { // as if screen is currently touch
+		//check if the screen is touched on one of the buttons
+		if (Gdx.input.isTouched())
+		{ 
 			if (pointInRectangle(buttonL, touchPos.x, touchPos.y))
 			{
 				if(skier.x!=0)
@@ -211,7 +208,7 @@ public class SkiGame implements Screen {
 		if (TimeUtils.nanoTime() - lastObTime > spawn)
 			spawnOb();
 
-		// render Ski
+		// render skier
 		batch.begin(); // start new batch , it will collect all drawings from
 						// begin to end and submit at once
 		back.draw(batch);
@@ -230,7 +227,8 @@ public class SkiGame implements Screen {
 			batch.draw(skierImage, skier.x, skier.y); // draw skier to batch
 		}
 
-
+		
+		//this updates the games speed slightly every second
 		if((lasttime) > 1)
 		{
 			speed+= 2;
@@ -255,6 +253,7 @@ public class SkiGame implements Screen {
 
 	}
 
+	//This method handles all of the objects currently on the screen and checks if the skier is passing through a gate or crashing into a tree
 	private void checkOb()
 	{
 		Iterator<Skiob> iter = Objects.iterator();
@@ -301,7 +300,8 @@ public class SkiGame implements Screen {
 					if(score < 0)// Ensure score can't go negative
 						score = 0;
 					points = "SCORE: " + score;
-
+					
+					//If you crash all of the current objects are removed from the screen and the speed is set back to the default
 					if (ob.isTree) {
 						crash++;
 						speed = 100;
@@ -313,7 +313,7 @@ public class SkiGame implements Screen {
 
 						DatabaseCustomAccess.Create(context).saveMaxScore_SkiGame(score);
 
-						Game.setScreen(new GameOver(Game,score,DatabaseCustomAccess.Create(context).saveMaxScore_SkiGame(0)));//maxscore
+						Game.setScreen(new GameOver(Game,score,DatabaseCustomAccess.Create(context).saveMaxScore_SkiGame(0)));//save the score to the database
 						dispose();
 					}
 
@@ -327,6 +327,8 @@ public class SkiGame implements Screen {
 			}
 		}
 	}
+	
+	//This method computes which object should be spawned and assigns it to the arraylist of objects
 	private void spawnOb() {
 		Skiob ob = new Skiob();
 		Rectangle rect = new Rectangle();
@@ -336,18 +338,23 @@ public class SkiGame implements Screen {
 		rect.height = 14;
 		ob.rec = rect;
 		int rand = MathUtils.random(0, 300);
+		//Tree
 		if (rand < 225) {
 			ob.image = flagImage;
 			ob.image = pineTreeImage;
 			ob.points = 0;
 			ob.isTree = true;
-		} else if (rand >= 225 && rand < 240) {
+		} 
+		//Gold flag
+		else if (rand >= 225 && rand < 240) {
 			ob.sound = 3;
 			ob.image = yFlagImage;
 			ob.points = 5;
 			rect.width = 64;
 			rect.height = 14;
-		} else {
+		} 
+		//regular flag
+		else {
 			if(flag == 0)
 			{
 				ob.sound = 1;
@@ -379,6 +386,7 @@ public class SkiGame implements Screen {
 
 	}
 
+	//Dispose of all of the game assets to free up memory
 	@Override
 	public void dispose() {
 		flagImage.dispose();

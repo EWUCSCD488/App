@@ -1,4 +1,7 @@
-
+/*
+ * This is the main class for the Appple Catch mini game. This controls everything in the main game screen such as spawning the apples
+ * as well as keeping track of the score and uploading it to the database.
+ */
 package com.spokanevalley.apples;
 import java.util.Iterator;
 
@@ -86,6 +89,7 @@ public class AppleGame implements Screen {
 		applesCaught = "SCORE: 0";
 		scoreFont = new BitmapFont(Gdx.files.internal(Constants.GAME_FONT), false);
 		
+		// save max score to database
 		DatabaseCustomAccess.Create(context).saveInitialScoretoDatabase_AppleGame(score);
 		
 		
@@ -96,7 +100,8 @@ public class AppleGame implements Screen {
 
 	}
 	
-	
+	//This is the main method for the game in that almost all of the objects are rendered here and the score is updated as the player catches apples
+	//This method constantly runs its while loop until the player has caught 3 bad apples which at that point the sprites are disposed and the game over screen is called
 
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1); 
@@ -137,7 +142,7 @@ public class AppleGame implements Screen {
 
 	}
 
-
+	//This method handles all of the objects currently on the screen and checks if the the apple is caught or is off the screen
 	private void checkApple()
 	{
 		Iterator<Appleob> iter = Apples.iterator();
@@ -162,6 +167,7 @@ public class AppleGame implements Screen {
 				if (Apple.isBad) {
 					badApples++;
 				}
+				//save the scores to the database as the game ends and update the highscore if needed
 				if (badApples > 2) {
 					DatabaseCustomAccess.Create(context).saveMaxScore_AppleGame(score);
 
@@ -174,6 +180,7 @@ public class AppleGame implements Screen {
 		}
 	}
 
+	//This method computes which apple should be spawned and assigns it to the arraylist of apple objects
 	private void spawnApple() {
 		Appleob ob = new Appleob();
 		Rectangle Apple = new Rectangle();
@@ -183,12 +190,17 @@ public class AppleGame implements Screen {
 		Apple.height = 48;
 		ob.rec = Apple;
 		int rand = MathUtils.random(0, 300);
+		//regular apple
 		if (rand < 225) {
 			ob.image = appleImage;
-		} else if (rand >= 225 && rand < 250) {
+		}
+		//gold apple
+		else if (rand >= 225 && rand < 250) {
 			ob.image = goldAppleImage;
 			ob.points = 3;
-		} else {
+		}
+		//bad apple
+		else {
 			ob.image = rotAppleImage;
 			ob.points = -5;
 			ob.isBad = true;
@@ -198,6 +210,7 @@ public class AppleGame implements Screen {
 		lastAppleTime = TimeUtils.nanoTime();
 	}
 
+	//initilize all of the textures used by the game as well as the background
 	private void setImages()
 	{
 		appleImage = new Texture(Gdx.files.internal(Constants.IMAGE_APPLE)); // internal
@@ -222,6 +235,7 @@ public class AppleGame implements Screen {
 		appleMusic.play();
 	}
 	
+	//This method sets the apple's spawn rate based on the current score of the game
 	private void setSpawn()
 	{
 		if(score < 25)
@@ -259,7 +273,7 @@ public class AppleGame implements Screen {
 		}
 	}
 	
-	
+	//This method sets the speed of the falling apples based on the current score of the game
 	private void setSpeed()
 	{
 		if(score < 25)

@@ -1,4 +1,4 @@
-package com.spokanevalley.minigames.plantesferry;
+package com.spokanevalley.plantesferry;
 
 import android.os.Bundle;
 

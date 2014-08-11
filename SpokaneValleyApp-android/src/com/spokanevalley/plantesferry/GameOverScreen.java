@@ -1,4 +1,4 @@
-package com.spokanevalley.minigames.plantesferry;
+package com.spokanevalley.plantesferry;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -14,9 +14,9 @@ import com.spokanevalley.database.DatabaseCustomAccess;
  * Will ask the user to "Try Again" or "Return to Map"
  */
 public class GameOverScreen implements Screen {
-	GameSetup setup;
-	PlantesFerry game;
-	GameState state;
+	private GameSetup setup;
+	private PlantesFerry game;
+	protected GameState state;
 
 	private Stage stage;
 	private MenuTable menuTable;
@@ -38,7 +38,7 @@ public class GameOverScreen implements Screen {
 		this.stage = new Stage();
 		this.paramSpriteBatch = new SpriteBatch();
 		/* Save High Score to database */
-		int score = game.getScore();
+		int score = this.game.getScore();
 		int maxScore = DatabaseCustomAccess.Create(setup.getContext())
 				.saveMaxScore_PlantesFerryGame(score);
 

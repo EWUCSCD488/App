@@ -1,4 +1,4 @@
-package com.spokanevalley.minigames.plantesferry;
+package com.spokanevalley.plantesferry;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -11,12 +11,12 @@ import com.badlogic.gdx.utils.TimeUtils;
  * @author Kevin Borling
  * Creates the Apple/Bubble
  * Apples grant 1 point per collision
- * Bubbles grant invinsibility for 10 seconds and grants 3 points for collision with apple or monster
- * Invinsibility will make the Swimming Dinosaur immune to monsters, therefore the life count will not decrease upon collision 
+ * Bubbles grant invincibility for 10 seconds and grants 3 points for collision with apple or monster
+ * Invincibility will make the Swimming Dinosaur immune to monsters, therefore the life count will not decrease upon collision 
  */
 public class Apples extends Actor {
 
-	PlantesFerry game;
+	private PlantesFerry game;
 
 	private Rectangle bounds = new Rectangle();
 	private final String invinsibleBubble = "Bubble";
@@ -45,8 +45,8 @@ public class Apples extends Actor {
 		this.bounds.set(getX(), getY(), getWidth(), getHeight());
 	} // End updateBounds
 
-	public void act(float paramFloat) {
-		super.act(paramFloat);
+	public void act(float timeSeconds) {
+		super.act(timeSeconds);
 		updateBounds();
 	} // End act
 

@@ -1,4 +1,4 @@
-package com.spokanevalley.minigames.plantesferry;
+package com.spokanevalley.plantesferry;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
  */
 public class SwimmingDino extends Actor {
 
-	PlantesFerry game;
+	private PlantesFerry game;
 	private Rectangle bounds = new Rectangle();
 	private int row;
 
@@ -26,8 +26,8 @@ public class SwimmingDino extends Actor {
 		setWidth(Assets.playerDino.getRegionWidth());
 		setHeight(Assets.playerDino.getRegionHeight());
 		this.row = 1;
-		game.getClass();
-		setPosition(100.0F, game.row2 - getHeight() / 2.0F);
+		this.game.getClass();
+		setPosition(100.0F, this.game.row2 - getHeight() / 2.0F);
 	} // End Constructor
 
 	/*
@@ -73,7 +73,7 @@ public class SwimmingDino extends Actor {
 	} // End act
 
 	/*
-	 * Draws the swimming dinosaur and invinsibility bubble if dino collides
+	 * Draws the swimming dinosaur and invincibility bubble if dino collides
 	 * with bubble
 	 */
 	public void draw(SpriteBatch paramSpriteBatch, float paramFloat) {
@@ -123,7 +123,7 @@ public class SwimmingDino extends Actor {
 				this.game.setLives(lives);
 			else
 				this.game.setLives(0);
-		} // End not invinsible check
+		} // End not invincible check
 	} // End collision
 
 } // End SwimmingDino

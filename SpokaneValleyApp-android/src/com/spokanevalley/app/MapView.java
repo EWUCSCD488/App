@@ -40,7 +40,7 @@ import com.spokanevalley.bankStore.MallActivity;
 import com.spokanevalley.database.DatabaseCustomAccess;
 import com.spokanevalley.discoveryGame.DiscoveryActivity;
 import com.spokanevalley.farm.FarmGameLauncher;
-import com.spokanevalley.minigames.plantesferry.PlantesFerryActivity;
+import com.spokanevalley.plantesferry.PlantesFerryActivity;
 import com.spokanevalley.ski.SkiActivity;
 
 @SuppressWarnings("deprecation")

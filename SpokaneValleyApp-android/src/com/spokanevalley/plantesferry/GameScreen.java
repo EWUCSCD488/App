@@ -1,4 +1,4 @@
-package com.spokanevalley.minigames.plantesferry;
+package com.spokanevalley.plantesferry;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -16,13 +16,13 @@ import com.badlogic.gdx.utils.TimeUtils;
  */
 public class GameScreen implements Screen, GestureDetector.GestureListener {
 
-	GameSetup setup;
-	PlantesFerry game;
+	private GameSetup setup;
+	private PlantesFerry game;
 
 	private Stage stage;
 	private BitmapFont scoreFont;
 	private SpriteBatch paramSpriteBatch;
-	GameState state = GameState.PLAY;
+	protected GameState state = GameState.PLAY;
 
 	/*
 	 * Set the game stage and initialized the score font.
@@ -39,10 +39,10 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
 	/*
 	 * When a fling gesture is detected, try to move up or down if possible.
 	 */
-	public boolean fling(float paramFloat1, float paramFloat2, int paramInt) {
-		if (paramFloat2 < -100.0F)
+	public boolean fling(float velocityX, float velocityY, int paramInt) {
+		if (velocityY < -100.0F)
 			this.game.playerDino.tryMoveUp();
-		if (paramFloat2 > 100.0F)
+		if (velocityY > 100.0F)
 			this.game.playerDino.tryMoveDown();
 		return false;
 	} // End fling
@@ -67,8 +67,8 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
 			this.stage.act(delta);
 			this.stage.draw();
 			displayStats();
+			/* Call Game Over Screen if Life = 0 */
 			if (this.game.getLives() < 1) {
-				/* Call Game Over Screen if Life = 0 */
 				this.setup.gameoverScreen = new GameOverScreen(this.setup, this.game);
 				this.setup.setScreen(setup.gameoverScreen);
 			}
@@ -122,7 +122,7 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
 
 		// Set background music and loop it forever
 		Assets.backgroundMusic.play();
-		Assets.backgroundMusic.setVolume(1.0f);
+		Assets.backgroundMusic.setVolume(0.75f);
 		Assets.backgroundMusic.setLooping(true);
 	} // End displayStats
 
@@ -161,6 +161,10 @@ public class GameScreen implements Screen, GestureDetector.GestureListener {
 		Gdx.input.setInputProcessor(new GestureDetector(this));
 	} // End show()
 
+	/*
+	 * Sets the game to a paused state if the user double taps the screen
+	 * From the pause menu, the user must tap once to resume the game
+	 */
 	public boolean tap(float paramFloat1, float paramFloat2, int tapNum,
 			int paramInt2) {
 		if (tapNum > 1)

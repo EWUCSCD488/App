@@ -1,4 +1,4 @@
-package com.spokanevalley.minigames.plantesferry;
+package com.spokanevalley.plantesferry;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -14,8 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  * Will ask user to "Start Game" or "Return to Map"
  */
 public class MenuScreen implements Screen {
-	GameSetup setup;
-	PlantesFerry game;
+	private GameSetup setup;
+	private PlantesFerry game;
 
 	private Stage stage;
 	private MenuTable menuTable;

@@ -1,4 +1,4 @@
-package com.spokanevalley.minigames.plantesferry;
+package com.spokanevalley.plantesferry;
 
 import java.util.Iterator;
 
@@ -24,8 +24,8 @@ import com.spokanevalley.database.DatabaseCustomAccess;
  */
 public class PlantesFerry extends Table {
 
-	SwimmingDino playerDino;
-	ScrollingBg river;
+	protected SwimmingDino playerDino;
+	protected ScrollingBg river;
 	private Context context;
 	private long lastMonsterSpawnTime = 0L;
 	private long lastAppleSpawnTime = 0L;
@@ -34,11 +34,11 @@ public class PlantesFerry extends Table {
 	private Apples localApple;
 	private Monster localRiverMonster;
 	/* Screen Size and Row Values */
-	public final float row1 = 90.0F;
-	public final float row2 = 240.0F;
-	public final float row3 = 390.0F;
-	public final float screenWidth = 800.0F;
-	public final float screenHeight = 480.0F;
+	protected final float row1 = 90.0F;
+	protected final float row2 = 240.0F;
+	protected final float row3 = 390.0F;
+	protected final float screenWidth = 800.0F;
+	protected final float screenHeight = 480.0F;
 
 	private int score;
 	private int lives;

@@ -1,4 +1,4 @@
-package com.spokanevalley.minigames.plantesferry;
+package com.spokanevalley.plantesferry;
 
 import android.content.Context;
 
@@ -10,10 +10,10 @@ import com.badlogic.gdx.Game;
  */
 public class GameSetup extends Game {
 
-	PlantesFerry game;
-	MenuScreen menuScreen;
-	GameScreen gameScreen;
-	GameOverScreen gameoverScreen;
+	protected PlantesFerry game;
+	protected MenuScreen menuScreen;
+	protected GameScreen gameScreen;
+	protected GameOverScreen gameoverScreen;
 	private Context context;
 
 	public GameSetup(Context applicationContext) {

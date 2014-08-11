@@ -1,4 +1,4 @@
-package com.spokanevalley.minigames.plantesferry;
+package com.spokanevalley.plantesferry;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
  */
 public class Monster extends Actor {
 
-	PlantesFerry game;
+	private PlantesFerry game;
 	private Rectangle bounds = new Rectangle();
 	private final String rareMonster = "rare";
 

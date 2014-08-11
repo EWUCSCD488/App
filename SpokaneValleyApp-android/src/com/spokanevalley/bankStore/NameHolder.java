@@ -35,13 +35,13 @@ public class NameHolder {
 	protected static final String coupon2ID = "Terrace View Coupon";
 	protected static final String coupon3ID = "Valley Mission Coupon ";
 	
-	protected static final String coupon1TrophyImagePath = "parkroadtrophy";								// coupon thumbnail image paths
+	protected static final String coupon1TrophyImagePath = "parkroadtrophy";								// coupon image paths
 	protected static final String coupon2TrophyImagePath = "terraceviewtrophy";
 	protected static final String coupon3TrophyImagePath = "valleymissiontrophy";
 	
-	protected static final String coupon1ImagePath = "parkroadtrophy";								// coupon thumbnail image paths
-	protected static final String coupon2ImagePath = "terraceviewtrophy";
-	protected static final String coupon3ImagePath = "valleymissiontrophy";
+	protected static final String coupon1ImagePath = "parkroadtrophy_thumb";								// coupon thumbnail image paths
+	protected static final String coupon2ImagePath = "terraceviewtrophy_thumb";
+	protected static final String coupon3ImagePath = "valleymissiontrophy_thumb";
 	
 	protected static final String Coupon1Description = "Redeem this at\n Park Road Pool\nin Spokane Valley";					// coupon descriptions
 	protected static final String Coupon2Description = "Redeem this at\n Terrace View Pool\nin Spokane Valley";

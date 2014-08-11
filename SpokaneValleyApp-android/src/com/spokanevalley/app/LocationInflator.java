@@ -38,6 +38,17 @@ public class LocationInflator {
                         token = parser.next();
                     }
                 }
+                //ID
+                else if ("ID".equals(parser.getName()))
+                {
+                    //get the text
+                    token = parser.next();
+                    if(token == XmlPullParser.TEXT)
+                    {
+                        c_Location.setID(parser.getText());
+                        token = parser.next();
+                    }
+                }
                 //lat
                 else if ("Latitude".equals(parser.getName()))
                 {

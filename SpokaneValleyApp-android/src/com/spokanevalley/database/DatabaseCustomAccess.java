@@ -66,6 +66,7 @@ public class DatabaseCustomAccess extends NameHolder {
 		saveInitialGameLocation(); // create game location for GPS checking
 		LoadingDatabaseTotalScore();
 		LoadingDatabaseScores();
+		LoadingDatabaseGameLocation();
 	}
 
 	/**
@@ -314,7 +315,7 @@ public class DatabaseCustomAccess extends NameHolder {
 
 			GAME_LIST.add(game);
 
-			long RowIds = helper.insertPoolLocation(GamelocationTableName,
+			long RowIds = helper.insertGameLocation(GamelocationTableName,
 					game.getTitle(), game.getDescription(),
 					convertToString(game.getIsCouponUsed()));
 			//if (RowIds == -1)
@@ -323,7 +324,7 @@ public class DatabaseCustomAccess extends NameHolder {
 
 			GAME_LIST.add(game);
 
-			long RowIds = helper.insertPoolLocation(GamelocationTableName,
+			long RowIds = helper.insertGameLocation(GamelocationTableName,
 					game.getTitle(), game.getDescription(),
 					convertToString(game.getIsCouponUsed()));			// reuse method
 			//if (RowIds == -1)
@@ -443,7 +444,9 @@ public class DatabaseCustomAccess extends NameHolder {
 
 			GAME_LIST.add(new gameLocation(ID, Description,
 					isUsed(isGameVisited)));
-
+			
+			Log.d(TAG, "game ID  : "+ ID);
+			
 		} // travel to database result
 
 	}

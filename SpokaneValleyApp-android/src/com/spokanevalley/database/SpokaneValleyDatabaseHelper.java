@@ -502,7 +502,7 @@ public class SpokaneValleyDatabaseHelper {
 			String[] selectionArgs = { ID };
 
 			Cursor cursor = db.query(table, columns,
-					privateDatabaseContent.GAME_LOCATION_TABLE_NAME + " = ?", selectionArgs,
+					privateDatabaseContent.GAME_LOCATION_ID + " = ?", selectionArgs,
 					null, null, null);
 
 			return cursor;

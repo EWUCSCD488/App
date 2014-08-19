@@ -28,6 +28,12 @@ public class Model {
 		this.imagePath = imagePath;
 	}
 	
+	public Model(String tile, String description, boolean isCouponUsed) {
+		this.title = tile;
+		this.description = description;
+		this.isCouponUsed = isCouponUsed;
+	}
+
 	public String getTitle() {
 		return title;
 	}

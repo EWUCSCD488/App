@@ -9,6 +9,7 @@ import android.util.Log;
 import com.spokanevalley.app.Location;
 import com.spokanevalley.bankStore.NameHolder;
 import com.spokanevalley.bankStore.ThumbNailFactory;
+import com.spokanevalley.bankStore.gameLocation;
 import com.spokanevalley.bankStore.gameModel;
 import com.spokanevalley.bankStore.poolLocation;
 
@@ -31,6 +32,8 @@ public class DatabaseCustomAccess extends NameHolder {
 	private static ArrayList<poolLocation> POOL_LIST = null; // list of pool
 																// locations and
 																// coupons
+	private static ArrayList<gameLocation> GAME_LIST = null;
+	
 	private int totalScore = 0; // back up totalScore
 
 	private SpokaneValleyDatabaseHelper helper; // original database class
@@ -60,6 +63,7 @@ public class DatabaseCustomAccess extends NameHolder {
 
 		saveInitialPoolLocation(); // save initial pools into database
 		saveInitialTotalScore(); // create total score in database
+		saveInitialGameLocation(); // create game location for GPS checking
 		LoadingDatabaseTotalScore();
 		LoadingDatabaseScores();
 	}
@@ -145,6 +149,16 @@ public class DatabaseCustomAccess extends NameHolder {
 	}
 	
 	/**
+	 * return arrayList of game locations
+	 * @return
+	 */
+	
+	public ArrayList<gameLocation> getGameList() {
+		LoadingDatabaseGameLocation();
+		return GAME_LIST;
+	}
+	
+	/**
 	 * 
 	 * load total score from database,store to backup value and return it
 	 * 
@@ -156,6 +170,19 @@ public class DatabaseCustomAccess extends NameHolder {
 		return totalScore;
 	}
 
+	/**
+	 * load inital game locations if database pool location table is empty
+	 */
+	
+	private void saveInitialGameLocation() {
+
+		GAME_LIST = new ArrayList<gameLocation>();
+
+		for (int i = 0; i < NumGameLocation; i++) {
+			addNewGame(getGameLocation(i));
+		}
+	}
+	
 	/**
 	 * load inital pool locations and coupons if database pool location table is empty
 	 */
@@ -220,6 +247,28 @@ public class DatabaseCustomAccess extends NameHolder {
 	}
 
 	/**
+	 * create game locations based on ID,generate thumbnail for each coupons using ThumbNailFactory
+	 * for convenience, coupons use poolLocation class aslo  
+	 * 
+	 * @param ID of pool location
+	 * @return poolLocation
+	 */
+	
+	private gameLocation getGameLocation(int ID) {
+		gameLocation game = null;
+		if (ID == 0) {
+			game = new gameLocation(AppleID, AppleDescription, false);
+		} else if (ID == 1) {
+			game = new gameLocation(DiscoveryID, DiscoveryDescription, false);
+		} else if (ID == 2) {
+			game = new gameLocation(PlantesFerryID, PlantesFerryDescription, false);
+		}else if (ID == 3) {
+			game = new gameLocation(GreenacresID, GreenacresDescription, false);
+		}
+		return game;
+	}
+	
+	/**
 	 * Custom access to pool location database table : add new pool locations or coupons to pool location table
 	 * @param pool location
 	 */
@@ -245,6 +294,38 @@ public class DatabaseCustomAccess extends NameHolder {
 			long RowIds = helper.insertPoolLocation(PooltableName,
 					pool.getTitle(), pool.getDescription(),
 					convertToString(pool.getIsCouponUsed()));
+			//if (RowIds == -1)
+				//Log.d(TAG, "Error on inserting columns");
+		}
+
+	}
+	
+	/**
+	 * Custom access to game location database table : add new game locations to game location table
+	 * @param pool location
+	 */
+
+	public void addNewGame(gameLocation game) {
+
+		// add to database here
+		Cursor checking_avalability = helper.getGameLocationData(GamelocationTableName,
+				game.getTitle());
+		if (checking_avalability == null) {				
+
+			GAME_LIST.add(game);
+
+			long RowIds = helper.insertPoolLocation(GamelocationTableName,
+					game.getTitle(), game.getDescription(),
+					convertToString(game.getIsCouponUsed()));
+			//if (RowIds == -1)
+				//Log.d(TAG, "Error on inserting columns");
+		} else if (checking_avalability.getCount() == 0) { 				// checking twice to make sure it will not miss 
+
+			GAME_LIST.add(game);
+
+			long RowIds = helper.insertPoolLocation(GamelocationTableName,
+					game.getTitle(), game.getDescription(),
+					convertToString(game.getIsCouponUsed()));			// reuse method
 			//if (RowIds == -1)
 				//Log.d(TAG, "Error on inserting columns");
 		}
@@ -334,6 +415,34 @@ public class DatabaseCustomAccess extends NameHolder {
 			POOL_LIST.add(new poolLocation(ID, Description,
 					isUsed(isCouponUsed), ThumbNailFactory.create()
 							.getThumbNail(ID)));
+
+		} // travel to database result
+
+	}
+	
+	/**
+	 * load game locations  to GAME_LIST array list.
+	 * create new arrayList every time it is called to make sure list is up-to-date
+	 * limit call due to memory cost
+	 */
+	
+	private void LoadingDatabaseGameLocation() {
+
+		Cursor cursor = helper.getDataAll(GamelocationTableName);
+
+		// id_counter = cursor.getCount();
+
+		GAME_LIST.clear();
+
+		while (cursor.moveToNext()) {
+			// loading each element from database
+			String ID = cursor.getString(ID_GAME_LCOATION_COLUMN);
+			String Description = cursor
+					.getString(DESCRIPTION_GAME_LCOATION_COLUMN);
+			String isGameVisited = cursor.getString(GAME_IS_VISITED_COLUMN);
+
+			GAME_LIST.add(new gameLocation(ID, Description,
+					isUsed(isGameVisited)));
 
 		} // travel to database result
 
@@ -553,5 +662,19 @@ public class DatabaseCustomAccess extends NameHolder {
 		helper.updatePoolLocationTable(PooltableName, ID,
 				convertToString(isgetCoupon));
 	}
+	
+	/**
+	 * update pool location after users buy coupon from this pool location
+	 * 
+	 * @param ID
+	 * @param isVisited
+	 */
+
+	public void updateGameLocationWithVisitOrNot(String ID, boolean isVisited) {
+		helper.updateGameLocationTable(GamelocationTableName, ID,
+				convertToString(isVisited));
+	}
+
+	
 
 }

@@ -69,6 +69,11 @@ public class SpokaneValleyDatabaseHelper {
 			SQLiteDatabase db = databaseContent.getWritableDatabase();
 			return db.delete(privateDatabaseContent.TOTAL_SCORE_TABLE_NAME, null,null);
 			
+		} else if (table_name.equals(privateDatabaseContent.GAME_LOCATION_TABLE_NAME)) {
+
+			SQLiteDatabase db = databaseContent.getWritableDatabase();
+			return db.delete(privateDatabaseContent.GAME_LOCATION_TABLE_NAME, null,null);
+			
 		}else {
 			return 0;
 		}
@@ -175,6 +180,40 @@ public class SpokaneValleyDatabaseHelper {
 		}//ELSE
 
 	}
+	
+	/**
+	 * THIS METHOD UPDATE ROWS IN TABLE GAME LOCATION WITH ID ,isUsed boolean AS String
+	 * 
+	 * update (name of table , ContentValues : colums will be changed
+	 * values,whereClase , whereArgs)
+	 * 
+	 * @param table Name
+	 * @param ID of game location
+	 * @param ID is used(1) or not(0)
+	 * @return how many rows changed
+	 */
+	public int updateGameLocationTable(String tableName,String ID, String isUsed) {
+
+		// If we have multiple tables, there will be more IF statement
+		if (!tableName.equals(privateDatabaseContent.GAME_LOCATION_TABLE_NAME))
+			return 0;
+		else {
+
+			SQLiteDatabase db = databaseContent.getReadableDatabase();
+
+			// VALUES TO BE CHANGED
+			ContentValues values = new ContentValues();
+			values.put(privateDatabaseContent.GAME_LOCATION_IS_VISITED_USED, isUsed);
+			
+			// CONDITION WHERE IT SHOULD BE CHANGED
+			String[] whereArgs = { ID };
+
+			return db.update(privateDatabaseContent.GAME_LOCATION_TABLE_NAME,
+					values, privateDatabaseContent.GAME_LOCATION_ID + " = ?",
+					whereArgs);
+		}//ELSE
+
+	}
 
 	/**
 	 * INSERT NEW ROW ON SCORE TABLE , null VALUES WILL NOT BE CREATED UNLESS USING
@@ -238,6 +277,37 @@ public class SpokaneValleyDatabaseHelper {
 		}
 	}
 	
+	/** 
+	 * INSERT NEW ROW ON game Location table , null VALUES WILL NOT BE CREATED UNLESS USING
+	 * numColumnHack in insert method
+	 * 
+	 * @param table Name
+	 * @param ID location
+	 * @param description about location
+	 * @param isUsed boolean is used(1) or not(0)
+	 * @retun how many row changed
+	 */
+	public long insertGameLocation(String tableName, String ID, String description,String isCouponUsed) {
+
+		// CHECK IF WE HAVE INSERTING IN RIGHT TABLE
+		if (!tableName.equals(privateDatabaseContent.GAME_LOCATION_TABLE_NAME))
+			return -1;
+		else {
+			// CREATE VALUES FOR A ROW
+			ContentValues contentvalue = new ContentValues();
+			contentvalue.put(privateDatabaseContent.GAME_LOCATION_ID, ID);
+			contentvalue.put(privateDatabaseContent.GAME_LOCATION_DESCRIPTION, description);
+			contentvalue.put(privateDatabaseContent.GAME_LOCATION_IS_VISITED_USED, isCouponUsed);
+
+			// PERFORM INSERTING
+			SQLiteDatabase db = databaseContent.getWritableDatabase();
+
+			long RowID = db.insert(privateDatabaseContent.GAME_LOCATION_TABLE_NAME,
+					null, contentvalue);
+			// if RowID is -1 , operation fails
+			return RowID;
+		}
+	}
 	
 	/**
 	 * INSERT NEW new total score to database
@@ -305,6 +375,16 @@ public class SpokaneValleyDatabaseHelper {
 			String table = privateDatabaseContent.TOTAL_SCORE_TABLE_NAME;
 			String[] columns = { privateDatabaseContent.TOTAL_SCORE_ID,
 					privateDatabaseContent.TOTAL_SCORE_POINT};
+
+			Cursor cursor = db.query(table, columns, null, null, null, null,
+					null);
+			return cursor;
+		}else if (tableName.equals(privateDatabaseContent.GAME_LOCATION_TABLE_NAME)){			// get all data in total score table
+			SQLiteDatabase db = databaseContent.getWritableDatabase();
+			String table = privateDatabaseContent.GAME_LOCATION_TABLE_NAME;
+			String[] columns = { privateDatabaseContent.GAME_LOCATION_ID,
+					privateDatabaseContent.GAME_LOCATION_DESCRIPTION,
+					privateDatabaseContent.GAME_LOCATION_IS_VISITED_USED};
 
 			Cursor cursor = db.query(table, columns, null, null, null, null,
 					null);
@@ -401,6 +481,34 @@ public class SpokaneValleyDatabaseHelper {
 		}
 	}
 
+	/**
+	 * GET GAME LOCATION DATA BASED ON ID
+	 * 
+	 * @param
+	 */
+	
+	public Cursor getGameLocationData(String tableName,String ID) {
+
+		if (!tableName.equals(privateDatabaseContent.GAME_LOCATION_TABLE_NAME))
+			return null;
+		else {
+
+			SQLiteDatabase db = databaseContent.getWritableDatabase();
+
+			String table = privateDatabaseContent.GAME_LOCATION_TABLE_NAME;
+			String[] columns = { privateDatabaseContent.GAME_LOCATION_ID,
+					privateDatabaseContent.GAME_LOCATION_DESCRIPTION,
+					privateDatabaseContent.GAME_LOCATION_IS_VISITED_USED};
+			String[] selectionArgs = { ID };
+
+			Cursor cursor = db.query(table, columns,
+					privateDatabaseContent.GAME_LOCATION_TABLE_NAME + " = ?", selectionArgs,
+					null, null, null);
+
+			return cursor;
+		}
+	}
+	
 
 	/**
 	 * THIS CLASS CONTAINS VALUES OF DATABASE . IF CHANGING ANY INFORMATION
@@ -424,7 +532,7 @@ public class SpokaneValleyDatabaseHelper {
 
 		/*
 		 * *******************************************************************************************
-		 * VARIABLES FOR POOL LOCATION TABLE
+		 * VARIABLES FOR POOL POOL LOCATION TABLE
 		 * ****************************************
 		 * ***************************************************
 		 */
@@ -478,7 +586,7 @@ public class SpokaneValleyDatabaseHelper {
 
 		/*
 		 * *******************************************************************************************
-		 * VARIABLES FOR LOCATION TABLE
+		 * VARIABLES FOR TOTAL SCORE TABLE
 		 * *****************************************
 		 * **************************************************
 		 */
@@ -503,6 +611,37 @@ public class SpokaneValleyDatabaseHelper {
 		private static final String DROP_TABLE_TOTAL_SCORE = "DROP TABLE IF EXISTS "
 				+ TOTAL_SCORE_TABLE_NAME;
 
+
+		/*
+		 * *******************************************************************************************
+		 * VARIABLES FOR GAME LOCATION TABLE
+		 * *****************************************
+		 * **************************************************
+		 */
+
+		// Name of table we have in database, we can have multiple tables in one
+		// database
+		private static final String GAME_LOCATION_TABLE_NAME = "gameLocationTable";
+
+		// Name of columns in each table, name starts with name of table , then
+		// name of columns
+		private static final String GAME_LOCATION_ID = "gameLocationID";
+		private static final String GAME_LOCATION_DESCRIPTION = "GAMELOCATION_Description";
+		private static final String GAME_LOCATION_IS_VISITED_USED = "GAMELOCATION_Visited";
+		
+
+		// Query to create table , we can have multiple queries to create
+		// multiple tables
+		private static final String CREATE_QUERY_GAME_LOCATION = "CREATE TABLE "
+				+ GAME_LOCATION_TABLE_NAME 		+ " (" 
+				+ GAME_LOCATION_ID 				+ " VARCHAR(255) PRIMARY KEY ," 
+				+ GAME_LOCATION_DESCRIPTION 	+ " VARCHAR(255),"
+				+ GAME_LOCATION_IS_VISITED_USED + "	VARCHAR(255));";
+
+		private static final String DROP_TABLE_GAME_LOCATION = "DROP TABLE IF EXISTS "
+				+ GAME_LOCATION_TABLE_NAME;
+		
+		
 		/*
 		 * *******************************************************************************************
 		 * CONTRUCTORS
@@ -526,6 +665,7 @@ public class SpokaneValleyDatabaseHelper {
 				db.execSQL(CREATE_QUERY_MAXSCORE);
 				db.execSQL(CREATE_QUERY_TOTAL_SCORE);
 				db.execSQL(CREATE_QUERY_POOL_TABLE);
+				db.execSQL(CREATE_QUERY_GAME_LOCATION);
 			} catch (SQLException e) {
 				Log.d(TAG, "Created database FAILED"); // DELETE LATER
 			}
@@ -537,6 +677,7 @@ public class SpokaneValleyDatabaseHelper {
 			db.execSQL(DROP_TABLE_MAXSCORE);
 			db.execSQL(DROP_TABLE_TOTAL_SCORE);
 			db.execSQL(DROP_TABLE_POOL_TABLE);
+			db.execSQL(DROP_TABLE_GAME_LOCATION);
 			onCreate(db);
 		}
 

@@ -11,6 +11,7 @@ public class NameHolder {
 	protected static final String TotalScoretableName = "totalScoreTable";				// table names in database
 	protected static final String ScoretableName = "GameScoreTable";
 	protected static final String PooltableName = "PoolLocationTable";
+	protected static final String GamelocationTableName = "gameLocationTable";
 	
 	protected static final String AppleID = "Apple Game";								// game IDs
 	protected static final String DiscoveryID = "Discovery Game";
@@ -18,6 +19,11 @@ public class NameHolder {
 	protected static final String GreenacresID = "Greenacres Game";
 	protected static final String SkiID = "Ski Game";
 	protected static final String totalScoreID = "totalAwesomeScore";
+	
+	protected static final String AppleDescription = "Apple Game Description ";								// game IDs
+	protected static final String DiscoveryDescription = "Discovery Game Description";
+	protected static final String PlantesFerryDescription = "Plantes Ferry Game Description";
+	protected static final String GreenacresDescription = "Greenacres Game Description";
 	
 	protected static final String pool1ID = "Park Road Pool";								// pool IDs
 	protected static final String pool2ID = "Terrace View";
@@ -59,6 +65,8 @@ public class NameHolder {
 	
 	protected static final int NumCoupon = 3;											//number of coupons
 	
+	protected static final int NumGameLocation = 4;
+	
 	protected static final int ID_MAXSCORE_COLUMN = 0;							// column numbers in max score table in database
 	protected static final int SCORE_MAXSCORE_COLUMN = 1;
 	
@@ -66,6 +74,10 @@ public class NameHolder {
 	protected static final int DESCRIPTION_POOL_LCOATION_COLUMN = 1;
 	protected static final int COUPON_IS_USED_COLUMN = 2;
 		
+	protected static final int ID_GAME_LCOATION_COLUMN = 0;						// column number in pool location table in database
+	protected static final int DESCRIPTION_GAME_LCOATION_COLUMN = 1;
+	protected static final int GAME_IS_VISITED_COLUMN = 2;
+	
 	protected static final int ID_TOTAL_SCORE_COLUMN = 0;						// column number in total score table in database
 	protected static final int POINT_TOTAL_SCORE_COLUMN = 1;
 }

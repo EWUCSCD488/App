@@ -678,6 +678,27 @@ public class DatabaseCustomAccess extends NameHolder {
 				convertToString(isVisited));
 	}
 
+	/**
+	 * 
+	 * check isVisited for specific game location
+	 * 
+	 * @param id of game location
+	 * @return
+	 */
 	
+	public boolean getGameLocationVisitedOrNot(String id){
+		Cursor cursor = getDatabase().getGameLocationData(GamelocationTableName, id);
+
+		while (cursor.moveToNext()) {
+			// loading each element from database
+			String ID = cursor.getString(ID_GAME_LCOATION_COLUMN);
+			String isVisitedString = cursor.getString(GAME_IS_VISITED_COLUMN);
+			
+			return isUsed(isVisitedString);				// return checking isVisited
+			
+		} // travel to database result
+		
+		return false;			// default false for isVisited
+	}
 
 }

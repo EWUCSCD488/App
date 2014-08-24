@@ -103,26 +103,37 @@ public class MapView extends Activity implements OnMarkerClickListener,
 				//TODO: Once database is done also add "if has not been visited" into the "if" statement
 				for (Location location2 : LocationList.LIST) {
 								
-								/*//Testing
+								//Testing
 								Log.i("MyActivity", "*********latitude bottom left: " + location2.getLatitudeBottomLeft());
 								Log.i("MyActivity", "*********longitude bottom left: " + location2.getLongitudeBottomLeft());
 								Log.i("MyActivity", "*********latitude top right: " + location2.getLatitudeTopRight());
 								Log.i("MyActivity", "*********longitude top right: " + location2.getLongitudeTopRight());
 								Log.i("MyActivity", "*********lattitude: " + location.getLatitude());
 								Log.i("MyActivity", "*********longitude: " + location.getLongitude());
-								*/
+								
 					double temp1 = location.getLatitude();
 					double temp2 = location.getLongitude();
+					
+				/*// --TESTING--------------------------------------------------------------------------
+					System.out.println(location2.getID());
+					if(DatabaseCustomAccess.Create(context).getGameLocationVisitedOrNot(location2.getID()))
+						System.out.println("true");
+					
+					if(!DatabaseCustomAccess.Create(context).getGameLocationVisitedOrNot(location2.getID()))
+						System.out.println("false");
+				// --TESTING--------------------------------------------------------------------------
+				*/	
 					if(location2.getLatitudeBottomLeft() <= temp1 && 
 							location2.getLongitudeBottomLeft() <= temp2 &&
 							location2.getLatitudeTopRight() >= temp1 &&
-							location2.getLongitudeTopRight() >= temp2){
+							location2.getLongitudeTopRight() >= temp2 &&
+							!DatabaseCustomAccess.Create(context).getGameLocationVisitedOrNot(location2.getID())){
 						Intent intent = new Intent(MapView.this, addScoreGPSLauncher.class);
 						startActivityForResult(intent, REQUEST_CODE);
-									/*//Testing
-									LatLng camMove = new LatLng(location.getLatitude(), location.getLongitude());
-							        CameraUpdate camUpdate = CameraUpdateFactory.newLatLng(camMove);
-							        map.animateCamera(camUpdate);*/
+						/* visited = true
+						 * not visited = false
+						 */
+						DatabaseCustomAccess.Create(context).updateGameLocationWithVisitOrNot(location2.getID(), true);
 						}
 					}
 				}
@@ -286,6 +297,37 @@ public class MapView extends Activity implements OnMarkerClickListener,
 		// Marker info window listener
 		map.setOnMarkerClickListener(this);
 
+		//This adds padding on top
+		GroundOverlay groundOverlayPaddingTop = map
+				.addGroundOverlay(new GroundOverlayOptions()
+				.image(BitmapDescriptorFactory
+				.fromResource(R.drawable.mapsky))
+				.position(new LatLng(47.823297, -117.239437), 32000)
+				.transparency(0.0f));
+		
+		//This adds padding on Bottom
+		GroundOverlay groundOverlayPaddingBottom = map
+				.addGroundOverlay(new GroundOverlayOptions()
+				.image(BitmapDescriptorFactory
+				.fromResource(R.drawable.groundmap))
+				.position(new LatLng(47.520112, -117.239437), 32000)
+				.transparency(0.0f));
+		
+		//This adds padding on Right Side
+		GroundOverlay groundOverlayPaddingSide = map
+				.addGroundOverlay(new GroundOverlayOptions()
+				.image(BitmapDescriptorFactory
+				.fromResource(R.drawable.groundmap))
+				.position(new LatLng(47.670568, -116.824730), 32000)
+				.transparency(0.0f));
+		
+		GroundOverlay groundOverlayPaddingSideLeft = map
+				.addGroundOverlay(new GroundOverlayOptions()
+				.image(BitmapDescriptorFactory
+				.fromResource(R.drawable.groundmap))
+				.position(new LatLng(47.670568, -117.432411), 32000)
+				.transparency(0.0f));
+		
 		// This adds an image over the google map
 		GroundOverlay groundOverlay = map
 				.addGroundOverlay(new GroundOverlayOptions()
@@ -293,7 +335,7 @@ public class MapView extends Activity implements OnMarkerClickListener,
 				.fromResource(R.drawable.mapbg))
 				.position(new LatLng(47.670568, -117.239437), 32000)
 				.transparency(0.0f));
-
+		
 		//Remove un-needed functionality
 		map.getUiSettings().setCompassEnabled(false);
 		map.getUiSettings().setRotateGesturesEnabled(false);

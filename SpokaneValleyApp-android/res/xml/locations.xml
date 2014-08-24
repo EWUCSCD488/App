@@ -3,25 +3,28 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
      <Location>
         <Title>Discovery Playground</Title>
-        <Artist></Artist>
+        <ID>Discovery Game</ID>
         <Latitude>47.677359</Latitude>
         <Longitude>-117.224588</Longitude>
         <latitudeBottomLeft>47.677576</latitudeBottomLeft>
         <longitudeBottomLeft>-117.224948</longitudeBottomLeft>
         <latitudeTopRight>47.678544</latitudeTopRight>
         <longitudeTopRight>-117.223456</longitudeTopRight>
-        <Info>Testing for Discovery Park. Update soon</Info>
+        <Info>-          A nice discovery filled park packed 
+            with big rings, dinosaur egg hunts, and
+            even a bear!</Info>
          <MarkerImage>bear.png</MarkerImage>
     </Location>
     <Location>
         <Title>Terrace View Park and Pool</Title>
+        <ID>Apple Game</ID>
         <Latitude>47.636221</Latitude>
         <Longitude>-117.222319</Longitude>
         <latitudeBottomLeft>47.635201</latitudeBottomLeft>
         <longitudeBottomLeft>-117.223466</longitudeBottomLeft>
         <latitudeTopRight>47.636965</latitudeTopRight>
         <longitudeTopRight>-117.220806</longitudeTopRight>
-        <Info>-  Play equipment and horseshoe pit.
+        <Info>-     Play equipment and horseshoe pit.
 			Swimming pool and lazy river feature.
 			Pool shade structure and furniture.
 			Ball field and basketball court.</Info>
@@ -29,17 +32,21 @@
     </Location>
     <Location>
         <Title>Plantes Ferry Park</Title>
+        <ID>Plantes Ferry Game</ID>
         <Latitude>47.697924</Latitude>
         <Longitude>-117.241588</Longitude>
         <latitudeBottomLeft>47.693562</latitudeBottomLeft>
         <longitudeBottomLeft>-117.242692</longitudeBottomLeft>
         <latitudeTopRight>47.700336</latitudeTopRight>
         <longitudeTopRight>-117.233466</longitudeTopRight>
-        <Info>-  This is a chill Park...</Info>
+        <Info>-          A nice big park filled with lots of 
+            grass and even a Soccer field! Located right
+            by the Spokane river.</Info>
         <MarkerImage>plantesferryicon.png</MarkerImage>
     </Location>
     <Location>
         <Title>Bank</Title>
+        <ID>nothing</ID>
         <Latitude>47.657974</Latitude>
         <Longitude>-117.266581</Longitude>
         <latitudeBottomLeft>0</latitudeBottomLeft>
@@ -51,6 +58,7 @@
     </Location>
     <Location>
         <Title>Greenacres Park</Title>
+        <ID>Greenacres Game</ID>
         <Latitude>47.668969</Latitude>
         <Longitude>-117.165825</Longitude>
         <latitudeBottomLeft>47.683823</latitudeBottomLeft>
@@ -62,6 +70,7 @@
     </Location>
     <Location>
         <Title>The Mall</Title>
+        <ID>nothing</ID>
         <Latitude>47.674313</Latitude>
         <Longitude>-117.207503</Longitude>
         <latitudeBottomLeft>47.671928</latitudeBottomLeft>
@@ -73,13 +82,14 @@
     </Location>
     <Location>
         <Title>Ski!</Title>
+        <ID>Ski Game</ID>
         <Latitude>47.694963</Latitude>
         <Longitude>-117.276478</Longitude>
         <latitudeBottomLeft>0</latitudeBottomLeft>
         <longitudeBottomLeft>0</longitudeBottomLeft>
         <latitudeTopRight>0</latitudeTopRight>
         <longitudeTopRight>0</longitudeTopRight>
-        <Info>-  The person who made the ramps for going up and down the mountain lived here!</Info>
+        <Info>-  The person who made the ramps for going up and down the mountain lived near here!</Info>
         <MarkerImage>snow_man.png</MarkerImage>
     </Location>
 </PreferenceScreen>

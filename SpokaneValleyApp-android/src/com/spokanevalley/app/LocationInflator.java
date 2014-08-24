@@ -93,7 +93,7 @@ public class LocationInflator {
                     }
                 }
                 //latBottomLeft
-                else if ("LatitudeBottomLeft".equals(parser.getName()))
+                else if ("latitudeBottomLeft".equals(parser.getName()))
                 {
                     token = parser.next();
                     if(token == XmlPullParser.TEXT)
@@ -104,7 +104,7 @@ public class LocationInflator {
                     }
                 }
                 //lonBottomLeft
-                else if ("LongitudeBottomLeft".equals(parser.getName()))
+                else if ("longitudeBottomLeft".equals(parser.getName()))
                 {
                     token = parser.next();
                     if(token == XmlPullParser.TEXT)
@@ -115,7 +115,7 @@ public class LocationInflator {
                     }
                 }                
                 //latTopRight
-                else if ("LatitudeTopRight".equals(parser.getName()))
+                else if ("latitudeTopRight".equals(parser.getName()))
                 {
                     token = parser.next();
                     if(token == XmlPullParser.TEXT)
@@ -126,7 +126,7 @@ public class LocationInflator {
                     }
                 }
                 //lonTopRight
-                else if ("LongitudeTopRight".equals(parser.getName()))
+                else if ("longitudeTopRight".equals(parser.getName()))
                 {
                     token = parser.next();
                     if(token == XmlPullParser.TEXT)
